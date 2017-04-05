@@ -130,8 +130,8 @@
         function crearActividad(){
             $("#modalCrearActividad").modal("show")
         }
-        var data = [
 
+        var data = [
             {
                 text : "Modelo Estandar de Control Interno (MECI)",
                 li_attr : {"data-nivel" : 1, "data-type": "module"},
@@ -440,15 +440,15 @@
                 li_attr : {"data-nivel" : 1, "data-type": "module"},
                 children : []
             }
-
         ]
-        $('#data').jstree({
-            'core' : {
-                'data' : data
-            }
-        });
-
-
+        Models.Planes.treeview(function(response){
+            console.log(response)
+            $('#data').jstree({
+                'core' : {
+                    'data' : response
+                }
+            });
+        })
 
     </script>
 @endsection

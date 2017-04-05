@@ -22,3 +22,11 @@ Route::get('/home', 'HomeController@index');
 Route::get('/dashboard', 'AppController@dashboard')->middleware('auth');
 
 Route::get('meci/dashboard', 'MECIController@dashboard')->middleware('auth');
+
+Route::group(['prefix' => 'api'], function()
+{
+	Route::group(['prefix' => 'planes'], function()
+	{
+		Route::get('/', "APIController@planes");
+	});
+});

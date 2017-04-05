@@ -156,6 +156,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        # Mapeador de Bases De Datos
+        Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
+
+
         #Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
         #Intervention\Image\ImageServiceProvider::class,
 
