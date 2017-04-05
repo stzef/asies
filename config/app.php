@@ -159,6 +159,7 @@ return [
         # Mapeador de Bases De Datos
         Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
 
+        #Illuminate\Html\HtmlServiceProvider,
 
         #Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
         #Intervention\Image\ImageServiceProvider::class,
@@ -210,6 +211,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         #'Image' => Intervention\Image\Facades\Image::class,
+
+        #'Form'      => 'Illuminate\Html\FormFacade',
+        #'Html'      => 'Illuminate\Html\HtmlFacade',
     ],
 
 

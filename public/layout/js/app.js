@@ -14,7 +14,7 @@ Models = {
 					if ( subplan.subplanes.length > 0 ){
 						subplan.subplanes = recursive(subplan.subplanes)
 					}
-					return {text : subplan.nplan,li_attr : {},children:subplan.subplanes}
+					return {text : subplan.nplan,icon : subplan.icono,li_attr : {},children:subplan.subplanes}
 				})
 				return a
 			}
@@ -27,7 +27,7 @@ Models = {
 						if ( plan.subplanes.length > 0 ){
 							plan.subplanes = recursive(plan.subplanes)
 						}
-						return {text : plan.nplan,li_attr : {},children:plan.subplanes}
+						return {text : plan.nplan,icon : plan.icono,li_attr : {},children:plan.subplanes}
 					})
 
 					return cb(response);
