@@ -32,6 +32,6 @@ Route::group(['prefix' => 'api'], function()
 });
 Route::group(['prefix' => 'planes'], function()
 {
-	Route::get('create', "PlanesController@create");
+	Route::post('create', "PlanesController@create");
 
 });

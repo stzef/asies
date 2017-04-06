@@ -22,7 +22,11 @@
 
     <!-- Custom Fonts -->
     <link rel="stylesheet" href="{{ URL::asset('layout/font-awesome/css/font-awesome.min.css') }}" >
+
     <!--<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
+
+    <!-- AlertifyJS -->
+    <link rel="stylesheet" href="{{ URL::asset('alertifyjs/css/alertify.min.css') }}" >
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -209,6 +213,9 @@
     <script src="{{ URL::asset('layout/js/bootstrap.min.js') }}"></script>
 
     <script src="{{ URL::asset('layout/js/app.js') }}"></script>
+
+    <!-- AlertifyJS -->
+    <script src="{{ URL::asset('alertifyjs/alertify.min.js') }}"></script>
 
     <script>
         $.ajaxSetup({
