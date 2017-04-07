@@ -21,6 +21,11 @@
 		</div>
 	</div>
 
+	<div>
+		<div id="usuarios"></div>
+
+	</div>
+
 	<div class="modal fade" id="modalCrearActividad" tabindex="-1" role="dialog" aria-labelledby="modalCrearActividadLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -136,7 +141,14 @@
 	<script src="{{ URL::asset('jstree/js/jstree.min.js') }}"></script>
 
 	<script>
+		$.jstree.defaults.plugins = [ "wholerow", "checkbox" ]
+		$.jstree.defaults.checkbox.keep_selected_style = true
+		$.jstree.defaults.core.multiple = false
 
+		function getPlanSelect(){
+			var plan = $('#treeview').jstree('get_selected',true)
+
+		}
 
 		function crearActividad(){
 			$("#modalCrearActividad").modal("show")
@@ -148,22 +160,17 @@
 			var that = this
 
 			// Array
-			var plan = $('#treeview').jstree('get_selected',true)
+			var plan = $('#treeview').jstree('get_selected',true)[0]
 
-			if( !plan.isEmpty() ) {
-				if ( plan.lengthIs(1) ) {
-					plan = plan[0]
-					console.log(plan)
-					/*
-					if( plan.li_attr.nivel == Niveles.productoMinimo ){
+			if ( plan ) {
+				console.log(plan)
+				/*
+				if( plan.li_attr.nivel == Niveles.productoMinimo ){
 
-					}else{
-						return alertify.error(Models.Planes.messages.validation.notSelectCorrectParent)
-					}
-					*/
 				}else{
-					return alertify.error(Models.Planes.messages.validation.multipleSelection)
+					return alertify.error(Models.Planes.messages.validation.notSelectCorrectParent)
 				}
+				*/
 			}else{
 				return alertify.error(Models.Planes.messages.validation.notSelection)
 			}
@@ -200,8 +207,169 @@
 		})
 
 		Models.Planes.treeview(function(response){
-			$('#treeview').jstree({ 'core' : {'data' : response } })
+			$('#treeview').jstree({
+				'core' : { 'data' : response }
+			})
 		})
 
 	</script>
+
+<script type="text/javascript">
+
+	var spanishMessages = {
+		serverCommunicationError: 'Se ha producido un error al comunicarse con el servidor.',
+		loadingMessage: 'Cargando...',
+		noDataAvailable: '¡Datos no disponibles!',
+		addNewRecord: 'Agregar',
+		editRecord: 'Editar',
+		areYouSure: '¿Estás seguro?',
+		deleteConfirmation: 'Este registro se eliminará. ¿Estás seguro?',
+		save: 'Guardar',
+		saving: 'Guardando',
+		cancel: 'Cancelar',
+		deleteText: 'Borado',
+		deleting: 'Borrando',
+		error: 'Error',
+		close: 'Cerrar',
+		cannotLoadOptionsFor: 'No se pueden cargar las opciones para el campo {0}',
+		pagingInfo: 'Mostrando {0}-{1} de {2}',
+		pageSizeChangeLabel: 'Numero de filas',
+		gotoPageLabel: 'Ir a la Pagina',
+		canNotDeletedRecords: 'No se pueden eliminar {0} de {1} registros!',
+		deleteProggress: 'Eliminando {0} de {1} registros, Procesando...'
+	}
+
+	$(document).ready(function () {
+		$('#usuarios').jtable({
+			title: 'Student List',
+			paging: true,
+			pageSize: 10,
+			sorting: true,
+			multiSorting: true,
+			defaultSorting: 'Name ASC',
+			messages: spanishMessages,
+			actions: {
+				listAction: function (postData, jtParams) {
+					console.log("Loading from custom function...");
+					return $.Deferred(function ($dfd) {
+						$dfd.resolve( {Records:[{"usuario":"1","ctirelacion":"1"}], Result:"OK", TotalRecordCount:1 })
+						/*$.ajax({
+							url: '/Demo/StudentList?jtStartIndex=' + jtParams.jtStartIndex + '&jtPageSize=' + jtParams.jtPageSize + '&jtSorting=' + jtParams.jtSorting,
+							type: 'POST',
+							dataType: 'json',
+							data: postData,
+							success: function (data) {
+								$dfd.resolve(data);
+							},
+							error: function () {
+								$dfd.reject();
+							}
+						});*/
+					});
+				},
+				createAction: function (postData) {
+					console.log("creating from custom function...");
+					return $.Deferred(function ($dfd) {
+						//return $dfd.resolve({Record:{"usuario":"2","ctirelacion":"2"},Result:"OK"});
+						postData.cplan = "1"
+						$.ajax({
+							url: '/Demo/CreateStudent',
+							type: 'POST',
+							dataType: 'json',
+							data: postData,
+							success: function (data) {
+								$dfd.resolve(data);
+							},
+							error: function () {
+								$dfd.reject();
+							}
+						});
+					});
+				},
+				updateAction: function(postData) {
+					console.log("updating from custom function...");
+					return $.Deferred(function ($dfd) {
+						$.ajax({
+							url: '/Demo/UpdateStudent',
+							type: 'POST',
+							dataType: 'json',
+							data: postData,
+							success: function (data) {
+								$dfd.resolve(data);
+							},
+							error: function () {
+								$dfd.reject();
+							}
+						});
+					});
+				},
+				deleteAction: function (postData) {
+					console.log("deleting from custom function...");
+					return $.Deferred(function ($dfd) {
+						$.ajax({
+							url: '/Demo/DeleteStudent',
+							type: 'POST',
+							dataType: 'json',
+							data: postData,
+							success: function (data) {
+								$dfd.resolve(data);
+							},
+							error: function () {
+								$dfd.reject();
+							}
+						});
+					});
+				},
+			},
+			fields: {
+				usuario: {
+					title: 'Usuarios',
+					width: '50%',
+					options: function () {
+
+						var options = [];
+
+						$.ajax({
+							url: "{{ action('APIController@usuarios') }}",
+							type: 'GET',
+							dataType: 'json',
+							async: false,
+							success: function (data) {
+								data.Options = {}
+								data.forEach(function(usuario){data.Options[usuario.id] = usuario.name})
+								options = data.Options;
+							}
+						});
+
+						return options;
+					}
+				},
+				ctirelacion: {
+					title: 'Relacion',
+					width: '50%',
+					options: function () {
+
+						var options = [];
+
+						$.ajax({
+							url: "{{ action('APIController@tirelaciones') }}",
+							type: 'GET',
+							dataType: 'json',
+							async: false,
+							success: function (data) {
+								data.Options = {}
+								data.forEach(function(tirelacion){data.Options[tirelacion.ctirelacion] = tirelacion.ntirelacion})
+								options = data.Options;
+							}
+						});
+
+						return options;
+					}
+				},
+			}
+		});
+
+		$('#usuarios').jtable('load');
+	});
+</script>
 @endsection

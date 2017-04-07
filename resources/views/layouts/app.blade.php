@@ -28,6 +28,14 @@
     <!-- AlertifyJS -->
     <link rel="stylesheet" href="{{ URL::asset('alertifyjs/css/alertify.min.css') }}" >
 
+    <!-- JQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" >
+
+    <!-- JTable -->
+    <!--<link rel="stylesheet" href="{{ URL::asset('jtable.2.4.0/themes/jqueryui/jtable_jqueryui.css') }}" >-->
+    <link rel="stylesheet" href="{{ URL::asset('jtable.2.4.0/themes/metro/darkgray/jtable.css') }}" >
+
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -216,6 +224,16 @@
 
     <!-- AlertifyJS -->
     <script src="{{ URL::asset('alertifyjs/alertify.min.js') }}"></script>
+
+    <!-- JQuery UI -->
+    <script
+      src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+      integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+      crossorigin="anonymous"></script>
+
+    <!-- JTable -->
+    <script src="{{ URL::asset('jtable.2.4.0/jquery.jtable.min.js') }}"></script>
+
 
     <script>
         $.ajaxSetup({

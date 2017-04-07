@@ -29,6 +29,14 @@ Route::group(['prefix' => 'api'], function()
 	{
 		Route::get('/', "APIController@planes");
 	});
+	Route::group(['prefix' => 'usuarios'], function()
+	{
+		Route::get('/', "APIController@usuarios");
+	});
+	Route::group(['prefix' => 'tirelaciones'], function()
+	{
+		Route::get('/', "APIController@tirelaciones");
+	});
 });
 Route::group(['prefix' => 'planes'], function()
 {
