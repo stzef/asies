@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace asies\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,7 +23,7 @@ class Estados extends Model
      */
     public function planes()
     {
-        return $this->hasMany('App\Models\Plane', 'cestado', 'cestados');
+        return $this->hasMany('asies\Models\Plane', 'cestado', 'cestados');
     }
 
     /**
@@ -31,6 +31,6 @@ class Estados extends Model
      */
     public function registros()
     {
-        return $this->hasMany('App\Models\Registro', 'cestado', 'cestados');
+        return $this->hasMany('asies\Models\Registro', 'cestado', 'cestados');
     }
 }

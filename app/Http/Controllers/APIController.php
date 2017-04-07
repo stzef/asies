@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace asies\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use asies\Http\Requests;
 
-use App\Models\Planes;
-use App\User;
-use App\Models\Personas;
-use App\Models\Tirelacion;
+use asies\Models\Planes;
+use asies\User;
+use asies\Models\Personas;
+use asies\Models\Tirelacion;
 
 
 class APIController extends Controller

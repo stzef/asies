@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace asies\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,7 +31,7 @@ class Planes extends Model
      */
     public function estado()
     {
-        return $this->belongsTo('App\Models\Estados', 'cestado', 'cestados');
+        return $this->belongsTo('asies\Models\Estados', 'cestado', 'cestados');
     }
 
     /**
@@ -39,7 +39,7 @@ class Planes extends Model
      */
     public function plane()
     {
-        return $this->belongsTo('App\Models\Plane', 'cplanmayor', 'cplan');
+        return $this->belongsTo('asies\Models\Plane', 'cplanmayor', 'cplan');
     }
 
     static function getSubPlanes($cplan,$json=false)
@@ -76,7 +76,7 @@ class Planes extends Model
      */
     public function planesusuarios()
     {
-        return $this->hasMany('App\Models\Planesusuario', 'cplan', 'cplan');
+        return $this->hasMany('asies\Models\Planesusuario', 'cplan', 'cplan');
     }
 
     /**
@@ -84,6 +84,6 @@ class Planes extends Model
      */
     public function registros()
     {
-        return $this->hasMany('App\Models\Registro', 'cplan', 'cplan');
+        return $this->hasMany('asies\Models\Registro', 'cplan', 'cplan');
     }
 }

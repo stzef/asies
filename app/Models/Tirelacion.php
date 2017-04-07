@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace asies\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,6 +28,6 @@ class Tirelacion extends Model
      */
     public function planesusuarios()
     {
-        return $this->hasMany('App\Models\Planesusuario', 'ctirelacion', 'ctirelacion');
+        return $this->hasMany('asies\Models\Planesusuario', 'ctirelacion', 'ctirelacion');
     }
 }

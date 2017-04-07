@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace asies\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,6 +28,6 @@ class Personas extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'usuario');
+        return $this->belongsTo('asies\Models\User', 'usuario');
     }
 }

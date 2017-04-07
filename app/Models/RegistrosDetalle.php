@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace asies\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,6 +31,6 @@ class RegistrosDetalle extends Model
      */
     public function registro()
     {
-        return $this->belongsTo('App\Models\Registro', 'cplan', 'cplan');
+        return $this->belongsTo('asies\Models\Registro', 'cplan', 'cplan');
     }
 }

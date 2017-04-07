@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace asies\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,7 +32,7 @@ class PlanesUsuarios extends Model
      */
     public function plane()
     {
-        return $this->belongsTo('App\Models\Plane', 'cplan', 'cplan');
+        return $this->belongsTo('asies\Models\Plane', 'cplan', 'cplan');
     }
 
     /**
@@ -40,7 +40,7 @@ class PlanesUsuarios extends Model
      */
     public function tirelacion()
     {
-        return $this->belongsTo('App\Models\Tirelacion', 'ctirelacion', 'ctirelacion');
+        return $this->belongsTo('asies\Models\Tirelacion', 'ctirelacion', 'ctirelacion');
     }
 
     /**
@@ -48,6 +48,6 @@ class PlanesUsuarios extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'usuario');
+        return $this->belongsTo('asies\Models\User', 'usuario');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace asies\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,7 +26,7 @@ class Registros extends Model
      */
     public function plane()
     {
-        return $this->belongsTo('App\Models\Plane', 'cplan', 'cplan');
+        return $this->belongsTo('asies\Models\Plane', 'cplan', 'cplan');
     }
 
     /**
@@ -34,7 +34,7 @@ class Registros extends Model
      */
     public function estado()
     {
-        return $this->belongsTo('App\Models\Estado', 'cestado', 'cestados');
+        return $this->belongsTo('asies\Models\Estado', 'cestado', 'cestados');
     }
 
     /**
@@ -42,6 +42,6 @@ class Registros extends Model
      */
     public function registrosdetalles()
     {
-        return $this->hasMany('App\Models\Registrosdetalle', 'cplan', 'cplan');
+        return $this->hasMany('asies\Models\Registrosdetalle', 'cplan', 'cplan');
     }
 }

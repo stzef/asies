@@ -151,10 +151,10 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        asies\Providers\AppServiceProvider::class,
+        asies\Providers\AuthServiceProvider::class,
+        asies\Providers\EventServiceProvider::class,
+        asies\Providers\RouteServiceProvider::class,
 
         # Mapeador de Bases De Datos
         Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
