@@ -22,12 +22,13 @@
 	</div>
 
 	<div>
+
 		<div id="usuarios"></div>
 
 	</div>
 
 	<div class="modal fade" id="modalCrearActividad" tabindex="-1" role="dialog" aria-labelledby="modalCrearActividadLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -39,69 +40,74 @@
 					<div class="modal-body">
 
 						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-						<div class="form-group row">
-							<label for="plan_nombre" class="col-sm-2 col-form-label">Nombre</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="plan_nombre" name="plan[nplan]" placeholder="Nombre">
+
+						<div class="col-md-6">
+							<div class="form-group row">
+								<label for="plan_nombre" class="col-sm-2 col-form-label">Nombre</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="plan_nombre" name="plan[nplan]" placeholder="Nombre">
+								</div>
 							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-2"></label>
-							<div class="col-sm-10">
-								<div class="form-check">
-									<label class="form-check-label">
-										<input class="form-check-input" type="checkbox" name="plan[ifarchivos]"> Archivos
-									</label>
+
+							<div class="form-group row">
+								<label for="" class="col-sm-2 col-form-label">Objetivos</label>
+								<div class="col-sm-10">
+									<textarea class="form-control" id="" name="plan[]"></textarea>
 								</div>
 							</div>
 						</div>
-						<div class="form-group row">
-							<label class="col-sm-2"></label>
-							<div class="col-sm-10">
-								<div class="form-check">
-								<label class="form-check-label">
-									<input class="form-check-input" type="checkbox" name="plan[ifacta]"> Acta
-								</label>
+						<div class="col-md-6">
+							<div class="form-group row">
+								<label for="" class="col-sm-2 col-form-label">Tipo Actividad</label>
+								<div class="col-sm-10">
+									<select name="" id=""></select>
 								</div>
 							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-2"></label>
-							<div class="col-sm-10">
-								<div class="form-check">
-									<label class="form-check-label">
-										<input class="form-check-input" type="checkbox" name="plan[desc]"> Descripcion
-									</label>
+							<div class="col-md-6">
+								<div class="form-group row">
+									<label for="" class="col-sm-2 col-form-label">Fecha Inicial</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="plan_nombre" name="plan[nplan]" placeholder="Nombre">
+									</div>
 								</div>
-								<textarea type="text" class="form-control" id="" placeholder="Descripcion" disabled></textarea>
+
+								<div class="form-group row">
+									<label for="" class="col-sm-2 col-form-label">Fecha Final</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="plan_nombre" name="plan[nplan]" placeholder="Nombre">
+									</div>
+								</div>
+
 							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-2"></label>
-							<div class="col-sm-5">
-								<div class="form-check">
-									<label class="form-check-label">
-										<input class="form-check-input" type="checkbox" name="plan[iffechaini]"> Fecha Inicial
-									</label>
+
+							<div class="col-md-6">
+								<div class="form-group row">
+									<label class="col-sm-2"></label>
+									<div class="col-sm-10">
+										<div class="form-check">
+											<label class="form-check-label">
+												<input class="form-check-input" type="checkbox" name="plan[ifarchivos]"> Archivos
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label class="col-sm-2"></label>
+									<div class="col-sm-10">
+										<div class="form-check">
+										<label class="form-check-label">
+											<input class="form-check-input" type="checkbox" name="plan[ifacta]"> Acta
+										</label>
+										</div>
+									</div>
 								</div>
 							</div>
-							<div class="col-sm-5">
-								<input type="text" class="form-control" id="inputEmail3" placeholder="Fecha Inicial" disabled name="plan[fechaini]">
-							</div>
+
 						</div>
-						<div class="form-group row">
-							<label class="col-sm-2"></label>
-							<div class="col-sm-5">
-								<div class="form-check">
-									<label class="form-check-label">
-										<input class="form-check-input" type="checkbox" name="plan[iffechafin]"> Fecha Final
-									</label>
-								</div>
-							</div>
-							<div class="col-sm-5">
-								<input type="text" class="form-control" id="inputEmail3" placeholder="Fecha Final" disabled name="plan[fechafin]" >
-							</div>
-						</div>
+
+
+
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">
@@ -117,6 +123,18 @@
 	</div>
 
 	<div class="row">
+
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -138,6 +156,14 @@
 @endsection
 
 @section('scripts')
+<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+					format: 'YYYY/MM/DD',
+					//defaultDate: moment().format("YYYY/MM/DD")
+                });
+            });
+        </script>
 	<script src="{{ URL::asset('jstree/js/jstree.min.js') }}"></script>
 
 	<script>
@@ -163,7 +189,6 @@
 			var plan = $('#treeview').jstree('get_selected',true)[0]
 
 			if ( plan ) {
-				console.log(plan)
 				/*
 				if( plan.li_attr.nivel == Niveles.productoMinimo ){
 
@@ -216,68 +241,49 @@
 
 <script type="text/javascript">
 
-	var spanishMessages = {
-		serverCommunicationError: 'Se ha producido un error al comunicarse con el servidor.',
-		loadingMessage: 'Cargando...',
-		noDataAvailable: '¡Datos no disponibles!',
-		addNewRecord: 'Agregar',
-		editRecord: 'Editar',
-		areYouSure: '¿Estás seguro?',
-		deleteConfirmation: 'Este registro se eliminará. ¿Estás seguro?',
-		save: 'Guardar',
-		saving: 'Guardando',
-		cancel: 'Cancelar',
-		deleteText: 'Borado',
-		deleting: 'Borrando',
-		error: 'Error',
-		close: 'Cerrar',
-		cannotLoadOptionsFor: 'No se pueden cargar las opciones para el campo {0}',
-		pagingInfo: 'Mostrando {0}-{1} de {2}',
-		pageSizeChangeLabel: 'Numero de filas',
-		gotoPageLabel: 'Ir a la Pagina',
-		canNotDeletedRecords: 'No se pueden eliminar {0} de {1} registros!',
-		deleteProggress: 'Eliminando {0} de {1} registros, Procesando...'
-	}
-
 	$(document).ready(function () {
 		$('#usuarios').jtable({
-			title: 'Student List',
+			title: 'Usuarios',
 			paging: true,
 			pageSize: 10,
 			sorting: true,
 			multiSorting: true,
-			defaultSorting: 'Name ASC',
-			messages: spanishMessages,
+			defaultSorting: 'usuario ASC',
+			messages: spanishMessagesJTable,
 			actions: {
 				listAction: function (postData, jtParams) {
-					console.log("Loading from custom function...");
 					return $.Deferred(function ($dfd) {
-						$dfd.resolve( {Records:[{"usuario":"1","ctirelacion":"1"}], Result:"OK", TotalRecordCount:1 })
-						/*$.ajax({
-							url: '/Demo/StudentList?jtStartIndex=' + jtParams.jtStartIndex + '&jtPageSize=' + jtParams.jtPageSize + '&jtSorting=' + jtParams.jtSorting,
-							type: 'POST',
+						$.ajax({
+							url: "{{ action('APIController@usuarios_plan',['cplan' => 1]) }}?jtStartIndex=" + jtParams.jtStartIndex + "&jtPageSize=" + jtParams.jtPageSize + "&jtSorting=" + jtParams.jtSorting,
+							type: 'GET',
 							dataType: 'json',
 							data: postData,
 							success: function (data) {
+								data.Records = []
+								data.TotalRecordCount = data.length
+								data.Result = "OK"
+								data.forEach( function(element, index) {
+									data.Records.push({"usuario":element.usuario,"ctirelacion":element.ctirelacion})
+								});
 								$dfd.resolve(data);
 							},
 							error: function () {
 								$dfd.reject();
 							}
-						});*/
+						});
 					});
 				},
 				createAction: function (postData) {
-					console.log("creating from custom function...");
 					return $.Deferred(function ($dfd) {
-						//return $dfd.resolve({Record:{"usuario":"2","ctirelacion":"2"},Result:"OK"});
 						postData.cplan = "1"
 						$.ajax({
-							url: '/Demo/CreateStudent',
+							url: "{{ action('PlanesController@add_user_to_plan',['cplan'=>1])}}",
 							type: 'POST',
 							dataType: 'json',
 							data: postData,
 							success: function (data) {
+								data.Record = {"usuario":data.obj.usuario,"ctirelacion":data.obj.ctirelacion}
+								data.Result = "OK"
 								$dfd.resolve(data);
 							},
 							error: function () {
@@ -287,7 +293,6 @@
 					});
 				},
 				updateAction: function(postData) {
-					console.log("updating from custom function...");
 					return $.Deferred(function ($dfd) {
 						$.ajax({
 							url: '/Demo/UpdateStudent',
@@ -304,7 +309,6 @@
 					});
 				},
 				deleteAction: function (postData) {
-					console.log("deleting from custom function...");
 					return $.Deferred(function ($dfd) {
 						$.ajax({
 							url: '/Demo/DeleteStudent',

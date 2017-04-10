@@ -35,6 +35,9 @@
     <!--<link rel="stylesheet" href="{{ URL::asset('jtable.2.4.0/themes/jqueryui/jtable_jqueryui.css') }}" >-->
     <link rel="stylesheet" href="{{ URL::asset('jtable.2.4.0/themes/metro/darkgray/jtable.css') }}" >
 
+    <!-- Datetimepicker JS -->
+    <link rel="stylesheet" href="{{ URL::asset('datetimepicker/css/bootstrap-datetimepicker-standalone.css') }}" >
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -169,17 +172,14 @@
                     <li class="active">
                         <a href="{{ URL::action('AppController@dashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
-                    <!--<li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Datos <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="#">Dropdown Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="{{ URL::route('meci_dashboard') }}">Planes</a>
                             </li>
                         </ul>
-                    </li>-->
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -216,9 +216,20 @@
     <!-- jQuery -->
     <script src="{{ URL::asset('layout/js/jquery.js') }}"></script>
 
+
+    <!-- Moment JS -->
+    <script src="{{ URL::asset('momentjs/moment-with-locales.js') }}"></script>
+    <script src="{{ URL::asset('momentjs/locale/es.js') }}"></script>
+
+    <script src="{{ URL::asset('datetimepicker/bootstrap/js/transition.js') }}"></script>
+    <script src="{{ URL::asset('datetimepicker/bootstrap/js/collapse.js') }}"></script>
+
     <!-- Bootstrap JavaScript -->
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ URL::asset('layout/js/bootstrap.min.js') }}"></script>
+
+    <!-- Datetimepicker JS -->
+    <script src="{{ URL::asset('datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
 
     <script src="{{ URL::asset('layout/js/app.js') }}"></script>
 

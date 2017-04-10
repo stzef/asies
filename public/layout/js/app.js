@@ -11,6 +11,29 @@ Array.prototype.lengthIs = function(length){
 	return false
 }
 
+var spanishMessagesJTable = {
+	serverCommunicationError: 'Se ha producido un error al comunicarse con el servidor.',
+	loadingMessage: 'Cargando...',
+	noDataAvailable: '¡Datos no disponibles!',
+	addNewRecord: 'Agregar',
+	editRecord: 'Editar',
+	areYouSure: '¿Estás seguro?',
+	deleteConfirmation: 'Este registro se eliminará. ¿Estás seguro?',
+	save: 'Guardar',
+	saving: 'Guardando',
+	cancel: 'Cancelar',
+	deleteText: 'Borado',
+	deleting: 'Borrando',
+	error: 'Error',
+	close: 'Cerrar',
+	cannotLoadOptionsFor: 'No se pueden cargar las opciones para el campo {0}',
+	pagingInfo: 'Mostrando {0}-{1} de {2}',
+	pageSizeChangeLabel: 'Numero de filas',
+	gotoPageLabel: 'Ir a la Pagina',
+	canNotDeletedRecords: 'No se pueden eliminar {0} de {1} registros!',
+	deleteProggress: 'Eliminando {0} de {1} registros, Procesando...'
+}
+
 Models = {
 	"Planes" : {
 		"messages" : {

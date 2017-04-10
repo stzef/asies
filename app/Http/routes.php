@@ -19,15 +19,23 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/dashboard', 'AppController@dashboard')->middleware('auth');
+Route::get('/dashboard', 'AppController@dashboard')
+	->name('app_dashboard')
+	->middleware('auth');
 
-Route::get('meci/dashboard', 'MECIController@dashboard')->middleware('auth');
+Route::group(['prefix' => 'meci'], function()
+{
+	Route::get('/dashboard', 'MECIController@dashboard')
+		->name('meci_dashboard')
+		->middleware('auth');
+});
 
 Route::group(['prefix' => 'api'], function()
 {
 	Route::group(['prefix' => 'planes'], function()
 	{
 		Route::get('/', "APIController@planes");
+		Route::get('/{cplan}/usuarios', "APIController@usuarios_plan");
 	});
 	Route::group(['prefix' => 'usuarios'], function()
 	{
@@ -38,8 +46,18 @@ Route::group(['prefix' => 'api'], function()
 		Route::get('/', "APIController@tirelaciones");
 	});
 });
+
 Route::group(['prefix' => 'planes'], function()
 {
 	Route::post('create', "PlanesController@create");
+	Route::post('/{cplan}/add/usuario', "PlanesController@add_user_to_plan");
+});
 
+Route::group(['prefix' => 'users'], function()
+{
+	Route::group(['prefix' => '{user}'], function()
+	{
+		Route::get('planes', "PerfilController@misplanes");
+		//Route::post('/{cplan}/add/usuario', "PlanesController@add_user_to_plan");
+	});
 });

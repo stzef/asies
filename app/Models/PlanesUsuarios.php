@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PlanesUsuarios extends Model
 {
+    public $timestamps = false;
+
     /**
      * The table associated with the model.
      *

@@ -10,6 +10,7 @@ use asies\Models\Planes;
 use asies\User;
 use asies\Models\Personas;
 use asies\Models\Tirelacion;
+use asies\Models\PlanesUsuarios;
 
 
 class APIController extends Controller
@@ -31,6 +32,15 @@ class APIController extends Controller
 			$persona = Personas::where('usuario', $usuario->id)->first();
 			$usuario->persona = $persona;
 		}
+		return response()->json($usuarios);
+	}
+	public function usuarios_plan($cplan)
+	{
+		$usuarios = PlanesUsuarios::where('cplan', $cplan)->get();
+		/*foreach ($usuarios as $usuario) {
+			$persona = Personas::where('usuario', $usuario->id)->first();
+			$usuario->persona = $persona;
+		}*/
 		return response()->json($usuarios);
 	}
 }

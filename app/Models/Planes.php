@@ -3,6 +3,7 @@
 namespace asies\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use asies\Models\PlanesUsuarios;
 
 /**
  * @property integer $cplan
@@ -21,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Planes extends Model
 {
+    public $timestamps = false;
+
     /**
      * @var array
      */
@@ -69,6 +72,24 @@ class Planes extends Model
         }else{
             return $planes;
         }
+    }
+
+    public function add_user($data,$cplan=null)
+    {   $plan = $this;
+        if ( $cplan ){
+            $plan = Planes::where('cplan', $cplan)->first();
+        }
+        $dataCreataion = array('cplan' => $plan->cplan , 'ctirelacion'=>$data["ctirelacion"],'usuario'=>$data["usuario"]);
+        //dump($dataCreataion);exit();
+        if( PlanesUsuarios::where(array('cplan' => $plan->cplan , 'ctirelacion'=>$data["ctirelacion"],'usuario'=>$data["usuario"]))->exists() ){
+            $obj = null;
+            $data = array("message"=>"El usuario ya se encuentra registrado");
+        }else{
+            $obj = PlanesUsuarios::create($dataCreataion);
+            $data = array("message"=>"El usuario se agregro exitosamente");
+        }
+
+        return array("obj"=>$obj,"data"=>$data);
     }
 
     /**
