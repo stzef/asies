@@ -226,6 +226,6 @@ return [
     |
     */
 
-    'empresas' => ["girardot"],
+    'empresas' => ["guataqui"],
 
 ];

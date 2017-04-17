@@ -58,10 +58,14 @@ Models = {
 		"treeview" : function(cb){
 			function recursive(subplanes){
 				var subplan = subplanes.map(function(subplan){
-					if ( subplan.subplanes.length > 0 ){
+					if ( subplan.subplanes && subplan.subplanes.length > 0 ){
 						subplan.subplanes = recursive(subplan.subplanes)
 					}
-					return {text : subplan.nplan,icon : subplan.icono,li_attr : {},children:subplan.subplanes}
+					if ( subplan.ctarea ){
+						return {text : subplan.ntarea,icon : subplan.icono,li_attr : {}}
+					}else if ( subplan.cplan ){
+						return {text : subplan.nplan,icon : subplan.icono,li_attr : {},children:subplan.subplanes}
+					}
 				})
 				return subplan
 			}

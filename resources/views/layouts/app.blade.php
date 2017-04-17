@@ -31,6 +31,9 @@
     <!-- JQuery UI -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" >
 
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ URL::asset('select2-4.0.3/dist/css/select2.min.css') }}" >
+
     <!-- JTable -->
     <!--<link rel="stylesheet" href="{{ URL::asset('jtable.2.4.0/themes/jqueryui/jtable_jqueryui.css') }}" >-->
     <link rel="stylesheet" href="{{ URL::asset('jtable.2.4.0/themes/metro/darkgray/jtable.css') }}" >
@@ -216,6 +219,18 @@
     <!-- jQuery -->
     <script src="{{ URL::asset('layout/js/jquery.js') }}"></script>
 
+    <!-- JQuery UI -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+    <script>
+        // handle jQuery plugin naming conflict between jQuery UI and Bootstrap
+        $.widget.bridge('uibutton', $.ui.button);
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+    </script>
+
+    <!-- Bootstrap JavaScript -->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ URL::asset('layout/js/bootstrap.min.js') }}"></script>
 
     <!-- Moment JS -->
     <script src="{{ URL::asset('momentjs/moment-with-locales.js') }}"></script>
@@ -224,9 +239,7 @@
     <script src="{{ URL::asset('datetimepicker/bootstrap/js/transition.js') }}"></script>
     <script src="{{ URL::asset('datetimepicker/bootstrap/js/collapse.js') }}"></script>
 
-    <!-- Bootstrap JavaScript -->
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{ URL::asset('layout/js/bootstrap.min.js') }}"></script>
+
 
     <!-- Datetimepicker JS -->
     <script src="{{ URL::asset('datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
@@ -236,14 +249,12 @@
     <!-- AlertifyJS -->
     <script src="{{ URL::asset('alertifyjs/alertify.min.js') }}"></script>
 
-    <!-- JQuery UI -->
-    <script
-      src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-      integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-      crossorigin="anonymous"></script>
 
     <!-- JTable -->
     <script src="{{ URL::asset('jtable.2.4.0/jquery.jtable.min.js') }}"></script>
+
+    <!-- Select2 -->
+    <script src="{{ URL::asset('select2-4.0.3/dist/js/select2.full.min.js') }}"></script>
 
 
     <script>
@@ -252,9 +263,20 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        $('select').select2();
+
         $( document ).ajaxError(function( event, jqxhr, settings, thrownError ) {
           console.log(thrownError)
         });
+
+        $( "#dialog" ).dialog({
+            width : "70%",
+            autoOpen: false,
+            modal: true,
+            resizable: false
+        });
+        $( "#dialog" ).dialog("open");
 
     </script>
 

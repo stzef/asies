@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $cestados
  * @property string $nestados
  * @property boolean $ifcerrado
+ * @property Actividade[] $actividades
  * @property Plane[] $planes
- * @property Registro[] $registros
  */
 class Estados extends Model
 {
@@ -21,16 +21,16 @@ class Estados extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function planes()
+    public function actividades()
     {
-        return $this->hasMany('asies\Models\Plane', 'cestado', 'cestados');
+        return $this->hasMany('App\Actividade', 'cestado', 'cestados');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function registros()
+    public function planes()
     {
-        return $this->hasMany('asies\Models\Registro', 'cestado', 'cestados');
+        return $this->hasMany('App\Plane', 'cestado', 'cestados');
     }
 }

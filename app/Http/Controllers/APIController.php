@@ -9,8 +9,8 @@ use asies\Http\Requests;
 use asies\Models\Planes;
 use asies\User;
 use asies\Models\Personas;
-use asies\Models\Tirelacion;
-use asies\Models\PlanesUsuarios;
+use asies\Models\TiRelaciones;
+use asies\Models\TareasUsuarios;
 
 
 class APIController extends Controller
@@ -22,21 +22,21 @@ class APIController extends Controller
 	}
 	public function tirelaciones()
 	{
-		$tirelaciones = Tirelacion::all();
+		$tirelaciones = TiRelaciones::all();
 		return response()->json($tirelaciones);
 	}
 	public function usuarios()
 	{
 		$usuarios = User::all();
-		foreach ($usuarios as $usuario) {
+		/*foreach ($usuarios as $usuario) {
 			$persona = Personas::where('usuario', $usuario->id)->first();
 			$usuario->persona = $persona;
-		}
+		}*/
 		return response()->json($usuarios);
 	}
-	public function usuarios_plan($cplan)
+	public function usuarios_plan($ctarea)
 	{
-		$usuarios = PlanesUsuarios::where('cplan', $cplan)->get();
+		$usuarios = TareasUsuarios::where('ctarea', $ctarea)->get();
 		/*foreach ($usuarios as $usuario) {
 			$persona = Personas::where('usuario', $usuario->id)->first();
 			$usuario->persona = $persona;
