@@ -2,6 +2,7 @@
 
 @section('styles')
 	<link rel="stylesheet" href="{{ URL::asset('jstree/css/themes/default/style.min.css') }}" >
+
 @endsection
 
 
@@ -21,131 +22,7 @@
 		</div>
 	</div>
 
-	<div id="dialog" title="Crear Actividad">
-
-
-
-
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<!--<h2 class="panel-title" id="modalCrearActividadLabel">Crear Actividad</h2>-->
-				</div>
-				<form id="form_crear_actividad" >
-					<div class="row panel-body">
-
-						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-
-						<div class="col-md-6">
-							<div class="form-group row">
-								<label for="plan_nombre" class="col-sm-2 col-form-label">Nombre</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="plan_nombre" name="plan[nplan]" placeholder="Nombre">
-								</div>
-							</div>
-
-							<div class="form-group row">
-								<label for="" class="col-sm-2 col-form-label">Objetivos</label>
-								<div class="col-sm-10">
-									<textarea class="form-control" id="" name="plan[]"></textarea>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group row">
-								<label for="" class="col-sm-4 col-form-label">Tipo Actividad</label>
-								<div class="col-sm-8">
-									<select name="" id=""></select>
-								</div>
-							</div>
-
-							<div>
-								<div class="col-md-8">
-
-									<div class="form-group row">
-										<label for="" class="col-sm-4 col-form-label">Fecha Final</label>
-										<div class="col-sm-8">
-											<input type='text' class="date form-control" tabindex="-1" />
-										</div>
-										<!--<div class='col-sm-8 input-group '>
-											<span class="input-group-addon">
-												<span class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>-->
-									</div>
-
-									<div class="form-group row">
-										<label for="" class="col-sm-4 col-form-label">Fecha Final</label>
-										<div class="col-sm-8">
-											<input type='text' class="date form-control" tabindex="-1" />
-										</div>
-										<!--<div class='col-sm-8 input-group '>
-											<span class="input-group-addon">
-												<span class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>-->
-									</div>
-
-								</div>
-
-								<div class="col-md-4">
-									<div class="form-group row">
-										<label class="col-sm-2"></label>
-										<div class="col-sm-10">
-											<div class="form-check">
-												<label class="form-check-label">
-													<input class="form-check-input" type="checkbox" name="plan[ifarchivos]"> Archivos
-												</label>
-											</div>
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<label class="col-sm-2"></label>
-										<div class="col-sm-10">
-											<div class="form-check">
-											<label class="form-check-label">
-												<input class="form-check-input" type="checkbox" name="plan[ifacta]"> Acta
-											</label>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-12">
-							<div class="col-md-6">
-								<div id="usuarios"></div>
-							</div>
-							<div class="col-md-6">
-
-							</div>
-						</div>
-
-
-
-					</div>
-					<div class="panel-footer">
-						<button type="button" class="btn btn-danger">
-							<i class="glyphicon glyphicon-remove"></i> Cancelar
-						</button>
-						<button type="submit" class="btn btn-success">
-							<i class="glyphicon glyphicon-plus"></i> Crear
-						</button>
-					</div>
-				</form>
-			</div>
-
-
-
-
-
-
-
-
-	</div>
-
-	<!--<div class="modal fade" id="modalCrearActividad" tabindex="-1" role="dialog" aria-labelledby="modalCrearActividadLabel" aria-hidden="true">
+	<div class="modal fade" id="modalCrearActividad" tabindex="-1" role="dialog" aria-labelledby="modalCrearActividadLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -178,7 +55,12 @@
 							<div class="form-group row">
 								<label for="" class="col-sm-4 col-form-label">Tipo Actividad</label>
 								<div class="col-sm-8">
-									<select name="" id=""></select>
+									<select name="" id="">
+										<option value="">Seleccione el tipo de actividad</option>
+										@foreach ($tiactividades as $tiactividad)
+											<option value="{{$tiactividad->ctiactividad}}">{{$tiactividad->ntiactividad}}</option>
+										@endforeach
+									</select>
 								</div>
 							</div>
 
@@ -232,16 +114,72 @@
 								</div>
 							</div>
 						</div>
+					<div class="row">
+					<div class="col-md-12">
+						<div class="table-responsive col-md-12">
+							<table>
+								<tbody>
+									<tr>
+										<td>
+											<select name="" id="tarea">
+												<option value="">Tareas</option>}
+												@foreach ($tareas as $tarea)
+	    											<option value="{{$tarea->cplan}}">{{$tarea->ntarea}}</option>
+												@endforeach
 
-						<div class="col-md-12">
-							<div class="col-md-6">
-								<div id="usuarios"></div>
-							</div>
-							<div class="col-md-6">
-
-							</div>
+											</select>
+										</td>
+										<td>
+											<select name="" id="respo" >
+												<option value="">Responsable</option>
+												@foreach ($responsables as $responsable)
+													<option value = "{{$responsable->cpersona}}">{{$responsable->nombres}} {{$responsable->apellidos}}</option>
+												@endforeach
+											</select>
+										</td>
+										<td>
+											<select name="" id="tirespo" >
+												<option value="">Tipo de responsabilidad</option>
+												@foreach ($relaciones as $relacion)
+													<option value = "{{$relacion->ctirelacion}}">{{$relacion->ntirelacion}}</option>
+												@endforeach
+											</select>
+										</td>
+										<td>
+											<button id="agregar" type="button" class="btn btn-info">
+												<i class="glyphicon glyphicon-plus"></i>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
+					</div>
+					<div class="container-fluid">
+						
+						<div class="col-md-12">
+							<div class="table-responsive col-md-12">
+								<table id="usuarios" class="table table-bordered tabla-hover" cellspacing="0">
+									<thead>
+										<tr>
+											<th>ctarea</th>
+											<th>Tarea</th>
+											<th>cusu</th>
+											<th>Responsable</th>
+											<th>ctirelacion</th>
+											<th>Responsabilidad</th>
+											<th> </th>
+											<th> </th>
+										</tr>
+									</thead>
+								</table>
+							</div>
 
+						</div>
+					</div>
+
+					</div>
+						
 
 
 					</div>
@@ -256,7 +194,7 @@
 				</form>
 			</div>
 		</div>
-	</div>-->
+	</div>
 
 	<div class="row">
 
@@ -281,15 +219,15 @@
 @endsection
 
 @section('scripts')
+	<script src="{{ URL::asset('DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script> 
+	<script src="{{ URL::asset('DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script> 
+	<script src="{{ URL::asset('DataTables-1.10.14/extensions/Buttons/js/buttons.bootstrap.min.js') }}"></script> 
+	<script src="{{ URL::asset('DataTables-1.10.14/extensions/Buttons/js/dataTables.buttons.min.js') }}"></script> 
 <script type="text/javascript">
 	$(function () {
-		/*$('.date').datetimepicker({
+		$('.date').datetimepicker({
 			format: 'YYYY/MM/DD',
-			//defaultDate: moment().format("YYYY/MM/DD")
-		});*/
-		$( ".date" ).datepicker({
-			defaultDate : moment().format("YYYY/MM/DD"),
-			dateFormat: "yy/mm/dd",
+			defaultDate: moment().format("YYYY/MM/DD")
 		});
 	});
 </script>
@@ -299,7 +237,22 @@
 		$.jstree.defaults.plugins = [ "wholerow", "checkbox" ]
 		$.jstree.defaults.checkbox.keep_selected_style = true
 		$.jstree.defaults.core.multiple = false
-
+		var table= $("#usuarios").DataTable({
+			"columnDefs": [
+            {
+                "targets": [ 0 ],
+                "visible": false,
+            },
+            {
+                "targets": [ 2 ],
+                "visible": false
+            },
+            {
+                "targets": [ 4 ],
+                "visible": false
+            }
+        ]
+		})
 		function getPlanSelect(){
 			var plan = $('#treeview').jstree('get_selected',true)
 
@@ -369,144 +322,25 @@
 
 	</script>
 
+
 <script type="text/javascript">
+$("#agregar").on("click" , function(){
+	listar();
+});
 
-	$(document).ready(function () {
-		$('#usuarios').jtable({
-			title: 'Usuarios',
-			paging: true,
-			pageSize: 10,
-			sorting: true,
-			multiSorting: true,
-			defaultSorting: 'usuario ASC',
-			messages: spanishMessagesJTable,
-			actions: {
-				listAction: function (postData, jtParams) {
-					return $.Deferred(function ($dfd) {
-						$.ajax({
-							url: "{{ action('APIController@usuarios_plan',['cplan' => 1]) }}?jtStartIndex=" + jtParams.jtStartIndex + "&jtPageSize=" + jtParams.jtPageSize + "&jtSorting=" + jtParams.jtSorting,
-							type: 'GET',
-							dataType: 'json',
-							data: postData,
-							success: function (data) {
-								data.Records = []
-								data.TotalRecordCount = data.length
-								data.Result = "OK"
-								data.forEach( function(element, index) {
-									data.Records.push({"usuario":element.usuario,"ctirelacion":element.ctirelacion})
-								});
-								$dfd.resolve(data);
-							},
-							error: function () {
-								$dfd.reject();
-							}
-						});
-					});
-				},
-				createAction: function (postData) {
-					return $.Deferred(function ($dfd) {
-						postData.cplan = "1"
-						$.ajax({
-							url: "{{ action('PlanesController@add_user_to_plan',['cplan'=>1])}}",
-							type: 'POST',
-							dataType: 'json',
-							data: postData,
-							success: function (data) {
-								data.Record = {"usuario":data.obj.usuario,"ctirelacion":data.obj.ctirelacion}
-								data.Result = "OK"
-								$dfd.resolve(data);
-							},
-							error: function () {
-								$dfd.reject();
-							}
-						});
-					});
-				},
-				updateAction: function(postData) {
-					return $.Deferred(function ($dfd) {
-						$.ajax({
-							url: '/Demo/UpdateStudent',
-							type: 'POST',
-							dataType: 'json',
-							data: postData,
-							success: function (data) {
-								$dfd.resolve(data);
-							},
-							error: function () {
-								$dfd.reject();
-							}
-						});
-					});
-				},
-				deleteAction: function (postData) {
-					return $.Deferred(function ($dfd) {
-						$.ajax({
-							url: '/Demo/DeleteStudent',
-							type: 'POST',
-							dataType: 'json',
-							data: postData,
-							success: function (data) {
-								$dfd.resolve(data);
-							},
-							error: function () {
-								$dfd.reject();
-							}
-						});
-					});
-				},
-			},
-			fields: {
-				usuario: {
-					title: 'Usuarios',
-					width: '50%',
-					options: function () {
+var listar = function(){
+var ctarea = $( "#tarea option:selected" ).val();
+var cresponsable = $( "#respo option:selected" ).val();
+var ctirespo = $( "#tirespo option:selected" ).val();
+var ntarea = $( "#tarea option:selected" ).text();
+var nresponsable = $( "#respo option:selected" ).text();
+var ntirespo = $( "#tirespo option:selected" ).text();
 
-						var options = [];
 
-						$.ajax({
-							url: "{{ action('APIController@usuarios') }}",
-							type: 'GET',
-							dataType: 'json',
-							async: false,
-							success: function (data) {
-								data.Options = {}
-								data.forEach(function(usuario){data.Options[usuario.id] = usuario.name})
-								options = data.Options;
-							}
-						});
-
-						return options;
-					}
-				},
-				ctirelacion: {
-					title: 'Relacion',
-					width: '50%',
-					options: function () {
-
-						var options = [];
-
-						$.ajax({
-							url: "{{ action('APIController@tirelaciones') }}",
-							type: 'GET',
-							dataType: 'json',
-							async: false,
-							success: function (data) {
-								data.Options = {}
-								data.forEach(function(tirelacion){data.Options[tirelacion.ctirelacion] = tirelacion.ntirelacion})
-								options = data.Options;
-							}
-						});
-
-						return options;
-					}
-				},
-			},
-			formCreated : function(){
-				$('select').select2();
-			}
-		});
-
-		$('#usuarios').jtable('load');
-	});
+//$("#tarea").val()
+table
+	.row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,"<button type='button' class='editar btn btn-primary'><i class='fa fa-pencil-square-o'></i></button>","<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>"])
+	.draw()
+}
 </script>
 @endsection
