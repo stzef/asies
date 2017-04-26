@@ -3,6 +3,7 @@
 namespace asies\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use asies\Models\ActividadesTareas;
 
 /**
  * @property integer $cactividad
@@ -67,4 +68,15 @@ class Actividades extends Model
     {
         return $this->hasMany('App\Evidencia', 'cactividad', 'cactividad');
     }
+
+    public function getTareas()
+    {
+        $ctareas = ActividadesTareas::where('cactividad', $this->cactividad)->get();
+        $tareas = array();
+        foreach ($ctareas as $data) {
+            array_push( $tareas, Tareas::where("ctarea",$data["ctarea"])->first() );
+        }
+        return $tareas;
+    }
+
 }

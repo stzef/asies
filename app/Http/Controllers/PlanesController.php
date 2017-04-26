@@ -33,7 +33,7 @@ class PlanesController extends Controller
 
 		if ($validator->fails()){
 			$messages = $validator->messages();
-			return response()->json($messages,400);
+			return response()->json(array("errors_form" => $messages),400);
 		}else{
 			$plan = Planes::where('cplan', $cplan)->first();
 			$response = $plan->add_user(
@@ -48,8 +48,7 @@ class PlanesController extends Controller
 		}
 	}
 
-	public function create(Request $request)
-	{
+	public function create(Request $request){
 		$user = Auth::user();
 
 		Log::info('Creacion de Plan,',['user' => $user->id ]);

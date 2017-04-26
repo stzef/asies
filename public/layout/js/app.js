@@ -11,6 +11,27 @@ Array.prototype.lengthIs = function(length){
 	return false
 }
 
+function callbackSuccessAjax(response){
+	console.log(response)
+		alertify.success("Listo.")
+}
+function callbackErrorAjax(response){
+	responseJSON = response.responseJSON
+	if ( responseJSON.errors_form ){
+		alertify.error("Ha Ocurrido un Error")
+	}
+	console.log(response)
+}
+function serializeForm(form){
+	var formData = new FormData(form);
+	$('input[type=file]').each(function(i, file) {
+		$.each(file.files, function(n, file) {
+			formData.append('file-'+i, file);
+		})
+	})
+	return formData
+}
+
 var spanishMessagesJTable = {
 	serverCommunicationError: 'Se ha producido un error al comunicarse con el servidor.',
 	loadingMessage: 'Cargando...',
@@ -34,7 +55,10 @@ var spanishMessagesJTable = {
 	deleteProggress: 'Eliminando {0} de {1} registros, Procesando...'
 }
 
-
+$("[data-find-task]").click(function(event){
+	var selector = $(this).data("input-reference")
+	openNewWindow("/utilities/tasktree",selector)
+})
 function openNewWindow(href,input_reference){
 	if(window.location.href == href) return
 

@@ -15,7 +15,8 @@ return [
     |
     */
 
-    'default' => 'local',
+    'default' => 's3',
+    //'default' => 'local',
 
     /*
     |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ return [
     |
     */
 
-    'cloud' => 's3',
+    'cloud' => 'local',
 
     /*
     |--------------------------------------------------------------------------
@@ -56,10 +57,10 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key' => 'your-key',
-            'secret' => 'your-secret',
-            'region' => 'your-region',
-            'bucket' => 'your-bucket',
+            'key' => env('AWS_S3_KEY'),
+            'secret' => env('AWS_S3_SECRET'),
+            'region' => env('AWS_S3_REGION'),
+            'bucket' => env('AWS_S3_BUCKET'),
         ],
 
     ],

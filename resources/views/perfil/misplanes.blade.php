@@ -10,11 +10,11 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">
-				Mis Planes <small></small>
+				Mis Tareas <small></small>
 			</h1>
 			<ol class="breadcrumb">
 				<li class="active">
-					<i class="fa fa-dashboard"></i> Planes
+					<i class="fa fa-dashboard"></i> Tareas
 				</li>
 
 			</ol>
@@ -25,7 +25,34 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					Planes
+					Tareas
+				<div class="panel-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Tarea</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach ($tareas as $tarea)
+								<tr>
+									<td>{{ $tarea->ntarea }}</td>
+									<td><button class="btn btn-success">Realizar</button></td>
+								</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Actividades
 				<div class="panel-body">
 					<table class="table">
 						<thead>
@@ -35,10 +62,10 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($planes as $plan)
+							@foreach ($actividades as $actividad)
 								<tr>
-									<td>{{ $plan->nplan }}</td>
-									<td><button class="btn btn-success">Realizar</button></td>
+									<td>{{ $actividad->nactividad }}</td>
+									<td><a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a></td>
 								</tr>
 							@endforeach
 						</tbody>

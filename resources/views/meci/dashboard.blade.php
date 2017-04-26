@@ -31,8 +31,8 @@
 					</button>
 					<h2 class="modal-title" id="modalCrearActividadLabel">Crear Actividad</h2>
 				</div>
-				<form id="form_crear_actividad" >
-					<div class="row modal-body">
+				<div class="row modal-body">
+					<form id="form_crear_actividad" class="form-horizontal">
 
 						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
@@ -40,14 +40,14 @@
 							<div class="form-group row">
 								<label for="plan_nombre" class="col-sm-2 col-form-label">Nombre</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="plan_nombre" name="plan[nplan]" placeholder="Nombre">
+									<input type="text" class="form-control" id="plan_nombre" name="actividad[nactividad]" placeholder="Nombre">
 								</div>
 							</div>
 
 							<div class="form-group row">
 								<label for="" class="col-sm-2 col-form-label">Objetivos</label>
 								<div class="col-sm-10">
-									<textarea class="form-control" id="" name="plan[]"></textarea>
+									<textarea class="form-control" id="" name="actividad[]"></textarea>
 								</div>
 							</div>
 						</div>
@@ -55,7 +55,7 @@
 							<div class="form-group row">
 								<label for="" class="col-sm-4 col-form-label">Tipo Actividad</label>
 								<div class="col-sm-8">
-									<select name="" id="">
+									<select name="actividad[ctiactividad]" id="" class="form-control">
 										<option value="">Seleccione el tipo de actividad</option>
 										@foreach ($tiactividades as $tiactividad)
 											<option value="{{$tiactividad->ctiactividad}}">{{$tiactividad->ntiactividad}}</option>
@@ -70,76 +70,128 @@
 									<div class="form-group row">
 										<label for="" class="col-sm-4 col-form-label">Fecha Final</label>
 										<div class='col-sm-8 input-group date'>
-											<input type='text' class="form-control" />
+											<input type='text' class="form-control" name="actividad[fini]"/>
 											<span class="input-group-addon">
 												<span class="glyphicon glyphicon-calendar"></span>
 											</span>
 										</div>
+									</div>
+
+									<div class="form-group row">
+										<label for="" class="col-sm-4 col-form-label">Fecha Final</label>
+										<div class='col-sm-8 input-group date'>
+											<input type='text' class="form-control" name="actividad[ffin]"/>
+											<span class="input-group-addon">
+												<span class="glyphicon glyphicon-calendar"></span>
+											</span>
+										</div>
+									</div>
+
+								</div>
+
+								<div class="col-md-4">
+									<div class="form-group row">
+										<label class="col-sm-2"></label>
+										<div class="col-sm-10">
+											<div class="form-check">
+												<label class="form-check-label">
+													<input class="form-check-input" type="checkbox" name="actividad[ifarchivos]"> Archivos
+												</label>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label class="col-sm-2"></label>
+										<div class="col-sm-10">
+											<div class="form-check">
+											<label class="form-check-label">
+												<input class="form-check-input" type="checkbox" name="actividad[ifacta]"> Acta
+											</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
+					</form>
 					<div class="row">
-					<div class="col-md-12">
-						<div class="table-responsive col-md-12">
-							<table>
-								<tbody>
-									<tr>
-										<td>
-											<select name="" id="tarea">
-												<option value="">Tareas</option>}
-												@foreach ($tareas as $tarea)
-	    											<option value="{{$tarea->cplan}}">{{$tarea->ntarea}}</option>
-												@endforeach
-
-											</select>
-										</td>
-										<td>
-											<select name="" id="respo" >
-												<option value="">Responsable</option>
-												@foreach ($responsables as $responsable)
-													<option value = "{{$responsable->cpersona}}">{{$responsable->nombres}} {{$responsable->apellidos}}</option>
-												@endforeach
-											</select>
-										</td>
-										<td>
-											<select name="" id="tirespo" >
-												<option value="">Tipo de responsabilidad</option>
-												@foreach ($relaciones as $relacion)
-													<option value = "{{$relacion->ctirelacion}}">{{$relacion->ntirelacion}}</option>
-												@endforeach
-											</select>
-										</td>
-										<td>
-											<button id="agregar" type="button" class="btn btn-info">
-												<i class="glyphicon glyphicon-plus"></i>
-											</button>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<div class="container-fluid">
-
 						<div class="col-md-12">
 							<div class="table-responsive col-md-12">
-								<table id="usuarios" class="table table-bordered tabla-hover" cellspacing="0">
-									<thead>
+							<form id="usuario_planes">
+								<table class="table">
+									<tbody>
 										<tr>
-											<th>ctarea</th>
-											<th>Tarea</th>
-											<th>cusu</th>
-											<th>Responsable</th>
-											<th>ctirelacion</th>
-											<th>Responsabilidad</th>
-											<th> </th>
-											<th> </th>
+											<td>
+												<div class="input-group">
+													<select name="" id="tarea" required class="form-control">
+														<option value="">Tareas</option>}
+														@foreach ($tareas as $tarea)
+			    											<option value="{{$tarea->cplan}}">{{$tarea->ntarea}}</option>
+														@endforeach
+													</select>
+													<span class="input-group-addon" data-find-task data-input-reference="#tarea"><i class="fa fa-search"></i></span>
+												</div>
+											</td>
+											<td>
+												<select name="" id="respo" required class="form-control">
+													<option value="">Responsable</option>
+													@foreach ($responsables as $responsable)
+														<option value = "{{$responsable->cpersona}}">{{$responsable->nombres}} {{$responsable->apellidos}}</option>
+													@endforeach
+												</select>
+											</td>
+											<td>
+												<select name="" id="tirespo" required class="form-control" >
+													<option value="">Tipo de responsabilidad</option>
+													@foreach ($relaciones as $relacion)
+														<option value = "{{$relacion->ctirelacion}}">{{$relacion->ntirelacion}}</option>
+													@endforeach
+												</select>
+											</td>
+											<td>
+												<button id="agregar" type="submit" class="btn btn-info">
+													<i class="glyphicon glyphicon-plus"></i>
+												</button>
+											</td>
 										</tr>
-									</thead>
+									</tbody>
 								</table>
+							</form>
 							</div>
-
 						</div>
+						<div class="col-md-12">
+							<table id="usuarios" class="table table-bordered tabla-hover table-responsive" cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th>ctarea</th>
+										<th>Tarea</th>
+										<th>cusu</th>
+										<th>Responsable</th>
+										<th>ctirelacion</th>
+										<th>Responsabilidad</th>
+										<th> </th>
+										<th> </th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+
 					</div>
 
+
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">
+							<i class="glyphicon glyphicon-remove"></i> Cancelar
+						</button>
+						<button type="submit" class="btn btn-success" form="form_crear_actividad">
+							<i class="glyphicon glyphicon-plus"></i> Crear
+						</button>
+					</div>
+			</div>
+		</div>
 	</div>
 
 	<div class="row">
@@ -183,50 +235,69 @@
 		$.jstree.defaults.plugins = [ "wholerow", "checkbox" ]
 		$.jstree.defaults.checkbox.keep_selected_style = true
 		$.jstree.defaults.core.multiple = false
+		var idioma_espanol = {
+		    "sProcessing":     "Procesando...",
+		    "sLengthMenu":     "Mostrar _MENU_ registros",
+		    "sZeroRecords":    "No se encontraron resultados",
+		    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+		    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+		    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+		    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+		    "sInfoPostFix":    "",
+		    "sSearch":         "Buscar:",
+		    "sUrl":            "",
+		    "sInfoThousands":  ",",
+		    "sLoadingRecords": "Cargando...",
+		    "oPaginate": {
+		        "sFirst":    "Primero",
+		        "sLast":     "Último",
+		        "sNext":     "Siguiente",
+		        "sPrevious": "Anterior"
+		    },
+		    "oAria": {
+		        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+		        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+		    }
+		}
+		var cols = {
+			ctarea : 0,
+			ntarea : 1,
+			crespo : 2,
+			nrespo : 3,
+			ctirela: 4,
+			ntirela: 5,
+		}
 		var table= $("#usuarios").DataTable({
+			"paging":   false,
+			"ordering": false,
+			"info":     false,
+			"language": idioma_espanol,
 			"columnDefs": [
             {
-                "targets": [ 0 ],
+                "targets": [ cols.ctarea ],
                 "visible": false,
             },
             {
-                "targets": [ 2 ],
+                "targets": [ cols.crespo ],
                 "visible": false
             },
             {
-                "targets": [ 4 ],
+                "targets": [ cols.ctirela ],
                 "visible": false
             }
-        ]
+       		]
+
+        	//editar("#usuarios tbody");
 		})
 		function getPlanSelect(){
 			var plan = $('#treeview').jstree('get_selected',true)
-
 		}
-
 		function crearActividad(){
 			$("#modalCrearActividad").modal("show")
 		}
-
 		$("#form_crear_actividad").submit(function(event){
 			event.preventDefault()
-
 			var that = this
-
-			// Array
-			var plan = $('#treeview').jstree('get_selected',true)[0]
-
-			if ( plan ) {
-				/*
-				if( plan.li_attr.nivel == Niveles.productoMinimo ){
-
-				}else{
-					return alertify.error(Models.Planes.messages.validation.notSelectCorrectParent)
-				}
-				*/
-			}else{
-				return alertify.error(Models.Planes.messages.validation.notSelection)
-			}
 
 			var formData = new FormData(that);
 			$('input[type=file]').each(function(i, file) {
@@ -234,59 +305,69 @@
 					formData.append('file-'+i, file);
 				})
 			})
-
 			$.ajax({
 				type : "POST",
-				url : "{{ action('PlanesController@create') }}",
+				url : "{{ action('ActividadesController@create') }}",
 				data:formData,
 				cache:false,
 				contentType: false,
 				processData: false,
 				success : function(){
 					$("#modalCrearActividad").modal("hide")
-
 					alertify.success(Models.Planes.messages.create.success)
-
 					$('#treeview').jstree("destroy")
 					Models.Planes.treeview(function(response){
 						$('#treeview').jstree({ 'core' : {'data' : response } })
 					})
 				},
 				error : function(){
-					$("#modalCrearActividad").modal("hide")
+					//$("#modalCrearActividad").modal("hide")
 					alertify.error(Models.Planes.messages.create.error)
 				},
 			})
 		})
-
 		Models.Planes.treeview(function(response){
-			console.info(response)
 			$('#treeview').jstree({
 				'core' : { 'data' : response }
 			})
 		})
-
 	</script>
 
 
 <script type="text/javascript">
-$("#agregar").on("click" , function(){
+$("#usuario_planes").on("submit" , function(event){
+	event.preventDefault()
 	listar();
 });
-
+function editar(event,button){
+	var data = table.row( $(button).parents("tr")).data();
+	table.row( $(button).parents("tr")).remove().draw(false);
+	var tarea = $("#tarea").val(data[cols.ctarea]).change();
+	var responsable = $("#respo").val(data[cols.crespo]).change();
+	var tiresponsable = $("#tirespo").val(data[cols.ctirela]).change();
+	console.log(tarea)
+	console.log(data)
+}
+function borrar(event,button){
+	table.row( $(button).parents("tr")).remove().draw(false);
+}
 var listar = function(){
-var ctarea = $( "#tarea option:selected" ).val();
-var cresponsable = $( "#respo option:selected" ).val();
-var ctirespo = $( "#tirespo option:selected" ).val();
-var ntarea = $( "#tarea option:selected" ).text();
-var nresponsable = $( "#respo option:selected" ).text();
-var ntirespo = $( "#tirespo option:selected" ).text();
-
-
-//$("#tarea").val()
-table
-	.row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,"<button type='button' class='editar btn btn-primary'><i class='fa fa-pencil-square-o'></i></button>","<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>"])
-	.draw()
+	var ctarea = $( "#tarea option:selected" ).val();
+	var cresponsable = $( "#respo option:selected" ).val();
+	var ctirespo = $( "#tirespo option:selected" ).val();
+	var ntarea = $( "#tarea option:selected" ).text();
+	var nresponsable = $( "#respo option:selected" ).text();
+	var ntirespo = $( "#tirespo option:selected" ).text();
+	//$("#tarea").val()
+	table
+		.row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,
+			"<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>"+
+				"<i class='fa fa-pencil-square-o'></i>"+
+			"</button>",
+			"<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)''>"+
+				"<i class='fa fa-trash-o'></i>"+
+			"</button>"])
+		.draw()
 }
 </script>
 @endsection

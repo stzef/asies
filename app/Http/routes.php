@@ -43,13 +43,24 @@ Route::group(['prefix' => 'planes'], function(){
 	Route::post('/{cplan}/add/usuario', "PlanesController@add_user_to_plan");
 });
 
+Route::group(['prefix' => 'actividades'], function(){
+	Route::post('create', "ActividadesController@create");
+	Route::get('do/{cactividad}', "ActividadesController@doActivity")->name('realizar_actividad');
+	Route::post('evidence/{cactividad}', "ActividadesController@store");
+});
+
+Route::group(['prefix' => 'tareas'], function(){
+	Route::get('create', "TareasController@create");
+	Route::post('create', "TareasController@create");
+});
+
 Route::group(['prefix' => 'utilities'], function(){
 	Route::get('tasktree', "UtilitiesController@tasktree");
 });
 
 Route::group(['prefix' => 'users'], function(){
 	Route::group(['prefix' => '{user}'], function(){
-		Route::get('planes', "PerfilController@misplanes");
+		Route::get('actividades', "PerfilController@actividades")->name('mis_actividades');
 		//Route::post('/{cplan}/add/usuario', "PlanesController@add_user_to_plan");
 	});
 });
