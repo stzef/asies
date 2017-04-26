@@ -19,15 +19,11 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/dashboard', 'AppController@dashboard')
-	->name('app_dashboard')
-	->middleware('auth');
+Route::get('/dashboard', 'AppController@dashboard')->name('app_dashboard')->middleware('auth');
 
 Route::group(['prefix' => 'meci'], function()
 {
-	Route::get('/dashboard', 'MECIController@dashboard')
-		->name('meci_dashboard')
-		->middleware('auth');
+	Route::get('/dashboard', 'MECIController@dashboard')->name('meci_dashboard')->middleware('auth');
 });
 
 Route::group(['prefix' => 'api'], function()

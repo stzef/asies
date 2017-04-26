@@ -22,241 +22,121 @@
 	</div>
 
 	<div id="dialog" title="Crear Actividad">
+		<div class="modal fade" id="modalCrearActividad" tabindex="-1" role="dialog" aria-labelledby="modalCrearActividadLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h2 class="modal-title" id="modalCrearActividadLabel">Crear Actividad</h2>
+					</div>
+					<form id="form_crear_actividad" >
+						<div class="row modal-body">
 
+							<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
+							<div class="col-md-6">
+								<div class="form-group row">
+									<label for="plan_nombre" class="col-sm-2 col-form-label">Nombre</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="plan_nombre" name="plan[nplan]" placeholder="Nombre">
+									</div>
+								</div>
 
-
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<!--<h2 class="panel-title" id="modalCrearActividadLabel">Crear Actividad</h2>-->
-				</div>
-				<form id="form_crear_actividad" >
-					<div class="row panel-body">
-
-						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-
-						<div class="col-md-6">
-							<div class="form-group row">
-								<label for="plan_nombre" class="col-sm-2 col-form-label">Nombre</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="plan_nombre" name="plan[nplan]" placeholder="Nombre">
+								<div class="form-group row">
+									<label for="" class="col-sm-2 col-form-label">Objetivos</label>
+									<div class="col-sm-10">
+										<textarea class="form-control" id="" name="plan[]"></textarea>
+									</div>
 								</div>
 							</div>
-
-							<div class="form-group row">
-								<label for="" class="col-sm-2 col-form-label">Objetivos</label>
-								<div class="col-sm-10">
-									<textarea class="form-control" id="" name="plan[]"></textarea>
+							<div class="col-md-6">
+								<div class="form-group row">
+									<label for="" class="col-sm-4 col-form-label">Tipo Actividad</label>
+									<div class="col-sm-8">
+										<select name="" id=""></select>
+									</div>
 								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group row">
-								<label for="" class="col-sm-4 col-form-label">Tipo Actividad</label>
-								<div class="col-sm-8">
-									<select name="" id=""></select>
-								</div>
-							</div>
 
-							<div>
-								<div class="col-md-8">
+								<div>
+									<div class="col-md-8">
 
-									<div class="form-group row">
-										<label for="" class="col-sm-4 col-form-label">Fecha Final</label>
-										<div class="col-sm-8">
-											<input type='text' class="date form-control" tabindex="-1" />
+										<div class="form-group row">
+											<label for="" class="col-sm-4 col-form-label">Fecha Final</label>
+											<div class='col-sm-8 input-group date'>
+												<input type='text' class="form-control" />
+												<span class="input-group-addon">
+													<span class="glyphicon glyphicon-calendar"></span>
+												</span>
+											</div>
 										</div>
-										<!--<div class='col-sm-8 input-group '>
-											<span class="input-group-addon">
-												<span class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>-->
+
+										<div class="form-group row">
+											<label for="" class="col-sm-4 col-form-label">Fecha Final</label>
+											<div class='col-sm-8 input-group date'>
+												<input type='text' class="form-control" />
+												<span class="input-group-addon">
+													<span class="glyphicon glyphicon-calendar"></span>
+												</span>
+											</div>
+										</div>
+
 									</div>
 
-									<div class="form-group row">
-										<label for="" class="col-sm-4 col-form-label">Fecha Final</label>
-										<div class="col-sm-8">
-											<input type='text' class="date form-control" tabindex="-1" />
+									<div class="col-md-4">
+										<div class="form-group row">
+											<label class="col-sm-2"></label>
+											<div class="col-sm-10">
+												<div class="form-check">
+													<label class="form-check-label">
+														<input class="form-check-input" type="checkbox" name="plan[ifarchivos]"> Archivos
+													</label>
+												</div>
+											</div>
 										</div>
-										<!--<div class='col-sm-8 input-group '>
-											<span class="input-group-addon">
-												<span class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>-->
-									</div>
 
-								</div>
-
-								<div class="col-md-4">
-									<div class="form-group row">
-										<label class="col-sm-2"></label>
-										<div class="col-sm-10">
-											<div class="form-check">
+										<div class="form-group row">
+											<label class="col-sm-2"></label>
+											<div class="col-sm-10">
+												<div class="form-check">
 												<label class="form-check-label">
-													<input class="form-check-input" type="checkbox" name="plan[ifarchivos]"> Archivos
+													<input class="form-check-input" type="checkbox" name="plan[ifacta]"> Acta
 												</label>
-											</div>
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<label class="col-sm-2"></label>
-										<div class="col-sm-10">
-											<div class="form-check">
-											<label class="form-check-label">
-												<input class="form-check-input" type="checkbox" name="plan[ifacta]"> Acta
-											</label>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 
-						<div class="col-md-12">
-							<div class="col-md-6">
-								<div id="usuarios"></div>
+							<div class="col-md-12">
+								<div class="col-md-6">
+									<div id="usuarios"></div>
+								</div>
+								<div class="col-md-6">
+
+								</div>
 							</div>
-							<div class="col-md-6">
 
-							</div>
+
+
 						</div>
-
-
-
-					</div>
-					<div class="panel-footer">
-						<button type="button" class="btn btn-danger">
-							<i class="glyphicon glyphicon-remove"></i> Cancelar
-						</button>
-						<button type="submit" class="btn btn-success">
-							<i class="glyphicon glyphicon-plus"></i> Crear
-						</button>
-					</div>
-				</form>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">
+								<i class="glyphicon glyphicon-remove"></i> Cancelar
+							</button>
+							<button type="submit" class="btn btn-success">
+								<i class="glyphicon glyphicon-plus"></i> Crear
+							</button>
+						</div>
+					</form>
+				</div>
 			</div>
-
-
-
-
-
-
-
+		</div>
 
 	</div>
 
-	<!--<div class="modal fade" id="modalCrearActividad" tabindex="-1" role="dialog" aria-labelledby="modalCrearActividadLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h2 class="modal-title" id="modalCrearActividadLabel">Crear Actividad</h2>
-				</div>
-				<form id="form_crear_actividad" >
-					<div class="row modal-body">
-
-						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-
-						<div class="col-md-6">
-							<div class="form-group row">
-								<label for="plan_nombre" class="col-sm-2 col-form-label">Nombre</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="plan_nombre" name="plan[nplan]" placeholder="Nombre">
-								</div>
-							</div>
-
-							<div class="form-group row">
-								<label for="" class="col-sm-2 col-form-label">Objetivos</label>
-								<div class="col-sm-10">
-									<textarea class="form-control" id="" name="plan[]"></textarea>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group row">
-								<label for="" class="col-sm-4 col-form-label">Tipo Actividad</label>
-								<div class="col-sm-8">
-									<select name="" id=""></select>
-								</div>
-							</div>
-
-							<div>
-								<div class="col-md-8">
-
-									<div class="form-group row">
-										<label for="" class="col-sm-4 col-form-label">Fecha Final</label>
-										<div class='col-sm-8 input-group date'>
-											<input type='text' class="form-control" />
-											<span class="input-group-addon">
-												<span class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<label for="" class="col-sm-4 col-form-label">Fecha Final</label>
-										<div class='col-sm-8 input-group date'>
-											<input type='text' class="form-control" />
-											<span class="input-group-addon">
-												<span class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>
-									</div>
-
-								</div>
-
-								<div class="col-md-4">
-									<div class="form-group row">
-										<label class="col-sm-2"></label>
-										<div class="col-sm-10">
-											<div class="form-check">
-												<label class="form-check-label">
-													<input class="form-check-input" type="checkbox" name="plan[ifarchivos]"> Archivos
-												</label>
-											</div>
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<label class="col-sm-2"></label>
-										<div class="col-sm-10">
-											<div class="form-check">
-											<label class="form-check-label">
-												<input class="form-check-input" type="checkbox" name="plan[ifacta]"> Acta
-											</label>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-12">
-							<div class="col-md-6">
-								<div id="usuarios"></div>
-							</div>
-							<div class="col-md-6">
-
-							</div>
-						</div>
-
-
-
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">
-							<i class="glyphicon glyphicon-remove"></i> Cancelar
-						</button>
-						<button type="submit" class="btn btn-success">
-							<i class="glyphicon glyphicon-plus"></i> Crear
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>-->
 
 	<div class="row">
 
