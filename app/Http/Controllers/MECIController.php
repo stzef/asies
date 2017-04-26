@@ -5,9 +5,11 @@ namespace asies\Http\Controllers;
 use Illuminate\Http\Request;
 
 use asies\Http\Requests;
-
+use asies\Models\Tareas;
 use asies\Models\Planes;
-
+use asies\Models\Personas;
+use asies\Models\TiActividades;
+use asies\Models\TiRelaciones;
 use View;
 
 class MECIController extends Controller
@@ -30,6 +32,11 @@ class MECIController extends Controller
      */
     public function dashboard()
     {
-        return view('meci/dashboard');
+        $tareas = Tareas::all();
+        $responsables = Personas::all();
+        $tiactividades = TiActividades::all();
+        $relaciones = TiRelaciones::all();
+        $context = array("tareas"=>$tareas,"tiactividades"=>$tiactividades,"responsables"=>$responsables,"relaciones"=>$relaciones);
+        return view('meci/dashboard',$context);
     }
 }

@@ -34,6 +34,19 @@ var spanishMessagesJTable = {
 	deleteProggress: 'Eliminando {0} de {1} registros, Procesando...'
 }
 
+
+function openNewWindow(href,input_reference){
+	if(window.location.href == href) return
+
+	var h = (window.innerHeight > 0) ? window.innerHeight : screen.height,
+		w = (window.innerWidth > 0) ? window.innerWidth : screen.width,
+		x = screen.width/2 - w/2,
+		y = screen.height/2 - h/2;
+	var win = window.open(href,"", "height="+h+",width="+w+",left="+x+",top="+y);
+	win.ASIES_IS_WIN_POPUOT = true
+	win.INPUT_REFERENCE = input_reference
+}
+
 Models = {
 	"Planes" : {
 		"messages" : {
@@ -62,9 +75,9 @@ Models = {
 						subplan.subplanes = recursive(subplan.subplanes)
 					}
 					if ( subplan.ctarea ){
-						return {text : subplan.ntarea,icon : subplan.icono,li_attr : {}}
+						return {text : subplan.ntarea,icon : subplan.icono,li_attr : { ctarea : subplan.ctarea}}
 					}else if ( subplan.cplan ){
-						return {text : subplan.nplan,icon : subplan.icono,li_attr : {},children:subplan.subplanes}
+						return {text : subplan.nplan,icon : subplan.icono,li_attr : { cplan : subplan.cplan },children:subplan.subplanes}
 					}
 				})
 				return subplan
@@ -78,7 +91,7 @@ Models = {
 						if ( plan.subplanes.length > 0 ){
 							plan.subplanes = recursive(plan.subplanes)
 						}
-						return {text : plan.nplan,icon : plan.icono,li_attr : {},children:plan.subplanes}
+						return {text : plan.nplan,icon : plan.icono,li_attr : { cplan : plan.cplan },children:plan.subplanes}
 					})
 
 					return cb(response);
