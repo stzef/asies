@@ -18,7 +18,7 @@ class APIController extends Controller
 	public function planes()
 	{
 		$planes = Planes::getArbolPlanes(true);
-		return response()->json($planes);
+		return response()->json($planes );
 	}
 	public function tirelaciones()
 	{
