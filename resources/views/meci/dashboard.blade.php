@@ -31,8 +31,8 @@
 					</button>
 					<h2 class="modal-title" id="modalCrearActividadLabel">Crear Actividad</h2>
 				</div>
-				<form id="form_crear_actividad" >
-					<div class="row modal-body">
+				<div class="row modal-body">
+					<form id="form_crear_actividad" >
 
 						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
@@ -114,69 +114,72 @@
 								</div>
 							</div>
 						</div>
+					</form>
 					<div class="row">
-					<div class="col-md-12">
-						<div class="table-responsive col-md-12">
-							<table>
-								<tbody>
-									<tr>
-										<td>
-											<select name="" id="tarea">
-												<option value="">Tareas</option>}
-												@foreach ($tareas as $tarea)
-	    											<option value="{{$tarea->cplan}}">{{$tarea->ntarea}}</option>
-												@endforeach
-
-											</select>
-										</td>
-										<td>
-											<select name="" id="respo" >
-												<option value="">Responsable</option>
-												@foreach ($responsables as $responsable)
-													<option value = "{{$responsable->cpersona}}">{{$responsable->nombres}} {{$responsable->apellidos}}</option>
-												@endforeach
-											</select>
-										</td>
-										<td>
-											<select name="" id="tirespo" >
-												<option value="">Tipo de responsabilidad</option>
-												@foreach ($relaciones as $relacion)
-													<option value = "{{$relacion->ctirelacion}}">{{$relacion->ntirelacion}}</option>
-												@endforeach
-											</select>
-										</td>
-										<td>
-											<button id="agregar" type="button" class="btn btn-info">
-												<i class="glyphicon glyphicon-plus"></i>
-											</button>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<div class="container-fluid">
-						
 						<div class="col-md-12">
 							<div class="table-responsive col-md-12">
-								<table id="usuarios" class="table table-bordered tabla-hover" cellspacing="0">
-									<thead>
+							<form id="usuario_planes">
+								<table>
+									<tbody>
 										<tr>
-											<th>ctarea</th>
-											<th>Tarea</th>
-											<th>cusu</th>
-											<th>Responsable</th>
-											<th>ctirelacion</th>
-											<th>Responsabilidad</th>
-											<th> </th>
-											<th> </th>
-										</tr>
-									</thead>
-								</table>
-							</div>
+											<td>
+												<select name="" id="tarea" required>
+													<option value="">Tareas</option>}
+													@foreach ($tareas as $tarea)
+		    											<option value="{{$tarea->cplan}}">{{$tarea->ntarea}}</option>
+													@endforeach
 
+												</select>
+											</td>
+											<td>
+												<select name="" id="respo" required>
+													<option value="">Responsable</option>
+													@foreach ($responsables as $responsable)
+														<option value = "{{$responsable->cpersona}}">{{$responsable->nombres}} {{$responsable->apellidos}}</option>
+													@endforeach
+												</select>
+											</td>
+											<td>
+												<select name="" id="tirespo" required >
+													<option value="">Tipo de responsabilidad</option>
+													@foreach ($relaciones as $relacion)
+														<option value = "{{$relacion->ctirelacion}}">{{$relacion->ntirelacion}}</option>
+													@endforeach
+												</select>
+											</td>
+											<td>
+												<button id="agregar" type="submit" class="btn btn-info">
+													<i class="glyphicon glyphicon-plus"></i>
+												</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</form>
+							</div>
 						</div>
-					</div>
+						<div class="container-fluid">
+							
+							<div class="col-md-12">
+								<div class="table-responsive col-md-12">
+									<table id="usuarios" class="table table-bordered tabla-hover" cellspacing="0">
+										<thead>
+											<tr>
+												<th>ctarea</th>
+												<th>Tarea</th>
+												<th>cusu</th>
+												<th>Responsable</th>
+												<th>ctirelacion</th>
+												<th>Responsabilidad</th>
+												<th> </th>
+												<th> </th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+
+							</div>
+						</div>
 
 					</div>
 						
@@ -191,7 +194,6 @@
 							<i class="glyphicon glyphicon-plus"></i> Crear
 						</button>
 					</div>
-				</form>
 			</div>
 		</div>
 	</div>
@@ -237,7 +239,40 @@
 		$.jstree.defaults.plugins = [ "wholerow", "checkbox" ]
 		$.jstree.defaults.checkbox.keep_selected_style = true
 		$.jstree.defaults.core.multiple = false
+		var idioma_espanol = {
+		    "sProcessing":     "Procesando...",
+		    "sLengthMenu":     "Mostrar _MENU_ registros",
+		    "sZeroRecords":    "No se encontraron resultados",
+		    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+		    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+		    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+		    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+		    "sInfoPostFix":    "",
+		    "sSearch":         "Buscar:",
+		    "sUrl":            "",
+		    "sInfoThousands":  ",",
+		    "sLoadingRecords": "Cargando...",
+		    "oPaginate": {
+		        "sFirst":    "Primero",
+		        "sLast":     "Último",
+		        "sNext":     "Siguiente",
+		        "sPrevious": "Anterior"
+		    },
+		    "oAria": {
+		        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+		        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+		    }
+		}
+		var cols = {
+			ctarea : 0,
+			ntarea : 1,
+			crespo : 2,
+			nrespo : 3,
+			ctirela: 4,
+			ntirela: 5,
+		}
 		var table= $("#usuarios").DataTable({
+			"language": idioma_espanol,
 			"columnDefs": [
             {
                 "targets": [ 0 ],
@@ -251,7 +286,10 @@
                 "targets": [ 4 ],
                 "visible": false
             }
-        ]
+       		]
+       		
+
+        	//editar("#usuarios tbody");
 		})
 		function getPlanSelect(){
 			var plan = $('#treeview').jstree('get_selected',true)
@@ -314,7 +352,6 @@
 		})
 
 		Models.Planes.treeview(function(response){
-			console.info(response)
 			$('#treeview').jstree({
 				'core' : { 'data' : response }
 			})
@@ -324,23 +361,41 @@
 
 
 <script type="text/javascript">
-$("#agregar").on("click" , function(){
+$("#usuario_planes").on("submit" , function(event){
+	event.preventDefault()
 	listar();
 });
 
+function editar(event,button){
+	var data = table.row( $(button).parents("tr")).data();
+	table.row( $(button).parents("tr")).remove().draw(false);
+	var tarea = $("#tarea").val(data[cols.ctarea]).change();
+	var responsable = $("#respo").val(data[cols.crespo]).change();
+	var tiresponsable = $("#tirespo").val(data[cols.ctirela]).change();
+	console.log(tarea)
+	console.log(data)
+}
+function borrar(event,button){
+	table.row( $(button).parents("tr")).remove().draw(false);
+}
 var listar = function(){
-var ctarea = $( "#tarea option:selected" ).val();
-var cresponsable = $( "#respo option:selected" ).val();
-var ctirespo = $( "#tirespo option:selected" ).val();
-var ntarea = $( "#tarea option:selected" ).text();
-var nresponsable = $( "#respo option:selected" ).text();
-var ntirespo = $( "#tirespo option:selected" ).text();
+	var ctarea = $( "#tarea option:selected" ).val();
+	var cresponsable = $( "#respo option:selected" ).val();
+	var ctirespo = $( "#tirespo option:selected" ).val();
+	var ntarea = $( "#tarea option:selected" ).text();
+	var nresponsable = $( "#respo option:selected" ).text();
+	var ntirespo = $( "#tirespo option:selected" ).text();
+	//$("#tarea").val()
+	table
+		.row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,
+			"<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>"+
+				"<i class='fa fa-pencil-square-o'></i>"+
+			"</button>",
+			"<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)''>"+
+				"<i class='fa fa-trash-o'></i>"+
+			"</button>"])
+		.draw()
 
-
-//$("#tarea").val()
-table
-	.row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,"<button type='button' class='editar btn btn-primary'><i class='fa fa-pencil-square-o'></i></button>","<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>"])
-	.draw()
 }
 </script>
 @endsection
