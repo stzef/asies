@@ -30,7 +30,7 @@
                         <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
                         <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
                         <div class="row fileupload-buttonbar">
-                            <div class="col-lg-7">
+                            <div class="col-lg-5">
                                 <!-- The fileinput-button span is used to style the file input field as button -->
                                 <span class="btn btn-success fileinput-button">
                                     <i class="glyphicon glyphicon-plus"></i>
@@ -50,11 +50,16 @@
                                     <span>Delete</span>
                                 </button>
                                 <input type="checkbox" class="toggle">
+
                                 <!-- The global file processing state -->
                                 <span class="fileupload-process"></span>
+                                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modalCrearActa">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                    Crear Acta
+                                </button>
                             </div>
                             <!-- The global progress state -->
-                            <div class="col-lg-5 fileupload-progress fade">
+                            <div class="col-lg-3 fileupload-progress fade">
                                 <!-- The global progress bar -->
                                 <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
                                     <div class="progress-bar progress-bar-success" style="width:0%;"></div>
@@ -70,6 +75,131 @@
             </div>
         </div>
     </div>
+
+
+
+    <div class="modal fade" id="modalCrearActa" tabindex="-1" role="dialog" aria-labelledby="modalCrearActaLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h2 class="modal-title" id="modalCrearActaLabel">Crear Acta</h2>
+                    </div>                
+                
+                <div class="row modal-body">
+                    <form id="form_crear_acta" class="form-horizontal">
+                            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label for="plan_nombre" class="col-sm-2 col-form-label">Nombre</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="plan_nombre" name="actividad[nactividad]" placeholder="Nombre">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-2 col-form-label">Objetivos</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" id="" name="actividad[descripcion]"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-2 col-form-label">Orden del dia</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" id="" name="actividad[descripcion]"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="plan_nombre" class="col-sm-2 col-form-label">Pie de firma</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="plan_nombre" name="actividad[nactividad]" placeholder="Ciudad, DD/MM/YY">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-2 col-form-label">Elaboro </label>
+                                    <div class="col-sm-10">
+                                        <select name="" class="form-control">
+                                            <option value=""></option>
+                    
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-2 col-form-label">Reviso </label>
+                                    <div class="col-sm-10">
+                                        <select name="" class="form-control">
+                                            <option value=""></option>
+                    
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-2 col-form-label">Aprobo </label>
+                                    <div class="col-sm-10">
+                                        <select name="" class="form-control">
+                                            <option value=""></option>
+                    
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-8">
+                                    <div class="form-group row">
+                                            <label for="" class="col-sm-4 col-form-label">Hora Inicial</label>
+                                            <div class='col-sm-8 input-group date'>
+                                                <input type='text' class="form-control" name="actividad[fini]"/>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                    </div>
+                                    <div class="form-group row">
+                                            <label for="" class="col-sm-4 col-form-label">Hora Inicial</label>
+                                            <div class='col-sm-8 input-group date'>
+                                                <input type='text' class="form-control" name="actividad[fini]"/>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                    </div>
+                                    <table id="tareas" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Tarea</th>
+                                                <th>Responsable</th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    <table id="usuarios" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Usuario</th>
+                                                <th>Funcion</th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>      
+                            </div>                        
+                    </form>
+                    <form action="" method="get" accept-charset="utf-8">
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
 	@foreach ($tareas as $tarea)
 		<div class="form-group row">
@@ -163,6 +293,44 @@
 @endsection
 
 @section('scripts')
+    <script>
+            var cols = {
+            ctarea : 0,
+            ntarea : 1,
+            crespo : 2,
+            nrespo : 3,
+            ctirela: 4,
+            ntirela: 5,
+            }   
+            var table= $("#tareas").DataTable({
+            "paging":   false,
+            "ordering": false,
+            "info":     false,
+            "language": idioma_espanol,
+            "columnDefs": [
+                {
+                    "targets": [ cols.ctarea,cols.crespo,cols.ctirela ],
+                    "visible": false,
+                },
+            ]
+
+            //editar("#usuarios tbody");
+        })
+            var table= $("#usuarios").DataTable({
+            "paging":   false,
+            "ordering": false,
+            "info":     false,
+            "language": idioma_espanol,
+            "columnDefs": [
+                {
+                    "targets": [ cols.ctarea,cols.crespo,cols.ctirela ],
+                    "visible": false,
+                },
+            ]
+
+            //editar("#usuarios tbody");
+        })
+    </script>
 	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
 	<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 	<script src="{{ URL::asset('jQuery-File-Upload-9.18.0/js/vendor/jquery.ui.widget.js') }}"></script>
