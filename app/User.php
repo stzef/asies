@@ -48,7 +48,16 @@ class User extends Authenticatable
     public function getActividades(){
         $TIRELACION_RESPONSABLE = \Config::get("app.CTE")["TIRELACION_RESPONSABLE"];
 
-        $actividades = Actividades::all();
+        $actividades = \DB::table('tareas')
+            ->join('tareasusuarios', 'tareasusuarios.ctarea', '=', 'tareas.ctarea')
+            ->join('actividadestareas', 'actividadestareas.ctarea', '=', 'tareas.ctarea')
+            ->join('users', 'tareasusuarios.user', '=', 'users.id')
+            ->join('actividades', 'actividadestareas.cactividad', '=', 'actividades.cactividad')
+            ->select('actividades.*')
+            ->where('users.id', $this->id)
+            //->groupBy('actividadestareas.cactividad')
+            ->get();
+
         return $actividades;
     }
 

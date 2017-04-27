@@ -25,34 +25,8 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					Tareas
-				<div class="panel-body">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Tarea</th>
-								<th>Acciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach ($tareas as $tarea)
-								<tr>
-									<td>{{ $tarea->ntarea }}</td>
-									<td><button class="btn btn-success">Realizar</button></td>
-								</tr>
-							@endforeach
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
 					Actividades
+				</div>
 				<div class="panel-body">
 					<table class="table">
 						<thead>
@@ -66,6 +40,32 @@
 								<tr>
 									<td>{{ $actividad->nactividad }}</td>
 									<td><a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a></td>
+								</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Tareas
+				</div>
+				<div class="panel-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Tarea</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach ($tareas as $tarea)
+								<tr>
+									<td>{{ $tarea->ntarea }}</td>
 								</tr>
 							@endforeach
 						</tbody>
