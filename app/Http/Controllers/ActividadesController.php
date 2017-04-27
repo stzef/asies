@@ -23,6 +23,19 @@ class ActividadesController extends Controller
 		$this->middleware('auth');
 	}
 
+	public function summaryActivity(Request $request,$cactividad){
+		if ($request->isMethod('get')){
+			if ( $actividad = Actividades::where("cactividad", $cactividad)->first() ) {
+				$tareas = $actividad->getTareas();
+				$evidencias = $actividad->getEvidencias();
+				return view( 'actividades.summaryActivity' , array(
+					'tareas' => $tareas,
+					'actividad' => $actividad,
+					'evidencias' => $evidencias,
+					));
+			}
+		}
+	}
 	public function doActivity(Request $request,$cactividad){
 		if ($request->isMethod('get')){
 			if ( $actividad = Actividades::where("cactividad", $cactividad)->first() ) {
@@ -33,7 +46,6 @@ class ActividadesController extends Controller
 					));
 			}
 		}
-
 	}
 	public function create(Request $request){
 		$user = Auth::user();

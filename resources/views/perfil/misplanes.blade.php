@@ -40,6 +40,7 @@
 								<tr>
 									<td>{{ $actividad->nactividad }}</td>
 									<td><a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a></td>
+									<td><a class="btn btn-primary" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a></td>
 								</tr>
 							@endforeach
 						</tbody>

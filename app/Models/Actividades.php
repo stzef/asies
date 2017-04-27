@@ -78,5 +78,10 @@ class Actividades extends Model
         }
         return $tareas;
     }
+    public function getEvidencias()
+    {
+        $evidencias = Evidencias::where('cactividad', $this->cactividad)->get();
+        return $evidencias;
+    }
 
 }
