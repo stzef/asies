@@ -17,6 +17,8 @@ class AppServiceProvider extends ServiceProvider
             return "<?php echo ucfirst($string); ?>";
             });
             Blade::directive('select', function($arreglo){
+                    //$arreglo = explode(',', preg_replace("/[\(\)]/", '', $expression), 2);
+
                 dump($arreglo);exit();
                 $select = "<select name =".'"'.'"'." id =".'"'.'"'.">";
                 foreach ($arreglo as $options) {

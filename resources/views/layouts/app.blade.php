@@ -182,7 +182,8 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Datos <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="{{ URL::route('meci_dashboard') }}">Planes</a>
+                                <a href="{{ URL::route('GET_tareas_create') }}">Tareas</a>
+                                <a href="{{ URL::route('meci_dashboard') }}">Actividades</a>
                             </li>
                         </ul>
                     </li>
@@ -267,7 +268,7 @@
             }
         });
 
-        $('select').select2();
+        $('select').select2({ width: '100%' });
 
         $( document ).ajaxError(function( event, jqxhr, settings, thrownError ) {
           console.log(thrownError)

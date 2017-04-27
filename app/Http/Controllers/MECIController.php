@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use asies\Http\Requests;
 use asies\Models\Tareas;
+use asies\User;
 use asies\Models\Planes;
 use asies\Models\Personas;
 use asies\Models\TiActividades;
@@ -33,10 +34,12 @@ class MECIController extends Controller
     public function dashboard()
     {
         $tareas = Tareas::all();
-        $responsables = Personas::all();
+
+        $usuarios = User::all();
+
         $tiactividades = TiActividades::all();
         $relaciones = TiRelaciones::all();
-        $context = array("tareas"=>$tareas,"tiactividades"=>$tiactividades,"responsables"=>$responsables,"relaciones"=>$relaciones);
+        $context = array("tareas"=>$tareas,"tiactividades"=>$tiactividades,"usuarios"=>$usuarios,"relaciones"=>$relaciones);
         return view('meci/dashboard',$context);
     }
 }

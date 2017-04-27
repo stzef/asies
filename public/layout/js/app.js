@@ -10,6 +10,10 @@ Array.prototype.lengthIs = function(length){
 	}
 	return false
 }
+String.prototype.set = function(key,value){
+	var reg = new RegExp(key,"g")
+	return this.replace(reg,value)
+}
 
 function callbackSuccessAjax(response){
 	console.log(response)
@@ -24,10 +28,14 @@ function callbackErrorAjax(response){
 }
 function serializeForm(form){
 	var formData = new FormData(form);
-	$('input[type=file]').each(function(i, file) {
+	$(form).find('input[type=file]').each(function(i, file) {
 		$.each(file.files, function(n, file) {
 			formData.append('file-'+i, file);
 		})
+	})
+	$(form).find('input[type=checkbox]').each(function(i, input) {
+		var value = input.checked ? 1 : 0
+		formData.append(input.name,value);
 	})
 	return formData
 }

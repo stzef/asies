@@ -50,9 +50,9 @@ class Tareas extends Model
         if ( $ctarea ){
             $tarea = Tareas::where('ctarea', $ctarea)->first();
         }
-        $dataCreataion = array('ctarea' => $tarea->ctarea , 'ctirelacion'=>$data["ctirelacion"],'usuario'=>$data["usuario"]);
+        $dataCreataion = array('ctarea' => $tarea->ctarea , 'ctirelacion'=>$data["ctirelacion"],'user'=>$data["user"]);
         //dump($dataCreataion);exit();
-        if( TareasUsuarios::where(array('ctarea' => $tarea->ctarea , 'ctirelacion'=>$data["ctirelacion"],'usuario'=>$data["usuario"]))->exists() ){
+        if( TareasUsuarios::where(array('ctarea' => $tarea->ctarea , 'ctirelacion'=>$data["ctirelacion"],'user'=>$data["user"]))->exists() ){
             $obj = null;
             $data = array("message"=>"El usuario ya se encuentra registrado");
         }else{

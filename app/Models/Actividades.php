@@ -11,11 +11,11 @@ use asies\Models\ActividadesTareas;
  * @property integer $ctiactividad
  * @property integer $cacta
  * @property string $nactividad
+ * @property string $descripcion
  * @property string $fini
  * @property string $ffin
  * @property boolean $ifacta
  * @property boolean $ifarchivos
- * @property boolean $ifdescripcion
  * @property Estado $estado
  * @property Tiactividade $tiactividade
  * @property Acta $acta
@@ -27,7 +27,7 @@ class Actividades extends Model
     /**
      * @var array
      */
-    protected $fillable = ['cestado', 'ctiactividad', 'cacta', 'nactividad', 'fini', 'ffin', 'ifacta', 'ifarchivos', 'ifdescripcion'];
+    protected $fillable = ['cestado', 'ctiactividad', 'cacta', 'nactividad', 'fini', 'ffin', 'ifacta', 'ifarchivos', 'descripcion'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

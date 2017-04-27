@@ -7,7 +7,6 @@
 
 
 @section('content')
-
 	<div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">
@@ -47,7 +46,7 @@
 							<div class="form-group row">
 								<label for="" class="col-sm-2 col-form-label">Objetivos</label>
 								<div class="col-sm-10">
-									<textarea class="form-control" id="" name="actividad[]"></textarea>
+									<textarea class="form-control" id="" name="actividad[descripcion]"></textarea>
 								</div>
 							</div>
 						</div>
@@ -122,27 +121,27 @@
 								<table class="table">
 									<tbody>
 										<tr>
-											<td>
+											<td width="50%">
 												<div class="input-group">
-													<select name="" id="tarea" required class="form-control">
+													<select name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
 														<option value="">Tareas</option>}
 														@foreach ($tareas as $tarea)
-			    											<option value="{{$tarea->cplan}}">{{$tarea->ntarea}}</option>
+															<option value="{{$tarea->cplan}}">{{$tarea->ntarea}}</option>
 														@endforeach
 													</select>
 													<span class="input-group-addon" data-find-task data-input-reference="#tarea"><i class="fa fa-search"></i></span>
 												</div>
 											</td>
-											<td>
-												<select name="" id="respo" required class="form-control">
+											<td width="25%">
+												<select name="tareasusuarios[user]" id="respo" required class="form-control">
 													<option value="">Responsable</option>
-													@foreach ($responsables as $responsable)
-														<option value = "{{$responsable->cpersona}}">{{$responsable->nombres}} {{$responsable->apellidos}}</option>
+													@foreach ($usuarios as $usuario)
+														<option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
 													@endforeach
 												</select>
 											</td>
-											<td>
-												<select name="" id="tirespo" required class="form-control" >
+											<td width="25%">
+												<select name="tareasusuarios[ctirelacion]" id="tirespo" required class="form-control" >
 													<option value="">Tipo de responsabilidad</option>
 													@foreach ($relaciones as $relacion)
 														<option value = "{{$relacion->ctirelacion}}">{{$relacion->ntirelacion}}</option>
@@ -236,28 +235,28 @@
 		$.jstree.defaults.checkbox.keep_selected_style = true
 		$.jstree.defaults.core.multiple = false
 		var idioma_espanol = {
-		    "sProcessing":     "Procesando...",
-		    "sLengthMenu":     "Mostrar _MENU_ registros",
-		    "sZeroRecords":    "No se encontraron resultados",
-		    "sEmptyTable":     "Ningún dato disponible en esta tabla",
-		    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-		    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-		    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-		    "sInfoPostFix":    "",
-		    "sSearch":         "Buscar:",
-		    "sUrl":            "",
-		    "sInfoThousands":  ",",
-		    "sLoadingRecords": "Cargando...",
-		    "oPaginate": {
-		        "sFirst":    "Primero",
-		        "sLast":     "Último",
-		        "sNext":     "Siguiente",
-		        "sPrevious": "Anterior"
-		    },
-		    "oAria": {
-		        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-		        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-		    }
+			"sProcessing":     "Procesando...",
+			"sLengthMenu":     "Mostrar _MENU_ registros",
+			"sZeroRecords":    "No se encontraron resultados",
+			"sEmptyTable":     "Ningún dato disponible en esta tabla",
+			"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+			"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+			"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+			"sInfoPostFix":    "",
+			"sSearch":         "Buscar:",
+			"sUrl":            "",
+			"sInfoThousands":  ",",
+			"sLoadingRecords": "Cargando...",
+			"oPaginate": {
+				"sFirst":    "Primero",
+				"sLast":     "Último",
+				"sNext":     "Siguiente",
+				"sPrevious": "Anterior"
+			},
+			"oAria": {
+				"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+				"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+			}
 		}
 		var cols = {
 			ctarea : 0,
@@ -273,21 +272,13 @@
 			"info":     false,
 			"language": idioma_espanol,
 			"columnDefs": [
-            {
-                "targets": [ cols.ctarea ],
-                "visible": false,
-            },
-            {
-                "targets": [ cols.crespo ],
-                "visible": false
-            },
-            {
-                "targets": [ cols.ctirela ],
-                "visible": false
-            }
-       		]
+				{
+					"targets": [ cols.ctarea,cols.crespo,cols.ctirela ],
+					"visible": false,
+				},
+			]
 
-        	//editar("#usuarios tbody");
+			//editar("#usuarios tbody");
 		})
 		function getPlanSelect(){
 			var plan = $('#treeview').jstree('get_selected',true)
@@ -299,16 +290,10 @@
 			event.preventDefault()
 			var that = this
 
-			var formData = new FormData(that);
-			$('input[type=file]').each(function(i, file) {
-				$.each(file.files, function(n, file) {
-					formData.append('file-'+i, file);
-				})
-			})
 			$.ajax({
 				type : "POST",
 				url : "{{ action('ActividadesController@create') }}",
-				data:formData,
+				data:serializeForm(that),
 				cache:false,
 				contentType: false,
 				processData: false,
@@ -336,8 +321,20 @@
 
 <script type="text/javascript">
 $("#usuario_planes").on("submit" , function(event){
+	var that = this
 	event.preventDefault()
-	listar();
+	var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['ctarea' => '__ctarea__'])}}"
+	$.ajax({
+		"url":base_url_add_user_tarea.set("__ctarea__",1),
+		"type":"POST",
+		data: serializeForm(that),
+		cache:false,
+		contentType: false,
+		processData: false,
+		success: function(){
+			listar();
+		}
+	})
 });
 function editar(event,button){
 	var data = table.row( $(button).parents("tr")).data();

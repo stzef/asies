@@ -28,6 +28,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function persona()
+    {
+        return $this->hasOne('asies\Models\Personas','cpersona','cpersona');
+        #return $this->belongsTo('asies\Models\Personas','cpersona','cpersona');
+
+    }
+
     public function getTareas()
     {
         $ctareas = TareasUsuarios::where('user', $this->id)->get();
@@ -39,6 +46,8 @@ class User extends Authenticatable
     }
 
     public function getActividades(){
+        $TIRELACION_RESPONSABLE = \Config::get("app.CTE")["TIRELACION_RESPONSABLE"];
+
         $actividades = Actividades::all();
         return $actividades;
     }

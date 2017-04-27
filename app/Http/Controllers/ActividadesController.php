@@ -21,6 +21,7 @@ class ActividadesController extends Controller
 		View::share('LONG_NAME_APP', env("LONG_NAME_APP"," - "));
 		$this->middleware('auth');
 	}
+
 	public function doActivity(Request $request,$cactividad){
 		if ($request->isMethod('get')){
 			if ( $actividad = Actividades::where("cactividad", $cactividad)->first() ) {
@@ -42,13 +43,14 @@ class ActividadesController extends Controller
 		$validator = Validator::make($dataBody["actividad"],
 			[
 				#'cestado' => 'required',
-				'ctiactividad' => 'required',
+				'ctiactividad' => 'required|exists:tiactividades,ctiactividad',
 				#'cacta' => 'required',
-				'nactividad' => 'required',
-				'fini' => 'required',
-				'ffin' => 'required',
-				'ifacta' => 'required',
-				'ifarchivos' => 'required',
+				'nactividad' => 'required|max:255',
+				'descripcion' => 'required|max:500',
+				'fini' => 'required|date',
+				'ffin' => 'required|date',
+				'ifacta' => 'required|boolean',
+				'ifarchivos' => 'required|boolean',
 				#'ifdescripcion' => 'required',
 			],
 			[
@@ -56,6 +58,7 @@ class ActividadesController extends Controller
 				'ctiactividad.required' => 'required',
 				#'cacta.required' => 'required',
 				'nactividad.required' => 'required',
+				'descripcion.required' => 'required',
 				'fini.required' => 'required',
 				'ffin.required' => 'required',
 				'ifacta.required' => 'required',

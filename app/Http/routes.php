@@ -40,7 +40,6 @@ Route::group(['prefix' => 'api'], function(){
 
 Route::group(['prefix' => 'planes'], function(){
 	Route::post('create', "PlanesController@create");
-	Route::post('/{cplan}/add/usuario', "PlanesController@add_user_to_plan");
 });
 
 Route::group(['prefix' => 'actividades'], function(){
@@ -50,8 +49,11 @@ Route::group(['prefix' => 'actividades'], function(){
 });
 
 Route::group(['prefix' => 'tareas'], function(){
-	Route::get('create', "TareasController@create");
+	Route::get('create', "TareasController@create")->name("GET_tareas_create");
 	Route::post('create', "TareasController@create");
+
+	Route::post('/{ctarea}/usuarios', "TareasController@users_task")->name("POST_users_task");
+	Route::put('/{ctarea}/usuarios', "TareasController@users_task")->name("PUT_users_task");
 });
 
 Route::group(['prefix' => 'utilities'], function(){
