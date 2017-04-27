@@ -54,6 +54,8 @@ Route::group(['prefix' => 'tareas'], function(){
 
 	Route::post('/{ctarea}/usuarios', "TareasController@users_task")->name("POST_users_task");
 	Route::put('/{ctarea}/usuarios', "TareasController@users_task")->name("PUT_users_task");
+
+	Route::post('/{ctarea}/change_state', "TareasController@change_state")->name("POST_cambiar_estado_tarea");
 });
 
 Route::group(['prefix' => 'utilities'], function(){
