@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use asies\Http\Requests;
 use asies\Models\Actividades;
+use asies\Models\Evidencias;
 use Illuminate\Support\Facades\Log;
 use \Auth;
 use View;
@@ -92,7 +93,7 @@ class ActividadesController extends Controller
 		return $size;
 	}
 
-	public function store(Request $request)
+	public function store(Request $request,$cactividad)
 	{
 		if ($request->hasFile('files')) {
 			$file = $request->file('files');
@@ -100,20 +101,26 @@ class ActividadesController extends Controller
 				$filename = $files->getClientOriginalName();
 				$extension = $files->getClientOriginalExtension();
 				$picture = sha1($filename . time()) . '.' . $extension;
-				$folder = "hola";
 
-				//specify your folder
+				$path_files = '/evidencias/actividades/actividad_' .$cactividad. '/';
+				$destinationPath = public_path().$path_files;
 
-				$destinationPath = public_path() . '/files_clients/' .$folder. '/';
 				$files->move($destinationPath, $picture);
 				//Storage::disk('s3')->move($destinationPath, $picture);
-				$destinationPath1='http://'.$_SERVER['HTTP_HOST'].'/files_clients/' .$folder. '/';
+				$destinationPath1='http://'.$_SERVER['HTTP_HOST'].'/evidencias/actividades/actividad_' .$cactividad. '/';
 						$filest = array();
 						$filest['name'] = $picture;
 						$filest['size'] = $this->get_file_size($destinationPath.$picture);
 						$filest['url'] = $destinationPath1.$picture;
 				$filest['thumbnailUrl'] = $destinationPath1.$picture;
 				$filesa['files'][]=$filest;
+
+				Evidencias::create(array(
+					'cactividad' => $cactividad,
+					'path' => $path_files.$picture,
+					'fregistro' => date("Y-m-d H:i:s"),
+				));
+
 			}
 			return  $filesa;
 		}

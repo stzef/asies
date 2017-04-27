@@ -46,7 +46,8 @@ class Tareas extends Model
     }
 
     public function add_user($data,$ctarea=null)
-    {   $tarea = $this;
+    {
+        $tarea = $this;
         if ( $ctarea ){
             $tarea = Tareas::where('ctarea', $ctarea)->first();
         }
