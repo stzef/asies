@@ -10,11 +10,11 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">
-				Mis Tareas <small></small>
+				Mi Perfil <small></small>
 			</h1>
 			<ol class="breadcrumb">
 				<li class="active">
-					<i class="fa fa-dashboard"></i> Tareas
+					<i class="fa fa-dashboard"></i> Perfil
 				</li>
 
 			</ol>
