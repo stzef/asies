@@ -115,7 +115,7 @@
                                 <div class="form-group row">
                                     <label for="plan_nombre" class="col-sm-2 col-form-label">Numero</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="plan_nombre" name="actividad[nactividad]" disabled>
+                                        <input type="text" class="form-control" id="plan_nombre" name="actividad[nactividad]" value="{{$numacta}}" disabled>
                                     </div>
                                 </div>
 
@@ -193,17 +193,7 @@
                                                 </span>
                                             </div>
                                     </div>
-                                    <table id="tareas" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>Tarea</th>
-                                                <th>Responsable</th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                    <table id="usuarios" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
+                                    <table id="usuarios_tareas" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th>Usuario</th>

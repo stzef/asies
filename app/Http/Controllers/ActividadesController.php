@@ -45,6 +45,8 @@ class ActividadesController extends Controller
 				$tareas = $actividad->getTareas();
 				$usuarios = User::all();
 				$numacta = Actas::genCode();
+				$asignacion = $actividad->getAsignacion();
+				//dump($asignacion);exit();
 				return view( 'actividades.doActivity' , array(
 					'tareas' => $tareas,
 					'actividad' => $actividad,

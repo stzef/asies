@@ -1,6 +1,7 @@
 <?php
 
 namespace asies\Models;
+use asies\User;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -113,6 +114,24 @@ class Actividades extends Model
                 ->get();
         }
         return $tareas;
+    }
+    public function getAsignacion()
+    {
+            $asignaciones = \DB::table('asignaciontareas')
+                ->join('users', 'asignaciontareas.user', '=', 'users.id')
+                ->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
+                ->select('asignaciontareas.*')
+                ->where('asignaciontareas.cactividad', $this->cactividad)
+                //->where('users.id', $iduser)
+                ->get();
+                foreach ($asignaciones as $asignacion) {
+                    $asignacion->tarea = Tareas::where('ctarea',$asignacion->ctarea)->first();
+                    $asignacion->actividad =Actividades::where('cactividad',$asignacion->cactividad)->first();
+                    $asignacion->relaacion = TiRelaciones::where('ctirelacion',$asignacion->ctirelacion)->first();
+                    $asignacion->usuario = User::where('id',$asignacion->user)->first();
+                    # code...
+                }
+        return $asignaciones;
     }
     public function getEvidencias()
     {
