@@ -323,9 +323,9 @@
 $("#usuario_planes").on("submit" , function(event){
 	var that = this
 	event.preventDefault()
-	var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['ctarea' => '__ctarea__'])}}"
+	var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
 	$.ajax({
-		"url":base_url_add_user_tarea.set("__ctarea__",1),
+		"url":base_url_add_user_tarea.set("__ctarea__",1).set("__cactividad__",1),
 		"type":"POST",
 		data: serializeForm(that),
 		cache:false,

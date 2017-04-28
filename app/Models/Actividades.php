@@ -74,6 +74,23 @@ class Actividades extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function add_task_user($data,$cactividad=null)
+    {
+        $actividad = $this;
+        if ( $cactividad ){
+            $actividad = Tareas::where('cactividad', $cactividad)->first();
+        }
+        $dataCreataion = array('cactividad' => $actividad->cactividad , 'ctirelacion'=>$data["ctirelacion"],'ctarea'=>$data["ctarea"],'user'=>$data["user"]);
+        //dump($dataCreataion);exit();
+        if( AsignacionTareas::where(array('cactividad' => $actividad->cactividad , 'ctirelacion'=>$data["ctirelacion"],'ctarea'=>$data["ctarea"],'user'=>$data["user"]))->exists() ){
+            $obj = null;
+            $data = array("message"=>"El usuario ya se encuentra registrado");
+        }else{
+            $obj = AsignacionTareas::create($dataCreataion);
+            $data = array("message"=>"El usuario se agregro exitosamente");
+        }
+        return array("obj"=>$obj,"data"=>$data);
+    }
     public function evidencias()
     {
         return $this->hasMany('App\Evidencia', 'cactividad', 'cactividad');

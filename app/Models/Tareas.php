@@ -45,21 +45,4 @@ class Tareas extends Model
     {
         return $this->hasMany('App\Asignaciontarea', 'ctarea', 'ctarea');
     }
-    public function add_user($data,$ctarea=null)
-    {
-        $tarea = $this;
-        if ( $ctarea ){
-            $tarea = Tareas::where('ctarea', $ctarea)->first();
-        }
-        $dataCreataion = array('ctarea' => $tarea->ctarea , 'ctirelacion'=>$data["ctirelacion"],'user'=>$data["user"]);
-        //dump($dataCreataion);exit();
-        if( TareasUsuarios::where(array('ctarea' => $tarea->ctarea , 'ctirelacion'=>$data["ctirelacion"],'user'=>$data["user"]))->exists() ){
-            $obj = null;
-            $data = array("message"=>"El usuario ya se encuentra registrado");
-        }else{
-            $obj = TareasUsuarios::create($dataCreataion);
-            $data = array("message"=>"El usuario se agregro exitosamente");
-        }
-        return array("obj"=>$obj,"data"=>$data);
-    }
 }
