@@ -4,17 +4,17 @@ namespace asies\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use asies\Models\Tareas;
-
 /**
  * @property integer $cplan
- * @property integer $cplanmayor
  * @property integer $cestado
+ * @property integer $cplanmayor
  * @property integer $ctiplan
  * @property string $nplan
  * @property integer $valor_plan
- * @property Plane $plane
+ * @property string $created_at
+ * @property string $updated_at
  * @property Estado $estado
+ * @property Plane $plane
  * @property Tiplane $tiplane
  * @property Tarea[] $tareas
  */
@@ -23,15 +23,7 @@ class Planes extends Model
     /**
      * @var array
      */
-    protected $fillable = ['cplanmayor', 'cestado', 'ctiplan', 'nplan', 'valor_plan'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function plane()
-    {
-        return $this->belongsTo('App\Plane', 'cplanmayor', 'cplan');
-    }
+    protected $fillable = ['cestado', 'cplanmayor', 'ctiplan', 'nplan', 'valor_plan', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -39,6 +31,14 @@ class Planes extends Model
     public function estado()
     {
         return $this->belongsTo('App\Estado', 'cestado', 'cestados');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function plane()
+    {
+        return $this->belongsTo('App\Plane', 'cplanmayor', 'cplan');
     }
 
     /**
@@ -56,7 +56,6 @@ class Planes extends Model
     {
         return $this->hasMany('App\Tarea', 'cplan', 'cplan');
     }
-
     static function getSubPlanes($cplan,$json=false)
     {
         $plan = Planes::where('cplan', $cplan)->first();

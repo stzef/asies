@@ -17,6 +17,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $compromisos
  * @property string $pendientes
  * @property string $sefirma
+ * @property string $created_at
+ * @property string $updated_at
  * @property User $user
  * @property User $user
  * @property User $user
@@ -28,7 +30,7 @@ class Actas extends Model
     /**
      * @var array
      */
-    protected $fillable = ['user_elaboro', 'user_reviso', 'user_aprobo', 'numeroacta', 'objetivos', 'fhini', 'fhfin', 'ordendeldia', 'compromisos', 'pendientes', 'sefirma'];
+    protected $fillable = ['user_elaboro', 'user_reviso', 'user_aprobo', 'numeroacta', 'objetivos', 'fhini', 'fhfin', 'ordendeldia', 'compromisos', 'pendientes', 'sefirma', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

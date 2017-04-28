@@ -45,15 +45,17 @@ Route::group(['prefix' => 'planes'], function(){
 Route::group(['prefix' => 'actividades'], function(){
 	Route::post('create', "ActividadesController@create");
 	Route::get('do/{cactividad}', "ActividadesController@doActivity")->name('realizar_actividad');
+	Route::get('summary/{cactividad}', "ActividadesController@summaryActivity")->name('GET_resumen_actividad');
 	Route::post('evidence/{cactividad}', "ActividadesController@store");
+});
+
+Route::group(['prefix' => 'asignacion'], function(){
+		Route::post('/{cactividad}/{ctarea}/usuarios', "AsignacionController@users_task")->name("POST_users_task");
 });
 
 Route::group(['prefix' => 'tareas'], function(){
 	Route::get('create', "TareasController@create")->name("GET_tareas_create");
 	Route::post('create', "TareasController@create");
-
-	Route::post('/{ctarea}/usuarios', "TareasController@users_task")->name("POST_users_task");
-	Route::put('/{ctarea}/usuarios', "TareasController@users_task")->name("PUT_users_task");
 
 	Route::post('/{ctarea}/change_state', "TareasController@change_state")->name("POST_cambiar_estado_tarea");
 });

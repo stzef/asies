@@ -3,23 +3,25 @@
 namespace asies\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use asies\Models\ActividadesTareas;
 
 /**
  * @property integer $cactividad
+ * @property integer $cacta
  * @property integer $cestado
  * @property integer $ctiactividad
- * @property integer $cacta
  * @property string $nactividad
  * @property string $descripcion
  * @property string $fini
  * @property string $ffin
  * @property boolean $ifacta
  * @property boolean $ifarchivos
+ * @property string $created_at
+ * @property string $updated_at
+ * @property Acta $acta
  * @property Estado $estado
  * @property Tiactividade $tiactividade
- * @property Acta $acta
  * @property Actividadestarea[] $actividadestareas
+ * @property Asignaciontarea[] $asignaciontareas
  * @property Evidencia[] $evidencias
  */
 class Actividades extends Model
@@ -27,7 +29,15 @@ class Actividades extends Model
     /**
      * @var array
      */
-    protected $fillable = ['cestado', 'ctiactividad', 'cacta', 'nactividad', 'fini', 'ffin', 'ifacta', 'ifarchivos', 'descripcion'];
+    protected $fillable = ['cacta', 'cestado', 'ctiactividad', 'nactividad', 'descripcion', 'fini', 'ffin', 'ifacta', 'ifarchivos', 'created_at', 'updated_at'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function acta()
+    {
+        return $this->belongsTo('App\Acta', 'cacta', 'idacta');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -46,14 +56,6 @@ class Actividades extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function acta()
-    {
-        return $this->belongsTo('App\Acta', 'cacta', 'idacta');
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function actividadestareas()
@@ -64,11 +66,35 @@ class Actividades extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function asignaciontareas()
+    {
+        return $this->hasMany('App\Asignaciontarea', 'cactividad', 'cactividad');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function add_task_user($data,$cactividad=null)
+    {
+        $actividad = $this;
+        if ( $cactividad ){
+            $actividad = Tareas::where('cactividad', $cactividad)->first();
+        }
+        $dataCreataion = array('cactividad' => $actividad->cactividad , 'ctirelacion'=>$data["ctirelacion"],'ctarea'=>$data["ctarea"],'user'=>$data["user"]);
+        //dump($dataCreataion);exit();
+        if( AsignacionTareas::where(array('cactividad' => $actividad->cactividad , 'ctirelacion'=>$data["ctirelacion"],'ctarea'=>$data["ctarea"],'user'=>$data["user"]))->exists() ){
+            $obj = null;
+            $data = array("message"=>"El usuario ya se encuentra registrado");
+        }else{
+            $obj = AsignacionTareas::create($dataCreataion);
+            $data = array("message"=>"El usuario se agregro exitosamente");
+        }
+        return array("obj"=>$obj,"data"=>$data);
+    }
     public function evidencias()
     {
         return $this->hasMany('App\Evidencia', 'cactividad', 'cactividad');
     }
-
     public function getTareas()
     {
         $ctareas = ActividadesTareas::where('cactividad', $this->cactividad)->get();
@@ -78,5 +104,9 @@ class Actividades extends Model
         }
         return $tareas;
     }
-
+    public function getEvidencias()
+    {
+        $evidencias = Evidencias::where('cactividad', $this->cactividad)->get();
+        return $evidencias;
+    }
 }

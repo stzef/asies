@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $ntiplan
  * @property integer $nivel
  * @property string $icono
+ * @property string $created_at
+ * @property string $updated_at
  * @property Plane[] $planes
  */
 class TiPlanes extends Model
@@ -23,7 +25,7 @@ class TiPlanes extends Model
     /**
      * @var array
      */
-    protected $fillable = ['ntiplan', 'nivel', 'icono'];
+    protected $fillable = ['ntiplan', 'nivel', 'icono', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

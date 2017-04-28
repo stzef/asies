@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property integer $ctiempleado
  * @property string $ntiempleado
+ * @property string $created_at
+ * @property string $updated_at
  * @property Persona[] $personas
  */
 class TiEmpleados extends Model
@@ -21,7 +23,7 @@ class TiEmpleados extends Model
     /**
      * @var array
      */
-    protected $fillable = ['ntiempleado'];
+    protected $fillable = ['ntiempleado', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

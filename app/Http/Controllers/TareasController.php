@@ -49,37 +49,6 @@ class TareasController extends Controller
 			return response()->json($response);
 		}
 	}
-	public function users_task(Request $request,$ctarea){
-		$dataBody = $request->all();
-		$dataBody["tareasusuarios"]["ctarea"] = $ctarea;
-		$validator = Validator::make($dataBody["tareasusuarios"],
-			[
-				'ctarea' => 'required',
-				'user' => 'required|max:255',
-				'ctirelacion' => 'required',
-			],
-			[
-				'ctarea.required' => 'El nombre del plan es requerido',
-			]
-		);
-
-		if ($validator->fails()){
-			$messages = $validator->messages();
-			return response()->json(array("errors_form" => $messages),400);
-		}else{
-			$tareas = Tareas::where('ctarea', $ctarea)->first();
-			$response = $tareas->add_user(
-				array(
-					"ctarea" => $dataBody["tareasusuarios"]["ctarea"],
-					"user" => $dataBody["tareasusuarios"]["user"],
-					"ctirelacion" => $dataBody["tareasusuarios"]["ctirelacion"]
-				)
-			);
-			if ( $response["obj"] ) $response["obj"] = $response["obj"]->toArray();
-			return response()->json($response);
-		}
-	}
-
 
 	public function create(Request $request){
 		if ($request->isMethod('get')) return view( 'tareas.create');

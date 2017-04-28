@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $telefono
  * @property string $celular
  * @property string $email
+ * @property string $created_at
+ * @property string $updated_at
  * @property Cargo $cargo
  * @property Tiempleado $tiempleado
  * @property User[] $users
@@ -24,7 +26,7 @@ class Personas extends Model
     /**
      * @var array
      */
-    protected $fillable = ['ccargo', 'ctiempleado', 'identificacion', 'nombres', 'apellidos', 'direccion', 'telefono', 'celular', 'email'];
+    protected $fillable = ['ccargo', 'ctiempleado', 'identificacion', 'nombres', 'apellidos', 'direccion', 'telefono', 'celular', 'email', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

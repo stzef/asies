@@ -7,25 +7,29 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property integer $id
  * @property integer $ctarea
- * @property integer $user
  * @property integer $ctirelacion
+ * @property integer $user
+ * @property integer $cactividad
+ * @property string $created_at
+ * @property string $updated_at
  * @property Tarea $tarea
+ * @property Tirelacione $tirelacione
  * @property User $user
- * @property Tirelacion $tirelacion
+ * @property Actividade $actividade
  */
-class TareasUsuarios extends Model
+class AsignacionTareas extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'tareasusuarios';
+    protected $table = 'asignaciontareas';
 
     /**
      * @var array
      */
-    protected $fillable = ['ctarea', 'user', 'ctirelacion'];
+    protected $fillable = ['ctarea', 'ctirelacion', 'user', 'cactividad', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -33,6 +37,14 @@ class TareasUsuarios extends Model
     public function tarea()
     {
         return $this->belongsTo('App\Tarea', 'ctarea', 'ctarea');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tirelacione()
+    {
+        return $this->belongsTo('App\Tirelacione', 'ctirelacion', 'ctirelacion');
     }
 
     /**
@@ -46,8 +58,8 @@ class TareasUsuarios extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function tirelacion()
+    public function actividade()
     {
-        return $this->belongsTo('App\Tirelacion', 'ctirelacion', 'ctirelacion');
+        return $this->belongsTo('App\Actividade', 'cactividad', 'cactividad');
     }
 }
