@@ -7,8 +7,12 @@ use asies\Models\TareasUsuarios;
 use asies\Models\Tareas;
 use asies\Models\Actividades;
 
-class User extends Authenticatable
+use Bican\Roles\Traits\HasRoleAndPermission;
+use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
+
+class User extends Authenticatable implements HasRoleAndPermissionContract
 {
+    use HasRoleAndPermission;
     /**
      * The attributes that are mass assignable.
      *
