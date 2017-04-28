@@ -112,9 +112,9 @@
                             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label for="plan_nombre" class="col-sm-2 col-form-label">Nombre</label>
+                                    <label for="plan_nombre" class="col-sm-2 col-form-label">Numero</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="plan_nombre" name="actividad[nactividad]" placeholder="Nombre">
+                                        <input type="text" class="form-control" id="plan_nombre" name="actividad[nactividad]" disabled>
                                     </div>
                                 </div>
 
@@ -140,8 +140,10 @@
                                     <label for="" class="col-sm-2 col-form-label">Elaboro </label>
                                     <div class="col-sm-10">
                                         <select name="" class="form-control">
-                                            <option value=""></option>
-
+                                            <option value="">Seleccione...</option>
+                                                @foreach ($usuarios as $usuario)
+                                                    <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
+                                                @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -150,8 +152,10 @@
                                     <label for="" class="col-sm-2 col-form-label">Reviso </label>
                                     <div class="col-sm-10">
                                         <select name="" class="form-control">
-                                            <option value=""></option>
-
+                                            <option value="">Seleccione...</option>
+                                                @foreach ($usuarios as $usuario)
+                                                    <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
+                                                @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -160,8 +164,10 @@
                                     <label for="" class="col-sm-2 col-form-label">Aprobo </label>
                                     <div class="col-sm-10">
                                         <select name="" class="form-control">
-                                            <option value=""></option>
-
+                                            <option value="">Seleccione...</option>
+                                                @foreach ($usuarios as $usuario)
+                                                    <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
+                                                @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -173,16 +179,16 @@
                                             <div class='col-sm-8 input-group date'>
                                                 <input type='text' class="form-control" name="actividad[fini]"/>
                                                 <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                    <span class="glyphicon glyphicon-time"></span>
                                                 </span>
                                             </div>
                                     </div>
                                     <div class="form-group row">
-                                            <label for="" class="col-sm-4 col-form-label">Hora Inicial</label>
+                                            <label for="" class="col-sm-4 col-form-label">Hora Final</label>
                                             <div class='col-sm-8 input-group date'>
                                                 <input type='text' class="form-control" name="actividad[fini]"/>
                                                 <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                    <span class="glyphicon glyphicon-time"></span>
                                                 </span>
                                             </div>
                                     </div>
@@ -209,10 +215,21 @@
                                 </div>
                             </div>
                     </form>
-                    <form action="" method="get" accept-charset="utf-8">
-
-                    </form>
                 </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">
+                            <i class="glyphicon glyphicon-print"></i> Imprimir
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            <i class="glyphicon glyphicon-send"></i> Enviar
+                        </button>
+                        <button type="submit" class="btn btn-primary" form="form_crear_acta">
+                            <i class="glyphicon glyphicon-plus"></i> Guardar
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <i class="glyphicon glyphicon-remove"></i> Cancelar
+                        </button>
+                    </div>
             </div>
         </div>
     </div>
@@ -345,6 +362,24 @@
 
             //editar("#usuarios tbody");
         })
+        var listar = function(){
+            var ctarea = $($tareas.);
+            var cresponsable = $( "#respo option:selected" ).val();
+            var ctirespo = $( "#tirespo option:selected" ).val();
+            var ntarea = $( "#tarea option:selected" ).text();
+            var nresponsable = $( "#respo option:selected" ).text();
+            var ntirespo = $( "#tirespo option:selected" ).text();
+            //$("#tarea").val()
+            table
+                .row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,
+                    "<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>"+
+                        "<i class='fa fa-pencil-square-o'></i>"+
+                    "</button>",
+                    "<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)''>"+
+                        "<i class='fa fa-trash-o'></i>"+
+                    "</button>"])
+                .draw()
+        }
     </script>
 	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
 	<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
