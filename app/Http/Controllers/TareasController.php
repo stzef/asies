@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use asies\Http\Requests;
 use View;
+use \Auth;
+
 use asies\Models\Actividades;
 use asies\Models\Tareas;
 use Illuminate\Support\Facades\Validator;
@@ -36,16 +38,21 @@ class TareasController extends Controller
 			$messages = $validator->messages();
 			return response()->json(array("errors_form" => $messages),400);
 		}else{
-			Tareas::where('ctarea', $ctarea)->update(['ifhecha' => $dataBody["ifhecha"]]);//->first();
+			$user = Auth::user();
 			$tarea = Tareas::where('ctarea', $ctarea)->first();
-			//$tarea->ifhecha = $dataBody["ifhecha"];
-			//$tarea->save();
-			$response = array("hecha"=>$tarea->ifhecha);
-			if ( $tarea->ifhecha ){
-				$response["message"] = "";
+
+			if ( $tarea->checkUser($user->id) ){
+				Tareas::where('ctarea', $ctarea)->update(['ifhecha' => $dataBody["ifhecha"]]);//->first();
+				if ( $tarea->ifhecha ){
+					$response["message"] = "";
+				}else{
+					$response["message"] = "";
+				}
 			}else{
-				$response["message"] = "";
+				$response["message"] = "Esta tarea no esta asignada al usuario";
 			}
+			$tarea = Tareas::where('ctarea', $ctarea)->first();
+			$response = array("hecha"=>$tarea->ifhecha);
 			return response()->json($response);
 		}
 	}

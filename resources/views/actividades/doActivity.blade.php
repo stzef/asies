@@ -222,6 +222,12 @@
     {% for (var i=0, file; file=o.files[i]; i++) { %}
         <tr class="template-upload fade">
             <td>
+                <input class="form-control" placeholder="Nombre" type="text" name="nombres[]">
+            </td>
+            <td>
+                <input class="form-control" placeholder="Descripcion" type="text" name="descripciones[]">
+            </td>
+            <td>
                 <span class="preview"></span>
             </td>
             <td>
@@ -236,13 +242,13 @@
                 {% if (!i && !o.options.autoUpload) { %}
                     <button class="btn btn-primary start" disabled>
                         <i class="glyphicon glyphicon-upload"></i>
-                        <span>Start</span>
+                        <span>Subir</span>
                     </button>
                 {% } %}
                 {% if (!i) { %}
                     <button class="btn btn-warning cancel">
                         <i class="glyphicon glyphicon-ban-circle"></i>
-                        <span>Cancel</span>
+                        <span>Cancelar</span>
                     </button>
                 {% } %}
             </td>

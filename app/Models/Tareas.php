@@ -45,4 +45,13 @@ class Tareas extends Model
     {
         return $this->hasMany('App\Asignaciontarea', 'ctarea', 'ctarea');
     }
+
+    public function checkUser($iduser)
+    {
+        $flag = false;
+        if ( AsignacionTareas::where("user",$iduser)->exists() ){
+            $flag = true;
+        }
+        return $flag;
+    }
 }

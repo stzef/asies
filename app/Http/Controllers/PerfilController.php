@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use asies\Http\Requests;
 
 use asies\Models\Tareas;
+use asies\Models\Actividades;
 use View;
 
 use \Auth;
@@ -22,6 +23,11 @@ class PerfilController extends Controller
 		$user = Auth::user();
 		$tareas = $user->getTareas();
 		$actividades = $user->getActividades();
+
+		foreach ($actividades as $actividad) {
+			$objactividad = Actividades::where("cactividad",$actividad->cactividad)->first();
+			$actividad->tareas = $objactividad->getTareas($user->id);
+		}
 
 		return view('perfil.misplanes', array( "tareas" => $tareas, "actividades" => $actividades ) );
 

@@ -95,12 +95,22 @@ class Actividades extends Model
     {
         return $this->hasMany('App\Evidencia', 'cactividad', 'cactividad');
     }
-    public function getTareas()
+    public function getTareas($iduser=null)
     {
-        $ctareas = ActividadesTareas::where('cactividad', $this->cactividad)->get();
-        $tareas = array();
-        foreach ($ctareas as $data) {
-            array_push( $tareas, Tareas::where("ctarea",$data["ctarea"])->first() );
+        if ( $iduser ){
+            $tareas = \DB::table('asignaciontareas')
+                ->join('users', 'asignaciontareas.user', '=', 'users.id')
+                ->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
+                ->select('tareas.*')
+                ->where('asignaciontareas.cactividad', $this->cactividad)
+                ->where('users.id', $iduser)
+                ->get();
+        }else{
+            $tareas = \DB::table('asignaciontareas')
+                ->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
+                ->select('tareas.*')
+                ->where('asignaciontareas.cactividad', $this->cactividad)
+                ->get();
         }
         return $tareas;
     }

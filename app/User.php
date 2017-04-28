@@ -37,22 +37,22 @@ class User extends Authenticatable
 
     public function getTareas()
     {
-        $ctareas = TareasUsuarios::where('user', $this->id)->get();
-        $tareas = array();
-        foreach ($ctareas as $data) {
-            array_push( $tareas, Tareas::where("ctarea",$data["ctarea"])->first() );
-        }
+        $tareas = \DB::table('asignaciontareas')
+            ->join('users', 'asignaciontareas.user', '=', 'users.id')
+            ->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
+            ->select('tareas.*')
+            ->where('users.id', $this->id)
+            //->groupBy('actividadestareas.cactividad')
+            ->get();
         return $tareas;
     }
 
     public function getActividades(){
         $TIRELACION_RESPONSABLE = \Config::get("app.CTE")["TIRELACION_RESPONSABLE"];
 
-        $actividades = \DB::table('tareas')
-            ->join('tareasusuarios', 'tareasusuarios.ctarea', '=', 'tareas.ctarea')
-            ->join('actividadestareas', 'actividadestareas.ctarea', '=', 'tareas.ctarea')
-            ->join('users', 'tareasusuarios.user', '=', 'users.id')
-            ->join('actividades', 'actividadestareas.cactividad', '=', 'actividades.cactividad')
+        $actividades = \DB::table('asignaciontareas')
+            ->join('users', 'asignaciontareas.user', '=', 'users.id')
+            ->join('actividades', 'asignaciontareas.cactividad', '=', 'actividades.cactividad')
             ->select('actividades.*')
             ->where('users.id', $this->id)
             //->groupBy('actividadestareas.cactividad')

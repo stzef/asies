@@ -28,49 +28,33 @@
 					Actividades
 				</div>
 				<div class="panel-body">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Actividad</th>
-								<th>Acciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach ($actividades as $actividad)
-								<tr>
-									<td>{{ $actividad->nactividad }}</td>
-									<td><a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a></td>
-									<td><a class="btn btn-primary" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a></td>
-								</tr>
-							@endforeach
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Tareas
-				</div>
-				<div class="panel-body">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Tarea</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach ($tareas as $tarea)
-								<tr>
-									<td>{{ $tarea->ntarea }}</td>
-								</tr>
-							@endforeach
-						</tbody>
-					</table>
+					@foreach ($actividades as $actividad)
+						<div class="well">
+							<div class="col-md-8">
+								{{ $actividad->nactividad }}
+							</div>
+							<div class="col-md-4">
+								<a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a>
+								<a class="btn btn-primary" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a>
+							</div>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Tareas</th>
+										<th>Completada</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach ($actividad->tareas as $tarea)
+										<tr>
+											<td>{{ $tarea->ntarea }}</td>
+											<td></td>
+										</tr>
+									@endforeach
+								</tbody>
+							</table>
+						</div>
+					@endforeach
 				</div>
 			</div>
 		</div>
