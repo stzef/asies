@@ -18,7 +18,7 @@ $(function () {
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url: '/actividades/evidence/1'
+        url: '/actividades/evidence/__cactividad__'.set("__cactividad__",$("input#cactividad").val())
     });
 
     // Enable iframe cross-domain access via redirect option:

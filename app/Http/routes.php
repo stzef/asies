@@ -50,7 +50,7 @@ Route::group(['prefix' => 'actividades'], function(){
 });
 
 Route::group(['prefix' => 'asignacion'], function(){
-		Route::post('/{cactividad}/{ctarea}/usuarios', "AsignacionController@users_task")->name("POST_users_task");
+		Route::post('/{cactividad}/{ctarea}/usuarios', "AsignacionController@users")->name("POST_users_task");
 });
 
 Route::group(['prefix' => 'tareas'], function(){

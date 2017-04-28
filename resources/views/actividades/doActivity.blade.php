@@ -85,7 +85,7 @@
                                 <div class="col-sm-10">
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" onclick="cambiarEstadoTarea(event,this)" type="checkbox" data-ctarea="{{ $tarea->ctarea }}" name="ctarea_{{ $tarea->ctarea }}" @if ($tarea->ifhecha) checked @endif> {{ $tarea->ntarea }}
+                                            <input class="form-check-input" onclick="Models.Tareas.cambiarEstado(this.dataset.ctarea,this.checked)" type="checkbox" data-ctarea="{{ $tarea->ctarea }}" name="ctarea_{{ $tarea->ctarea }}" @if ($tarea->ifhecha) checked @endif> {{ $tarea->ntarea }}
                                         </label>
                                     </div>
                                 </div>
@@ -115,7 +115,7 @@
                                 <div class="form-group row">
                                     <label for="plan_nombre" class="col-sm-2 col-form-label">Numero</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="plan_nombre" name="actividad[nactividad]" value="{{$numacta}}" disabled>
+                                        <input type="text" class="form-control" id="plan_nombre" name="actividad[nactividad]" disabled>
                                     </div>
                                 </div>
 
@@ -193,7 +193,17 @@
                                                 </span>
                                             </div>
                                     </div>
-                                    <table id="usuarios_tareas" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
+                                    <table id="tareas" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Tarea</th>
+                                                <th>Responsable</th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    <table id="usuarios" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th>Usuario</th>
@@ -225,104 +235,93 @@
         </div>
     </div>
 
-<!-- The template to display files available for upload -->
-<script id="template-upload" type="text/x-tmpl">
-    {% for (var i=0, file; file=o.files[i]; i++) { %}
-        <tr class="template-upload fade">
-            <td>
-                <input class="form-control" placeholder="Nombre" type="text" name="nombres[]">
-            </td>
-            <td>
-                <input class="form-control" placeholder="Descripcion" type="text" name="descripciones[]">
-            </td>
-            <td>
-                <span class="preview"></span>
-            </td>
-            <td>
-                <p class="name">{%=file.name%}</p>
-                <strong class="error text-danger"></strong>
-            </td>
-            <td>
-                <p class="size">Processing...</p>
-                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
-            </td>
-            <td>
-                {% if (!i && !o.options.autoUpload) { %}
-                    <button class="btn btn-primary start" disabled>
-                        <i class="glyphicon glyphicon-upload"></i>
-                        <span>Subir</span>
-                    </button>
-                {% } %}
-                {% if (!i) { %}
-                    <button class="btn btn-warning cancel">
-                        <i class="glyphicon glyphicon-ban-circle"></i>
-                        <span>Cancelar</span>
-                    </button>
-                {% } %}
-            </td>
-        </tr>
-    {% } %}
-</script>
-<!-- The template to display files available for download -->
-<script id="template-download" type="text/x-tmpl">
-    {% for (var i=0, file; file=o.files[i]; i++) { %}
-        <tr class="template-download fade">
-            <td>
-                <span class="preview">
-                    {% if (file.thumbnailUrl) { %}
-                        <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+    <!-- The template to display files available for upload -->
+    <script id="template-upload" type="text/x-tmpl">
+        {% for (var i=0, file; file=o.files[i]; i++) { %}
+            <tr class="template-upload fade">
+                <td>
+                    <input class="form-control" placeholder="Nombre" type="text" name="nombres[]">
+                </td>
+                <td>
+                    <input class="form-control" placeholder="Descripcion" type="text" name="descripciones[]">
+                </td>
+                <td>
+                    <span class="preview" width="100px"></span>
+                </td>
+                <td>
+                    <p class="name">{%=file.name%}</p>
+                    <strong class="error text-danger"></strong>
+                </td>
+                <td>
+                    <p class="size">Processing...</p>
+                    <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+                </td>
+                <td>
+                    {% if (!i && !o.options.autoUpload) { %}
+                        <button class="btn btn-primary start" disabled>
+                            <i class="glyphicon glyphicon-upload"></i>
+                            <span>Subir</span>
+                        </button>
                     {% } %}
-                </span>
-            </td>
-            <td>
-                <p class="name">
-                    {% if (file.url) { %}
-                        <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                    {% if (!i) { %}
+                        <button class="btn btn-warning cancel">
+                            <i class="glyphicon glyphicon-ban-circle"></i>
+                            <span>Cancelar</span>
+                        </button>
+                    {% } %}
+                </td>
+            </tr>
+        {% } %}
+    </script>
+    <!-- The template to display files available for download -->
+    <script id="template-download" type="text/x-tmpl">
+        {% for (var i=0, file; file=o.files[i]; i++) { %}
+            <tr class="template-download fade">
+                <td>
+                    <span class="preview" width="100px">
+                        {% if (file.thumbnailUrl) { %}
+                            <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                        {% } %}
+                    </span>
+                </td>
+                <td>
+                    <p class="name">
+                        {% if (file.url) { %}
+                            <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                        {% } else { %}
+                            <span>{%=file.name%}</span>
+                        {% } %}
+                    </p>
+                    {% if (file.error) { %}
+                        <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+                    {% } %}
+                </td>
+                <td>
+                    <span class="size">{%=o.formatFileSize(file.size)%}</span>
+                </td>
+                <td>
+                    {% if (file.deleteUrl) { %}
+                        <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                            <i class="glyphicon glyphicon-trash"></i>
+                            <span>Delete</span>
+                        </button>
+                        <input type="checkbox" name="delete" value="1" class="toggle">
                     {% } else { %}
-                        <span>{%=file.name%}</span>
+                        <button class="btn btn-warning cancel">
+                            <i class="glyphicon glyphicon-ban-circle"></i>
+                            <span>Cancel</span>
+                        </button>
                     {% } %}
-                </p>
-                {% if (file.error) { %}
-                    <div><span class="label label-danger">Error</span> {%=file.error%}</div>
-                {% } %}
-            </td>
-            <td>
-                <span class="size">{%=o.formatFileSize(file.size)%}</span>
-            </td>
-            <td>
-                {% if (file.deleteUrl) { %}
-                    <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
-                        <i class="glyphicon glyphicon-trash"></i>
-                        <span>Delete</span>
-                    </button>
-                    <input type="checkbox" name="delete" value="1" class="toggle">
-                {% } else { %}
-                    <button class="btn btn-warning cancel">
-                        <i class="glyphicon glyphicon-ban-circle"></i>
-                        <span>Cancel</span>
-                    </button>
-                {% } %}
-            </td>
-        </tr>
-    {% } %}
-</script>
+                </td>
+            </tr>
+        {% } %}
+    </script>
 
 @endsection
 
 @section('scripts')
     <script>
-        function cambiarEstadoTarea(event,element){
-            var ctarea = $(element).data("ctarea")
-            var ifhecha = element.checked ? 1 : 0
-            var base_url_cambio_estado_tarea = "{{ URL::route('POST_cambiar_estado_tarea',['ctarea' => '__ctarea__']) }}"
-            $.ajax({
-                url : base_url_cambio_estado_tarea.set("__ctarea__",ctarea),
-                type : "POST",
-                data : { ctarea : ctarea, ifhecha : ifhecha },
-                success : function(reponse){},
-                error : function(reponse){},
-            })
-        }
+
         var cols = {
             ctarea : 0,
             ntarea : 1,
@@ -359,24 +358,6 @@
 
             //editar("#usuarios tbody");
         })
-        var listar = function(){
-            var ctarea = $($tareas.);
-            var cresponsable = $( "#respo option:selected" ).val();
-            var ctirespo = $( "#tirespo option:selected" ).val();
-            var ntarea = $( "#tarea option:selected" ).text();
-            var nresponsable = $( "#respo option:selected" ).text();
-            var ntirespo = $( "#tirespo option:selected" ).text();
-            //$("#tarea").val()
-            table
-                .row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,
-                    "<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>"+
-                        "<i class='fa fa-pencil-square-o'></i>"+
-                    "</button>",
-                    "<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)''>"+
-                        "<i class='fa fa-trash-o'></i>"+
-                    "</button>"])
-                .draw()
-        }
     </script>
 	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
 	<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->

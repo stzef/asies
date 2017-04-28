@@ -59,7 +59,7 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
             ->join('actividades', 'asignaciontareas.cactividad', '=', 'actividades.cactividad')
             ->select('actividades.*')
             ->where('users.id', $this->id)
-            //->groupBy('actividadestareas.cactividad')
+            ->groupBy('actividades.cactividad')
             ->get();
 
         return $actividades;

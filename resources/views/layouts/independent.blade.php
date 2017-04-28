@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <title>{{$SHORT_NAME_APP}} - Bootstrap Admin Template</title>
+    <title>{{$SHORT_NAME_APP}}</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ URL::asset('layout/css/bootstrap.min.css') }}" >

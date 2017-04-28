@@ -73,7 +73,7 @@ class ActividadesController extends Controller
 				'ffin' => 'required|date',
 				'ifacta' => 'required|boolean',
 				'ifarchivos' => 'required|boolean',
-				#'ifdescripcion' => 'required',
+				'descripcion' => 'required',
 			],
 			[
 				#'cestado.required' => 'required',
@@ -85,7 +85,7 @@ class ActividadesController extends Controller
 				'ffin.required' => 'required',
 				'ifacta.required' => 'required',
 				'ifarchivos.required' => 'required',
-				#'ifdescripcion.required' => 'required',
+				'descripcion.required' => 'required',
 			]
 		);
 
@@ -94,7 +94,7 @@ class ActividadesController extends Controller
 			return response()->json(array("errors_form" => $messages),400);
 		}
 		$actividad = Actividades::create($dataBody["actividad"]);
-		return response()->json(array());
+		return response()->json(array("obj" => $actividad->toArray()));
 	}
 
 	protected function get_file_size($file_path, $clear_stat_cache = false) {

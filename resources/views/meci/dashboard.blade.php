@@ -34,19 +34,20 @@
 					<form id="form_crear_actividad" class="form-horizontal">
 
 						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+						<input type="hidden" name="actividad[cactividad]" value="" id="actividad_cactividad">
 
 						<div class="col-md-6">
 							<div class="form-group row">
 								<label for="plan_nombre" class="col-sm-2 col-form-label">Nombre</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="plan_nombre" name="actividad[nactividad]" placeholder="Nombre">
+									<input type="text" class="form-control" id="plan_nombre" name="actividad[nactividad]" required placeholder="Nombre">
 								</div>
 							</div>
 
 							<div class="form-group row">
 								<label for="" class="col-sm-2 col-form-label">Objetivos</label>
 								<div class="col-sm-10">
-									<textarea class="form-control" id="" name="actividad[descripcion]"></textarea>
+									<textarea class="form-control" id="" name="actividad[descripcion]" required></textarea>
 								</div>
 							</div>
 						</div>
@@ -54,7 +55,7 @@
 							<div class="form-group row">
 								<label for="" class="col-sm-4 col-form-label">Tipo Actividad</label>
 								<div class="col-sm-8">
-									<select name="actividad[ctiactividad]" id="" class="form-control">
+									<select name="actividad[ctiactividad]" id="" required class="form-control">
 										<option value="">Seleccione el tipo de actividad</option>
 										@foreach ($tiactividades as $tiactividad)
 											<option value="{{$tiactividad->ctiactividad}}">{{$tiactividad->ntiactividad}}</option>
@@ -67,9 +68,9 @@
 								<div class="col-md-8">
 
 									<div class="form-group row">
-										<label for="" class="col-sm-4 col-form-label">Fecha Final</label>
+										<label for="" class="col-sm-4 col-form-label" >Fecha Final</label>
 										<div class='col-sm-8 input-group date'>
-											<input type='text' class="form-control" name="actividad[fini]"/>
+											<input type='text' class="form-control" name="actividad[fini]" required />
 											<span class="input-group-addon">
 												<span class="glyphicon glyphicon-calendar"></span>
 											</span>
@@ -79,7 +80,7 @@
 									<div class="form-group row">
 										<label for="" class="col-sm-4 col-form-label">Fecha Final</label>
 										<div class='col-sm-8 input-group date'>
-											<input type='text' class="form-control" name="actividad[ffin]"/>
+											<input type='text' class="form-control" name="actividad[ffin]" required />
 											<span class="input-group-addon">
 												<span class="glyphicon glyphicon-calendar"></span>
 											</span>
@@ -123,17 +124,17 @@
 										<tr>
 											<td width="50%">
 												<div class="input-group">
-													<select name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
+													<select disabled name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
 														<option value="">Tareas</option>}
 														@foreach ($tareas as $tarea)
-															<option value="{{$tarea->cplan}}">{{$tarea->ntarea}}</option>
+															<option value="{{$tarea->ctarea}}">{{$tarea->ntarea}}</option>
 														@endforeach
 													</select>
 													<span class="input-group-addon" data-find-task data-input-reference="#tarea"><i class="fa fa-search"></i></span>
 												</div>
 											</td>
 											<td width="25%">
-												<select name="tareasusuarios[user]" id="respo" required class="form-control">
+												<select disabled name="tareasusuarios[user]" id="respo" required class="form-control">
 													<option value="">Responsable</option>
 													@foreach ($usuarios as $usuario)
 														<option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
@@ -141,7 +142,7 @@
 												</select>
 											</td>
 											<td width="25%">
-												<select name="tareasusuarios[ctirelacion]" id="tirespo" required class="form-control" >
+												<select disabled name="tareasusuarios[ctirelacion]" id="tirespo" required class="form-control" >
 													<option value="">Tipo de responsabilidad</option>
 													@foreach ($relaciones as $relacion)
 														<option value = "{{$relacion->ctirelacion}}">{{$relacion->ntirelacion}}</option>
@@ -149,7 +150,7 @@
 												</select>
 											</td>
 											<td>
-												<button id="agregar" type="submit" class="btn btn-info">
+												<button disabled id="agregar" type="submit" class="btn btn-info">
 													<i class="glyphicon glyphicon-plus"></i>
 												</button>
 											</td>
@@ -293,14 +294,19 @@
 			$.ajax({
 				type : "POST",
 				url : "{{ action('ActividadesController@create') }}",
-				data:serializeForm(that),
-				cache:false,
-				contentType: false,
-				processData: false,
-				success : function(){
-					$("#modalCrearActividad").modal("hide")
+				data : serializeForm(that),
+				cache : false,
+				contentType : false,
+				processData : false,
+				success : function(response){
+					//$("#modalCrearActividad").modal("hide")
+					$("#usuario_planes").find("[disabled]").prop("disabled",false)
+					$("#form_crear_actividad").find(":input").prop("disabled",true)
 					alertify.success(Models.Planes.messages.create.success)
 					$('#treeview').jstree("destroy")
+
+					$("input#actividad_cactividad").val(response.obj.id)
+
 					Models.Planes.treeview(function(response){
 						$('#treeview').jstree({ 'core' : {'data' : response } })
 					})
@@ -321,13 +327,19 @@
 
 <script type="text/javascript">
 $("#usuario_planes").on("submit" , function(event){
-	var that = this
 	event.preventDefault()
+	var that = this
+	var ctarea = $( "#tarea option:selected" ).val();
+	var cactividad = $("input#actividad_cactividad").val();
+
+	var data = serializeForm(that)
+	data.append("tareasusuarios[cactividad]",cactividad)
+	/*arreglar*/
 	var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
 	$.ajax({
-		"url":base_url_add_user_tarea.set("__ctarea__",1).set("__cactividad__",1),
+		"url":base_url_add_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
 		"type":"POST",
-		data: serializeForm(that),
+		data: data,
 		cache:false,
 		contentType: false,
 		processData: false,

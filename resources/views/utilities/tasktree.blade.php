@@ -34,12 +34,13 @@
 
 	<script>
 		function returnTask (evt, data){
-			console.log(data)
 			var tarea = $('#treeview').jstree('get_selected',true)[0]
 			console.log(tarea)
+			var rvalue = tarea.li_attr.cplan | tarea.li_attr.ctarea
+			alert(rvalue)
 			alertify.confirm("Desea escoger esta Tarea",function(){
 				window.opener.$(window.INPUT_REFERENCE)
-					.val(tarea.li_attr.cplan)
+					.val(rvalue)
 					.focus()
 					.trigger("change")
 

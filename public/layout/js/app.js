@@ -80,6 +80,23 @@ function openNewWindow(href,input_reference){
 }
 
 Models = {
+	"Tareas" : {
+		cambiarEstado : function(ctarea,ifhecha){
+			var ifhecha = ifhecha ? 1 : 0
+			var base_url_cambio_estado_tarea = "/tareas/__ctarea__/change_state"
+			$.ajax({
+				url : base_url_cambio_estado_tarea.set("__ctarea__",ctarea),
+				type : "POST",
+				data : { ctarea : ctarea, ifhecha : ifhecha },
+				success : function(response){
+					console.log(response)
+					var textEstado = response.hecha == 1 ? "Hecha" : "No Hecha"
+					alertify.success("El Estado se ha Cambiado <br> Estado Actual : <b>__estado__</b>".set("__estado__",textEstado))
+				},
+				error : function(response){},
+			})
+		}
+	},
 	"Planes" : {
 		"messages" : {
 			"create" : {

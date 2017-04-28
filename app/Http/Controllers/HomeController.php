@@ -4,6 +4,7 @@ namespace asies\Http\Controllers;
 
 use asies\Http\Requests;
 use Illuminate\Http\Request;
+use \View;
 
 class HomeController extends Controller
 {

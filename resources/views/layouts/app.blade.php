@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <title>{{$SHORT_NAME_APP}} - Bootstrap Admin Template</title>
+    <title>{{$SHORT_NAME_APP}}</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ URL::asset('layout/css/bootstrap.min.css') }}" >
@@ -66,7 +66,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">{{$SHORT_NAME_APP}}</a>
+                <a class="navbar-brand" href="{{ URL::route('app_dashboard') }}">{{$SHORT_NAME_APP}}</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -176,14 +176,14 @@
                         <a href="{{ URL::action('AppController@dashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}"><i class="fa fa-fw fa-dashboard"></i> Mis Actividades</a>
+                        <a href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}"><i class="fa fa-fw fa-file-text-o"></i> Mis Actividades</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Datos <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="{{ URL::route('GET_tareas_create') }}">Tareas</a>
-                                <a href="{{ URL::route('meci_dashboard') }}">Actividades</a>
+                                <a href="{{ URL::route('GET_tareas_create') }}"><i class="fa fa-fw fa-pencil"></i>Tareas</a>
+                                <a href="{{ URL::route('meci_dashboard') }}"><i class="fa fa-fw fa-file-text-o"></i>Actividades</a>
                             </li>
                         </ul>
                     </li>

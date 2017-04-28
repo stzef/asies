@@ -37,7 +37,7 @@ class Actividades extends Model
      */
     public function acta()
     {
-        return $this->belongsTo('App\Acta', 'cacta', 'idacta');
+        return $this->belongsTo('asies\Models\Actas', 'cacta', 'idacta');
     }
 
     /**
@@ -45,7 +45,7 @@ class Actividades extends Model
      */
     public function estado()
     {
-        return $this->belongsTo('App\Estado', 'cestado', 'cestados');
+        return $this->belongsTo('asies\Models\Estado', 'cestado', 'cestados');
     }
 
     /**
@@ -53,7 +53,7 @@ class Actividades extends Model
      */
     public function tiactividade()
     {
-        return $this->belongsTo('App\Tiactividade', 'ctiactividad', 'ctiactividad');
+        return $this->belongsTo('asies\Models\Tiactividade', 'ctiactividad', 'ctiactividad');
     }
 
     /**
@@ -61,7 +61,7 @@ class Actividades extends Model
      */
     public function actividadestareas()
     {
-        return $this->hasMany('App\Actividadestarea', 'cactividad', 'cactividad');
+        return $this->hasMany('asies\Models\Actividadestarea', 'cactividad', 'cactividad');
     }
 
     /**
@@ -69,7 +69,7 @@ class Actividades extends Model
      */
     public function asignaciontareas()
     {
-        return $this->hasMany('App\Asignaciontarea', 'cactividad', 'cactividad');
+        return $this->hasMany('asies\Models\Asignaciontarea', 'cactividad', 'cactividad');
     }
 
     /**
@@ -83,9 +83,10 @@ class Actividades extends Model
         }
         $dataCreataion = array('cactividad' => $actividad->cactividad , 'ctirelacion'=>$data["ctirelacion"],'ctarea'=>$data["ctarea"],'user'=>$data["user"]);
         //dump($dataCreataion);exit();
-        if( AsignacionTareas::where(array('cactividad' => $actividad->cactividad , 'ctirelacion'=>$data["ctirelacion"],'ctarea'=>$data["ctarea"],'user'=>$data["user"]))->exists() ){
-            $obj = null;
-            $data = array("message"=>"El usuario ya se encuentra registrado");
+        if( AsignacionTareas::where(array('cactividad' => $actividad->cactividad ,'ctarea'=>$data["ctarea"],'user'=>$data["user"]))->exists() ){
+            AsignacionTareas::where(array('cactividad' => $actividad->cactividad ,'ctarea'=>$data["ctarea"],'user'=>$data["user"]))->update(['ctirelacion'=>$data["ctirelacion"]]);
+            $obj = AsignacionTareas::where(array('cactividad' => $actividad->cactividad ,'ctarea'=>$data["ctarea"],'user'=>$data["user"]))->first();
+            $data = array("message"=>"Se edito la <b>Responsabilidad</b> del Usuario.");
         }else{
             $obj = AsignacionTareas::create($dataCreataion);
             $data = array("message"=>"El usuario se agregro exitosamente");
@@ -94,7 +95,7 @@ class Actividades extends Model
     }
     public function evidencias()
     {
-        return $this->hasMany('App\Evidencia', 'cactividad', 'cactividad');
+        return $this->hasMany('asies\Models\Evidencia', 'cactividad', 'cactividad');
     }
     public function getTareas($iduser=null)
     {
@@ -136,6 +137,16 @@ class Actividades extends Model
     public function getEvidencias()
     {
         $evidencias = Evidencias::where('cactividad', $this->cactividad)->get();
+
+        $ext_img = array("ani","bmp","cal","fax","gif","img","jbg","jpe","jpe","jpg","mac","pbm","pcd","pcx","pct","pgm","png","ppm","psd","ras","tga","tif","wmf");
+        foreach ($evidencias as $evidencia) {
+            $ext = pathinfo($evidencia->path, PATHINFO_EXTENSION);
+            if ( in_array($ext, $ext_img) ){
+                $evidencia->previewimg = $evidencia->path;
+            }else{
+                $evidencia->previewimg = "/evidencias/generic-file.png";
+            }
+        }
         return $evidencias;
     }
 }

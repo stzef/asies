@@ -11,7 +11,7 @@ use asies\Models\Actividades;
 
 class AsignacionController extends Controller
 {
-	public function users_task(Request $request,$cactividad,$ctarea){
+	public function users(Request $request,$cactividad,$ctarea){
 		$dataBody = $request->all();
 		$dataBody["tareasusuarios"]["ctarea"] = $ctarea;
 		$dataBody["tareasusuarios"]["cactividad"] = $cactividad;
