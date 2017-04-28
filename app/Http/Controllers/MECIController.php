@@ -22,8 +22,8 @@ class MECIController extends Controller
      */
     public function __construct()
     {
-    	View::share('SHORT_NAME_APP', env("SHORT_NAME_APP"," - "));
-    	View::share('LONG_NAME_APP', env("LONG_NAME_APP"," - "));
+        View::share('SHORT_NAME_APP', env("SHORT_NAME_APP"," - "));
+        View::share('LONG_NAME_APP', env("LONG_NAME_APP"," - "));
         $this->middleware('auth');
     }
     /**
@@ -39,7 +39,12 @@ class MECIController extends Controller
 
         $tiactividades = TiActividades::all();
         $relaciones = TiRelaciones::all();
-        $context = array("tareas"=>$tareas,"tiactividades"=>$tiactividades,"usuarios"=>$usuarios,"relaciones"=>$relaciones);
+        $context = array(
+            "tareas" => $tareas,
+            "tiactividades" => $tiactividades,
+            "usuarios" => $usuarios,
+            "relaciones" => $relaciones
+        );
         return view('meci/dashboard',$context);
     }
 }
