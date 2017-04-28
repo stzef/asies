@@ -71,4 +71,21 @@ class Actas extends Model
     {
         return $this->hasMany('App\Actividade', 'cacta', 'idacta');
     }
+    public function genCode()
+    {
+        $empresa = "EMP";
+        $date = date('d m y');
+        $last = $this->last();
+        if($last->numeroacta)
+        {
+            $number = substr($last->numeroacta, -8);
+            $number += 1; 
+        }else
+        {
+            $number = "00000001";
+        }
+        $numacta = $empresa."-".$date."-".$number;
+        return $numacta;
+
+    }
 }

@@ -8,6 +8,7 @@ use asies\Http\Requests;
 use asies\Models\Actividades;
 use asies\Models\Evidencias;
 use asies\Models\Personas;
+use asies\Models\Actas;
 use asies\User;
 use Illuminate\Support\Facades\Log;
 use \Auth;
@@ -43,11 +44,13 @@ class ActividadesController extends Controller
 			if ( $actividad = Actividades::where("cactividad", $cactividad)->first() ) {
 				$tareas = $actividad->getTareas();
 				$usuarios = User::all();
+				$numacta = Actas::genCode();
 				return view( 'actividades.doActivity' , array(
 					'tareas' => $tareas,
 					'actividad' => $actividad,
 					'usuarios' => $usuarios,
-					));
+					'numacta' => $numacta,
+ 					));
 			}
 		}
 	}
