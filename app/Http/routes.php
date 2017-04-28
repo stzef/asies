@@ -49,6 +49,10 @@ Route::group(['prefix' => 'actividades'], function(){
 	Route::post('evidence/{cactividad}', "ActividadesController@store");
 });
 
+Route::group(['prefix' =>'actas'], function(){
+	Route::post('create','ActasController@create');
+});
+
 Route::group(['prefix' => 'asignacion'], function(){
 		Route::post('/{cactividad}/{ctarea}/usuarios', "AsignacionController@users_task")->name("POST_users_task");
 });

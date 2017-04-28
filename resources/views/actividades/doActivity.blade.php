@@ -112,34 +112,34 @@
                             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label for="plan_nombre" class="col-sm-2 col-form-label">Numero</label>
+                                    <label for="number_acta" class="col-sm-2 col-form-label">Numero</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="plan_nombre" name="actividad[nactividad]" value="{{$numacta}}" disabled>
+                                        <input type="text" class="form-control" id="number_acta" name="acta[numeroacta]" value="{{$numacta}}" readonly required>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2 col-form-label">Objetivos</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" id="" name="actividad[descripcion]"></textarea>
+                                        <textarea class="form-control" id="" name="acta[objetivos]"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2 col-form-label">Orden del dia</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" id="" name="actividad[descripcion]"></textarea>
+                                        <textarea class="form-control" id="" name="acta[ordendeldia]"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="plan_nombre" class="col-sm-2 col-form-label">Pie de firma</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="plan_nombre" name="actividad[nactividad]" placeholder="Ciudad, DD/MM/YY">
+                                        <input type="text" class="form-control" id="plan_nombre" name="acta[sefirma]" placeholder="Ciudad, DD/MM/AA">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2 col-form-label">Elaboro </label>
                                     <div class="col-sm-10">
-                                        <select name="" class="form-control">
+                                        <select name="acta[user_elaboro]" class="form-control">
                                             <option value="">Seleccione...</option>
                                                 @foreach ($usuarios as $usuario)
                                                     <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
@@ -151,7 +151,7 @@
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2 col-form-label">Reviso </label>
                                     <div class="col-sm-10">
-                                        <select name="" class="form-control">
+                                        <select name="acta[user_reviso]" class="form-control">
                                             <option value="">Seleccione...</option>
                                                 @foreach ($usuarios as $usuario)
                                                     <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
@@ -163,7 +163,7 @@
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2 col-form-label">Aprobo </label>
                                     <div class="col-sm-10">
-                                        <select name="" class="form-control">
+                                        <select name="acta[user_aprobo]" class="form-control">
                                             <option value="">Seleccione...</option>
                                                 @foreach ($usuarios as $usuario)
                                                     <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
@@ -177,7 +177,7 @@
                                     <div class="form-group row">
                                             <label for="" class="col-sm-4 col-form-label">Hora Inicial</label>
                                             <div class='col-sm-8 input-group date'>
-                                                <input type='text' class="form-control" name="actividad[fini]"/>
+                                                <input type='text' class="form-control" name="acta[fhini]"/>
                                                 <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-time"></span>
                                                 </span>
@@ -186,7 +186,7 @@
                                     <div class="form-group row">
                                             <label for="" class="col-sm-4 col-form-label">Hora Final</label>
                                             <div class='col-sm-8 input-group date'>
-                                                <input type='text' class="form-control" name="actividad[fini]"/>
+                                                <input type='text' class="form-control" name="acta[fhfin]"/>
                                                 <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-time"></span>
                                                 </span>
@@ -195,12 +195,27 @@
                                     <table id="usuarios_tareas" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>Usuario</th>
-                                                <th>Funcion</th>
-                                                <th></th>
-                                                <th></th>
+                                                <th>ctarea</th>
+                                                <th>Tarea</th>
+                                                <th>cusu</th>
+                                                <th>Responsable</th>
+                                                <th>ctirelacion</th>
+                                                <th>Responsabilidad</th>
+                                                <th>Hecha</th>
                                             </tr>
                                         </thead>
+                                        <tbody>
+                                            <tr>
+                                                @foreach ($asignacion as $asignar)
+                                                <td>{{$asignar->ctarea}}</td>
+                                                <td>{{$asignar->tarea->ntarea}}</td>
+                                                <td>{{$asignar->user}}</td>
+                                                <td>{{$asignar->usuario->name}}</td>
+                                                <td>{{$asignar->ctirelacion}}</td>
+                                                <td>{{$asignar->relacion->ntirelacion}}</td>
+                                                @endforeach
+                                            </tr>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -309,7 +324,40 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ URL::asset('DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ URL::asset('DataTables-1.10.14/extensions/Buttons/js/buttons.bootstrap.min.js') }}"></script>
+    <script src="{{ URL::asset('DataTables-1.10.14/extensions/Buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script type="text/javascript">
+    $(function () {
+        $('.date').datetimepicker({
+            format: 'YYYY/MM/DD',
+            defaultDate: moment().format("YYYY/MM/DD")
+        });
+    });
+                $("#form_crear_acta").submit(function(event){
+                        event.preventDefault()
+                        var that = this
+
+                        $.ajax({
+                            type : "POST",
+                            url : "{{ URL::action('ActasController@create') }}",
+                            data:serializeForm(that),
+                            cache:false,
+                            contentType: false,
+                            processData: false,
+                            success : function(){
+                                alertify.success("Bien")
+                            },
+                            error : function(){
+                                //$("#modalCrearActividad").modal("hide")
+                                alertify.error(Models.Planes.messages.create.error)
+                            },
+                        })
+                    })
+    </script>
     <script>
+
         function cambiarEstadoTarea(event,element){
             var ctarea = $(element).data("ctarea")
             var ifhecha = element.checked ? 1 : 0
@@ -330,52 +378,41 @@
             ctirela: 4,
             ntirela: 5,
             }
-            var table= $("#tareas").DataTable({
-            "paging":   false,
-            "ordering": false,
-            "info":     false,
-            "language": idioma_espanol,
-            "columnDefs": [
-                {
-                    "targets": [ cols.ctarea,cols.crespo,cols.ctirela ],
-                    "visible": false,
-                },
-            ]
-
-            //editar("#usuarios tbody");
-        })
-        var table= $("#usuarios").DataTable({
-            "paging":   false,
-            "ordering": false,
-            "info":     false,
-            "language": idioma_espanol,
-            "columnDefs": [
-                {
-                    "targets": [ cols.ctarea,cols.crespo,cols.ctirela ],
-                    "visible": false,
-                },
-            ]
-
-            //editar("#usuarios tbody");
-        })
-        var listar = function(){
-            var ctarea = $($tareas.);
-            var cresponsable = $( "#respo option:selected" ).val();
-            var ctirespo = $( "#tirespo option:selected" ).val();
-            var ntarea = $( "#tarea option:selected" ).text();
-            var nresponsable = $( "#respo option:selected" ).text();
-            var ntirespo = $( "#tirespo option:selected" ).text();
-            //$("#tarea").val()
-            table
-                .row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,
-                    "<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>"+
-                        "<i class='fa fa-pencil-square-o'></i>"+
-                    "</button>",
-                    "<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)''>"+
-                        "<i class='fa fa-trash-o'></i>"+
-                    "</button>"])
-                .draw()
+        var idioma_espanol = {
+            "sProcessing":     "Procesando...",
+            "sLengthMenu":     "Mostrar _MENU_ registros",
+            "sZeroRecords":    "No se encontraron resultados",
+            "sEmptyTable":     "Ningún dato disponible en esta tabla",
+            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix":    "",
+            "sSearch":         "Buscar:",
+            "sUrl":            "",
+            "sInfoThousands":  ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
         }
+            var table= $("#usuarios_tareas").DataTable({
+            "paging":   false,
+            "ordering": false,
+            "info":     false,
+            "language": idioma_espanol,             
+                //editar("#usuarios tbody");
+            })
+            $(table).on("ready",function(){
+                table.add.row()
+            })
+
     </script>
 	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
 	<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->

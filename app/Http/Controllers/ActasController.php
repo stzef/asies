@@ -17,7 +17,7 @@ use Storage;
 
 use Illuminate\Support\Facades\Validator;
 
-class ActividadesController extends Controller
+class ActasController extends Controller
 {
 	public function __construct()
 	{
@@ -60,32 +60,36 @@ class ActividadesController extends Controller
 	public function create(Request $request){
 		$user = Auth::user();
 
-		Log::info('Creacion de Plan,',['user' => $user->id ]);
+		Log::info('Creacion de Acta,',['user' => $user->id ]);
 
 		$dataBody = $request->all();
-		$validator = Validator::make($dataBody["actividad"],
+		$validator = Validator::make($dataBody["acta"],
 			[
 				#'cestado' => 'required',
-				'ctiactividad' => 'required|exists:tiactividades,ctiactividad',
+				'numeroacta' => 'required',
 				#'cacta' => 'required',
-				'nactividad' => 'required|max:255',
-				'descripcion' => 'required|max:500',
-				'fini' => 'required|date',
-				'ffin' => 'required|date',
-				'ifacta' => 'required|boolean',
-				'ifarchivos' => 'required|boolean',
+				'objetivos' => 'required|max:200',
+				'ordendeldia' => 'required|max:400',
+				'fhini' => 'required|date',
+				'fhfin' => 'required|date',
+				'sefirma' => 'required|max:100',
+				'user_elaboro' => 'required|exists:users,id',
+				'user_reviso' => 'required|exists:users,id',
+				'user_aprobo' => 'required|exists:users,id',
 				#'ifdescripcion' => 'required',
 			],
 			[
 				#'cestado.required' => 'required',
-				'ctiactividad.required' => 'required',
-				#'cacta.required' => 'required',
-				'nactividad.required' => 'required',
-				'descripcion.required' => 'required',
-				'fini.required' => 'required',
-				'ffin.required' => 'required',
-				'ifacta.required' => 'required',
-				'ifarchivos.required' => 'required',
+				'numeroacta.required' => 'required',
+				'objetivos.required' => 'required',
+				'ordendeldia.required' => 'required',
+				#'descripcion.required' => 'required',
+				'fhini.required' => 'required',
+				'fhfin.required' => 'required',
+				'sefirma.required' => 'required',
+				'user_elaboro.required' => 'required',
+				'user_reviso.required' => 'required',
+				'user_aprobo.required' => 'required',
 				#'ifdescripcion.required' => 'required',
 			]
 		);
@@ -94,7 +98,7 @@ class ActividadesController extends Controller
 			$messages = $validator->messages();
 			return response()->json(array("errors_form" => $messages),400);
 		}
-		$actividad = Actividades::create($dataBody["actividad"]);
+		$acta = Actas::create($dataBody["acta"]);
 		return response()->json(array());
 	}
 

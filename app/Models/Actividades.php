@@ -127,9 +127,8 @@ class Actividades extends Model
                 foreach ($asignaciones as $asignacion) {
                     $asignacion->tarea = Tareas::where('ctarea',$asignacion->ctarea)->first();
                     $asignacion->actividad =Actividades::where('cactividad',$asignacion->cactividad)->first();
-                    $asignacion->relaacion = TiRelaciones::where('ctirelacion',$asignacion->ctirelacion)->first();
+                    $asignacion->relacion = TiRelaciones::where('ctirelacion',$asignacion->ctirelacion)->first();
                     $asignacion->usuario = User::where('id',$asignacion->user)->first();
-                    # code...
                 }
         return $asignaciones;
     }
