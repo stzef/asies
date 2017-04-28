@@ -78,8 +78,10 @@ class Actas extends Model
         $last = Actas::all()->last();
         if($last)
         {
-            $number = substr($last->numeroacta, -8);
-            $number += 1; 
+            $number = (int)substr($last->numeroacta, -8);
+            $number += 1;
+            $number = sprintf("%08d", $number);
+            //dump($number);exit();
         }else
         {
             $number = "00000001";

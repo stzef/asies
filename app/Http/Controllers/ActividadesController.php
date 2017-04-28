@@ -52,6 +52,7 @@ class ActividadesController extends Controller
 					'actividad' => $actividad,
 					'usuarios' => $usuarios,
 					'numacta' => $numacta,
+					'asignacion' => $asignacion,
  					));
 			}
 		}
