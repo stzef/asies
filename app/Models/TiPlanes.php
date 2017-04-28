@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace asies\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,7 +17,7 @@ class TiPlanes extends Model
 {
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'tiplanes';
