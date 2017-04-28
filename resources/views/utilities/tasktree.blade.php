@@ -35,10 +35,11 @@
 	<script>
 		function returnTask (evt, data){
 			console.log(data)
-			var tareas = $('#treeview').jstree('get_selected',true)
+			var tarea = $('#treeview').jstree('get_selected',true)[0]
+			console.log(tarea)
 			alertify.confirm("Desea escoger esta Tarea",function(){
 				window.opener.$(window.INPUT_REFERENCE)
-					.val(1212)
+					.val(tarea.li_attr.cplan)
 					.focus()
 					.trigger("change")
 

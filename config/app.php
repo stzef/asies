@@ -159,6 +159,16 @@ return [
         # Mapeador de Bases De Datos
         Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
 
+        /*
+         * Laravel Framework Service Providers...
+         */
+        Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
+
+        /**
+         * Third Party Service Providers...
+         */
+        Bican\Roles\RolesServiceProvider::class,
+
         #Illuminate\Html\HtmlServiceProvider,
 
         #Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,

@@ -29,7 +29,7 @@ class PerfilController extends Controller
 			$actividad->tareas = $objactividad->getTareas($user->id);
 		}
 
-		return view('perfil.misplanes', array( "tareas" => $tareas, "actividades" => $actividades ) );
+		return view('perfil.dashboard', array( "tareas" => $tareas, "actividades" => $actividades ) );
 
 	}
 }
