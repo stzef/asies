@@ -18,7 +18,7 @@
 
                         <div class="row modal-body">
                             @if ( $actividad->acta )
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="form-group row">
                                         <label for="plan_nombre" class="col-sm-2 col-form-label">Numero</label>
                                         <div class="col-sm-10">
@@ -65,8 +65,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="col-md-8">
+                                <div class="col-md-7">
+                                    <div class="col-md-12">
                                         <div class="form-group row">
                                                 <label for="" class="col-sm-4 col-form-label">Hora Inicial</label>
                                                 <div class='col-sm-8 input-group date'>
@@ -79,25 +79,25 @@
                                                     <p> {{ $actividad->acta->fhfin }} </p>
                                                 </div>
                                         </div>
-                                        <table id="tareas" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
+                                        <table class="table table-bordered tabla-hover table-responsive" cellspacing="0">
                                             <thead>
                                                 <tr>
                                                     <th>Tarea</th>
                                                     <th>Responsable</th>
-                                                    <th></th>
-                                                    <th></th>
+                                                    <th>Responsabilidad</th>
+                                                    <th>Hecha</th>
                                                 </tr>
                                             </thead>
-                                        </table>
-                                        <table id="usuarios" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Usuario</th>
-                                                    <th>Funcion</th>
-                                                    <th></th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
+                                            <tbody>
+                                                @foreach($asignaciones as $asignacion)
+                                                    <tr>
+                                                        <td>{{$asignacion->tarea->ntarea}}</td>
+                                                        <td>{{$asignacion->usuario->name}}</td>
+                                                        <td>{{$asignacion->relacion->ntirelacion}}</td>
+                                                        <td> @if( $asignacion->tarea->ifhecha ) Si @else No @endif </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>

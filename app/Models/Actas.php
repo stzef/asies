@@ -3,6 +3,7 @@
 namespace asies\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use asies\User;
 
 /**
  * @property integer $idacta
@@ -88,6 +89,25 @@ class Actas extends Model
         }
         $numacta = $empresa."-".$date."-".$number;
         return $numacta;
-
+    }
+    public function getAsistentes($cacta=null)
+    {
+        $acta = $this;
+        if ( $cacta ){
+            $acta = Actas::where("cacta",$cacta)->first();
+        }
+        $asistentes = \DB::table('asignaciontareas')
+            ->join('actasasistentes', 'asignaciontareas.user', '=', 'actasasistentes.user')
+            //->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
+            ->select('asignaciontareas.*')
+            ->where('actasasistentes.cacta', $acta->idacta)
+            ->get();
+        foreach ($asistentes as $asistente) {
+            $asistente->tarea = Tareas::where('ctarea',$asistente->ctarea)->first();
+            $asistente->actividad =Actividades::where('cactividad',$asistente->cactividad)->first();
+            $asistente->relacion = TiRelaciones::where('ctirelacion',$asistente->ctirelacion)->first();
+            $asistente->usuario = User::where('id',$asistente->user)->first();
+        }
+        return $asistentes;
     }
 }

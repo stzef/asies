@@ -35,6 +35,7 @@ class ActividadesController extends Controller
 					'tareas' => $tareas,
 					'actividad' => $actividad,
 					'evidencias' => $evidencias,
+					'asignaciones' => $actividad->acta->getAsistentes(),
 					));
 			}
 		}
