@@ -1,19 +1,21 @@
 <?php
 
-namespace asies\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property integer $ctirelacion
  * @property string $ntirelacion
- * @property Tareasusuario[] $tareasusuarios
+ * @property string $created_at
+ * @property string $updated_at
+ * @property Asignaciontarea[] $asignaciontareas
  */
 class TiRelaciones extends Model
 {
     /**
      * The table associated with the model.
-     *
+     * 
      * @var string
      */
     protected $table = 'tirelaciones';
@@ -21,13 +23,13 @@ class TiRelaciones extends Model
     /**
      * @var array
      */
-    protected $fillable = ['ntirelacion'];
+    protected $fillable = ['ntirelacion', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function tareasusuarios()
+    public function asignaciontareas()
     {
-        return $this->hasMany('App\Tareasusuario', 'ctirelacion', 'ctirelacion');
+        return $this->hasMany('App\Asignaciontarea', 'ctirelacion', 'ctirelacion');
     }
 }

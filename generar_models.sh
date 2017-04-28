@@ -14,5 +14,5 @@ php artisan krlove:generate:model TiRelaciones --table-name=tirelaciones
 php artisan krlove:generate:model ActasAsistentes --table-name=actasasistentes
 #php artisan krlove:generate:model empresas --table-name=empresas
 php artisan krlove:generate:model Tareas --table-name=tareas
-php artisan krlove:generate:model ActividadesTareas --table-name=actividadestareas
-php artisan krlove:generate:model TareasUsuarios --table-name=tareasusuarios
+
+php artisan krlove:generate:model AsignacionTareas --table-name=asignaciontareas
