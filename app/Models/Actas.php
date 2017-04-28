@@ -35,7 +35,7 @@ class Actas extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function user_elaboro()
     {
         return $this->belongsTo('App\User', 'user_elaboro');
     }
@@ -43,7 +43,7 @@ class Actas extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function user_reviso()
     {
         return $this->belongsTo('App\User', 'user_reviso');
     }
@@ -51,7 +51,7 @@ class Actas extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function user_aprobo()
     {
         return $this->belongsTo('App\User', 'user_aprobo');
     }
@@ -71,12 +71,12 @@ class Actas extends Model
     {
         return $this->hasMany('App\Actividade', 'cacta', 'idacta');
     }
-    public function genCode()
+    static function genCode()
     {
         $empresa = "EMP";
-        $date = date('d m y');
-        $last = $this->last();
-        if($last->numeroacta)
+        $date = date('dmy');
+        $last = Actas::all()->last();
+        if($last)
         {
             $number = substr($last->numeroacta, -8);
             $number += 1; 
