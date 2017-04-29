@@ -47,21 +47,21 @@
                                     <div class="form-group row">
                                         <label for="" class="col-sm-2 col-form-label">Elaboro </label>
                                         <div class="col-sm-10">
-                                            <p> {{ $actividad->acta->user_elaboro }} </p>
+                                            <p> {{ $actividad->acta->user_elaboro}} </p>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="" class="col-sm-2 col-form-label">Reviso </label>
                                         <div class="col-sm-10">
-                                            <p> {{ $actividad->acta->user_reviso }} </p>
+                                            <p> {{ $actividad->acta->user_reviso}} </p>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="" class="col-sm-2 col-form-label">Aprobo </label>
                                         <div class="col-sm-10">
-                                            <p> {{ $actividad->acta->user_aprobo }} </p>
+                                            <p> {{ $actividad->acta->user_aprobo}} </p>
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +91,7 @@
                                             <tbody>
                                                 @foreach($asignaciones as $asignacion)
                                                     <tr>
-                                                        <td>{{$asignacion->tarea->ntarea}}</td>
+                                                        <td title="{{$asignacion->tarea->ntarea}}">{{ str_limit($asignacion->tarea->ntarea, 30 ,$end="...") }}</td>
                                                         <td>{{$asignacion->usuario->name}}</td>
                                                         <td>{{$asignacion->relacion->ntirelacion}}</td>
                                                         <td> @if( $asignacion->tarea->ifhecha ) Si @else No @endif </td>

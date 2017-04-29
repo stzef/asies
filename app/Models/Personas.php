@@ -51,4 +51,9 @@ class Personas extends Model
     {
         return $this->hasMany('App\User', 'cpersona', 'cpersona');
     }
+
+    public function nombreCompleto()
+    {
+        return $this->nombres . " " . $this->apellidos;
+    }
 }

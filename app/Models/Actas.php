@@ -20,9 +20,9 @@ use asies\User;
  * @property string $sefirma
  * @property string $created_at
  * @property string $updated_at
- * @property User $user
- * @property User $user
- * @property User $user
+ * @property User $user_elaboro
+ * @property User $user_reviso
+ * @property User $user_aprobo
  * @property Actasasistente[] $actasasistentes
  * @property Actividade[] $actividades
  */
@@ -38,7 +38,7 @@ class Actas extends Model
      */
     public function user_elaboro()
     {
-        return $this->belongsTo('App\User', 'user_elaboro');
+        return $this->belongsTo('asies\User','id','user_elaboro');
     }
 
     /**
@@ -46,7 +46,7 @@ class Actas extends Model
      */
     public function user_reviso()
     {
-        return $this->belongsTo('App\User', 'user_reviso');
+        return $this->belongsTo('asies\User','id','user_reviso');
     }
 
     /**
@@ -54,7 +54,7 @@ class Actas extends Model
      */
     public function user_aprobo()
     {
-        return $this->belongsTo('App\User', 'user_aprobo');
+        return $this->belongsTo('asies\User','id','user_aprobo');
     }
 
     /**
@@ -75,7 +75,7 @@ class Actas extends Model
     static function genCode()
     {
         $empresa = "EMP";
-        $date = date('dmy');
+        $date = date('Ymd');
         $last = Actas::all()->last();
         if($last)
         {

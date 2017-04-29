@@ -44,6 +44,8 @@ Route::group(['prefix' => 'planes'], function(){
 
 Route::group(['prefix' => 'actividades'], function(){
 	Route::post('create', "ActividadesController@create");
+	Route::get('create', "ActividadesController@create");
+
 	Route::get('do/{cactividad}', "ActividadesController@doActivity")->name('realizar_actividad');
 	Route::get('summary/{cactividad}', "ActividadesController@summaryActivity")->name('GET_resumen_actividad');
 	Route::post('evidence/{cactividad}', "ActividadesController@store");

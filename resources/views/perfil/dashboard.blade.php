@@ -10,7 +10,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">
-				Mi Perfil <small></small>
+				{{ Auth::user()->persona->nombreCompleto() }} <small></small>
 			</h1>
 			<ol class="breadcrumb">
 				<li class="active">
@@ -31,7 +31,9 @@
 					@foreach ($actividades as $actividad)
 						<div class="well">
 							<div class="col-md-8">
-								{{ $actividad->nactividad }}
+								<h4>
+									Actividad : {{ $actividad->nactividad }}
+								</h4>
 							</div>
 							<div class="col-md-4">
 								<a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a>

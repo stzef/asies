@@ -25,14 +25,14 @@
                 </div>
 
                 <div class="panel-body">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
                             <input type="hidden" name="cactividad" id="cactividad" value="{{ $actividad->cactividad }}">
                             <!-- Redirect browsers with JavaScript disabled to the origin page -->
                             <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
                             <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
                             <div class="row fileupload-buttonbar">
-                                <div class="col-lg-5">
+                                <div class="col-md-12">
                                     <!-- The fileinput-button span is used to style the file input field as button -->
                                     <span class="btn btn-success fileinput-button">
                                         <i class="glyphicon glyphicon-plus"></i>
@@ -59,7 +59,7 @@
                                     <span class="fileupload-process"></span>
                                 </div>
                                 <!-- The global progress state -->
-                                <div class="col-lg-3 fileupload-progress fade">
+                                <div class="col-lg-12 fileupload-progress fade">
                                     <!-- The global progress bar -->
                                     <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
                                         <div class="progress-bar progress-bar-success" style="width:0%;"></div>
@@ -72,7 +72,7 @@
                             <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
                         </form>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="row">
                             <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modalCrearActa">
                                 <i class="glyphicon glyphicon-plus"></i>
@@ -82,7 +82,7 @@
                         @foreach ($tareas as $tarea)
                             <div class="form-group row">
                                 <!--<label class="col-sm-2"></label>-->
-                                <div class="col-sm-10">
+                                <div class="col-sm-12">
                                     <div class="form-check">
                                         <label class="form-check-label">
                                             <input class="form-check-input" onclick="Models.Tareas.cambiarEstado(this.dataset.ctarea,this.checked)" type="checkbox" data-ctarea="{{ $tarea->ctarea }}" name="ctarea_{{ $tarea->ctarea }}" @if ($tarea->ifhecha) checked @endif> {{ $tarea->ntarea }}
@@ -115,32 +115,32 @@
                                 <div class="form-group row">
                                     <label for="number_acta" class="col-sm-2 col-form-label">Numero</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="number_acta" name="acta[numeroacta]" value="{{$numacta}}" readonly required>
+                                        <input type="text" class="form-control" id="number_acta" required name="acta[numeroacta]" value="{{$numacta}}" readonly required>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2 col-form-label">Objetivos</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" id="" name="acta[objetivos]"></textarea>
+                                        <textarea class="form-control" id="" required name="acta[objetivos]"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2 col-form-label">Orden del dia</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" id="" name="acta[ordendeldia]"></textarea>
+                                        <textarea class="form-control" id="" required name="acta[ordendeldia]"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="plan_nombre" class="col-sm-2 col-form-label">Pie de firma</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="plan_nombre" name="acta[sefirma]" placeholder="Ciudad, DD/MM/AA">
+                                        <input type="text" class="form-control" id="plan_nombre" required name="acta[sefirma]" placeholder="Ciudad, DD/MM/AA">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2 col-form-label">Elaboro </label>
                                     <div class="col-sm-10">
-                                        <select name="acta[user_elaboro]" class="form-control">
+                                        <select required name="acta[user_elaboro]" class="form-control">
                                             <option value="">Seleccione...</option>
                                                 @foreach ($usuarios as $usuario)
                                                     <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
@@ -152,7 +152,7 @@
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2 col-form-label">Reviso </label>
                                     <div class="col-sm-10">
-                                        <select name="acta[user_reviso]" class="form-control">
+                                        <select required name="acta[user_reviso]" class="form-control">
                                             <option value="">Seleccione...</option>
                                                 @foreach ($usuarios as $usuario)
                                                     <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
@@ -164,7 +164,7 @@
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2 col-form-label">Aprobo </label>
                                     <div class="col-sm-10">
-                                        <select name="acta[user_aprobo]" class="form-control">
+                                        <select required name="acta[user_aprobo]" class="form-control">
                                             <option value="">Seleccione...</option>
                                                 @foreach ($usuarios as $usuario)
                                                     <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
@@ -178,7 +178,7 @@
                                     <div class="form-group row">
                                             <label for="" class="col-sm-4 col-form-label">Hora Inicial</label>
                                             <div class='col-sm-8 input-group date'>
-                                                <input type='text' class="form-control" name="acta[fhini]"/>
+                                                <input type='text' class="form-control" required name="acta[fhini]"/>
                                                 <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-time"></span>
                                                 </span>
@@ -187,7 +187,7 @@
                                     <div class="form-group row">
                                             <label for="" class="col-sm-4 col-form-label">Hora Final</label>
                                             <div class='col-sm-8 input-group date'>
-                                                <input type='text' class="form-control" name="acta[fhfin]"/>
+                                                <input type='text' class="form-control" required name="acta[fhfin]"/>
                                                 <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-time"></span>
                                                 </span>
@@ -206,17 +206,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                @foreach ($asignacion as $asignar)
-                                                <td>{{$asignar->ctarea}}</td>
-                                                <td>{{$asignar->tarea->ntarea}}</td>
-                                                <td>{{$asignar->user}}</td>
-                                                <td>{{$asignar->usuario->name}}</td>
-                                                <td>{{$asignar->ctirelacion}}</td>
-                                                <td>{{$asignar->relacion->ntirelacion}}</td>
-                                                <td> @if( $asignar->tarea->ifhecha ) Si @else No @endif </td>
-                                                @endforeach
-                                            </tr>
+                                            @foreach ($asignacion as $asignar)
+                                                <tr>
+                                                    <td>{{$asignar->ctarea}}</td>
+                                                    <td title="{{$asignar->tarea->ntarea}}">{{ str_limit($asignar->tarea->ntarea, 30 ,$end="...") }}</td>
+                                                    <td>{{$asignar->user}}</td>
+                                                    <td>{{$asignar->usuario->name}}</td>
+                                                    <td>{{$asignar->ctirelacion}}</td>
+                                                    <td>{{$asignar->relacion->ntirelacion}}</td>
+                                                    <td> @if( $asignar->tarea->ifhecha ) Si @else No @endif </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -328,16 +328,14 @@
 @section('scripts')
     <script src="{{ URL::asset('DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ URL::asset('DataTables-1.10.14/extensions/Buttons/js/buttons.bootstrap.min.js') }}"></script>
-    <script src="{{ URL::asset('DataTables-1.10.14/extensions/Buttons/js/dataTables.buttons.min.js') }}"></script>
     <script type="text/javascript">
-    $(function () {
-        $('.date').datetimepicker({
-            format: 'YYYY/MM/DD',
-            defaultDate: moment().format("YYYY/MM/DD")
+        $(function () {
+            $('.date').datetimepicker({
+                format: 'YYYY/MM/DD',
+                defaultDate: moment().format("YYYY/MM/DD")
+            });
         });
-    });
-            var cols = {
+        var cols = {
             ctarea : 0,
             ntarea : 1,
             crespo : 2,
@@ -345,77 +343,46 @@
             ctirela: 4,
             ntirela: 5,
         }
-                $("#form_crear_acta").submit(function(event){
-                        event.preventDefault()
-                        var that = this
-
-                        var data = serializeForm(that)
-                        data.append("acta[cactividad]",$("#cactividad").val())
-
-                        table.data().toArray().forEach( function(element, index) {
-                            data.append("acta[asistentes][]",element[cols.crespo])
-                        });
-                        $.ajax({
-                            type : "POST",
-                            url : "{{ URL::action('ActasController@create') }}",
-                            data:data,
-                            cache:false,
-                            contentType: false,
-                            processData: false,
-                            success : function(){
-                                alertify.success("Bien")
-                            },
-                            error : function(){
-                                //$("#modalCrearActividad").modal("hide")
-                                alertify.error(Models.Planes.messages.create.error)
-                            },
-                        })
-                    })
-    </script>
-    <script>
-
-        var idioma_espanol = {
-            "sProcessing":     "Procesando...",
-            "sLengthMenu":     "Mostrar _MENU_ registros",
-            "sZeroRecords":    "No se encontraron resultados",
-            "sEmptyTable":     "Ningún dato disponible en esta tabla",
-            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-            "sInfoPostFix":    "",
-            "sSearch":         "Buscar:",
-            "sUrl":            "",
-            "sInfoThousands":  ",",
-            "sLoadingRecords": "Cargando...",
-            "oPaginate": {
-                "sFirst":    "Primero",
-                "sLast":     "Último",
-                "sNext":     "Siguiente",
-                "sPrevious": "Anterior"
-            },
-            "oAria": {
-                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        }
-            var table= $("#usuarios").DataTable({
+        var table= $("#usuarios").DataTable({
             "paging":   false,
             "ordering": false,
+            "searching": false,
             "info":     false,
-            //"language": idioma_espanol,
-                        "columnDefs": [
-                {
-                    "targets": [ cols.ctarea,cols.crespo,cols.ctirela ],
-                    "visible": false,
-                },
-            ]
-                //editar("#usuarios tbody");
-            })
-            $(table).on("ready",function(){
-                table.add.row()
-            })
+            "language": DTspanish,
+            "columnDefs": [{
+                "targets": [ cols.ctarea,cols.crespo,cols.ctirela ],
+                "visible": false,
+            },]
+        })
+        $(table).on("ready",function(){ table.add.row() })
 
+        $("#form_crear_acta").submit(function(event){
+            event.preventDefault()
+            var that = this
+
+            var data = serializeForm(that)
+            data.append("acta[cactividad]",$("#cactividad").val())
+
+            table.data().toArray().forEach( function(element, index) {
+                data.append("acta[asistentes][]",element[cols.crespo])
+            });
+            $.ajax({
+                type : "POST",
+                url : "{{ URL::action('ActasController@create') }}",
+                data:data,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success : function(){
+                    alertify.success("Bien")
+                },
+                error : function(){
+                    alertify.error(Models.Planes.messages.create.error)
+                },
+            })
+        })
     </script>
+
 	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
 	<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 	<script src="{{ URL::asset('jQuery-File-Upload-9.18.0/js/vendor/jquery.ui.widget.js') }}"></script>

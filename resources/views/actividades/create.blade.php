@@ -10,7 +10,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">
-				Planes <small>Vista General</small>
+				Actividades <small>Vista General</small>
 			</h1>
 			<ol class="breadcrumb">
 				<li class="active">
@@ -21,16 +21,21 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="modalCrearActividad" tabindex="-1" role="dialog" aria-labelledby="modalCrearActividadLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h2 class="modal-title" id="modalCrearActividadLabel">Crear Actividad</h2>
+	<div class="row">
+
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Planes
+					<div class="pull-right">
+						<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modalCrearActividad">
+							<i class="glyphicon glyphicon-plus"></i>
+							Nueva Actividad
+						</button>
+					</div>
 				</div>
-				<div class="row modal-body">
+
+				<div class="panel-body">
 					<form id="form_crear_actividad" class="form-horizontal">
 
 						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
@@ -181,35 +186,12 @@
 
 
 
-					</div>
-					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">
 							<i class="glyphicon glyphicon-remove"></i> Cancelar
 						</button>
 						<button type="submit" class="btn btn-success" form="form_crear_actividad">
 							<i class="glyphicon glyphicon-plus"></i> Crear
 						</button>
-					</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-
-		<div class="col-md-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Planes
-					<!--<div class="pull-right">
-						<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modalCrearActividad">
-							<i class="glyphicon glyphicon-plus"></i>
-							Nueva Actividad
-						</button>
-					</div>-->
-				</div>
-
-				<div class="panel-body">
-					<div id="treeview" class="demo"></div>
 				</div>
 			</div>
 		</div>

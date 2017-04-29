@@ -8,7 +8,10 @@ use asies\Http\Requests;
 use asies\Models\Actividades;
 use asies\Models\Evidencias;
 use asies\Models\Personas;
+use asies\Models\Tareas;
 use asies\Models\Actas;
+use asies\Models\TiActividades;
+use asies\Models\TiRelaciones;
 use asies\User;
 use Illuminate\Support\Facades\Log;
 use \Auth;
@@ -31,11 +34,15 @@ class ActividadesController extends Controller
 			if ( $actividad = Actividades::where("cactividad", $cactividad)->first() ) {
 				$tareas = $actividad->getTareas();
 				$evidencias = $actividad->getEvidencias();
+				$asignaciones = [];
+				if( $actividad->acta ){
+					$asignaciones = $actividad->acta->getAsistentes();
+				}
 				return view( 'actividades.summaryActivity' , array(
 					'tareas' => $tareas,
 					'actividad' => $actividad,
 					'evidencias' => $evidencias,
-					'asignaciones' => $actividad->acta->getAsistentes(),
+					'asignaciones' => $asignaciones,
 					));
 			}
 		}
@@ -59,6 +66,24 @@ class ActividadesController extends Controller
 		}
 	}
 	public function create(Request $request){
+
+		if ($request->isMethod('get')){
+        $tareas = Tareas::all();
+
+        $usuarios = User::all();
+
+        $tiactividades = TiActividades::all();
+        $relaciones = TiRelaciones::all();
+        $context = array(
+            "tareas" => $tareas,
+            "tiactividades" => $tiactividades,
+            "usuarios" => $usuarios,
+            "relaciones" => $relaciones
+        );
+			return view('actividades/create',$context);
+		}
+
+
 		$user = Auth::user();
 
 		Log::info('Creacion de Plan,',['user' => $user->id ]);
