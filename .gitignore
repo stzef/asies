@@ -4,7 +4,7 @@
 /public/evidencias/*
 Homestead.yaml
 Homestead.json
-.env
+#.env
 .*.env
 .sh
 *.xls
