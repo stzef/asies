@@ -10,6 +10,9 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
+    <link rel="icon" href="{{ URL::asset('img/logo.png') }}" type="image/png" sizes="16x16">
+
+
     <title>{{$SHORT_NAME_APP}}</title>
 
     <!-- Bootstrap Core CSS -->
@@ -26,7 +29,7 @@
     <!--<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
 
     <!-- AlertifyJS -->
-    <link rel="stylesheet" href="{{ URL::asset('alertifyjs/css/alertify.min.css') }}" >
+    <link rel="stylesheet" href="{{ URL::asset('alertifyjs/css/alertify.css') }}" >
 
     <!-- JQuery UI -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" >
@@ -172,6 +175,9 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
+                    <li class="active">
+                        <a href="{{ URL::route('meci_dashboard') }}"><i class="fa fa-fw fa-tree"></i>Arbol de Tareas</a>
+                    </li>
                     <li class="active">
                         <a href="{{ URL::action('AppController@dashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>

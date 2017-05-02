@@ -117,7 +117,11 @@ Models = {
 				success : function(response){
 					console.log(response)
 					var textEstado = response.hecha == 1 ? "Hecha" : "No Hecha"
-					alertify.success("El Estado se ha Cambiado <br> Estado Actual : <b>__estado__</b>".set("__estado__",textEstado))
+					if ( response.ok ){
+						alertify.success("El Estado se ha Cambiado <br> Estado Actual : <b>__estado__</b>".set("__estado__",textEstado))
+					}else{
+						alertify.warning(response.message)
+					}
 				},
 				error : function(response){},
 			})

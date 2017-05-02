@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <link rel="icon" href="{{ URL::asset('img/logo.png') }}" type="image/png" sizes="16x16">
 
     <title>{{$SHORT_NAME_APP}}</title>
 

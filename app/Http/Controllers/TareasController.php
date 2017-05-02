@@ -41,6 +41,7 @@ class TareasController extends Controller
 			$user = Auth::user();
 			$tarea = Tareas::where('ctarea', $ctarea)->first();
 
+			$response["ok"] = true;
 			if ( $tarea->checkUser($user->id) ){
 				Tareas::where('ctarea', $ctarea)->update(['ifhecha' => $dataBody["ifhecha"]]);//->first();
 				if ( $tarea->ifhecha ){
@@ -50,9 +51,10 @@ class TareasController extends Controller
 				}
 			}else{
 				$response["message"] = "Esta tarea no esta asignada al usuario";
+				$response["ok"] = false;
 			}
 			$tarea = Tareas::where('ctarea', $ctarea)->first();
-			$response = array("hecha"=>$tarea->ifhecha);
+			$response["hecha"]=$tarea->ifhecha;
 			return response()->json($response);
 		}
 	}

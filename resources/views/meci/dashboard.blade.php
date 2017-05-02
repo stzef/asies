@@ -232,9 +232,9 @@
 	<script src="{{ URL::asset('jstree/js/jstree.min.js') }}"></script>
 
 	<script>
-		$.jstree.defaults.plugins = [ "wholerow", "checkbox" ]
-		$.jstree.defaults.checkbox.keep_selected_style = true
-		$.jstree.defaults.core.multiple = false
+		//$.jstree.defaults.plugins = [ "wholerow", "checkbox" ]
+		//$.jstree.defaults.checkbox.keep_selected_style = false
+		//$.jstree.defaults.core.multiple = false
 		var idioma_espanol = {
 			"sProcessing":     "Procesando...",
 			"sLengthMenu":     "Mostrar _MENU_ registros",

@@ -38,7 +38,8 @@ class Actas extends Model
      */
     public function user_elaboro()
     {
-        return $this->belongsTo('asies\User','id','user_elaboro');
+//        return $this->belongsTo('asies\User','id','user_elaboro');
+          return $this->belongsTo('App\User', 'user');
     }
 
     /**
@@ -46,7 +47,8 @@ class Actas extends Model
      */
     public function user_reviso()
     {
-        return $this->belongsTo('asies\User','id','user_reviso');
+        //return $this->belongsTo('asies\User','id','user_reviso');
+          return $this->belongsTo('App\User', 'user');
     }
 
     /**
@@ -54,7 +56,8 @@ class Actas extends Model
      */
     public function user_aprobo()
     {
-        return $this->belongsTo('asies\User','id','user_aprobo');
+        //return $this->belongsTo('asies\User','id','user_aprobo');
+          return $this->belongsTo('App\User', 'user');
     }
 
     /**

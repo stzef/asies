@@ -380,7 +380,7 @@
                 contentType: false,
                 processData: false,
                 success : function(){
-                    alertify.success("Bien")
+                    alertify.success("El Acta se ha creado.")
                 },
                 error : function(){
                     alertify.error(Models.Planes.messages.create.error)

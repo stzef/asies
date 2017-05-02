@@ -185,19 +185,20 @@
             ctirela: 4,
             ntirela: 5,
             }
-            var table= $("#tareas").DataTable({
-            "paging":   false,
-            "ordering": false,
-            "info":     false,
-            "language": idioma_espanol,
-            "columnDefs": [
-                {
-                    "targets": [ cols.ctarea,cols.crespo,cols.ctirela ],
-                    "visible": false,
-                },
-            ]
+            /*var table= $("#tareas").DataTable({
+                "paging":   false,
+                "ordering": false,
+                "info":     false,
+                //"language": DTspanish,
+                "columnDefs": [
+                    {
+                        "targets": [ cols.ctarea,cols.crespo,cols.ctirela ],
+                        "visible": false,
+                    },
+                ]
 
-            //editar("#usuarios tbody");
-        })
+                //editar("#usuarios tbody");
+            })
+            */
     </script>
 @endsection

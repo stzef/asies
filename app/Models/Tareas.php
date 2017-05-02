@@ -49,7 +49,7 @@ class Tareas extends Model
     public function checkUser($iduser)
     {
         $flag = false;
-        if ( AsignacionTareas::where("user",$iduser)->exists() ){
+        if ( AsignacionTareas::where("user",$iduser)->where("ctarea",$this->ctarea)->exists() ){
             $flag = true;
         }
         return $flag;
