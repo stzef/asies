@@ -74,10 +74,16 @@
                     </div>
                     <div class="col-md-12">
                         <div class="row">
-                            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modalCrearActa">
-                                <i class="glyphicon glyphicon-plus"></i>
-                                Crear Acta
-                            </button>
+                            @if ( $actividad->acta )
+                                <div class="alert alert-warning">
+                                    El acta de esta actividad ya se ha creado.
+                                </div>
+                            @else
+                                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modalCrearActa">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                    Crear Acta
+                                </button>
+                            @endif
                         </div>
                         @foreach ($tareas as $tarea)
                             <div class="form-group row">
@@ -245,12 +251,12 @@
     <script id="template-upload" type="text/x-tmpl">
         {% for (var i=0, file; file=o.files[i]; i++) { %}
             <tr class="template-upload fade">
-                <td>
+                <!--<td>
                     <input class="form-control" placeholder="Nombre" type="text" name="nombres[]">
                 </td>
                 <td>
                     <input class="form-control" placeholder="Descripcion" type="text" name="descripciones[]">
-                </td>
+                </td>-->
                 <td>
                     <span class="preview" width="100px"></span>
                 </td>

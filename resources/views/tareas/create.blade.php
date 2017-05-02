@@ -55,10 +55,16 @@
 							</div>
 						</div>
 
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-								<button type="submit" class="btn btn-success">Crear</button>
-							</div>
+						<div class="form-group text-center">
+
+							<a type="button" class="btn btn-danger" href="{{ URL::route('app_dashboard') }}" data-dismiss="modal">
+								<i class="glyphicon glyphicon-remove"></i> Cancelar
+							</a>
+							<button type="submit" class="btn btn-success">
+								<i class="glyphicon glyphicon-plus"></i>
+								Crear
+							</button>
+
 						</div>
 
 					</form>

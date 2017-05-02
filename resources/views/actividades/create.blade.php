@@ -14,7 +14,7 @@
 			</h1>
 			<ol class="breadcrumb">
 				<li class="active">
-					<i class="fa fa-dashboard"></i> Planes
+					<i class="fa fa-dashboard"></i> Actividades
 				</li>
 
 			</ol>
@@ -26,13 +26,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					Planes
-					<div class="pull-right">
-						<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modalCrearActividad">
-							<i class="glyphicon glyphicon-plus"></i>
-							Nueva Actividad
-						</button>
-					</div>
+					Actividades
 				</div>
 
 				<div class="panel-body">
@@ -185,13 +179,15 @@
 					</div>
 
 
+					<div class="text-center">
 
-						<button type="button" class="btn btn-danger" data-dismiss="modal">
+						<a type="button" class="btn btn-danger" href="{{ URL::route('app_dashboard') }}" data-dismiss="modal">
 							<i class="glyphicon glyphicon-remove"></i> Cancelar
-						</button>
+						</a>
 						<button type="submit" class="btn btn-success" form="form_crear_actividad">
 							<i class="glyphicon glyphicon-plus"></i> Crear
 						</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -253,6 +249,7 @@
 			"paging":   false,
 			"ordering": false,
 			"info":     false,
+			"searching":false,
 			"language": idioma_espanol,
 			"columnDefs": [
 				{

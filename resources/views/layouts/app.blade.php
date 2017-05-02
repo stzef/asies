@@ -183,7 +183,7 @@
                         <ul id="demo" class="collapse">
                             <li>
                                 <a href="{{ URL::route('GET_tareas_create') }}"><i class="fa fa-fw fa-pencil"></i>Tareas</a>
-                                <a href="{{ URL::route('meci_dashboard') }}"><i class="fa fa-fw fa-file-text-o"></i>Actividades</a>
+                                <a href="{{ URL::route('GET_actividades_create') }}"><i class="fa fa-fw fa-file-text-o"></i>Actividades</a>
                             </li>
                         </ul>
                     </li>
