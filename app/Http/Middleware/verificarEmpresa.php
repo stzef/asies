@@ -16,10 +16,13 @@ class verificarEmpresa
      */
     public function handle($request, Closure $next)
     {
-    $pos = mb_strpos($_SERVER['HTTP_HOST'], '.');
+    $http_host = str_replace("www.","",$_SERVER['HTTP_HOST']);
+    $pos = mb_strpos($http_host, '.');
     $subdomain = '';
+
     if ($pos) {
-        $subdomain = mb_substr($_SERVER['HTTP_HOST'], 0, $pos);
+        $subdomain = mb_substr($http_host, 0, $pos);
+        dump($subdomain);exit();
     }
     if( $subdomain ){
         if ( in_array( $subdomain, \Config::get("app.empresas") ) ){
