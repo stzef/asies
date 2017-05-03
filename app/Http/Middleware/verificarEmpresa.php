@@ -22,7 +22,6 @@ class verificarEmpresa
 
     if ($pos) {
         $subdomain = mb_substr($http_host, 0, $pos);
-        dump($subdomain);exit();
     }
     if( $subdomain ){
         if ( in_array( $subdomain, \Config::get("app.empresas") ) ){
