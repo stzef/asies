@@ -175,11 +175,12 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
-                        <a href="{{ URL::route('meci_dashboard') }}"><i class="fa fa-fw fa-tree"></i>Arbol de Tareas</a>
-                    </li>
-                    <li class="active">
+                    <!--<li class="active">-->
+                    <li >
                         <a href="{{ URL::action('AppController@dashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    </li>
+                    <li >
+                        <a href="{{ URL::route('meci_dashboard') }}"><i class="fa fa-fw fa-tree"></i>Arbol de Tareas</a>
                     </li>
                     <li>
                         <a href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}"><i class="fa fa-fw fa-file-text-o"></i> Mis Actividades</a>
