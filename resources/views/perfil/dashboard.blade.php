@@ -49,7 +49,7 @@
 								<tbody>
 									@foreach ($actividad->tareas as $tarea)
 										<tr>
-											<td>{{ $tarea->ntarea }}</td>
+											<td>({{ $tarea->cplan }}) {{ $tarea->ntarea }}</td>
 											<td>@if ($tarea->ifhecha) Si @else No @endif</td>
 										</tr>
 									@endforeach
