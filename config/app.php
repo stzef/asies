@@ -175,7 +175,7 @@ return [
         #Intervention\Image\ImageServiceProvider::class,
 
         #PDF
-        #Barryvdh\DomPDF\ServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -223,7 +223,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         #PDF
-        #'PDF' => Barryvdh\DomPDF\Facade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
         #'Image' => Intervention\Image\Facades\Image::class,
 

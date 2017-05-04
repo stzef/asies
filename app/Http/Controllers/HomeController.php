@@ -5,6 +5,7 @@ namespace asies\Http\Controllers;
 use asies\Http\Requests;
 use Illuminate\Http\Request;
 use \View;
+use \App;
 
 class HomeController extends Controller
 {
@@ -27,6 +28,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML('<h1>Test</h1>');
+        return $pdf->stream();
         return view('home');
     }
 }

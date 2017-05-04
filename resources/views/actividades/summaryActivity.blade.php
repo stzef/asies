@@ -154,18 +154,22 @@
 
                     <div class="col-md-6">
                         <h2>Tareas</h2>
-                        @foreach ($tareas as $tarea)
-                            <div class="form-group row">
-                                <!--<label class="col-sm-2"></label>-->
-                                <div class="col-sm-10">
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" disabled type="checkbox" data-ctarea="{{ $tarea->ctarea }}" name="ctarea_{{ $tarea->ctarea }}" @if ($tarea->ifhecha) checked @endif> {{ $tarea->ntarea }}
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                        <table class="table">
+                                <tr>
+                                    <th>Tarea</th>
+                                    <th>Estado</th>
+                                </tr>
+                            @foreach ($tareas as $tarea)
+                                <tr>
+                                    <td>
+                                        <p>{{ $tarea->ntarea }}</p>
+                                    </td>
+                                    <td>
+                                        <input class="form-check-input" disabled type="checkbox" data-ctarea="{{ $tarea->ctarea }}" name="ctarea_{{ $tarea->ctarea }}" @if ($tarea->ifhecha) checked @endif>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </table>
                     </div>
 
                 </div>
