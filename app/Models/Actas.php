@@ -77,7 +77,7 @@ class Actas extends Model
     }
     static function genCode()
     {
-        $empresa = "EMP";
+        $empresa = "GUA";
         $date = date('Ymd');
         $last = Actas::all()->last();
         if($last)
