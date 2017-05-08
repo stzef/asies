@@ -104,6 +104,7 @@ class Actas extends Model
             //->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
             ->select('asignaciontareas.*')
             ->where('actasasistentes.cacta', $acta->idacta)
+            ->groupBy("asignaciontareas.user")
             ->get();
         foreach ($asistentes as $asistente) {
             $asistente->tarea = Tareas::where('ctarea',$asistente->ctarea)->first();
@@ -112,5 +113,11 @@ class Actas extends Model
             $asistente->usuario = User::where('id',$asistente->user)->first();
         }
         return $asistentes;
+    }
+    public function getActividad()
+    {
+        $acta = $this;
+        $actividad = Actividades::where("cacta",$acta->id)->first();
+        return $actividad;
     }
 }

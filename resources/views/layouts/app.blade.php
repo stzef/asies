@@ -16,7 +16,7 @@
     <title>{{$SHORT_NAME_APP}}</title>
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="{{ URL::asset('layout/css/bootstrap.min.css') }}" >
+    <link rel="stylesheet" href="{{ URL::asset('layout/css/bootstrap.css') }}" >
     <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
 
     <!-- Custom CSS -->
@@ -29,20 +29,20 @@
     <!--<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
 
     <!-- AlertifyJS -->
-    <link rel="stylesheet" href="{{ URL::asset('alertifyjs/css/alertify.css') }}" >
+    <link rel="stylesheet" href="{{ URL::asset('vendor/alertifyjs/css/alertify.css') }}" >
 
     <!-- JQuery UI -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" >
 
     <!-- Select2 -->
-    <link rel="stylesheet" href="{{ URL::asset('select2-4.0.3/dist/css/select2.min.css') }}" >
+    <link rel="stylesheet" href="{{ URL::asset('vendor/select2-4.0.3/dist/css/select2.min.css') }}" >
 
     <!-- JTable -->
-    <!--<link rel="stylesheet" href="{{ URL::asset('jtable.2.4.0/themes/jqueryui/jtable_jqueryui.css') }}" >-->
-    <link rel="stylesheet" href="{{ URL::asset('jtable.2.4.0/themes/metro/darkgray/jtable.css') }}" >
+    <!--<link rel="stylesheet" href="{{ URL::asset('vendor/jtable.2.4.0/themes/jqueryui/jtable_jqueryui.css') }}" >-->
+    <link rel="stylesheet" href="{{ URL::asset('vendor/jtable.2.4.0/themes/metro/darkgray/jtable.css') }}" >
 
     <!-- Datetimepicker JS -->
-    <link rel="stylesheet" href="{{ URL::asset('datetimepicker/css/bootstrap-datetimepicker-standalone.css') }}" >
+    <link rel="stylesheet" href="{{ URL::asset('vendor/datetimepicker/css/bootstrap-datetimepicker-standalone.css') }}" >
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -244,28 +244,28 @@
     <script src="{{ URL::asset('layout/js/bootstrap.min.js') }}"></script>
 
     <!-- Moment JS -->
-    <script src="{{ URL::asset('momentjs/moment-with-locales.js') }}"></script>
-    <script src="{{ URL::asset('momentjs/locale/es.js') }}"></script>
+    <script src="{{ URL::asset('vendor/momentjs/moment-with-locales.js') }}"></script>
+    <script src="{{ URL::asset('vendor/momentjs/locale/es.js') }}"></script>
 
-    <script src="{{ URL::asset('datetimepicker/bootstrap/js/transition.js') }}"></script>
-    <script src="{{ URL::asset('datetimepicker/bootstrap/js/collapse.js') }}"></script>
+    <script src="{{ URL::asset('vendor/datetimepicker/bootstrap/js/transition.js') }}"></script>
+    <script src="{{ URL::asset('vendor/datetimepicker/bootstrap/js/collapse.js') }}"></script>
 
 
 
     <!-- Datetimepicker JS -->
-    <script src="{{ URL::asset('datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ URL::asset('vendor/datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
 
     <script src="{{ URL::asset('layout/js/app.js') }}"></script>
 
     <!-- AlertifyJS -->
-    <script src="{{ URL::asset('alertifyjs/alertify.min.js') }}"></script>
+    <script src="{{ URL::asset('vendor/alertifyjs/alertify.min.js') }}"></script>
 
 
     <!-- JTable -->
-    <script src="{{ URL::asset('jtable.2.4.0/jquery.jtable.min.js') }}"></script>
+    <script src="{{ URL::asset('vendor/jtable.2.4.0/jquery.jtable.min.js') }}"></script>
 
     <!-- Select2 -->
-    <script src="{{ URL::asset('select2-4.0.3/dist/js/select2.full.min.js') }}"></script>
+    <script src="{{ URL::asset('vendor/select2-4.0.3/dist/js/select2.full.min.js') }}"></script>
 
 
     <script>

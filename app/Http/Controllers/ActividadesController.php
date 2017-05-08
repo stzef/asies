@@ -68,18 +68,18 @@ class ActividadesController extends Controller
 	public function create(Request $request){
 
 		if ($request->isMethod('get')){
-        $tareas = Tareas::all();
+			$tareas = Tareas::all();
 
-        $usuarios = User::all();
+			$usuarios = User::all();
 
-        $tiactividades = TiActividades::all();
-        $relaciones = TiRelaciones::all();
-        $context = array(
-            "tareas" => $tareas,
-            "tiactividades" => $tiactividades,
-            "usuarios" => $usuarios,
-            "relaciones" => $relaciones
-        );
+			$tiactividades = TiActividades::all();
+			$relaciones = TiRelaciones::all();
+			$context = array(
+				"tareas" => $tareas,
+				"tiactividades" => $tiactividades,
+				"usuarios" => $usuarios,
+				"relaciones" => $relaciones
+			);
 			return view('actividades/create',$context);
 		}
 

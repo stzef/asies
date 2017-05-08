@@ -14,6 +14,17 @@ String.prototype.set = function(key,value){
 	var reg = new RegExp(key,"g")
 	return this.replace(reg,value)
 }
+String.prototype.truncate = function(len,end){
+	if ( len > this.length ){
+		return this
+	}else{
+		var substr = this.substr(0,len)
+		end = end ? end : "..."
+		var trunc = substr + end
+		return trunc
+	}
+	return this.replace(reg,value)
+}
 
 function callbackSuccessAjax(response){
 	console.log(response)
@@ -154,9 +165,9 @@ Models = {
 						subplan.subplanes = recursive(subplan.subplanes)
 					}
 					if ( subplan.ctarea ){
-						return {text : subplan.ntarea,icon : subplan.icono,li_attr : { ctarea : subplan.ctarea}}
+						return {text : subplan.ntarea,icon : subplan.icono,li_attr : { ctarea : subplan.ctarea},type:"tareas",}
 					}else if ( subplan.cplan ){
-						return {text : subplan.nplan,icon : subplan.icono,li_attr : { cplan : subplan.cplan },children:subplan.subplanes}
+						return {text : subplan.nplan,icon : subplan.icono,li_attr : { cplan : subplan.cplan },type:subplan.tiplan.slug,children:subplan.subplanes}
 					}
 				})
 				return subplan
@@ -170,7 +181,7 @@ Models = {
 						if ( plan.subplanes.length > 0 ){
 							plan.subplanes = recursive(plan.subplanes)
 						}
-						return {text : plan.nplan,icon : plan.icono,li_attr : { cplan : plan.cplan },children:plan.subplanes}
+						return {text : plan.nplan,icon : plan.icono,li_attr : { cplan : plan.cplan, "select_treeview":"treeview___cplan__".set("__cplan__",plan.cplan)},type : plan.tiplan.slug,children:plan.subplanes}
 					})
 
 					return cb(response);

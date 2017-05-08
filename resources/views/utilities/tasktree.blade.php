@@ -1,7 +1,7 @@
 @extends('layouts.independent')
 
 @section('styles')
-	<link rel="stylesheet" href="{{ URL::asset('jstree/css/themes/default/style.min.css') }}" >
+	<link rel="stylesheet" href="{{ URL::asset('vendor/jstree/css/themes/default/style.min.css') }}" >
 	<style>
 		body{
 			background: inherit;
@@ -29,7 +29,7 @@
 
 @section('scripts')
 	<!--<script src="{{ URL::asset('DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>-->
-	<script src="{{ URL::asset('jstree/js/jstree.min.js') }}"></script>
+	<script src="{{ URL::asset('vendor/jstree/js/jstree.min.js') }}"></script>
 
 
 	<script>

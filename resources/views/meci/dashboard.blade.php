@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('styles')
-	<link rel="stylesheet" href="{{ URL::asset('jstree/css/themes/default/style.min.css') }}" >
+	<link rel="stylesheet" href="{{ URL::asset('vendor/jstree/css/themes/default/style.min.css') }}" >
 
 @endsection
 
@@ -20,196 +20,31 @@
 			</ol>
 		</div>
 	</div>
-
-	<div class="modal fade" id="modalCrearActividad" tabindex="-1" role="dialog" aria-labelledby="modalCrearActividadLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h2 class="modal-title" id="modalCrearActividadLabel">Crear Actividad</h2>
-				</div>
-				<div class="row modal-body">
-					<form id="form_crear_actividad" class="form-horizontal">
-
-						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-						<input type="hidden" name="actividad[cactividad]" value="" id="actividad_cactividad">
-
-						<div class="col-md-6">
-							<div class="form-group row">
-								<label for="plan_nombre" class="col-sm-2 col-form-label">Nombre</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="plan_nombre" name="actividad[nactividad]" required placeholder="Nombre">
-								</div>
-							</div>
-
-							<div class="form-group row">
-								<label for="" class="col-sm-2 col-form-label">Objetivos</label>
-								<div class="col-sm-10">
-									<textarea class="form-control" id="" name="actividad[descripcion]" required></textarea>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group row">
-								<label for="" class="col-sm-4 col-form-label">Tipo Actividad</label>
-								<div class="col-sm-8">
-									<select name="actividad[ctiactividad]" id="" required class="form-control">
-										<option value="">Seleccione el tipo de actividad</option>
-										@foreach ($tiactividades as $tiactividad)
-											<option value="{{$tiactividad->ctiactividad}}">{{$tiactividad->ntiactividad}}</option>
-										@endforeach
-									</select>
-								</div>
-							</div>
-
-							<div>
-								<div class="col-md-8">
-
-									<div class="form-group row">
-										<label for="" class="col-sm-4 col-form-label" >Fecha Final</label>
-										<div class='col-sm-8 input-group date'>
-											<input type='text' class="form-control" name="actividad[fini]" required />
-											<span class="input-group-addon">
-												<span class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<label for="" class="col-sm-4 col-form-label">Fecha Final</label>
-										<div class='col-sm-8 input-group date'>
-											<input type='text' class="form-control" name="actividad[ffin]" required />
-											<span class="input-group-addon">
-												<span class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>
-									</div>
-
-								</div>
-
-								<div class="col-md-4">
-									<div class="form-group row">
-										<label class="col-sm-2"></label>
-										<div class="col-sm-10">
-											<div class="form-check">
-												<label class="form-check-label">
-													<input class="form-check-input" type="checkbox" name="actividad[ifarchivos]"> Archivos
-												</label>
-											</div>
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<label class="col-sm-2"></label>
-										<div class="col-sm-10">
-											<div class="form-check">
-											<label class="form-check-label">
-												<input class="form-check-input" type="checkbox" name="actividad[ifacta]"> Acta
-											</label>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="table-responsive col-md-12">
-							<form id="usuario_planes">
-								<table class="table">
-									<tbody>
-										<tr>
-											<td width="50%">
-												<div class="input-group">
-													<select disabled name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
-														<option value="">Tareas</option>}
-														@foreach ($tareas as $tarea)
-															<option value="{{$tarea->ctarea}}">{{$tarea->ntarea}}</option>
-														@endforeach
-													</select>
-													<span class="input-group-addon" data-find-task data-input-reference="#tarea"><i class="fa fa-search"></i></span>
-												</div>
-											</td>
-											<td width="25%">
-												<select disabled name="tareasusuarios[user]" id="respo" required class="form-control">
-													<option value="">Responsable</option>
-													@foreach ($usuarios as $usuario)
-														<option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
-													@endforeach
-												</select>
-											</td>
-											<td width="25%">
-												<select disabled name="tareasusuarios[ctirelacion]" id="tirespo" required class="form-control" >
-													<option value="">Tipo de responsabilidad</option>
-													@foreach ($relaciones as $relacion)
-														<option value = "{{$relacion->ctirelacion}}">{{$relacion->ntirelacion}}</option>
-													@endforeach
-												</select>
-											</td>
-											<td>
-												<button disabled id="agregar" type="submit" class="btn btn-info">
-													<i class="glyphicon glyphicon-plus"></i>
-												</button>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</form>
-							</div>
-						</div>
-						<div class="col-md-12">
-							<table id="usuarios" class="table table-bordered tabla-hover table-responsive" cellspacing="0" width="100%">
-								<thead>
-									<tr>
-										<th>ctarea</th>
-										<th>Tarea</th>
-										<th>cusu</th>
-										<th>Responsable</th>
-										<th>ctirelacion</th>
-										<th>Responsabilidad</th>
-										<th> </th>
-										<th> </th>
-									</tr>
-								</thead>
-							</table>
-						</div>
-
-					</div>
-
-
-
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">
-							<i class="glyphicon glyphicon-remove"></i> Cancelar
-						</button>
-						<button type="submit" class="btn btn-success" form="form_crear_actividad">
-							<i class="glyphicon glyphicon-plus"></i> Crear
-						</button>
-					</div>
-			</div>
-		</div>
-	</div>
-
 	<div class="row">
 
 		<div class="col-md-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">
-					Planes
-					<!--<div class="pull-right">
-						<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modalCrearActividad">
-							<i class="glyphicon glyphicon-plus"></i>
-							Nueva Actividad
-						</button>
-					</div>-->
-				</div>
+				<div class="panel-heading">Planes</div>
 
 				<div class="panel-body">
-					<div id="treeview" class="demo"></div>
+				<ul class="nav nav-tabs">
+					<li data-treeview="#treeview_1" class="active"><a data-toggle="tab" href="#home">Home</a></li>
+					<li data-treeview="#treeview_2" ><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+					<li data-treeview="#treeview_3" ><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+				</ul>
+
+				<input type="text" id="treeview_find" value="" placeholder="Buscar..." class="input" style="margin:0em auto 1em auto; display:block; padding:4px; border-radius:4px; border:1px solid silver;">
+				<div class="tab-content">
+					<div id="home" class="tab-pane fade in active" data-treeview="#treeview_1">
+						<div id="treeview_1"></div>
+					</div>
+					<div id="menu1" class="tab-pane fade" data-treeview="#treeview_2">
+						<div id="treeview_2"></div>
+					</div>
+					<div id="menu2" class="tab-pane fade" data-treeview="#treeview_3">
+						<div id="treeview_3"></div>
+					</div>
+				</div>
 				</div>
 			</div>
 		</div>
@@ -217,10 +52,10 @@
 @endsection
 
 @section('scripts')
-	<script src="{{ URL::asset('DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script>
-	<script src="{{ URL::asset('DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>
-	<script src="{{ URL::asset('DataTables-1.10.14/extensions/Buttons/js/buttons.bootstrap.min.js') }}"></script>
-	<script src="{{ URL::asset('DataTables-1.10.14/extensions/Buttons/js/dataTables.buttons.min.js') }}"></script>
+	<script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>
+	<script src="{{ URL::asset('vendor/DataTables-1.10.14/extensions/Buttons/js/buttons.bootstrap.min.js') }}"></script>
+	<script src="{{ URL::asset('vendor/DataTables-1.10.14/extensions/Buttons/js/dataTables.buttons.min.js') }}"></script>
 <script type="text/javascript">
 	$(function () {
 		$('.date').datetimepicker({
@@ -229,36 +64,20 @@
 		});
 	});
 </script>
-	<script src="{{ URL::asset('jstree/js/jstree.min.js') }}"></script>
+	<script src="{{ URL::asset('vendor/jstree/js/jstree.min.js') }}"></script>
 
 	<script>
+
+	$(".nav.nav-tabs li").click(function(){
+		var that = this
+		TREEVIEW_SELECT = $(that).data("treeview")
+		$('#treeview_find').val("")
+	})
+
 		//$.jstree.defaults.plugins = [ "wholerow", "checkbox" ]
 		//$.jstree.defaults.checkbox.keep_selected_style = false
 		//$.jstree.defaults.core.multiple = false
-		var idioma_espanol = {
-			"sProcessing":     "Procesando...",
-			"sLengthMenu":     "Mostrar _MENU_ registros",
-			"sZeroRecords":    "No se encontraron resultados",
-			"sEmptyTable":     "Ningún dato disponible en esta tabla",
-			"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-			"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-			"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-			"sInfoPostFix":    "",
-			"sSearch":         "Buscar:",
-			"sUrl":            "",
-			"sInfoThousands":  ",",
-			"sLoadingRecords": "Cargando...",
-			"oPaginate": {
-				"sFirst":    "Primero",
-				"sLast":     "Último",
-				"sNext":     "Siguiente",
-				"sPrevious": "Anterior"
-			},
-			"oAria": {
-				"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-				"sSortDescending": ": Activar para ordenar la columna de manera descendente"
-			}
-		}
+
 		var cols = {
 			ctarea : 0,
 			ntarea : 1,
@@ -271,7 +90,7 @@
 			"paging":   false,
 			"ordering": false,
 			"info":     false,
-			"language": idioma_espanol,
+			"language": DTspanish,
 			"columnDefs": [
 				{
 					"targets": [ cols.ctarea,cols.crespo,cols.ctirela ],
@@ -279,104 +98,57 @@
 				},
 			]
 
-			//editar("#usuarios tbody");
 		})
 		function getPlanSelect(){
 			var plan = $('#treeview').jstree('get_selected',true)
 		}
-		function crearActividad(){
-			$("#modalCrearActividad").modal("show")
-		}
-		$("#form_crear_actividad").submit(function(event){
-			event.preventDefault()
-			var that = this
-
-			$.ajax({
-				type : "POST",
-				url : "{{ action('ActividadesController@create') }}",
-				data : serializeForm(that),
-				cache : false,
-				contentType : false,
-				processData : false,
-				success : function(response){
-					//$("#modalCrearActividad").modal("hide")
-					$("#usuario_planes").find("[disabled]").prop("disabled",false)
-					$("#form_crear_actividad").find(":input").prop("disabled",true)
-					alertify.success(Models.Planes.messages.create.success)
-					$('#treeview').jstree("destroy")
-
-					$("input#actividad_cactividad").val(response.obj.id)
-
-					Models.Planes.treeview(function(response){
-						$('#treeview').jstree({ 'core' : {'data' : response } })
-					})
-				},
-				error : function(){
-					//$("#modalCrearActividad").modal("hide")
-					alertify.error(Models.Planes.messages.create.error)
-				},
-			})
-		})
 		Models.Planes.treeview(function(response){
-			$('#treeview').jstree({
-				'core' : { 'data' : response }
-			})
+			$.jstree.defaults.contextmenu.items = {
+				addChild : {
+					action : function(){alert("Add")},
+					label : "Agregar Tarea"
+				}
+			}
+			for ( var action of response ){
+				console.log(action)
+				var select_treeview = "#"+action.li_attr.select_treeview
+				var select_label_treeview = "li[data-treeview=#"+action.li_attr.select_treeview+"] a"
+				console.log(action)
+				$(select_label_treeview).html(action.text.truncate(15,"..."))
+				$(select_label_treeview).attr("title",action.text)
+				$(select_treeview).jstree({
+					"plugins" : [ "search" , "contextmenu", "types"],
+					"types" : {
+						"modulo" : {
+							"icon" : "/vendor/jstree/img/module.png"
+						},
+						"tareas" : {
+							"icon" : "/vendor/jstree/img/"
+						},
+						"componente" : {
+							"icon" : "/vendor/jstree/img/component.png"
+						},
+						"elemento" : {
+							"icon" : "/vendor/jstree/img/element.png"
+						},
+						"prod_minimo" : {
+							"icon" : "/vendor/jstree/img/product.png"
+						},
+					},
+					'core' : { 'data' : action },
+				})
+			}
+
+		var to = false;
+		$('#treeview_find').keyup(function () {
+			if(to) { clearTimeout(to); }
+			to = setTimeout(function () {
+				var v = $('#treeview_find').val();
+				$(TREEVIEW_SELECT).jstree(true).search(v);
+			}, 250);
+		});
+
 		})
 	</script>
 
-
-<script type="text/javascript">
-$("#usuario_planes").on("submit" , function(event){
-	event.preventDefault()
-	var that = this
-	var ctarea = $( "#tarea option:selected" ).val();
-	var cactividad = $("input#actividad_cactividad").val();
-
-	var data = serializeForm(that)
-	data.append("tareasusuarios[cactividad]",cactividad)
-	/*arreglar*/
-	var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
-	$.ajax({
-		"url":base_url_add_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
-		"type":"POST",
-		data: data,
-		cache:false,
-		contentType: false,
-		processData: false,
-		success: function(){
-			listar();
-		}
-	})
-});
-function editar(event,button){
-	var data = table.row( $(button).parents("tr")).data();
-	table.row( $(button).parents("tr")).remove().draw(false);
-	var tarea = $("#tarea").val(data[cols.ctarea]).change();
-	var responsable = $("#respo").val(data[cols.crespo]).change();
-	var tiresponsable = $("#tirespo").val(data[cols.ctirela]).change();
-	console.log(tarea)
-	console.log(data)
-}
-function borrar(event,button){
-	table.row( $(button).parents("tr")).remove().draw(false);
-}
-var listar = function(){
-	var ctarea = $( "#tarea option:selected" ).val();
-	var cresponsable = $( "#respo option:selected" ).val();
-	var ctirespo = $( "#tirespo option:selected" ).val();
-	var ntarea = $( "#tarea option:selected" ).text();
-	var nresponsable = $( "#respo option:selected" ).text();
-	var ntirespo = $( "#tirespo option:selected" ).text();
-	//$("#tarea").val()
-	table
-		.row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,
-			"<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>"+
-				"<i class='fa fa-pencil-square-o'></i>"+
-			"</button>",
-			"<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)''>"+
-				"<i class='fa fa-trash-o'></i>"+
-			"</button>"])
-		.draw()
-}
-</script>
 @endsection

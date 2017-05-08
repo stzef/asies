@@ -14,6 +14,7 @@ use asies\User;
 use Illuminate\Support\Facades\Log;
 use \Auth;
 use View;
+use PDF;
 use Storage;
 
 use Illuminate\Support\Facades\Validator;
@@ -35,9 +36,7 @@ class ActasController extends Controller
 		$dataBody = $request->all();
 		$validator = Validator::make($dataBody["acta"],
 			[
-				#'cestado' => 'required',
 				'numeroacta' => 'required',
-				#'cacta' => 'required',
 				'objetivos' => 'required|max:200',
 				'ordendeldia' => 'required|max:400',
 				'fhini' => 'required|date',
@@ -46,21 +45,17 @@ class ActasController extends Controller
 				'user_elaboro' => 'required|exists:users,id',
 				'user_reviso' => 'required|exists:users,id',
 				'user_aprobo' => 'required|exists:users,id',
-				#'ifdescripcion' => 'required',
 			],
 			[
-				#'cestado.required' => 'required',
 				'numeroacta.required' => 'required',
 				'objetivos.required' => 'required',
 				'ordendeldia.required' => 'required',
-				#'descripcion.required' => 'required',
 				'fhini.required' => 'required',
 				'fhfin.required' => 'required',
 				'sefirma.required' => 'required',
 				'user_elaboro.required' => 'required',
 				'user_reviso.required' => 'required',
 				'user_aprobo.required' => 'required',
-				#'ifdescripcion.required' => 'required',
 			]
 		);
 
@@ -81,5 +76,39 @@ class ActasController extends Controller
 		Actividades::where("cactividad",$dataBody["acta"]["cactividad"])->update(["cacta"=>$acta->id]);
 
 		return response()->json(array());
+	}
+
+	public function pdf(Request $request,$cacta){
+		//dump(phpinfo());exit();
+		$acta = Actas::where("idacta",$cacta)->first();
+
+		if ( !$acta ) return view('errors/generic',array('title' => 'Error PDF.', 'message' => "El acta $cacta no existe" ));
+
+		$acta->asistentes = $acta->getAsistentes();
+
+		$actividad = $acta->getActividad();
+
+		$data = array("acta" => $acta,"actividad" => $actividad,);
+		//return view('actas.pdf',$data);
+
+		PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+		$pdf = PDF::loadView('actas.pdf', $data);
+
+		//return $pdf->download('invoice.pdf');
+
+		$namefile = "acta_{$acta->numeroacta}.pdf";
+		$dir_path = base_path()."/public/evidencias/actividades/actividad_{$actividad->cactividad}";
+		$file_path = "$dir_path/$namefile";
+
+		if ( ! is_dir( $dir_path ) ) {
+			if ( mkdir( $dir_path, 0777 ) ){
+				return $pdf->save( $file_path )->stream();
+			}else{
+				return view('errors/generic',array('title' => 'Error Interno.', 'message' => "Hay Ocurrido un error Interno, Por favor Intente de Nuevo" ));
+			}
+		}else{
+			return $pdf->save( $file_path )->stream();
+		}
+
 	}
 }

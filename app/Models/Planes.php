@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $updated_at
  * @property Estado $estado
  * @property Plane $plane
- * @property Tiplane $tiplane
+ * @property TiPlanes $tiplan
  * @property Tarea[] $tareas
  */
 class Planes extends Model
@@ -44,9 +44,9 @@ class Planes extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function tiplane()
+    public function tiplan()
     {
-        return $this->belongsTo('App\Tiplane', 'ctiplan', 'ctiplan');
+        return $this->belongsTo('asies\Models\TiPlanes', 'ctiplan', 'ctiplan');
     }
 
     /**
@@ -59,7 +59,7 @@ class Planes extends Model
     static function getSubPlanes($cplan,$json=false)
     {
         $plan = Planes::where('cplan', $cplan)->first();
-        $plan->subplanes = Planes::where('cplanmayor', $plan->cplan)->get();
+        $plan->subplanes = Planes::with('tiplan')->where('cplanmayor', $plan->cplan)->get();
 
         if (Tareas::where('cplan',$cplan)->first()){
             //dump("Hola");exit();
@@ -79,10 +79,11 @@ class Planes extends Model
     }
     static function getArbolPlanes($json=false)
     {
-        $planes = Planes::where('cplanmayor', NULL)->get();
+        $planes = Planes::with('tiplan')->where('cplanmayor', NULL)->get();
         foreach ($planes as $plan) {
             $plan->subplanes = Planes::getSubPlanes($plan->cplan,$json);
         }
+            //dump($planes->toArray()[0]["tiplan"]);exit();
         if ( $json ){
             return $planes->toArray();
         }else{
