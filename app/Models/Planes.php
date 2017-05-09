@@ -2,6 +2,8 @@
 
 namespace asies\Models;
 
+use \DB;
+
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -77,8 +79,7 @@ class Planes extends Model
             return $plan->subplanes;
         }
     }
-    static function getArbolPlanes($json=false)
-    {
+    static function getArbolPlanes($json=false){
         $planes = Planes::with('tiplan')->where('cplanmayor', NULL)->get();
         foreach ($planes as $plan) {
             $plan->subplanes = Planes::getSubPlanes($plan->cplan,$json);
@@ -89,5 +90,35 @@ class Planes extends Model
         }else{
             return $planes;
         }
+    }
+    static function recalcularPuntosSubPlanes($cplan,$puntos)
+    {
+        $plan = Planes::where('cplan', $cplan)->first();
+        $npuntos = $plan->valor_plan + $puntos;
+        Planes::where('cplan', $cplan)->update(["valor_plan" => $npuntos]);
+
+        if ( $plan->cplanmayor != null){
+            Planes::recalcularPuntosSubPlanes($plan->cplanmayor,$puntos);
+        }
+        return null;
+    }
+    static function recalcularPuntos()
+    {
+        DB::table('planes')->update(array('valor_plan' => 0));
+
+
+        $tareas = Tareas::all();
+
+        foreach ($tareas as $tarea) {
+            if( $tarea->ifhecha ){
+                dump($tarea->ifhecha);
+                $puntos = $tarea->valor_tarea;
+                Planes::recalcularPuntosSubPlanes($tarea->cplan,$puntos);
+            }
+        }
+
+        exit();
+
+        return $planes;
     }
 }

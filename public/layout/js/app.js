@@ -165,9 +165,28 @@ Models = {
 						subplan.subplanes = recursive(subplan.subplanes)
 					}
 					if ( subplan.ctarea ){
-						return {text : subplan.ntarea,icon : subplan.icono,li_attr : { ctarea : subplan.ctarea},type:"tareas",}
+						console.info(subplan)
+						var valor = subplan.ifhecha == "1" ? subplan.valor_tarea : 0
+						return {
+							text : subplan.ntarea + "(" + valor + ")",
+							icon : subplan.icono,
+							li_attr : {
+								ctarea : subplan.ctarea,
+								valor : valor,
+							},
+							type:"tareas"
+						}
 					}else if ( subplan.cplan ){
-						return {text : subplan.nplan,icon : subplan.icono,li_attr : { cplan : subplan.cplan },type:subplan.tiplan.slug,children:subplan.subplanes}
+						return {
+							text : subplan.nplan + "(" + subplan.valor_plan + ")",
+							icon : subplan.icono,
+							li_attr : {
+								cplan : subplan.cplan,
+								valor : subplan.valor_plan,
+							},
+							type:subplan.tiplan.slug,
+							children:subplan.subplanes
+						}
 					}
 				})
 				return subplan
@@ -181,7 +200,17 @@ Models = {
 						if ( plan.subplanes.length > 0 ){
 							plan.subplanes = recursive(plan.subplanes)
 						}
-						return {text : plan.nplan,icon : plan.icono,li_attr : { cplan : plan.cplan, "select_treeview":"treeview___cplan__".set("__cplan__",plan.cplan)},type : plan.tiplan.slug,children:plan.subplanes}
+						return {
+							text : plan.nplan + "("+plan.valor_plan+")",
+							icon : plan.icono,
+							li_attr : {
+								cplan : plan.cplan,
+								valor : plan.valor_plan,
+								"select_treeview":"treeview___cplan__".set("__cplan__",plan.cplan)
+							},
+							type : plan.tiplan.slug,
+							children:plan.subplanes
+						}
 					})
 
 					return cb(response);

@@ -4,6 +4,8 @@ namespace asies\Http\Controllers;
 
 use asies\Http\Requests;
 use Illuminate\Http\Request;
+use asies\Models\Planes;
+
 use \View;
 
 class HomeController extends Controller
@@ -27,6 +29,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $planes = Planes::recalcularPuntos();
+        dump($planes);exit();
         return view('home');
     }
 }
