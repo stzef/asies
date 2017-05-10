@@ -107,12 +107,16 @@
                         </div>
 
                         <div class="modal-footer">
-                            <a href="{{ URL::route('GET_pdf_acta',['numeroacta'=>$actividad->acta->numeroacta]) }}" target="blank" type="button" class="btn btn-primary">
-                                <i class="glyphicon glyphicon-print"></i> Imprimir
-                            </a>
+                            @if ( $actividad->acta )
+
+                                <a href="{{ URL::route('GET_pdf_acta',['numeroacta'=>$actividad->acta->numeroacta]) }}" target="blank" type="button" class="btn btn-primary">
+                                    <i class="glyphicon glyphicon-print"></i> Imprimir
+                                </a>
+
                             <button type="button" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-send"></i> Enviar
                             </button>
+                            @endif
                             <button type="button" class="btn btn-danger" data-dismiss="modal">
                                 <i class="glyphicon glyphicon-remove"></i> Salir
                             </button>
