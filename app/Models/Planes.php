@@ -96,7 +96,7 @@ class Planes extends Model
     {
         $plan = Planes::where('cplan', $cplan)->first();
         $npuntos = $plan->valor_plan + $puntos;
-        $npuntos_acumulativos = $npuntos + $puntos_acumulativos;
+        $npuntos_acumulativos =  $plan->valor_total + $puntos_acumulativos;//$puntos_acumulativos += $puntos_acumulativos;
         Planes::where('cplan', $cplan)->update(["valor_plan" => $npuntos,'valor_total' => $npuntos_acumulativos ]);
 
 
@@ -107,19 +107,28 @@ class Planes extends Model
     }
     static function recalcularPuntos()
     {
-        DB::table('planes')->update(array('valor_plan' => 0));
+        DB::table('planes')->update(array('valor_plan' => 0,'valor_total' => 0));
 
 
-        $tareas = Tareas::all();
+        $prods_min = Planes::where("ctiplan",4)->get(); # Equivalente a Model::all()
 
-        foreach ($tareas as $tarea) {
-            $puntos = 0;
-            if( $tarea->ifhecha ){
-                $puntos = $tarea->valor_tarea;
+        $stpuntos = 0;
+        foreach ($prods_min as $prod_min) {
+            $tareas = Tareas::where("cplan",$prod_min->cplan)->orderBy("cplan")->get(); # Equivalente a Model::all()
+            $spuntos = 0;
+            dump("prod min : {$prod_min->nplan}");
+            foreach ($tareas as $tarea) {
+                $puntos = 0;
+                if( $tarea->ifhecha ){
+                    $puntos = $tarea->valor_tarea;
+                }
+                $spuntos += $tarea->valor_tarea;
+                dump("total puntos : $spuntos");
+                Planes::recalcularPuntosPlanes($tarea->cplan,$puntos,$tarea->valor_tarea);
             }
-            dump($tarea->ifhecha);
-            Planes::recalcularPuntosPlanes($tarea->cplan,$puntos,$tarea->valor_tarea);
+            $stpuntos += $spuntos;
         }
+        dump("total puntos : $stpuntos");
 
         exit();
 

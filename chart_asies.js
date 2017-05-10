@@ -1,21 +1,3 @@
-@extends('layouts.app')
-
-@section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                        <div id="chart_div" style="width: 400px; height: 120px;"></div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-   <script type="text/javascript">
       google.charts.load('current', {'packages':['gauge']});
       google.charts.setOnLoadCallback(drawChart);
 
@@ -23,15 +5,16 @@
 
         var data = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-          ['Memory', 80],
-          ['CPU', 55],
-          ['Network', 68]
+          ['MECI', 50],
+          ['Admin', 40],
+          ['Calidad', 19]
         ]);
 
         var options = {
-          width: 400, height: 120,
-          redFrom: 90, redTo: 100,
-          yellowFrom:75, yellowTo: 90,
+          width: 800, height: 240,
+          redFrom: 0, redTo: 60,
+          yellowFrom:61, yellowTo: 80,
+          greenFrom:81, greenTo: 100,
           minorTicks: 5
         };
 
@@ -52,6 +35,3 @@
           chart.draw(data, options);
         }, 26000);
       }
-    </script>
-
-@endsection
