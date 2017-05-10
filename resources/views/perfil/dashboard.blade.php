@@ -43,7 +43,7 @@
 								<thead>
 									<tr>
 										<th>Tareas</th>
-										<th>Completada</th>
+										<th>Realizar</th>
 									</tr>
 								</thead>
 								<tbody>

@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $cplanmayor
  * @property integer $ctiplan
  * @property string $nplan
+ * @property string $ncplan
  * @property integer $valor_plan
  * @property integer $valor_total
  * @property string $created_at
@@ -26,7 +27,7 @@ class Planes extends Model
     /**
      * @var array
      */
-    protected $fillable = ['cestado', 'cplanmayor', 'ctiplan', 'nplan', 'valor_plan', 'valor_total', 'created_at', 'updated_at'];
+    protected $fillable = ['cestado', 'cplanmayor', 'ctiplan', 'nplan','ncplan', 'valor_plan', 'valor_total', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -92,6 +93,16 @@ class Planes extends Model
             return $planes;
         }
     }
+    /*public function getSubplanes($json=false){
+        $plan = Planes::with('tiplan')->where('cplan', $this->cplan)->first();
+        $subplanes = Planes::getSubPlanes($plan->cplan,$json);
+            //dump($planes->toArray()[0]["tiplan"]);exit();
+        if ( $json ){
+            return $subplanes->toArray();
+        }else{
+            return $subplanes;
+        }
+    }*/
     static function recalcularPuntosPlanes($cplan,$puntos,$puntos_acumulativos)
     {
         $plan = Planes::where('cplan', $cplan)->first();

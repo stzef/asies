@@ -42,7 +42,7 @@
 <table class="table">
 	<tr>
 		<td> Tarea </td>
-		<td> Completada </td>
+		<td> Realizada </td>
 	</tr>
 	@foreach( $actividad->getTareas() as $tarea )
 	<tr>

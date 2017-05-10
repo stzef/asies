@@ -28,6 +28,7 @@ Route::group(['prefix' => 'meci'], function(){
 Route::group(['prefix' => 'api'], function(){
 	Route::group(['prefix' => 'planes'], function(){
 		Route::get('/', "APIController@planes");
+		Route::get('/{cplan}', "APIController@plan");
 		Route::get('/{cplan}/usuarios', "APIController@usuarios_plan");
 	});
 	Route::group(['prefix' => 'usuarios'], function(){
@@ -40,6 +41,7 @@ Route::group(['prefix' => 'api'], function(){
 
 Route::group(['prefix' => 'planes'], function(){
 	Route::post('create', "PlanesController@create");
+	Route::get('status/{cplan}', "PlanesController@status")->name('GET_status_plan');
 });
 
 Route::group(['prefix' => 'actividades'], function(){

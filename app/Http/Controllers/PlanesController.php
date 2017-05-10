@@ -10,6 +10,7 @@ use asies\Models\PlanesUsuarios;
 use asies\Models\Planes;
 
 use \Auth;
+use \View;
 
 use Illuminate\Support\Facades\Log;
 
@@ -17,6 +18,12 @@ use Illuminate\Support\Facades\Validator;
 
 class PlanesController extends Controller
 {
+	public function __construct()
+	{
+		View::share('SHORT_NAME_APP', env("SHORT_NAME_APP"," - "));
+		View::share('LONG_NAME_APP', env("LONG_NAME_APP"," - "));
+		$this->middleware('auth');
+	}
 	public function create(Request $request){
 		$user = Auth::user();
 
@@ -48,5 +55,15 @@ class PlanesController extends Controller
 		//$plan = Planes::create($dataBody["plan"]);
 		$plan->add_user($data);
 		return response()->json(array("text"=>"ok"));
+	}
+	public function status(Request $request,$cplan){
+
+
+		$plan = Planes::where("cplan",$cplan)->first();
+		if ( !$plan ) return view('errors/generic',array('title' => 'Error Plan.', 'message' => "El plan $cplan no existe" ));
+		$context = array(
+			"plan" => $plan,
+		);
+		return view('planes/status',$context);
 	}
 }

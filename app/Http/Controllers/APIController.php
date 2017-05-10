@@ -20,6 +20,12 @@ class APIController extends Controller
 		$planes = Planes::getArbolPlanes(true);
 		return response()->json($planes );
 	}
+	public function plan($cplan)
+	{
+		$plan = Planes::with('tiplan')->where("cplan",$cplan)->first();
+		$plan->subplanes = Planes::getSubplanes($plan->cplan,true);
+		return response()->json($plan );
+	}
 	public function tirelaciones()
 	{
 		$tirelaciones = TiRelaciones::all();

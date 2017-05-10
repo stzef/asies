@@ -212,7 +212,7 @@
                                                 <th>Responsable</th>
                                                 <th>ctirelacion</th>
                                                 <th>Responsabilidad</th>
-                                                <th>Hecha</th>
+                                                <th>Realizada</th>
                                             </tr>
                                         </thead>
                                         <tbody>

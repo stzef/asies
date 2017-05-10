@@ -117,55 +117,14 @@ function openNewWindow(href,input_reference){
 }
 
 Models = {
-	"Tareas" : {
-		cambiarEstado : function(ctarea,ifhecha){
-			var ifhecha = ifhecha ? 1 : 0
-			var base_url_cambio_estado_tarea = "/tareas/__ctarea__/change_state"
-			$.ajax({
-				url : base_url_cambio_estado_tarea.set("__ctarea__",ctarea),
-				type : "POST",
-				data : { ctarea : ctarea, ifhecha : ifhecha },
-				success : function(response){
-					console.log(response)
-					var textEstado = response.hecha == 1 ? "Hecha" : "No Hecha"
-					if ( response.ok ){
-						alertify.success("El Estado se ha Cambiado <br> Estado Actual : <b>__estado__</b>".set("__estado__",textEstado))
-					}else{
-						alertify.warning(response.message)
-					}
-				},
-				error : function(response){},
-			})
-		}
-	},
-	"Planes" : {
-		"messages" : {
-			"create" : {
-				"success" : "El Plan se ha creado Exitosamente",
-				"error" : "Ops. Algo no ha salido bien.",
-			},
-			"validation" : {
-				"multipleSelection" : "Solo debe Seleccionar un plan",
-				"notSelection" : "Debe Seleccionar al menos un plan",
-				"notSelectCorrectParent" : "Debe Seleccionar el plan correcto",
-			}
-		},
-		"all" : function(cb){
-			$.ajax({
-				type : "GET",
-				url : "/api/planes",
-				success : cb,
-				error : function(){}
-			})
-		},
-		"treeview" : function(cb){
+	"Utils" : {
+		"dataToTreeview" : function(planes){
 			function recursive(subplanes){
 				var subplan = subplanes.map(function(subplan){
 					if ( subplan.subplanes && subplan.subplanes.length > 0 ){
 						subplan.subplanes = recursive(subplan.subplanes)
 					}
 					if ( subplan.ctarea ){
-						console.info(subplan)
 						var valor = subplan.ifhecha == "1" ? subplan.valor_tarea : 0
 						return {
 							text : subplan.ntarea + "(" + valor + ")",
@@ -191,32 +150,84 @@ Models = {
 				})
 				return subplan
 			}
+			planes = planes.map(function(plan){
+				if ( plan.subplanes.length > 0 ){
+					plan.subplanes = recursive(plan.subplanes)
+				}
+				return {
+					text : plan.nplan + "("+plan.valor_plan+"/"+plan.valor_total+")",
+					icon : plan.icono,
+					state : {
+						opened : true,
+					},
+					li_attr : {
+						cplan : plan.cplan,
+						valor : plan.valor_plan,
+						"select_treeview":"treeview___cplan__".set("__cplan__",plan.cplan)
+					},
+					type : plan.tiplan.slug,
+					children:plan.subplanes
+				}
+			})
+			return planes
+		}
+	},
+	"Tareas" : {
+		cambiarEstado : function(ctarea,ifhecha){
+			var ifhecha = ifhecha ? 1 : 0
+			var base_url_cambio_estado_tarea = "/tareas/__ctarea__/change_state"
+			$.ajax({
+				url : base_url_cambio_estado_tarea.set("__ctarea__",ctarea),
+				type : "POST",
+				data : { ctarea : ctarea, ifhecha : ifhecha },
+				success : function(response){
+					var textEstado = response.hecha == 1 ? "Hecha" : "No Hecha"
+					if ( response.ok ){
+						alertify.success("El Estado se ha Cambiado <br> Estado Actual : <b>__estado__</b>".set("__estado__",textEstado))
+					}else{
+						alertify.warning(response.message)
+					}
+				},
+				error : function(response){},
+			})
+		}
+	},
+	"Planes" : {
+		"messages" : {
+			"create" : {
+				"success" : "El Plan se ha creado Exitosamente",
+				"error" : "Ops. Algo no ha salido bien.",
+			},
+			"validation" : {
+				"multipleSelection" : "Solo debe Seleccionar un plan",
+				"notSelection" : "Debe Seleccionar al menos un plan",
+				"notSelectCorrectParent" : "Debe Seleccionar el plan correcto",
+			}
+		},
+		"findOne" : function(key,cb){
+			$.ajax({
+				type : "GET",
+				url : "/api/planes/"+key,
+				success : cb,
+				error : function(){}
+			})
+		},
+		"all" : function(cb){
+			$.ajax({
+				type : "GET",
+				url : "/api/planes",
+				success : cb,
+				error : function(){}
+			})
+		},
+
+		"treeview" : function(cb){
 			$.ajax({
 				type : "GET",
 				url : "/api/planes",
 				success : function(response){
-
-					response = response.map(function(plan){
-						if ( plan.subplanes.length > 0 ){
-							plan.subplanes = recursive(plan.subplanes)
-						}
-						return {
-							text : plan.nplan + "("+plan.valor_plan+"/"+plan.valor_total+")",
-							icon : plan.icono,
-							state : {
-								opened : true,
-							},
-							li_attr : {
-								cplan : plan.cplan,
-								valor : plan.valor_plan,
-								"select_treeview":"treeview___cplan__".set("__cplan__",plan.cplan)
-							},
-							type : plan.tiplan.slug,
-							children:plan.subplanes
-						}
-					})
-
-					return cb(response);
+					var data = Models.Utils.dataToTreeview(response)
+					return cb(data);
 				},
 				error : function(){}
 			})

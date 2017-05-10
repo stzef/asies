@@ -1,57 +1,48 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+		<div class="row">
+				<div class="col-md-12">
+						<div class="panel panel-default">
+								<div class="panel-heading">Dashboard</div>
 
-                <div class="panel-body">
-                        <div id="chart_div" style="width: 400px; height: 120px;"></div>
+								<div class="panel-body">
+												<div id="chart_div" ></div>
 
-                </div>
-            </div>
-        </div>
-    </div>
+								</div>
+						</div>
+				</div>
+		</div>
 
-   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-   <script type="text/javascript">
-      google.charts.load('current', {'packages':['gauge']});
-      google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
+@endsection
 
-        var data = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['Memory', 80],
-          ['CPU', 55],
-          ['Network', 68]
-        ]);
+@section('scripts')
 
-        var options = {
-          width: 400, height: 120,
-          redFrom: 90, redTo: 100,
-          yellowFrom:75, yellowTo: 90,
-          minorTicks: 5
-        };
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
+		google.charts.load('current', {'packages':['gauge']});
+		google.charts.setOnLoadCallback(drawChart);
 
-        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-
-        chart.draw(data, options);
-
-        setInterval(function() {
-          data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
-          chart.draw(data, options);
-        }, 13000);
-        setInterval(function() {
-          data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
-          chart.draw(data, options);
-        }, 5000);
-        setInterval(function() {
-          data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
-          chart.draw(data, options);
-        }, 26000);
-      }
-    </script>
-
+		function drawChart() {
+			Models.Planes.all(function(planes){
+				var data = [['Label', 'Porcentaje'],]
+				planes.forEach(function(plan){
+					plan.porcentaje = parseInt((100*plan.valor_plan)/plan.valor_total)
+					data.push([plan.ncplan,plan.porcentaje])
+				})
+				console.log(data)
+				var data = google.visualization.arrayToDataTable(data);
+				var options = {
+					width: 800, height: 240,
+					redFrom: 0, redTo: 60,
+					yellowFrom:61, yellowTo: 80,
+					greenFrom:81, greenTo: 100,
+					minorTicks: 5
+				};
+				var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+				chart.draw(data, options);
+			})
+		}
+	</script>
 @endsection

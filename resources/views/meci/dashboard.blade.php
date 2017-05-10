@@ -28,9 +28,9 @@
 
 				<div class="panel-body">
 				<ul class="nav nav-tabs">
-					<li data-treeview="#treeview_1" class="active"><a data-toggle="tab" href="#home">Home</a></li>
-					<li data-treeview="#treeview_2" ><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-					<li data-treeview="#treeview_3" ><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+					<li data-treeview="#treeview_1" class="active"><a data-toggle="tab" href="#home">Sistema 1</a></li>
+					<li data-treeview="#treeview_2" ><a data-toggle="tab" href="#menu1">Sistema 2</a></li>
+					<li data-treeview="#treeview_3" ><a data-toggle="tab" href="#menu2">Sistema 3</a></li>
 				</ul>
 
 				<input type="text" id="treeview_find" value="" placeholder="Buscar..." class="input" style="margin:0em auto 1em auto; display:block; padding:4px; border-radius:4px; border:1px solid silver;">
@@ -73,6 +73,7 @@
 		TREEVIEW_SELECT = $(that).data("treeview")
 		$('#treeview_find').val("")
 	})
+	$(".nav.nav-tabs li").first().trigger("click")
 
 		//$.jstree.defaults.plugins = [ "wholerow", "checkbox" ]
 		//$.jstree.defaults.checkbox.keep_selected_style = false
@@ -104,9 +105,13 @@
 		}
 		Models.Planes.treeview(function(response){
 			$.jstree.defaults.contextmenu.items = {
-				addChild : {
-					action : function(){alert("Add")},
-					label : "Agregar Tarea"
+				showDetail : {
+					action : function(){
+						var item = $(TREEVIEW_SELECT).jstree('get_selected',true)[0]
+						console.log(item)
+						window.open("/planes/status/__cplan__".set("__cplan__",item.li_attr.cplan))
+					},
+					label : "Ver en Detalle"
 				}
 			}
 			for ( var action of response ){
