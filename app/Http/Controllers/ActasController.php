@@ -34,6 +34,11 @@ class ActasController extends Controller
 		Log::info('Creacion de Acta,',['user' => $user->id ]);
 
 		$dataBody = $request->all();
+
+		$actividad = Actividades::where("cactividad",$dataBody["acta"]["cactividad"])->first();
+
+		if ( $actividad->cacta ) return response()->json(array("warning" => "La Actividad ya acta {$actividad->cacta}"),400);
+
 		$validator = Validator::make($dataBody["acta"],
 			[
 				'numeroacta' => 'required',
@@ -78,9 +83,9 @@ class ActasController extends Controller
 		return response()->json(array());
 	}
 
-	public function pdf(Request $request,$cacta){
+	public function pdf(Request $request,$numeroacta){
 		//dump(phpinfo());exit();
-		$acta = Actas::where("idacta",$cacta)->first();
+		$acta = Actas::where("numeroacta",$numeroacta)->first();
 
 		if ( !$acta ) return view('errors/generic',array('title' => 'Error PDF.', 'message' => "El acta $cacta no existe" ));
 

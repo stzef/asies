@@ -53,7 +53,7 @@ Route::group(['prefix' => 'actividades'], function(){
 
 Route::group(['prefix' =>'actas'], function(){
 	Route::post('create','ActasController@create');
-	Route::get('/pdf/{cacta}', "ActasController@pdf")->name("POST_pdf_acta");
+	Route::get('/pdf/{numeroacta}', "ActasController@pdf")->name("GET_pdf_acta");
 });
 
 Route::group(['prefix' => 'asignacion'], function(){

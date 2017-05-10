@@ -107,9 +107,9 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">
+                            <a href="{{ URL::route('GET_pdf_acta',['numeroacta'=>$actividad->acta->numeroacta]) }}" target="blank" type="button" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-print"></i> Imprimir
-                            </button>
+                            </a>
                             <button type="button" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-send"></i> Enviar
                             </button>
