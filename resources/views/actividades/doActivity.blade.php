@@ -128,7 +128,11 @@
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2 col-form-label">Objetivos</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" id="" required name="acta[objetivos]"></textarea>
+                                        <textarea class="form-control" id="" required name="acta[objetivos]" rows="20">
+                                            @foreach ($tareas as $tarea)
+                                                {{ $tarea->ntarea }}
+                                            @endforeach
+                                        </textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -183,7 +187,7 @@
                                 <div class="col-md-8">
                                     <div class="form-group row">
                                             <label for="" class="col-sm-4 col-form-label">Hora Inicial</label>
-                                            <div class='col-sm-8 input-group date'>
+                                            <div class='col-sm-8 input-group datetime'>
                                                 <input type='text' class="form-control" required name="acta[fhini]"/>
                                                 <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-time"></span>
@@ -192,7 +196,7 @@
                                     </div>
                                     <div class="form-group row">
                                             <label for="" class="col-sm-4 col-form-label">Hora Final</label>
-                                            <div class='col-sm-8 input-group date'>
+                                            <div class='col-sm-8 input-group datetime'>
                                                 <input type='text' class="form-control" required name="acta[fhfin]"/>
                                                 <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-time"></span>
@@ -336,9 +340,9 @@
     <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>
     <script type="text/javascript">
         $(function () {
-            $('.date').datetimepicker({
-                format: 'YYYY/MM/DD',
-                defaultDate: moment().format("YYYY/MM/DD")
+            $('.datetime').datetimepicker({
+                format: 'YYYY/MM/DD HH:mm:ss',
+                defaultDate: moment().format("YYYY/MM/DD HH:mm:ss")
             });
         });
         var cols = {

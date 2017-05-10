@@ -40,15 +40,27 @@
 
 <h2> Tareas </h2>
 <table class="table">
+	<tr>
+		<td> Tarea </td>
+		<td> Completada </td>
+	</tr>
 	@foreach( $actividad->getTareas() as $tarea )
 	<tr>
 		<td> {{ $tarea->ntarea }} </td>
+		<td> @if($tarea->ifhecha) Si @else No @endif </td>
 	</tr>
 	@endforeach
 
 </table>
 
-<table class="table">
+
+
+<table class="text-center" width="100%">
+	<tr>
+		<td>________________________</td>
+		<td>________________________</td>
+		<td>________________________</td>
+	</tr>
 	<tr>
 		<td>Elaboro</td>
 		<td>Reviso</td>

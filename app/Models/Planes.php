@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $ctiplan
  * @property string $nplan
  * @property integer $valor_plan
+ * @property integer $valor_total
  * @property string $created_at
  * @property string $updated_at
  * @property Estado $estado
@@ -25,7 +26,7 @@ class Planes extends Model
     /**
      * @var array
      */
-    protected $fillable = ['cestado', 'cplanmayor', 'ctiplan', 'nplan', 'valor_plan', 'created_at', 'updated_at'];
+    protected $fillable = ['cestado', 'cplanmayor', 'ctiplan', 'nplan', 'valor_plan', 'valor_total', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -91,14 +92,16 @@ class Planes extends Model
             return $planes;
         }
     }
-    static function recalcularPuntosSubPlanes($cplan,$puntos)
+    static function recalcularPuntosPlanes($cplan,$puntos,$puntos_acumulativos)
     {
         $plan = Planes::where('cplan', $cplan)->first();
         $npuntos = $plan->valor_plan + $puntos;
-        Planes::where('cplan', $cplan)->update(["valor_plan" => $npuntos]);
+        $npuntos_acumulativos = $npuntos + $puntos_acumulativos;
+        Planes::where('cplan', $cplan)->update(["valor_plan" => $npuntos,'valor_total' => $npuntos_acumulativos ]);
+
 
         if ( $plan->cplanmayor != null){
-            Planes::recalcularPuntosSubPlanes($plan->cplanmayor,$puntos);
+            Planes::recalcularPuntosPlanes($plan->cplanmayor,$puntos,$puntos_acumulativos);
         }
         return null;
     }
@@ -110,11 +113,12 @@ class Planes extends Model
         $tareas = Tareas::all();
 
         foreach ($tareas as $tarea) {
+            $puntos = 0;
             if( $tarea->ifhecha ){
-                dump($tarea->ifhecha);
                 $puntos = $tarea->valor_tarea;
-                Planes::recalcularPuntosSubPlanes($tarea->cplan,$puntos);
             }
+            dump($tarea->ifhecha);
+            Planes::recalcularPuntosPlanes($tarea->cplan,$puntos,$tarea->valor_tarea);
         }
 
         exit();

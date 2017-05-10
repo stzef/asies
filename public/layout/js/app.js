@@ -178,7 +178,7 @@ Models = {
 						}
 					}else if ( subplan.cplan ){
 						return {
-							text : subplan.nplan + "(" + subplan.valor_plan + ")",
+							text : subplan.nplan + "(" + subplan.valor_plan + "/"+subplan.valor_total+")",
 							icon : subplan.icono,
 							li_attr : {
 								cplan : subplan.cplan,
@@ -201,8 +201,11 @@ Models = {
 							plan.subplanes = recursive(plan.subplanes)
 						}
 						return {
-							text : plan.nplan + "("+plan.valor_plan+")",
+							text : plan.nplan + "("+plan.valor_plan+"/"+plan.valor_total+")",
 							icon : plan.icono,
+							state : {
+								opened : true,
+							},
 							li_attr : {
 								cplan : plan.cplan,
 								valor : plan.valor_plan,
