@@ -20,48 +20,48 @@
                             @if ( $actividad->acta )
                                 <div class="col-md-5">
                                     <div class="form-group row">
-                                        <label for="plan_nombre" class="col-sm-2 col-form-label">Numero</label>
-                                        <div class="col-sm-10">
+                                        <label for="plan_nombre" class="col-sm-4 col-form-label">Numero</label>
+                                        <div class="col-sm-8">
                                             <p> {{ $actividad->acta->numeroacta }} </p>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="" class="col-sm-2 col-form-label">Objetivos</label>
-                                        <div class="col-sm-10">
+                                        <label for="" class="col-sm-4 col-form-label">Objetivos</label>
+                                        <div class="col-sm-8">
                                             <p> {{ $actividad->acta->objetivos }} </p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="" class="col-sm-2 col-form-label">Orden del dia</label>
-                                        <div class="col-sm-10">
+                                        <label for="" class="col-sm-4 col-form-label">Orden del dia</label>
+                                        <div class="col-sm-8">
                                             <p> {{ $actividad->acta->ordendeldia }} </p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="plan_nombre" class="col-sm-2 col-form-label">Pie de firma</label>
-                                        <div class="col-sm-10">
+                                        <label for="plan_nombre" class="col-sm-4 col-form-label">Pie de firma</label>
+                                        <div class="col-sm-8">
                                             <p> {{ $actividad->acta->sefirma }} </p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="" class="col-sm-2 col-form-label">Elaboro </label>
-                                        <div class="col-sm-10">
+                                        <label for="" class="col-sm-4 col-form-label">Elaboro </label>
+                                        <div class="col-sm-8">
                                             <p> {{ $actividad->acta->elaboro->persona->nombreCompleto()}} </p>
 
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="" class="col-sm-2 col-form-label">Reviso </label>
-                                        <div class="col-sm-10">
+                                        <label for="" class="col-sm-4 col-form-label">Reviso </label>
+                                        <div class="col-sm-8">
                                             <p> {{ $actividad->acta->reviso->persona->nombreCompleto()}} </p>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="" class="col-sm-2 col-form-label">Aprobo </label>
-                                        <div class="col-sm-10">
+                                        <label for="" class="col-sm-4 col-form-label">Aprobo </label>
+                                        <div class="col-sm-8">
                                             <p> {{ $actividad->acta->aprobo->persona->nombreCompleto()}} </p>
                                         </div>
                                     </div>

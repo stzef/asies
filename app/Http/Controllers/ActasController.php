@@ -13,6 +13,7 @@ use asies\Models\Actas;
 use asies\User;
 use Illuminate\Support\Facades\Log;
 use \Auth;
+use \Mail;
 use View;
 use PDF;
 use Storage;
@@ -83,11 +84,29 @@ class ActasController extends Controller
 		return response()->json(array());
 	}
 
+    /**
+     * Send an e-mail reminder to the user.
+     *
+     * @param  Request  $request
+     * @param  int  $id
+     * @return Response
+     */
+    public function send(Request $request)
+    {
+        //$user = User::findOrFail($id);
+
+        Mail::send('emails.acta', ['foo' => "bar"], function ($m) /*use ($user)*/ {
+            $m->from('hello@app.com', 'Your Application');
+
+            $m->to("sistematizaref.programador5@gmail.com", "Carlos Alonso Turner Benites")->subject('Your Reminder!');
+        });
+    }
+
 	public function pdf(Request $request,$numeroacta){
 		//dump(phpinfo());exit();
 		$acta = Actas::where("numeroacta",$numeroacta)->first();
 
-		if ( !$acta ) return view('errors/generic',array('title' => 'Error PDF.', 'message' => "El acta $cacta no existe" ));
+		if ( !$acta ) return view('errors/generic',array('title' => 'Error PDF.', 'message' => "El acta $numeroacta no existe" ));
 
 		$acta->asistentes = $acta->getAsistentes();
 
