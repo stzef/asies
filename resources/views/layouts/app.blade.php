@@ -73,39 +73,9 @@
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
+                <!--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu message-dropdown">
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>{{ Auth::user()->name }}</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>{{ Auth::user()->name }}</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
                         <li class="message-preview">
                             <a href="#">
                                 <div class="media">
@@ -132,31 +102,16 @@
                         <li>
                             <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
                         </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                        </li>
                         <li class="divider"></li>
                         <li>
                             <a href="#">View All</a>
                         </li>
                     </ul>
-                </li>
+                </li>-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ Auth::user()->name }} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li>
+                        <!--<li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
                         <li>
@@ -164,10 +119,10 @@
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>
+                        </li>-->
                         <li class="divider"></li>
                         <li>
-                            <a href="{{ url('/logout') }}"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="{{ url('/logout') }}"><i class="fa fa-fw fa-power-off"></i> Salir </a>
                         </li>
                     </ul>
                 </li>
@@ -179,9 +134,11 @@
                     <li >
                         <a href="{{ URL::action('AppController@dashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
-                    <li >
-                        <a href="{{ URL::route('meci_dashboard') }}"><i class="fa fa-fw fa-tree"></i>Arbol de Tareas</a>
-                    </li>
+                    @permission('tasktree.see')
+                        <li>
+                            <a href="{{ URL::route('meci_dashboard') }}"><i class="fa fa-fw fa-tree"></i>Arbol de Tareas</a>
+                        </li>
+                    @endpermission
                     <li>
                         <a href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}"><i class="fa fa-fw fa-file-text-o"></i> Mis Actividades</a>
                     </li>
@@ -189,8 +146,13 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Datos <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="{{ URL::route('GET_tareas_create') }}"><i class="fa fa-fw fa-pencil"></i>Tareas</a>
-                                <a href="{{ URL::route('GET_actividades_create') }}"><i class="fa fa-fw fa-file-text-o"></i>Actividades</a>
+                                @permission('task.crud')
+                                    <a href="{{ URL::route('GET_tareas_create') }}"><i class="fa fa-fw fa-pencil"></i>Tareas</a>
+                                @endpermission
+
+                                @permission('activities.crud')
+                                    <a href="{{ URL::route('GET_actividades_create') }}"><i class="fa fa-fw fa-file-text-o"></i>Actividades</a>
+                                @endpermission
                             </li>
                         </ul>
                     </li>

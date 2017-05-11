@@ -148,10 +148,10 @@ class ActividadesController extends Controller
 
 	public function store(Request $request,$cactividad)
 	{
+
 		if ($request->hasFile('files')) {
 			$file = $request->file('files');
 			$data = $request->all();
-			//dump($file);
 			//dump($data);exit();
 			foreach($file as $files){
 				$filename = $files->getClientOriginalName();
