@@ -12,7 +12,7 @@ use asies\Models\Personas;
 use asies\Models\Evidencias;
 use asies\Models\TiRelaciones;
 use asies\Models\TareasUsuarios;
-
+use \View;
 
 class APIController extends Controller
 {

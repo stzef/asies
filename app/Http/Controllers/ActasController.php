@@ -30,9 +30,7 @@ class ActasController extends Controller
 	}
 
 	public function create(Request $request){
-		$user = Auth::user();
 
-		Log::info('Creacion de Acta,',['user' => $user->id ]);
 
 		$dataBody = $request->all();
 
@@ -43,7 +41,7 @@ class ActasController extends Controller
 		$validator = Validator::make($dataBody["acta"],
 			[
 				'numeroacta' => 'required',
-				'objetivos' => 'required|max:200',
+				'objetivos' => 'required',
 				'ordendeldia' => 'required|max:400',
 				'fhini' => 'required|date',
 				'fhfin' => 'required|date',
@@ -68,6 +66,9 @@ class ActasController extends Controller
 		if ($validator->fails()){
 			$messages = $validator->messages();
 			return response()->json(array("errors_form" => $messages),400);
+		}else{
+			$user = Auth::user();
+			Log::info('Creacion de Acta,',['user' => $user->id, 'numeroacta' => $dataBody['acta']['numeroacta'], 'elaboro' => $dataBody['acta']['user_elaboro'], 'reviso' => $dataBody['acta']['user_reviso'], 'aprobo' => $dataBody['acta']['user_aprobo']]);
 		}
 
 		$acta = Actas::create($dataBody["acta"]);
@@ -125,9 +126,11 @@ class ActasController extends Controller
 		$file_path = "$dir_path/$namefile";
 
 		if ( ! is_dir( $dir_path ) ) {
+			Log::warning('La carpeta no existe en la direccion: ',['path' => $dir_path ]);
 			if ( mkdir( $dir_path, 0777 ) ){
 				return $pdf->save( $file_path )->stream();
 			}else{
+				
 				return view('errors/generic',array('title' => 'Error Interno.', 'message' => "Hay Ocurrido un error Interno, Por favor Intente de Nuevo" ));
 			}
 		}else{

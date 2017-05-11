@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use asies\Http\Requests;
 use View;
 use \Auth;
-
+use Illuminate\Support\Facades\Log;
 use asies\Models\Actividades;
 use asies\Models\Tareas;
 use Illuminate\Support\Facades\Validator;
@@ -22,6 +22,7 @@ class TareasController extends Controller
 	}
 
 	public function change_state(Request $request,$ctarea){
+
 		$dataBody = $request->all();
 		$validator = Validator::make($dataBody,
 			[
@@ -38,8 +39,10 @@ class TareasController extends Controller
 			$messages = $validator->messages();
 			return response()->json(array("errors_form" => $messages),400);
 		}else{
+
 			$user = Auth::user();
 			$tarea = Tareas::where('ctarea', $ctarea)->first();
+			$estadant=$tarea->ifhecha;
 
 			$response["ok"] = true;
 			if ( $tarea->checkUser($user->id) ){
@@ -55,12 +58,15 @@ class TareasController extends Controller
 			}
 			$tarea = Tareas::where('ctarea', $ctarea)->first();
 			$response["hecha"]=$tarea->ifhecha;
+			Log::info('Cambio estado de tarea,',['tarea' => $tarea->ctarea, 'user' => $user->id, 'estado anterior' => $estadant, 'estado actual'=>$tarea->ifhecha]);
 			return response()->json($response);
 		}
 	}
 
 	public function create(Request $request){
+
 		if ($request->isMethod('get')) return view( 'tareas.create');
+
 		$dataBody = $request->all();
 		$validator = Validator::make($dataBody["tarea"],
 			[
@@ -83,7 +89,9 @@ class TareasController extends Controller
 			$messages = $validator->messages();
 			return response()->json(array("errors_form"=>$messages),400);
 		}else{
+			$user = Auth::user();
 			$tarea = Tareas::create($dataBody["tarea"]);
+			Log::info('Creacion Tarea ,',['tarea'=> $tarea->id,'user' => $user->id,'estado creacion'=> $tarea->ifhecha ]);
 			dump($tarea);
 			return response()->json(array());
 		}
