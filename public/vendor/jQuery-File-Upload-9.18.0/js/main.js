@@ -18,9 +18,9 @@ $(function () {
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url: '/actividades/evidence/__cactividad__'.set("__cactividad__",$("input#cactividad").val())
+        url: '/actividades/evidence/__cactividad__'.set("__cactividad__",$("input#cactividad").val()),
     });
-
+/*
     // Enable iframe cross-domain access via redirect option:
     $('#fileupload').fileupload(
         'option',
@@ -72,4 +72,5 @@ $(function () {
         });
     }
 
+*/
 });

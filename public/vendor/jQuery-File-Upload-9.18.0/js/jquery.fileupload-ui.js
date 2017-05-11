@@ -214,6 +214,8 @@
             },
             // Callback for failed (abort or error) uploads:
             fail: function (e, data) {
+                console.log(e)
+                console.log(data)
                 if (e.isDefaultPrevented()) {
                     return false;
                 }

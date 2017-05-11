@@ -11,17 +11,31 @@
 |
 */
 
+# Route::auth();
+Route::get('login', 'Auth\AuthController@showLoginForm');
+Route::post('login', 'Auth\AuthController@login');
+Route::get('logout', 'Auth\AuthController@logout');
+
+// Registration Routes...
+Route::get('register', 'Auth\AuthController@showRegistrationForm')->middleware('auth');
+Route::post('register', 'Auth\AuthController@register')->middleware('auth');
+
+// Password Reset Routes...
+Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+Route::post('password/reset', 'Auth\PasswordController@reset');
+
 Route::get('/', function () {
-	return view('welcome');
+	return redirect('/dashboard');
+	//return view('welcome');
 });
 
 # Visualizador de logs
 
 
-Route::auth();
 
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware('auth');
-Route::get('/home', 'HomeController@index');
+//Route::get('/home', 'HomeController@index');
 
 Route::get('/dashboard', 'AppController@dashboard')->name('app_dashboard')->middleware('auth');
 
@@ -71,7 +85,7 @@ Route::group(['prefix' => 'asignacion'], function(){
 });
 
 Route::group(['prefix' => 'tareas'], function(){
-	Route::get('create', "TareasController@create")->name("GET_tareas_create");
+	Route::get('create', "TareasController@create")->name("GET_tareas_create")->middleware("permission:task.crud");
 	Route::post('create', "TareasController@create");
 
 	Route::post('/{ctarea}/change_state', "TareasController@change_state")->name("POST_cambiar_estado_tarea");

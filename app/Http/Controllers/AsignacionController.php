@@ -8,7 +8,9 @@ use asies\Http\Requests;
 use Illuminate\Support\Facades\Validator;
 use asies\Models\Tareas;
 use asies\Models\Actividades;
+use View;
 use Illuminate\Support\Facades\Log;
+
 class AsignacionController extends Controller
 {
 	public function __construct()

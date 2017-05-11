@@ -4,12 +4,10 @@
 		<div class="row">
 				<div class="col-md-12">
 						<div class="panel panel-default">
-								<div class="panel-heading">Dashboard</div>
-
-								<div class="panel-body">
-												<div id="chart_div" ></div>
-
-								</div>
+							<div class="panel-heading">Dashboard <b>{{ Auth::user()->persona->nombreCompleto() }}</b></div>
+							<div class="panel-body">
+								<div id="chart_div" ></div>
+							</div>
 						</div>
 				</div>
 		</div>

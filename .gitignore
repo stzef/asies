@@ -8,6 +8,7 @@ Homestead.json
 .env
 .*.env
 .sh
+*.sql
 *.xls
 *.xlsx
 readme.dev

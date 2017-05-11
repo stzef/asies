@@ -45,6 +45,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+
+        //\Bican\Roles\Exceptions\RoleDeniedException
+        //\Bican\Roles\Exceptions\PermissionDeniedException
+        //\Bican\Roles\Exceptions\LevelDeniedException
+        if ($e instanceof \Bican\Roles\Exceptions\PermissionDeniedException) {
+            // you can for example flash message, redirect...
+            var_dump("hola");exit();
+            return redirect()->back();
+        }
         return parent::render($request, $e);
     }
 }

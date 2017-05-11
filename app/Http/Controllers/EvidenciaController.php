@@ -5,6 +5,7 @@ namespace asies\Http\Controllers;
 use Illuminate\Http\Request;
 
 use asies\Http\Requests;
+use View;
 
 class EvidenciaController extends Controller
 {
