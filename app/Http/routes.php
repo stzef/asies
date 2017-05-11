@@ -15,8 +15,12 @@ Route::get('/', function () {
 	return view('welcome');
 });
 
+# Visualizador de logs
+
+
 Route::auth();
 
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware('auth');
 Route::get('/home', 'HomeController@index');
 
 Route::get('/dashboard', 'AppController@dashboard')->name('app_dashboard')->middleware('auth');
@@ -30,6 +34,9 @@ Route::group(['prefix' => 'api'], function(){
 		Route::get('/', "APIController@planes");
 		Route::get('/{cplan}', "APIController@plan");
 		Route::get('/{cplan}/usuarios', "APIController@usuarios_plan");
+	});
+	Route::group(['prefix' => 'evidencias'], function(){
+		Route::put('/{cevidencia}/set', "APIController@update_evidencia");
 	});
 	Route::group(['prefix' => 'usuarios'], function(){
 		Route::get('/', "APIController@usuarios");

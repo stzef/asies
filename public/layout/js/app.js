@@ -172,6 +172,18 @@ Models = {
 			return planes
 		}
 	},
+	"Evidencias" : {
+		"set" : function(key,data,cb){
+			$.ajax({
+				type : "PUT",
+				url : "/api/evidencias/"+key+"/set",
+				contentType:"application/json",
+				success : cb,
+				data : data,
+				error : function(){}
+			})
+		}
+	},
 	"Tareas" : {
 		cambiarEstado : function(ctarea,ifhecha){
 			var ifhecha = ifhecha ? 1 : 0

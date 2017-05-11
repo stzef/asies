@@ -293,12 +293,18 @@
     <script id="template-download" type="text/x-tmpl">
         {% for (var i=0, file; file=o.files[i]; i++) { %}
             <tr class="template-download fade">
-                <td>
-                    <span class="preview" width="100px">
+                <td width="100px">
+                    <span class="preview" >
                         {% if (file.thumbnailUrl) { %}
-                            <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                            <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img width="100%" src="{%=file.thumbnailUrl%}"></a>
                         {% } %}
                     </span>
+                </td>
+                <td>
+                    <input class="form-control" placeholder="Nombre" type="text" name="nombre" data-evidencia="{%=file.evidencia%}" onchange="setdataEvidencia(this.dataset.evidencia,this.name,this.value)">
+                </td>
+                <td>
+                    <input class="form-control" placeholder="Descripcion" type="text" name="descripcion" data-evidencia="{%=file.evidencia%}" onchange="setdataEvidencia(this.dataset.evidencia,this.name,this.value)">
                 </td>
                 <td>
                     <p class="name">
@@ -339,6 +345,11 @@
     <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>
     <script type="text/javascript">
+        function setdataEvidencia(key,name,value){
+            Models.Evidencias.set(key,JSON.stringify([[name,value]]),function(response){
+                console.log(response)
+            })
+        }
         $(function () {
             $('.datetime').datetimepicker({
                 format: 'YYYY/MM/DD HH:mm:ss',

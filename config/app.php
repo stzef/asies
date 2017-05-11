@@ -176,6 +176,10 @@ return [
 
         #PDF
         Barryvdh\DomPDF\ServiceProvider::class,
+
+        # Visualizador de logs
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+
     ],
 
     /*

@@ -11,6 +11,12 @@ use asies\Models\Actividades;
 
 class AsignacionController extends Controller
 {
+	public function __construct()
+	{
+		View::share('SHORT_NAME_APP', env("SHORT_NAME_APP"," - "));
+		View::share('LONG_NAME_APP', env("LONG_NAME_APP"," - "));
+		$this->middleware('auth');
+	}
 	public function users(Request $request,$cactividad,$ctarea){
 		$dataBody = $request->all();
 		$dataBody["tareasusuarios"]["ctarea"] = $ctarea;

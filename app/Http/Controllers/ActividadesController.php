@@ -47,7 +47,10 @@ class ActividadesController extends Controller
 			}
 		}
 	}
+
 	public function doActivity(Request $request,$cactividad){
+		Log::info('Creacion de Plan,',['user' => "" ]);
+
 		if ($request->isMethod('get')){
 			if ( $actividad = Actividades::where("cactividad", $cactividad)->first() ) {
 				$tareas = $actividad->getTareas();
@@ -65,6 +68,7 @@ class ActividadesController extends Controller
 			}
 		}
 	}
+
 	public function create(Request $request){
 
 		if ($request->isMethod('get')){
@@ -134,6 +138,7 @@ class ActividadesController extends Controller
 		}
 		return $this->fix_integer_overflow(filesize($file_path));
 	}
+
 	protected function fix_integer_overflow($size) {
 		if ($size < 0) {
 			$size += 2.0 * (PHP_INT_MAX + 1);
@@ -158,19 +163,20 @@ class ActividadesController extends Controller
 
 				$files->move($destinationPath, $picture);
 				//Storage::disk('s3')->move($destinationPath, $picture);
+				$evidencia = Evidencias::create(array(
+					'cactividad' => $cactividad,
+					'path' => $path_files.$picture,
+					'fregistro' => date("Y-m-d H:i:s"),
+				));
 				$destinationPath1='http://'.$_SERVER['HTTP_HOST'].'/evidencias/actividades/actividad_' .$cactividad. '/';
 						$filest = array();
 						$filest['name'] = $picture;
 						$filest['size'] = $this->get_file_size($destinationPath.$picture);
 						$filest['url'] = $destinationPath1.$picture;
+						$filest['evidencia'] = $evidencia->id;
 				$filest['thumbnailUrl'] = $destinationPath1.$picture;
 				$filesa['files'][]=$filest;
 
-				Evidencias::create(array(
-					'cactividad' => $cactividad,
-					'path' => $path_files.$picture,
-					'fregistro' => date("Y-m-d H:i:s"),
-				));
 
 			}
 			return  $filesa;
