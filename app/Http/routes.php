@@ -13,8 +13,10 @@
 
 # Route::auth();
 Route::get('login', 'Auth\AuthController@showLoginForm');
-Route::post('login', 'Auth\AuthController@login');
-Route::get('logout', 'Auth\AuthController@logout');
+//Route::post('login', 'Auth\AuthController@login');
+Route::post('login', 'Auth\LoginController@authenticate');
+//Route::get('logout', 'Auth\AuthController@logout');
+Route::get('logout', 'Auth\LoginController@logout');
 
 // Registration Routes...
 Route::get('register', 'Auth\AuthController@showRegistrationForm')->middleware('auth');
