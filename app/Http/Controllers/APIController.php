@@ -14,7 +14,6 @@ use asies\Models\TiRelaciones;
 use asies\Models\TareasUsuarios;
 use \View;
 
-
 class APIController extends Controller
 {
 	public function __construct()

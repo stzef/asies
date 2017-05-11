@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use asies\Models\Tareas;
 use asies\Models\Actividades;
 use View;
+use Illuminate\Support\Facades\Log;
 
 class AsignacionController extends Controller
 {
@@ -19,6 +20,8 @@ class AsignacionController extends Controller
 		$this->middleware('auth');
 	}
 	public function users(Request $request,$cactividad,$ctarea){
+		$user = Auth::user();
+		Log::info('Asignacion usuario ,',['user' => $user->id ]);
 		$dataBody = $request->all();
 		$dataBody["tareasusuarios"]["ctarea"] = $ctarea;
 		$dataBody["tareasusuarios"]["cactividad"] = $cactividad;
@@ -40,7 +43,10 @@ class AsignacionController extends Controller
 			$messages = $validator->messages();
 			return response()->json(array("errors_form" => $messages),400);
 		}else{
+
 			$tarea = Tareas::where('ctarea', $ctarea)->first();
+			$user = Auth::user();
+			Log::info('Asignacion usuario a tarea ,',['user' => $user->id, 'tarea' => $tarea->ctarea]);
 			$actividad = Actividades::where('cactividad', $cactividad)->first();
 			$response = $actividad->add_task_user(
 				array(

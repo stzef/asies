@@ -49,7 +49,6 @@ class ActividadesController extends Controller
 	}
 
 	public function doActivity(Request $request,$cactividad){
-		Log::info('Creacion de Plan,',['user' => "" ]);
 
 		if ($request->isMethod('get')){
 			if ( $actividad = Actividades::where("cactividad", $cactividad)->first() ) {
@@ -86,12 +85,6 @@ class ActividadesController extends Controller
 			);
 			return view('actividades/create',$context);
 		}
-
-
-		$user = Auth::user();
-
-		Log::info('Creacion de Plan,',['user' => $user->id ]);
-
 		$dataBody = $request->all();
 		$validator = Validator::make($dataBody["actividad"],
 			[
@@ -123,8 +116,13 @@ class ActividadesController extends Controller
 		if ($validator->fails()){
 			$messages = $validator->messages();
 			return response()->json(array("errors_form" => $messages),400);
+		}else{
+			$actividad = Actividades::create($dataBody["actividad"]);
+			//dump($actividad->id);exit();
+			$user = Auth::user();
+			Log::info('Creacion de actividad,',['actividad'=>$actividad->id,'ctiactividad'=> $dataBody['actividad']['ctiactividad'],'user' => $user->id ]);
 		}
-		$actividad = Actividades::create($dataBody["actividad"]);
+		
 		return response()->json(array("obj" => $actividad->toArray()));
 	}
 
