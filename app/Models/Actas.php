@@ -20,11 +20,11 @@ use asies\User;
  * @property string $sefirma
  * @property string $created_at
  * @property string $updated_at
- * @property User $user_elaboro
- * @property User $user_reviso
- * @property User $user_aprobo
- * @property Actasasistente[] $actasasistentes
- * @property Actividade[] $actividades
+ * @property User $elaboro
+ * @property User $reviso
+ * @property User $aprobo
+ * @property Actasasistentes[] $actasasistentes
+ * @property Actividades[] $actividades
  */
 class Actas extends Model
 {
@@ -36,28 +36,25 @@ class Actas extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user_elaboro()
+    public function elaboro()
     {
-//        return $this->belongsTo('asies\User','id','user_elaboro');
-          return $this->belongsTo('App\User', 'user');
+        return $this->belongsTo('asies\User', 'user_elaboro', 'id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user_reviso()
+    public function reviso()
     {
-        //return $this->belongsTo('asies\User','id','user_reviso');
-          return $this->belongsTo('App\User', 'user');
+        return $this->belongsTo('asies\User', 'user_elaboro', 'id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user_aprobo()
+    public function aprobo()
     {
-        //return $this->belongsTo('asies\User','id','user_aprobo');
-          return $this->belongsTo('App\User', 'user');
+        return $this->belongsTo('asies\User', 'user_elaboro', 'id');
     }
 
     /**
@@ -65,7 +62,7 @@ class Actas extends Model
      */
     public function actasasistentes()
     {
-        return $this->hasMany('App\Actasasistente', 'cacta', 'idacta');
+        return $this->hasMany('asies\Models\ActasAsistentes', 'cacta', 'idacta');
     }
 
     /**
@@ -73,7 +70,7 @@ class Actas extends Model
      */
     public function actividades()
     {
-        return $this->hasMany('App\Actividade', 'cacta', 'idacta');
+        return $this->hasMany('asies\Models\Actividades', 'cacta', 'idacta');
     }
     static function genCode()
     {

@@ -62,6 +62,11 @@
 		<td>________________________</td>
 	</tr>
 	<tr>
+		<td>{{ $acta->elaboro->persona->nombreCompleto() }}</td>
+		<td>{{ $acta->reviso->persona->nombreCompleto() }}</td>
+		<td>{{ $acta->aprobo->persona->nombreCompleto() }}</td>
+	</tr>
+	<tr>
 		<td>Elaboro</td>
 		<td>Reviso</td>
 		<td>Aprobo</td>

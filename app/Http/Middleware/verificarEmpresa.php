@@ -29,10 +29,8 @@ class verificarEmpresa
         }else{
             return new Response(view('empresa_no_registrada'));
         }
+        return $next($request);
     }
-    return $next($request);
-
-    var_dump("No esta registrado");exit();
-
+    return new Response(view('empresa_no_registrada'));
     }
 }

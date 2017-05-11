@@ -47,21 +47,22 @@
                                     <div class="form-group row">
                                         <label for="" class="col-sm-2 col-form-label">Elaboro </label>
                                         <div class="col-sm-10">
-                                            <p> {{ $actividad->acta->user_elaboro}} </p>
+                                            <p> {{ $actividad->acta->elaboro->persona->nombreCompleto()}} </p>
+
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="" class="col-sm-2 col-form-label">Reviso </label>
                                         <div class="col-sm-10">
-                                            <p> {{ $actividad->acta->user_reviso}} </p>
+                                            <p> {{ $actividad->acta->reviso->persona->nombreCompleto()}} </p>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="" class="col-sm-2 col-form-label">Aprobo </label>
                                         <div class="col-sm-10">
-                                            <p> {{ $actividad->acta->user_aprobo}} </p>
+                                            <p> {{ $actividad->acta->aprobo->persona->nombreCompleto()}} </p>
                                         </div>
                                     </div>
                                 </div>
@@ -161,7 +162,7 @@
                         <table class="table">
                                 <tr>
                                     <th>Tarea</th>
-                                    <th>Estado</th>
+                                    <th>Realizada</th>
                                 </tr>
                             @foreach ($tareas as $tarea)
                                 <tr>
@@ -184,29 +185,4 @@
 @endsection
 
 @section('scripts')
-    <script>
-        var cols = {
-            ctarea : 0,
-            ntarea : 1,
-            crespo : 2,
-            nrespo : 3,
-            ctirela: 4,
-            ntirela: 5,
-            }
-            /*var table= $("#tareas").DataTable({
-                "paging":   false,
-                "ordering": false,
-                "info":     false,
-                //"language": DTspanish,
-                "columnDefs": [
-                    {
-                        "targets": [ cols.ctarea,cols.crespo,cols.ctirela ],
-                        "visible": false,
-                    },
-                ]
-
-                //editar("#usuarios tbody");
-            })
-            */
-    </script>
 @endsection
