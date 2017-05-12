@@ -63,6 +63,16 @@ var DTspanish = {
 	}
 }
 
+alertify.defaults.glossary.acccpt = "Aceptar"
+alertify.defaults.glossary.cancel = "Cancelar"
+alertify.defaults.glossary.close = "Cerrar"
+alertify.defaults.glossary.confirm = "Confirmar"
+alertify.defaults.glossary.decline = "Rechazar"
+alertify.defaults.glossary.maximize = "Maximizar"
+alertify.defaults.glossary.ok = "Si"
+alertify.defaults.glossary.restore = "Restaurar"
+alertify.defaults.glossary.title = "ASIES"
+
 function serializeForm(form){
 	var formData = new FormData(form);
 	$(form).find('input[type=file]').each(function(i, file) {
@@ -233,19 +243,21 @@ Models = {
 			})
 		},
 		"recalcular" : function(cb){
-			waitingDialog.show('Recalculando Puntos',{onHide: function () {alertify.success('Puntos Recalculados')}});
-			$.ajax({
-				type:"POST",
-				url:"/planes/recalcular",
-				success:function(response){
-					waitingDialog.hide();
-					cb(response)
-					console.log(arguments)
-				},
-				error : function(){
-					waitingDialog.hide();
-				}
+			alertify.confirm("Desea Recalcular los puntos de los Planes, Recuerde que este proceso puede tandar varios minutos, en los cuales no se podran realizar ninguna otra acción.",function(){
+				waitingDialog.show('Recalculando Puntos',{onHide: function () {alertify.success('Puntos Recalculados')}});
+				$.ajax({
+					type:"POST",
+					url:"/planes/recalcular",
+					success:function(response){
+						waitingDialog.hide();
+						cb(response)
+						console.log(arguments)
+					},
+					error : function(){
+						waitingDialog.hide();
+					}
 				})
+			})
 		},
 		"treeview" : function(cb){
 			$.ajax({

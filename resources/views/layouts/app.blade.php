@@ -136,7 +136,7 @@
                     </li>
                     @permission('tasktree.see')
                         <li>
-                            <a href="{{ URL::route('meci_dashboard') }}"><i class="fa fa-fw fa-tree"></i>Arbol de Tareas</a>
+                            <a href="{{ URL::route('GET_treetask') }}"><i class="fa fa-fw fa-tree"></i>Arbol de Tareas</a>
                         </li>
                     @endpermission
                     <li>
@@ -219,10 +219,11 @@
     <!-- Datetimepicker JS -->
     <script src="{{ URL::asset('vendor/datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
 
-    <script src="{{ URL::asset('layout/js/app.js') }}"></script>
-
     <!-- AlertifyJS -->
     <script src="{{ URL::asset('vendor/alertifyjs/alertify.min.js') }}"></script>
+
+    <script src="{{ URL::asset('layout/js/app.js') }}"></script>
+
 
 
     <!-- JTable -->

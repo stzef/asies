@@ -19,6 +19,8 @@
 
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
+		waitingDialog.show("Cargando Estadisticas...")
+
 		google.charts.load('current', {'packages':['gauge']});
 		google.charts.setOnLoadCallback(drawChart);
 
@@ -40,6 +42,7 @@
 				};
 				var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
 				chart.draw(data, options);
+				waitingDialog.hide()
 			})
 		}
 	</script>

@@ -105,7 +105,10 @@
 		function getPlanSelect(){
 			var plan = $('#treeview').jstree('get_selected',true)
 		}
+
+		waitingDialog.show("Cargando Arbol...")
 		Models.Planes.treeview(function(response){
+			waitingDialog.hide()
 			$.jstree.defaults.contextmenu.items = {
 				showDetail : {
 					action : function(){

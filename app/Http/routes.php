@@ -42,10 +42,6 @@ Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->m
 
 Route::get('/dashboard', 'AppController@dashboard')->name('app_dashboard')->middleware('auth');
 
-Route::group(['prefix' => 'meci'], function(){
-	Route::get('/dashboard', 'MECIController@dashboard')->name('meci_dashboard')->middleware('auth');
-});
-
 Route::group(['prefix' => 'api'], function(){
 	Route::group(['prefix' => 'planes'], function(){
 		Route::get('/', "APIController@planes");
@@ -67,11 +63,14 @@ Route::group(['prefix' => 'planes'], function(){
 	Route::post('create', "PlanesController@create");
 	Route::post('recalcular', "PlanesController@recalcularPuntos")->name('POST_recaulcular_puntos');
 	Route::get('status/{cplan}', "PlanesController@status")->name('GET_status_plan');
+
+	Route::get('/treeview', 'ArbolTareasController@treeview')->name('GET_treetask')->middleware("permission:tasktree.see")->middleware('auth');
+
 });
 
 Route::group(['prefix' => 'actividades'], function(){
-	Route::post('create', "ActividadesController@create");
-	Route::get('create', "ActividadesController@create")->name("GET_actividades_create");
+	Route::post('create', "ActividadesController@create")->middleware("permission:activities.crud");
+	Route::get('create', "ActividadesController@create")->name("GET_actividades_create")->middleware("permission:activities.crud");
 
 	Route::get('do/{cactividad}', "ActividadesController@doActivity")->name('realizar_actividad');
 	Route::get('summary/{cactividad}', "ActividadesController@summaryActivity")->name('GET_resumen_actividad');
@@ -90,7 +89,7 @@ Route::group(['prefix' => 'asignacion'], function(){
 
 Route::group(['prefix' => 'tareas'], function(){
 	Route::get('create', "TareasController@create")->name("GET_tareas_create")->middleware("permission:task.crud");
-	Route::post('create', "TareasController@create");
+	Route::post('create', "TareasController@create")->middleware("permission:task.crud");
 
 	Route::post('/{ctarea}/change_state', "TareasController@change_state")->name("POST_cambiar_estado_tarea");
 });
