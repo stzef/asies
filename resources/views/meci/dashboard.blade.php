@@ -126,7 +126,7 @@
 							"icon" : "/vendor/jstree/img/module.png"
 						},
 						"tareas" : {
-							"icon" : "/vendor/jstree/img/"
+							"icon" : "/vendor/jstree/img/tarea.png"
 						},
 						"componente" : {
 							"icon" : "/vendor/jstree/img/component.png"

@@ -35,6 +35,7 @@ Route::get('/', function () {
 # Visualizador de logs
 
 
+Route::get('/alcaldias', 'HomeController@alcaldias')->name('GET_alcaldias');
 
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware('auth');
 //Route::get('/home', 'HomeController@index');

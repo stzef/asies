@@ -19,7 +19,7 @@ class HomeController extends Controller
     {
         View::share('SHORT_NAME_APP', env("SHORT_NAME_APP"," - "));
         View::share('LONG_NAME_APP', env("LONG_NAME_APP"," - "));
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => 'alcaldias']);
     }
 
     /**
@@ -32,5 +32,16 @@ class HomeController extends Controller
         //$planes = Planes::recalcularPuntos();
         //dump($planes);exit();
         return view('home');
+    }
+
+    public function alcaldias()
+    {
+        $alcaldias = \Config::get("app.empresas");
+        $server_name = $_SERVER['SERVER_NAME'];
+        $context = array(
+            'alcaldias' => $alcaldias,
+            'server_name' => $server_name
+        );
+        return view('alcaldias',$context);
     }
 }

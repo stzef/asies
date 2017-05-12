@@ -245,7 +245,7 @@ return [
     |
     */
 
-    'empresas' => ["guataqui"],
+    'empresas' => ["guataqui","anapoima","jerusalem"],
     'CTE' => [
         'TIRELACION_RESPONSABLE' => 1,
     ],
