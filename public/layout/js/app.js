@@ -128,7 +128,7 @@ Models = {
 						var valor = subplan.ifhecha == "1" ? subplan.valor_tarea : 0
 						return {
 							text : subplan.ntarea + "(" + valor + ")",
-							icon : subplan.icono,
+							//icon : subplan.icono,
 							li_attr : {
 								ctarea : subplan.ctarea,
 								valor : valor,
@@ -138,7 +138,7 @@ Models = {
 					}else if ( subplan.cplan ){
 						return {
 							text : subplan.nplan + "(" + subplan.valor_plan + "/"+subplan.valor_total+")",
-							icon : subplan.icono,
+							//icon : subplan.icono,
 							li_attr : {
 								cplan : subplan.cplan,
 								valor : subplan.valor_plan,
@@ -156,7 +156,7 @@ Models = {
 				}
 				return {
 					text : plan.nplan + "("+plan.valor_plan+"/"+plan.valor_total+")",
-					icon : plan.icono,
+					//icon : plan.icono,
 					state : {
 						opened : true,
 					},
