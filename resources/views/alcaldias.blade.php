@@ -47,7 +47,7 @@
 		                                </div>
 		                            </div>
 		                        </div>
-		                        <a href="//guataqui.controlasies.com/login">
+		                        <a href="//guataqui.controlasies.com.co/login">
 		                            <div class="panel-footer">
 		                                <span class="pull-left">Ingresar</span>
 		                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -69,7 +69,7 @@
 		                                </div>
 		                            </div>
 		                        </div>
-		                        <a href="//anapoima.controlasies.com/login">
+		                        <a href="//anapoima.controlasies.com.co/login">
 		                            <div class="panel-footer">
 		                                <span class="pull-left">Ingresar</span>
 		                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -91,7 +91,7 @@
 		                                </div>
 		                            </div>
 		                        </div>
-		                        <a href="//jerusalen.controlasies.com/login">
+		                        <a href="//jerusalen.controlasies.com.co/login">
 		                            <div class="panel-footer">
 		                                <span class="pull-left">Ingresar</span>
 		                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
