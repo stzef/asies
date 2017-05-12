@@ -65,6 +65,7 @@ Route::group(['prefix' => 'api'], function(){
 
 Route::group(['prefix' => 'planes'], function(){
 	Route::post('create', "PlanesController@create");
+	Route::post('recalcular', "PlanesController@recalcularPuntos")->name('POST_recaulcular_puntos');
 	Route::get('status/{cplan}', "PlanesController@status")->name('GET_status_plan');
 });
 

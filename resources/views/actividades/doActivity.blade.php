@@ -304,7 +304,7 @@
                     <input class="form-control" placeholder="Nombre" type="text" name="nombre" data-evidencia="{%=file.evidencia%}" onchange="setdataEvidencia(this.dataset.evidencia,this.name,this.value)">
                 </td>
                 <td>
-                    <input class="form-control" placeholder="Descripcion" type="text" name="descripcion" data-evidencia="{%=file.evidencia%}" onchange="setdataEvidencia(this.dataset.evidencia,this.name,this.value)">
+                    <input class="form-control" placeholder="Descripción" type="text" name="descripcion" data-evidencia="{%=file.evidencia%}" onchange="setdataEvidencia(this.dataset.evidencia,this.name,this.value)">
                 </td>
                 <td>
                     <p class="name">
@@ -348,6 +348,7 @@
         function setdataEvidencia(key,name,value){
             Models.Evidencias.set(key,JSON.stringify([[name,value]]),function(response){
                 console.log(response)
+                alertify.success("Evidencia Editada")
             })
         }
         $(function () {

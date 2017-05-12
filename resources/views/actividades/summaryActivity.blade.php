@@ -151,6 +151,8 @@
                                         <a href="{{ $evidencia->path }}">
                                             <img class="img-thumbnail img-responsive " width="100px" src="{{ $evidencia->previewimg }}" alt="">
                                         </a>
+                                        <input type="text" value="{{ $evidencia->nombre }}" name="nombre" placeholder="Nombre" data-evidencia="{{$evidencia->cevidencia}}" onchange="setdataEvidencia(this.dataset.evidencia,this.name,this.value)">
+                                        <input type="text" value="{{ $evidencia->descripcion }}" name="descripcion" placeholder="Descripción" data-evidencia="{{$evidencia->cevidencia}}" onchange="setdataEvidencia(this.dataset.evidencia,this.name,this.value)">
                                     </td>
                                 </tr>
                             @endforeach
@@ -185,4 +187,12 @@
 @endsection
 
 @section('scripts')
+<script>
+            function setdataEvidencia(key,name,value){
+            Models.Evidencias.set(key,JSON.stringify([[name,value]]),function(response){
+                console.log(response)
+                alertify.success("Evidencia Editada")
+            })
+        }
+</script>
 @endsection

@@ -30,31 +30,22 @@ class PlanesController extends Controller
 		Log::info('Creacion de Plan,',['user' => $user->id ]);
 
 		$dataBody = $request->all()["plan"];
-		/*$validator = Validator::make($dataBody,
-			[
-				'cplan' => 'required|unique:planes',
-				'nplan' => 'required|max:255',
-				'cestado' => 'required',
-				#'nivel' => '',
-				'cplanmayor' => 'required',
-				#'icono' => 'required|max:100',
-				'ifacta' => 'boolean',
-				'ifarchivos' => 'boolean',
-				'iftexto' => 'boolean',
-				'iffechaini' => 'boolean',
-			],
-			[
-				'nplan.required' => 'El nombre del plan es requerido',
-			]
-		);
 
-		if ($validator->fails()){
-			$messages = $validator->messages();
-			return response()->json($messages,400);
-		}*/
-		//$plan = Planes::create($dataBody["plan"]);
 		$plan->add_user($data);
 		return response()->json(array("text"=>"ok"));
+	}
+	public function recalcularPuntos(Request $request){
+		$user = Auth::user();
+
+		try {
+			Planes::recalcularPuntos();
+			Log::info('Recaulculo de Puntos',['user' => $user->id ]);
+			return response()->json(array("text"=>"ok"));
+		} catch (Exception $e) {
+			return response()->json(array("text"=>"Ha ocurrido un error"),400);
+
+		}
+
 	}
 	public function status(Request $request,$cplan){
 

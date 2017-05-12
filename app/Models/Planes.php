@@ -116,7 +116,7 @@ class Planes extends Model
         }
         return null;
     }
-    static function recalcularPuntos()
+    static function recalcularPuntos($cmodulo=null)
     {
         DB::table('planes')->update(array('valor_plan' => 0,'valor_total' => 0));
 
@@ -127,22 +127,15 @@ class Planes extends Model
         foreach ($prods_min as $prod_min) {
             $tareas = Tareas::where("cplan",$prod_min->cplan)->orderBy("cplan")->get(); # Equivalente a Model::all()
             $spuntos = 0;
-            dump("prod min : {$prod_min->nplan}");
             foreach ($tareas as $tarea) {
                 $puntos = 0;
                 if( $tarea->ifhecha ){
                     $puntos = $tarea->valor_tarea;
                 }
                 $spuntos += $tarea->valor_tarea;
-                dump("total puntos : $spuntos");
                 Planes::recalcularPuntosPlanes($tarea->cplan,$puntos,$tarea->valor_tarea);
             }
             $stpuntos += $spuntos;
         }
-        dump("total puntos : $stpuntos");
-
-        exit();
-
-        return $planes;
     }
 }

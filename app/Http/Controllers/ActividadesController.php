@@ -122,7 +122,7 @@ class ActividadesController extends Controller
 			$user = Auth::user();
 			Log::info('Creacion de actividad,',['actividad'=>$actividad->id,'ctiactividad'=> $dataBody['actividad']['ctiactividad'],'user' => $user->id ]);
 		}
-		
+
 		return response()->json(array("obj" => $actividad->toArray()));
 	}
 
@@ -156,6 +156,16 @@ class ActividadesController extends Controller
 				$extension = $files->getClientOriginalExtension();
 				$picture = sha1($filename . time()) . '.' . $extension;
 
+				//var_dump($extension);exit();
+				$destinationPath1='http://'.$_SERVER['HTTP_HOST'].'/evidencias/actividades/actividad_' .$cactividad. '/';
+
+				$ext_img = array("ani","bmp","cal","fax","gif","img","jbg","jpe","jpe","jpg","mac","pbm","pcd","pcx","pct","pgm","png","ppm","psd","ras","tga","tif","wmf");
+				if ( in_array($extension, $ext_img) ){
+					$thumbnailUrl = $destinationPath1.$picture;
+				}else{
+					$thumbnailUrl = "/evidencias/generic-file.png";
+				}
+
 				$path_files = '/evidencias/actividades/actividad_' .$cactividad. '/';
 				$destinationPath = public_path().$path_files;
 
@@ -166,13 +176,12 @@ class ActividadesController extends Controller
 					'path' => $path_files.$picture,
 					'fregistro' => date("Y-m-d H:i:s"),
 				));
-				$destinationPath1='http://'.$_SERVER['HTTP_HOST'].'/evidencias/actividades/actividad_' .$cactividad. '/';
 						$filest = array();
 						$filest['name'] = $picture;
 						$filest['size'] = $this->get_file_size($destinationPath.$picture);
 						$filest['url'] = $destinationPath1.$picture;
 						$filest['evidencia'] = $evidencia->id;
-				$filest['thumbnailUrl'] = $destinationPath1.$picture;
+				$filest['thumbnailUrl'] = $thumbnailUrl;
 				$filesa['files'][]=$filest;
 
 

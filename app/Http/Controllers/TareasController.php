@@ -10,6 +10,7 @@ use \Auth;
 use Illuminate\Support\Facades\Log;
 use asies\Models\Actividades;
 use asies\Models\Tareas;
+use asies\Models\Planes;
 use Illuminate\Support\Facades\Validator;
 
 class TareasController extends Controller
@@ -89,11 +90,17 @@ class TareasController extends Controller
 			$messages = $validator->messages();
 			return response()->json(array("errors_form"=>$messages),400);
 		}else{
-			$user = Auth::user();
-			$tarea = Tareas::create($dataBody["tarea"]);
-			Log::info('Creacion Tarea ,',['tarea'=> $tarea->id,'user' => $user->id,'estado creacion'=> $tarea->ifhecha ]);
-			dump($tarea);
-			return response()->json(array());
+			$plan = Planes::where("cplan",$dataBody["tarea"]["cplan"])->first();
+
+			// Verificar que el tiplo del plan sea producto minimo
+			if ( $plan->ctiplan == 4 ){
+				$user = Auth::user();
+				$tarea = Tareas::create($dataBody["tarea"]);
+				Log::info('Creacion Tarea ,',['tarea'=> $tarea->id,'user' => $user->id,'estado creacion'=> $tarea->ifhecha ]);
+				return response()->json(array());
+			}else{
+				return response()->json(array("errors_form"=>array("cplan"=>"El plan no es un Producto Minimo")),400);
+			}
 		}
 	}
 }

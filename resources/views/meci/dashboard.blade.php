@@ -24,7 +24,7 @@
 
 		<div class="col-md-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Planes</div>
+				<div class="panel-heading">Planes <button class="btn btn-info" onclick="Models.Planes.recalcular(pos_recalculo)">Recalcular Puntos</button></div>
 
 				<div class="panel-body">
 				<ul class="nav nav-tabs">
@@ -65,6 +65,10 @@
 	<script src="{{ URL::asset('vendor/jstree/js/jstree.min.js') }}"></script>
 
 	<script>
+
+	function pos_recalculo(response){
+
+	}
 
 	$(".nav.nav-tabs li").click(function(){
 		var that = this
@@ -113,10 +117,8 @@
 				}
 			}
 			for ( var action of response ){
-				console.log(action)
 				var select_treeview = "#"+action.li_attr.select_treeview
 				var select_label_treeview = "li[data-treeview=#"+action.li_attr.select_treeview+"] a"
-				console.log(action)
 				$(select_label_treeview).html(action.text.truncate(15,"..."))
 				$(select_label_treeview).attr("title",action.text)
 				$(select_treeview).jstree({

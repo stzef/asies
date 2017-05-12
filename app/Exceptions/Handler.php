@@ -49,9 +49,12 @@ class Handler extends ExceptionHandler
         //\Bican\Roles\Exceptions\RoleDeniedException
         //\Bican\Roles\Exceptions\PermissionDeniedException
         //\Bican\Roles\Exceptions\LevelDeniedException
-        if ($e instanceof \Bican\Roles\Exceptions\PermissionDeniedException) {
-            // you can for example flash message, redirect...
-            var_dump("hola");exit();
+        if (
+            $e instanceof \Bican\Roles\Exceptions\RoleDeniedException ||
+            $e instanceof \Bican\Roles\Exceptions\PermissionDeniedException ||
+            $e instanceof \Bican\Roles\Exceptions\LevelDeniedException
+        ) {
+            $request->session()->flash('message', 'No tiene Persmisos para acceder a este lugar');
             return redirect()->back();
         }
         return parent::render($request, $e);
