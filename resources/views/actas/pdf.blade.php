@@ -7,7 +7,7 @@
 
 
 @section('header')
-	<img src="{{ URL::asset('img/logo.png') }}" alt="" width="10%">
+	<img src="{{ URL::asset('img/alcaldias/guataqui/logo.png') }}" alt="" width="10%">
 @endsection
 
 @section('body')
