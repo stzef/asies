@@ -114,9 +114,9 @@
                                     <i class="glyphicon glyphicon-print"></i> Imprimir
                                 </a>
 
-                            <button type="button" class="btn btn-primary">
-                                <i class="glyphicon glyphicon-send"></i> Enviar
-                            </button>
+                                <a href="{{URL::route('GET_send_acta',['numeroacta'=>$actividad->acta->numeroacta])}}"><button type="button" class="btn btn-primary">
+                                    <i class="glyphicon glyphicon-send"></i> Enviar
+                                </button></a>
                             @endif
                             <button type="button" class="btn btn-danger" data-dismiss="modal">
                                 <i class="glyphicon glyphicon-remove"></i> Salir

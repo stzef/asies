@@ -147,7 +147,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Weblee\Mandrill\MandrillServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -194,7 +194,7 @@ return [
     */
 
     'aliases' => [
-
+        'MandrillMail'  => Weblee\Mandrill\MandrillFacade::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
