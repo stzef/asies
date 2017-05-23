@@ -128,17 +128,11 @@
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2 col-form-label">Objetivos</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" id="" required name="acta[objetivos]" rows="20">
+                                        <textarea class="form-control" id="" required name="acta[objetivos]" rows="15">
                                             @foreach ($tareas as $tarea)
                                                 {{ $tarea->ntarea }}
                                             @endforeach
                                         </textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="" class="col-sm-2 col-form-label">Orden del dia</label>
-                                    <div class="col-sm-10">
-                                        <textarea class="form-control" id="" required name="acta[ordendeldia]"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
