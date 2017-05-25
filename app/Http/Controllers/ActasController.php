@@ -3,7 +3,7 @@
 namespace asies\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Weblee\Mandrill\Mail;
 use asies\Http\Requests;
 use asies\Models\Actividades;
 use asies\Models\Evidencias;
@@ -13,15 +13,14 @@ use asies\Models\Actas;
 use asies\User;
 use Illuminate\Support\Facades\Log;
 use \Auth;
-use \Mail;
 use View;
 use PDF;
 use Storage;
-
 use Illuminate\Support\Facades\Validator;
 
 class ActasController extends Controller
 {
+
 	public function __construct()
 	{
 		View::share('SHORT_NAME_APP', env("SHORT_NAME_APP"," - "));
@@ -83,23 +82,29 @@ class ActasController extends Controller
 		return response()->json(array());
 	}
 
-    /**
-     * Send an e-mail reminder to the user.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function send(Request $request)
-    {
-        //$user = User::findOrFail($id);
+/**
+	 * Send Welcome Email throught mandriall APP
+	 * https://mandrillapp.com/api/docs/messages.php.html
+	 * @param  int  $activationLink
+	 * @param  int  $userEmail
+	 * @param  int  $userName
+	 * @return Response
+	 */
+	public function send(request $request,$numeroacta){
+		$data = array(
+			'acta' => Actas::where("numeroacta",$numeroacta)->first()
+		);
+			$prueba=\Mail::send('welcome', [], function ($message) use ($data){
+				$actividad = $data['acta']->getActividad();
+				$namefile = "acta_{$data['acta']->numeroacta}.pdf";
+				$dir_path = base_path()."/public/evidencias/actividades/actividad_{$actividad->cactividad}";
+				$file_path = "$dir_path/$namefile";
+		    	$message->attach($file_path);
+		    	$message->to('sistematizaref.programador4@gmail.com')->subject('Testing mail');
+			});
+			dump($prueba->statusCode);exit();
+	}
 
-        Mail::send('emails.acta', ['foo' => "bar"], function ($m) /*use ($user)*/ {
-            $m->from('hello@app.com', 'Your Application');
-
-            $m->to("sistematizaref.programador5@gmail.com", "Carlos Alonso Turner Benites")->subject('Your Reminder!');
-        });
-    }
 
 	public function pdf(Request $request,$numeroacta){
 		//dump(phpinfo());exit();
