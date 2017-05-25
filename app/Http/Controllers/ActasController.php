@@ -100,9 +100,9 @@ class ActasController extends Controller
 				$dir_path = base_path()."/public/evidencias/actividades/actividad_{$actividad->cactividad}";
 				$file_path = "$dir_path/$namefile";
 		    	$message->attach($file_path);
-		    	$message->to('sistematizaref.programador4@gmail.com')->subject('Testing mail');
+		    	$message->to('sistematizaref.programador5@gmail.com')->subject('Testing mail');
 			});
-			dump($prueba->statusCode);exit();
+			dump($prueba);exit();
 	}
 
 

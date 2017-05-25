@@ -147,14 +147,14 @@
 				})
 			}
 
-		var to = false;
-		$('#treeview_find').keyup(function () {
-			if(to) { clearTimeout(to); }
-			to = setTimeout(function () {
-				var v = $('#treeview_find').val();
-				$(TREEVIEW_SELECT).jstree(true).search(v);
-			}, 250);
-		});
+			var to = false;
+			$('#treeview_find').keyup(function () {
+				if(to) { clearTimeout(to); }
+				to = setTimeout(function () {
+					var v = $('#treeview_find').val();
+					$(TREEVIEW_SELECT).jstree(true).search(v);
+				}, 250);
+			});
 
 		})
 	</script>

@@ -15,29 +15,26 @@
 
 		<div class="col-md-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">
-					Planes
-				</div>
 
 				<div class="panel-body">
-					<ul class="nav nav-tabs">
-						<li data-treeview="#treeview_1" class="active"><a data-toggle="tab" href="#home">Home</a></li>
-						<li data-treeview="#treeview_2" ><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-						<li data-treeview="#treeview_3" ><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-					</ul>
+				<ul class="nav nav-tabs">
+					<li data-treeview="#treeview_1" class="active"><a data-toggle="tab" href="#home">Sistema 1</a></li>
+					<li data-treeview="#treeview_2" ><a data-toggle="tab" href="#menu1">Sistema 2</a></li>
+					<li data-treeview="#treeview_3" ><a data-toggle="tab" href="#menu2">Sistema 3</a></li>
+				</ul>
 
-					<input type="text" id="treeview_find" value="" placeholder="Buscar..." class="input" style="margin:0em auto 1em auto; display:block; padding:4px; border-radius:4px; border:1px solid silver;">
-					<div class="tab-content">
-						<div id="home" class="tab-pane fade in active" data-treeview="#treeview_1">
-							<div id="treeview_1"></div>
-						</div>
-						<div id="menu1" class="tab-pane fade" data-treeview="#treeview_2">
-							<div id="treeview_2"></div>
-						</div>
-						<div id="menu2" class="tab-pane fade" data-treeview="#treeview_3">
-							<div id="treeview_3"></div>
-						</div>
+				<input type="text" id="treeview_find" value="" placeholder="Buscar..." class="input" style="margin:0em auto 1em auto; display:block; padding:4px; border-radius:4px; border:1px solid silver;">
+				<div class="tab-content">
+					<div id="home" class="tab-pane fade in active" data-treeview="#treeview_1">
+						<div id="treeview_1"></div>
 					</div>
+					<div id="menu1" class="tab-pane fade" data-treeview="#treeview_2">
+						<div id="treeview_2"></div>
+					</div>
+					<div id="menu2" class="tab-pane fade" data-treeview="#treeview_3">
+						<div id="treeview_3"></div>
+					</div>
+				</div>
 				</div>
 			</div>
 		</div>
@@ -77,13 +74,22 @@
 		$.jstree.defaults.checkbox.keep_selected_style = true
 		$.jstree.defaults.core.multiple = false
 
+		waitingDialog.show("Cargando Arbol...")
 		Models.Planes.treeview(function(response){
-
-			console.log(response)
+			waitingDialog.hide()
+			$.jstree.defaults.contextmenu.items = {
+				showDetail : {
+					action : function(){
+						var item = $(TREEVIEW_SELECT).jstree('get_selected',true)[0]
+						console.log(item)
+						window.open("/planes/status/__cplan__".set("__cplan__",item.li_attr.cplan))
+					},
+					label : "Ver en Detalle"
+				}
+			}
 			for ( var action of response ){
 				var select_treeview = "#"+action.li_attr.select_treeview
 				var select_label_treeview = "li[data-treeview=#"+action.li_attr.select_treeview+"] a"
-				console.log(action)
 				$(select_label_treeview).html(action.text.truncate(15,"..."))
 				$(select_label_treeview).attr("title",action.text)
 				$(select_treeview).jstree({
@@ -93,7 +99,7 @@
 							"icon" : "/vendor/jstree/img/module.png"
 						},
 						"tareas" : {
-							"icon" : "/vendor/jstree/img/"
+							"icon" : "/vendor/jstree/img/tarea.png"
 						},
 						"componente" : {
 							"icon" : "/vendor/jstree/img/component.png"
@@ -110,18 +116,19 @@
 				if ( window.ASIES_IS_WIN_POPUOT ) $(select_treeview).on('changed.jstree', returnTask)
 			}
 
+
+			var to = false;
+			$('#treeview_find').keyup(function () {
+				if(to) { clearTimeout(to); }
+				to = setTimeout(function () {
+					var v = $('#treeview_find').val();
+					$(TREEVIEW_SELECT).jstree(true).search(v);
+				}, 250);
+			});
+
 		})
 
-	</script>
-	<script>
-				var to = false;
-		$('#treeview_find').keyup(function () {
-			if(to) { clearTimeout(to); }
-			to = setTimeout(function () {
-				var v = $('#treeview_find').val();
-				$(TREEVIEW_SELECT).jstree(true).search(v);
-			}, 250);
-		});
+
 	</script>
 
 

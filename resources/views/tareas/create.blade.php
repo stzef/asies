@@ -17,10 +17,11 @@
 				<div class="panel-body">
 					<form class="form-horizontal">
 
+						<input type="hidden" class="form-control" id="tarea_ctarea" name="tarea[ctarea]" value="@if( $tarea){{ $tarea->ctarea }}@endif">
 						<div class="form-group">
 							<label for="tarea_ntarea" class="col-sm-2 control-label">Nombre</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="tarea_ntarea" name="tarea[ntarea]" placeholder="Nombre">
+								<input type="text" class="form-control" id="tarea_ntarea" name="tarea[ntarea]" placeholder="Nombre" value="@if( $tarea){{ $tarea->ntarea }}@endif">
 							</div>
 						</div>
 
@@ -29,7 +30,7 @@
 							<label for="tarea_cplan" class="col-sm-2 control-label">Prod. Min</label>
 							<div class="col-sm-10">
 								<div class="input-group">
-									<input type="text" class="form-control" id="tarea_cplan" name="tarea[cplan]" placeholder="Producto Minimo">
+									<input type="text" class="form-control" id="tarea_cplan" name="tarea[cplan]" placeholder="Producto Minimo" value="@if( $tarea){{ $tarea->cplan }}@endif">
 									<span class="input-group-addon"><i class="fa fa-search" data-find-task data-input-reference="#tarea_cplan"></i></span>
 								</div>
 							</div>
@@ -40,7 +41,7 @@
 								<div class="form-group">
 									<label for="tarea_valor_tarea" class="col-sm-2 control-label">Valor Tarea</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" id="tarea_valor_tarea" name="tarea[valor_tarea]" placeholder="Valor Tarea">
+										<input type="text" class="form-control" id="tarea_valor_tarea" name="tarea[valor_tarea]" placeholder="Valor Tarea" value="@if( $tarea){{ $tarea->valor_tarea }}@endif">
 									</div>
 								</div>
 							</div>
@@ -48,7 +49,7 @@
 								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">
 										<div class="checkbox">
-											<label> <input type="checkbox" name="tarea[ifhecha]"> Hecha </label>
+											<label> <input type="checkbox" name="tarea[ifhecha]" @if( $tarea) @if( $tarea->ifhecha ) checked @endif @endif> Hecha </label>
 										</div>
 									</div>
 								</div>
@@ -60,10 +61,17 @@
 							<a type="button" class="btn btn-danger" href="{{ URL::route('app_dashboard') }}" data-dismiss="modal">
 								<i class="glyphicon glyphicon-remove"></i> Cancelar
 							</a>
-							<button type="submit" class="btn btn-success">
-								<i class="glyphicon glyphicon-plus"></i>
-								Crear
-							</button>
+							@if ( $action == "create" )
+								<button type="submit" class="btn btn-success">
+									<i class="glyphicon glyphicon-plus"></i>
+									Crear
+								</button>
+							@else
+								<button type="submit" class="btn btn-success">
+									<i class="glyphicon glyphicon-pencil"></i>
+									Editar
+								</button>
+							@endif
 
 						</div>
 
@@ -82,8 +90,8 @@
 		var that = this
 		event.preventDefault()
 		$.ajax({
-			url:"/tareas/create",
-			type:"POST",
+			url:"{{ $ajax['url'] }}",
+			type:"{{ $ajax['method'] }}",
 			data: serializeForm(that),
 			cache:false,
 			contentType: false,

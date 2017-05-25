@@ -2,7 +2,8 @@
 
 namespace asies\Models;
 use asies\User;
-
+use \Auth;
+use \Log;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -87,7 +88,7 @@ class Actividades extends Model
         if( AsignacionTareas::where(array('cactividad' => $actividad->cactividad ,'ctarea'=>$data["ctarea"],'user'=>$data["user"]))->exists() ){
             AsignacionTareas::where(array('cactividad' => $actividad->cactividad ,'ctarea'=>$data["ctarea"],'user'=>$data["user"]))->update(['ctirelacion'=>$data["ctirelacion"]]);
             $obj = AsignacionTareas::where(array('cactividad' => $actividad->cactividad ,'ctarea'=>$data["ctarea"],'user'=>$data["user"]))->first();
-            Log::info('responsable editado en tarea,',['user (edito)' => $user->id, '' => $data['cactividad'] ,'tarea' => $data['ctarea'] , 'user (responsable)' =>$data["user"]]);
+            Log::info('responsable editado en tarea,',['user (edito)' => $user->id, '' => $actividad->cactividad ,'tarea' => $data['ctarea'] , 'user (responsable)' =>$data["user"]]);
             $data = array("message"=>"Se edito la <b>Responsabilidad</b> del Usuario.");
         }else{
             $obj = AsignacionTareas::create($dataCreataion);
