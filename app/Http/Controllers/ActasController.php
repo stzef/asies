@@ -42,7 +42,6 @@ class ActasController extends Controller
 			[
 				'numeroacta' => 'required',
 				'objetivos' => 'required',
-				'ordendeldia' => 'required|max:400',
 				'fhini' => 'required|date',
 				'fhfin' => 'required|date',
 				'sefirma' => 'required|max:100',
@@ -53,7 +52,6 @@ class ActasController extends Controller
 			[
 				'numeroacta.required' => 'required',
 				'objetivos.required' => 'required',
-				'ordendeldia.required' => 'required',
 				'fhini.required' => 'required',
 				'fhfin.required' => 'required',
 				'sefirma.required' => 'required',
@@ -130,7 +128,7 @@ class ActasController extends Controller
 			if ( mkdir( $dir_path, 0777 ) ){
 				return $pdf->save( $file_path )->stream();
 			}else{
-				
+
 				return view('errors/generic',array('title' => 'Error Interno.', 'message' => "Hay Ocurrido un error Interno, Por favor Intente de Nuevo" ));
 			}
 		}else{

@@ -333,8 +333,6 @@ function editar(event,button){
 	var tarea = $("#tarea").val(data[cols.ctarea]).change();
 	var responsable = $("#respo").val(data[cols.crespo]).change();
 	var tiresponsable = $("#tirespo").val(data[cols.ctirela]).change();
-	console.log(tarea)
-	console.log(data)
 }
 function borrar(event,button){
 	table.row( $(button).parents("tr")).remove().draw(false);
