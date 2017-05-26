@@ -115,119 +115,253 @@
                     </div>
 
                 <div class="row modal-body">
-                    <form id="form_crear_acta" class="form-horizontal">
-                            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label for="number_acta" class="col-sm-2 col-form-label">Numero</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="number_acta" required name="acta[numeroacta]" value="{{$numacta}}" readonly required>
-                                    </div>
-                                </div>
 
-                                <div class="form-group row">
-                                    <label for="" class="col-sm-2 col-form-label">Objetivos</label>
-                                    <div class="col-sm-10">
-                                        <textarea class="form-control" id="" required name="acta[objetivos]" rows="15">
-                                            @foreach ($tareas as $tarea)
-                                                {{ $tarea->ntarea }}
-                                            @endforeach
-                                        </textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="plan_nombre" class="col-sm-2 col-form-label">Pie de firma</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="plan_nombre" required name="acta[sefirma]" placeholder="Ciudad, DD/MM/AA">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="" class="col-sm-2 col-form-label">Elaboro </label>
-                                    <div class="col-sm-10">
-                                        <select required name="acta[user_elaboro]" class="form-control">
-                                            <option value="">Seleccione...</option>
-                                                @foreach ($usuarios as $usuario)
-                                                    <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
-                                                @endforeach
-                                        </select>
-                                    </div>
-                                </div>
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#form_data_acta">Datos</a></li>
+                        <li><a data-toggle="tab" href="#tabla_responsables">Responsables</a></li>
+                        <li><a data-toggle="tab" href="#tabla_compromisos">Compromisos</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="form_data_acta" class="tab-pane fade in active">
+                            <form id="form_crear_acta" class="form-horizontal">
+                                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="number_acta" class="col-sm-2 col-form-label">Numero</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="number_acta" required name="acta[numeroacta]" value="{{$numacta}}" readonly required>
+                                            </div>
+                                        </div>
 
-                                <div class="form-group row">
-                                    <label for="" class="col-sm-2 col-form-label">Reviso </label>
-                                    <div class="col-sm-10">
-                                        <select required name="acta[user_reviso]" class="form-control">
-                                            <option value="">Seleccione...</option>
-                                                @foreach ($usuarios as $usuario)
-                                                    <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
-                                                @endforeach
-                                        </select>
+                                        <div class="form-group row">
+                                            <label for="" class="col-sm-2 col-form-label">Objetivos</label>
+                                            <div class="col-sm-10">
+                                                <textarea class="form-control" id="" required name="acta[objetivos]" rows="15">
+                                                    @foreach ($tareas as $tarea)
+                                                        {{ $tarea->ntarea }}
+                                                    @endforeach
+                                                </textarea>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="col-md-6">
+                                            <div class="form-group row">
+                                                    <label for="" class="col-sm-4 col-form-label">Hora Inicial</label>
+                                                    <div class='col-sm-8 input-group datetime'>
+                                                        <input type='text' class="form-control" required name="acta[fhini]"/>
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-time"></span>
+                                                        </span>
+                                                    </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                    <label for="" class="col-sm-4 col-form-label">Hora Final</label>
+                                                    <div class='col-sm-8 input-group datetime'>
+                                                        <input type='text' class="form-control" required name="acta[fhfin]"/>
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-time"></span>
+                                                        </span>
+                                                    </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="" class="col-sm-2 col-form-label">Orden del dia</label>
+                                                <div class="col-sm-10">
+                                                    <textarea class="form-control" id="" required name="acta[ordendeldia]"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="plan_nombre" class="col-sm-2 col-form-label">Pie de firma</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="plan_nombre" required name="acta[sefirma]" placeholder="Ciudad, DD/MM/AA">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="" class="col-sm-2 col-form-label">Elaboro </label>
+                                                <div class="col-sm-10">
+                                                    <select required name="acta[user_elaboro]" class="form-control">
+                                                        <option value="">Seleccione...</option>
+                                                            @foreach ($usuarios as $usuario)
+                                                                <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
+                                                            @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
 
-                                <div class="form-group row">
-                                    <label for="" class="col-sm-2 col-form-label">Aprobo </label>
-                                    <div class="col-sm-10">
-                                        <select required name="acta[user_aprobo]" class="form-control">
-                                            <option value="">Seleccione...</option>
-                                                @foreach ($usuarios as $usuario)
-                                                    <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
-                                                @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="col-md-8">
-                                    <div class="form-group row">
-                                            <label for="" class="col-sm-4 col-form-label">Hora Inicial</label>
-                                            <div class='col-sm-8 input-group datetime'>
-                                                <input type='text' class="form-control" required name="acta[fhini]"/>
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-time"></span>
-                                                </span>
+                                            <div class="form-group row">
+                                                <label for="" class="col-sm-2 col-form-label">Reviso </label>
+                                                <div class="col-sm-10">
+                                                    <select required name="acta[user_reviso]" class="form-control">
+                                                        <option value="">Seleccione...</option>
+                                                            @foreach ($usuarios as $usuario)
+                                                                <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
+                                                            @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="" class="col-sm-2 col-form-label">Aprobo </label>
+                                                <div class="col-sm-10">
+                                                    <select required name="acta[user_aprobo]" class="form-control">
+                                                        <option value="">Seleccione...</option>
+                                                            @foreach ($usuarios as $usuario)
+                                                                <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
+                                                            @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
                                     </div>
-                                    <div class="form-group row">
-                                            <label for="" class="col-sm-4 col-form-label">Hora Final</label>
-                                            <div class='col-sm-8 input-group datetime'>
-                                                <input type='text' class="form-control" required name="acta[fhfin]"/>
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-time"></span>
-                                                </span>
-                                            </div>
+                            </form>
+                        </div>
+                        <div id="tabla_responsables" class="tab-pane fade">
+                            <div class="col-md-12">
+                                    <div class="table-responsive col-md-12">
+                                        <form id="usuario_planes">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="50%">
+                                                            <div class="input-group">
+                                                                <select name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
+                                                                    <option value="">Tareas</option>}
+                                                                    @foreach ($tareas as $tarea)
+                                                                        <option value="{{$tarea->ctarea}}">{{$tarea->ntarea}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                                <span class="input-group-addon" data-find-task data-input-reference="#tarea"><i class="fa fa-search"></i></span>
+                                                            </div>
+                                                        </td>
+                                                        <td width="25%">
+                                                            <select name="tareasusuarios[user]" id="respo" required class="form-control">
+                                                                <option value="">Responsable</option>
+                                                                @foreach ($usuarios as $usuario)
+                                                                    <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td width="25%">
+                                                            <select name="tareasusuarios[ctirelacion]" id="tirespo" required class="form-control" >
+                                                                <option value="">Tipo de responsabilidad</option>
+                                                                @foreach ($relaciones as $relacion)
+                                                                    <option value = "{{$relacion->ctirelacion}}">{{$relacion->ntirelacion}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <button id="agregar" type="submit" class="btn btn-info">
+                                                                <i class="glyphicon glyphicon-plus"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </form>
+                                      <div class="col-md-12">
+                                            <table id="usuarios" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ctarea</th>
+                                                        <th>Tarea</th>
+                                                        <th>cusu</th>
+                                                        <th>Responsable</th>
+                                                        <th>ctirelacion</th>
+                                                        <th>Responsabilidad</th>
+                                                        <th>Realizada</th>
+                                                        <th>Editar</th>
+                                                        <th>Borrar</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($asignacion as $asignar)
+                                                        <tr>
+                                                            <td>{{$asignar->ctarea}}</td>
+                                                            <td title="{{$asignar->tarea->ntarea}}">{{ str_limit($asignar->tarea->ntarea, 30 ,$end="...") }}</td>
+                                                            <td>{{$asignar->user}}</td>
+                                                            <td>{{$asignar->usuario->name}}</td>
+                                                            <td>{{$asignar->ctirelacion}}</td>
+                                                            <td>{{$asignar->relacion->ntirelacion}}</td>
+                                                            <td> @if( $asignar->tarea->ifhecha ) Si @else No @endif </td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>                                
                                     </div>
-                                    <table id="usuarios" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>ctarea</th>
-                                                <th>Tarea</th>
-                                                <th>cusu</th>
-                                                <th>Responsable</th>
-                                                <th>ctirelacion</th>
-                                                <th>Responsabilidad</th>
-                                                <th>Realizada</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($asignacion as $asignar)
-                                                <tr>
-                                                    <td>{{$asignar->ctarea}}</td>
-                                                    <td title="{{$asignar->tarea->ntarea}}">{{ str_limit($asignar->tarea->ntarea, 30 ,$end="...") }}</td>
-                                                    <td>{{$asignar->user}}</td>
-                                                    <td>{{$asignar->usuario->name}}</td>
-                                                    <td>{{$asignar->ctirelacion}}</td>
-                                                    <td>{{$asignar->relacion->ntirelacion}}</td>
-                                                    <td> @if( $asignar->tarea->ifhecha ) Si @else No @endif </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
                             </div>
-                    </form>
+                        </div>
+                        <div id="tabla_compromisos" class="tab-pane fade">
+                            <div class="col-md-12">
+                                    <div class="table-responsive col-md-12">
+                                        <form id="nuevas_tareas">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="50%">
+                                                            <div class="form-group">
+                                                                <label for="tarea_cplan" class="col-sm-2 control-label">Nombre Tarea</label>
+                                                                <div class="col-sm-10">
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="form-control" id="tarea_ntarea" name="tarea[ntarea]" placeholder="Nombre Tarea">
+                                                                        <span class="input-group-addon"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td width="50%">
+                                                            <div class="form-group">
+                                                                <label for="tarea_cplan" class="col-sm-2 control-label">Prod. Min</label>
+                                                                <div class="col-sm-10">
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="form-control" id="tarea_cplan" name="tarea[cplan]" placeholder="Producto Minimo">
+                                                                        <span class="input-group-addon"><i class="fa fa-search" data-find-task data-input-reference="#tarea_cplan"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group row">
+                                                                <div class="input-group">
+                                                                    <button width="50%" id="agregar" type="submit" class="btn btn-info">
+                                                                        <i class="glyphicon glyphicon-plus"></i>
+                                                                    </button>
+                                                                                                       
+                                                               </div>                                             
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                      </form>
+                                      <div class="col-md-12">
+                                            <table id="nuevas" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Tarea</th>
+                                                        <th>cplan</th>
+                                                        <th>Producto Minimo</th>
+                                                        <th>Editar</th>
+                                                        <th>Borrar</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>  
+                                                        <tr>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>                                
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                    <div class="modal-footer">
+            <div class="modal-footer">
                         <button type="button" class="btn btn-primary">
                             <i class="glyphicon glyphicon-print"></i> Imprimir
                         </button>
@@ -351,6 +485,7 @@
                 defaultDate: moment().format("YYYY/MM/DD HH:mm:ss")
             });
         });
+
         var cols = {
             ctarea : 0,
             ntarea : 1,
@@ -359,14 +494,32 @@
             ctirela: 4,
             ntirela: 5,
         }
+        var cols2 = {
+            ntarea : 0,
+            cplan : 1,
+            nplan : 2,
+        }
+
         var table= $("#usuarios").DataTable({
+            "paging":   true,
+            "ordering": false,
+            "searching": true,
+            "info":     false,
+            "language": DTspanish,
+            "columnDefs": [{
+                "targets": [ cols.ctarea,cols.crespo,cols.ctirela ],
+                "visible": false,
+            },]
+        }) 
+
+        var table= $("#nuevas").DataTable({
             "paging":   false,
             "ordering": false,
             "searching": false,
             "info":     false,
             "language": DTspanish,
             "columnDefs": [{
-                "targets": [ cols.ctarea,cols.crespo,cols.ctirela ],
+                "targets": [ cols2.cplan ],
                 "visible": false,
             },]
         })
@@ -398,7 +551,82 @@
             })
         })
     </script>
+    <script type="text/javascript">
+        $("#nuevas_tareas").on("submit" , function(event){
+            event.preventDefault()
+            var that = this
+            var cactividad = $("#cactividad").val();
+            var data = serializeForm(that);
+            data.append("actividad",cactividad)
+            var cplan = "202";
+            var ntarea = $( "#tarea_ntarea" ).val();
+            var nplan = $( "#tarea_cplan" ).val();
+            table
+                .row.add([ntarea,cplan,nplan,
+                    "<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>"+
+                        "<i class='fa fa-pencil-square-o'></i>"+
+                    "</button>",
+                    "<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)''>"+
+                        "<i class='fa fa-trash-o'></i>"+
+                    "</button>"])
+                .draw()
+        })
 
+
+
+        $("#usuario_planes").on("submit" , function(event){
+        event.preventDefault()
+        var that = this
+        var ctarea = $( "#tarea option:selected" ).val();
+        var cactividad = $("#cactividad").val();
+
+        var data = serializeForm(that)
+        data.append("tareasusuarios[cactividad]",cactividad)
+        /*arreglar*/
+        var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
+        $.ajax({
+            "url":base_url_add_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
+            "type":"POST",
+            data: data,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success: function(){
+                listar();
+            }
+        })
+    });
+    function editar(event,button){
+        var data = table.row( $(button).parents("tr")).data();
+        table.row( $(button).parents("tr")).remove().draw(false);
+        var tarea = $("#tarea").val(data[cols.ctarea]).change();
+        var responsable = $("#respo").val(data[cols.crespo]).change();
+        var tiresponsable = $("#tirespo").val(data[cols.ctirela]).change();
+        console.log(tarea)
+        console.log(data)
+    }
+    function borrar(event,button){
+        table.row( $(button).parents("tr")).remove().draw(false);
+    }
+    var listar = function(){
+        var ctarea = $( "#tarea option:selected" ).val();
+        var cresponsable = $( "#respo option:selected" ).val();
+        var ctirespo = $( "#tirespo option:selected" ).val();
+        var ntarea = $( "#tarea option:selected" ).text();
+        var nresponsable = $( "#respo option:selected" ).text();
+        var ntirespo = $( "#tirespo option:selected" ).text();
+        //$("#tarea").val()
+        table
+            .row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,
+                "<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>"+
+                    "<i class='fa fa-pencil-square-o'></i>"+
+                "</button>",
+                "<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)''>"+
+                    "<i class='fa fa-trash-o'></i>"+
+                "</button>"])
+            .draw()
+    }
+    </script>
 	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
 	<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/vendor/jquery.ui.widget.js') }}"></script>

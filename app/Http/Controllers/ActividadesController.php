@@ -55,6 +55,9 @@ class ActividadesController extends Controller
 				$tareas = $actividad->getTareas();
 				$usuarios = User::all();
 				$numacta = Actas::genCode();
+				$usuarios = User::all();
+				$tiactividades = TiActividades::all();
+				$relaciones = TiRelaciones::all();
 				$asignacion = $actividad->getAsignacion();
 				//dump($asignacion);exit();
 				return view( 'actividades.doActivity' , array(
@@ -63,6 +66,9 @@ class ActividadesController extends Controller
 					'usuarios' => $usuarios,
 					'numacta' => $numacta,
 					'asignacion' => $asignacion,
+					"tiactividades" => $tiactividades,
+					"usuarios" => $usuarios,
+					"relaciones" => $relaciones
  					));
 			}
 		}

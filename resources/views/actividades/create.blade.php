@@ -320,11 +320,12 @@
 
 
 <script type="text/javascript">
-$("#usuario_planes").on("submit" , function(event){
-	event.preventDefault()
-	var that = this
-	var ctarea = $( "#tarea option:selected" ).val();
-	var cactividad = $("input#actividad_cactividad").val();
+	$("#usuario_planes").on("submit" , function(event){
+		event.preventDefault()
+		var that = this
+		var ctarea = $( "#tarea option:selected" ).val();
+		var cactividad = $("input#actividad_cactividad").val();
+
 
 	var data = serializeForm(that)
 	data.append("tareasusuarios[cactividad]",cactividad)
