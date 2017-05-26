@@ -84,7 +84,7 @@ class ActasController extends Controller
 		return response()->json(array());
 	}
 
-/**
+	/**
 	 * Send Welcome Email throught mandriall APP
 	 * https://mandrillapp.com/api/docs/messages.php.html
 	 * @param  int  $activationLink
@@ -104,9 +104,7 @@ class ActasController extends Controller
 		    	$message->attach($file_path);
 		    	$message->to('sistematizaref.programador4@gmail.com')->subject('Testing mail');
 			});
-			dump($prueba->statusCode);exit();
 	}
-
 
 	public function pdf(Request $request,$numeroacta){
 		//dump(phpinfo());exit();
@@ -142,5 +140,12 @@ class ActasController extends Controller
 			return $pdf->save( $file_path )->stream();
 		}
 
+	}
+
+	public function list(Request $request){
+		if ($request->isMethod('get')){
+			$actas = Actas::all();
+			return view( 'actas.list' , array("acta" => $actas));	
+		}
 	}
 }

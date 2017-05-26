@@ -2,9 +2,9 @@
 
 namespace asies\Models;
 use asies\User;
-
+use \Auth;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Log;
 /**
  * @property integer $cactividad
  * @property integer $cacta

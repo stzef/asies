@@ -10,7 +10,8 @@ use asies\Models\Tareas;
 use asies\Models\Actividades;
 use View;
 use Illuminate\Support\Facades\Log;
-
+use asies\User;
+use \Auth;
 class AsignacionController extends Controller
 {
 	public function __construct()

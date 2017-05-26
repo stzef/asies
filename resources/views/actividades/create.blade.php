@@ -123,7 +123,7 @@
 										<tr>
 											<td width="50%">
 												<div class="input-group">
-													<select disabled name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
+													<select  name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
 														<option value="">Tareas</option>}
 														@foreach ($tareas as $tarea)
 															<option value="{{$tarea->ctarea}}">{{$tarea->ntarea}}</option>
@@ -133,7 +133,7 @@
 												</div>
 											</td>
 											<td width="25%">
-												<select disabled name="tareasusuarios[user]" id="respo" required class="form-control">
+												<select  name="tareasusuarios[user]" id="respo" required class="form-control">
 													<option value="">Responsable</option>
 													@foreach ($usuarios as $usuario)
 														<option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
@@ -141,7 +141,7 @@
 												</select>
 											</td>
 											<td width="25%">
-												<select disabled name="tareasusuarios[ctirelacion]" id="tirespo" required class="form-control" >
+												<select  name="tareasusuarios[ctirelacion]" id="tirespo" required class="form-control" >
 													<option value="">Tipo de responsabilidad</option>
 													@foreach ($relaciones as $relacion)
 														<option value = "{{$relacion->ctirelacion}}">{{$relacion->ntirelacion}}</option>
@@ -149,7 +149,7 @@
 												</select>
 											</td>
 											<td>
-												<button disabled id="agregar" type="submit" class="btn btn-info">
+												<button  id="agregar" type="submit" class="btn btn-info">
 													<i class="glyphicon glyphicon-plus"></i>
 												</button>
 											</td>
@@ -305,57 +305,57 @@
 
 
 <script type="text/javascript">
-$("#usuario_planes").on("submit" , function(event){
-	event.preventDefault()
-	var that = this
-	var ctarea = $( "#tarea option:selected" ).val();
-	var cactividad = $("input#actividad_cactividad").val();
+	$("#usuario_planes").on("submit" , function(event){
+		event.preventDefault()
+		var that = this
+		var ctarea = $( "#tarea option:selected" ).val();
+		var cactividad = $("input#actividad_cactividad").val();
 
-	var data = serializeForm(that)
-	data.append("tareasusuarios[cactividad]",cactividad)
-	/*arreglar*/
-	var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
-	$.ajax({
-		"url":base_url_add_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
-		"type":"POST",
-		data: data,
-		cache:false,
-		contentType: false,
-		processData: false,
-		success: function(){
-			listar();
-		}
-	})
-});
-function editar(event,button){
-	var data = table.row( $(button).parents("tr")).data();
-	table.row( $(button).parents("tr")).remove().draw(false);
-	var tarea = $("#tarea").val(data[cols.ctarea]).change();
-	var responsable = $("#respo").val(data[cols.crespo]).change();
-	var tiresponsable = $("#tirespo").val(data[cols.ctirela]).change();
-	console.log(tarea)
-	console.log(data)
-}
-function borrar(event,button){
-	table.row( $(button).parents("tr")).remove().draw(false);
-}
-var listar = function(){
-	var ctarea = $( "#tarea option:selected" ).val();
-	var cresponsable = $( "#respo option:selected" ).val();
-	var ctirespo = $( "#tirespo option:selected" ).val();
-	var ntarea = $( "#tarea option:selected" ).text();
-	var nresponsable = $( "#respo option:selected" ).text();
-	var ntirespo = $( "#tirespo option:selected" ).text();
-	//$("#tarea").val()
-	table
-		.row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,
-			"<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>"+
-				"<i class='fa fa-pencil-square-o'></i>"+
-			"</button>",
-			"<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)''>"+
-				"<i class='fa fa-trash-o'></i>"+
-			"</button>"])
-		.draw()
-}
+		var data = serializeForm(that)
+		data.append("tareasusuarios[cactividad]",cactividad)
+		/*arreglar*/
+		var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
+		$.ajax({
+			"url":base_url_add_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
+			"type":"POST",
+			data: data,
+			cache:false,
+			contentType: false,
+			processData: false,
+			success: function(){
+				listar();
+			}
+		})
+	});
+	function editar(event,button){
+		var data = table.row( $(button).parents("tr")).data();
+		table.row( $(button).parents("tr")).remove().draw(false);
+		var tarea = $("#tarea").val(data[cols.ctarea]).change();
+		var responsable = $("#respo").val(data[cols.crespo]).change();
+		var tiresponsable = $("#tirespo").val(data[cols.ctirela]).change();
+		console.log(tarea)
+		console.log(data)
+	}
+	function borrar(event,button){
+		table.row( $(button).parents("tr")).remove().draw(false);
+	}
+	var listar = function(){
+		var ctarea = $( "#tarea option:selected" ).val();
+		var cresponsable = $( "#respo option:selected" ).val();
+		var ctirespo = $( "#tirespo option:selected" ).val();
+		var ntarea = $( "#tarea option:selected" ).text();
+		var nresponsable = $( "#respo option:selected" ).text();
+		var ntirespo = $( "#tirespo option:selected" ).text();
+		//$("#tarea").val()
+		table
+			.row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,
+				"<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>"+
+					"<i class='fa fa-pencil-square-o'></i>"+
+				"</button>",
+				"<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)''>"+
+					"<i class='fa fa-trash-o'></i>"+
+				"</button>"])
+			.draw()
+	}
 </script>
 @endsection
