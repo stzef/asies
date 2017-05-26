@@ -102,10 +102,6 @@ class ActasController extends Controller
 		    	$message->attach($file_path);
 		    	$message->to('sistematizaref.programador5@gmail.com')->subject('Testing mail');
 			});
-<<<<<<< HEAD
-=======
-			dump($prueba);exit();
->>>>>>> 7733955988b8330171c1b751a1caa4c06cee49c4
 	}
 
 	public function pdf(Request $request,$numeroacta){

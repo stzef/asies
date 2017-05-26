@@ -75,6 +75,7 @@ class TareasController extends Controller
 					"url" => "/tareas/edit/$ctarea" ,
 					"method" => "POST" ,
 				),
+				"action" => "edit",
 				"crud_action" => "edit",
 				"tarea" => $tarea,
 				)
@@ -133,6 +134,7 @@ class TareasController extends Controller
 					"url" => "/tareas/create" ,
 					"method" => "POST" ,
 				),
+				"action" => "create",
 				"crud_action" => "create",
 				"tarea" => null,
 				)
