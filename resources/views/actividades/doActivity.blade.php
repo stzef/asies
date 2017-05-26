@@ -133,46 +133,16 @@
                                             </div>
                                         </div>
 
-                                <div class="form-group row">
-                                    <label for="" class="col-sm-2 col-form-label">Objetivos</label>
-                                    <div class="col-sm-10">
-                                        <textarea class="form-control" id="" required name="acta[objetivos]" rows="15">
-                                            @foreach ($tareas as $tarea)
-                                                {{ $tarea->ntarea }}
-                                            @endforeach
-                                        </textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="plan_nombre" class="col-sm-2 col-form-label">Pie de firma</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="plan_nombre" required name="acta[sefirma]" placeholder="Ciudad, DD/MM/AA">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="" class="col-sm-2 col-form-label">Elaboro </label>
-                                    <div class="col-sm-10">
-                                        <select required name="acta[user_elaboro]" class="form-control">
-                                            <option value="">Seleccione...</option>
-                                                @foreach ($usuarios as $usuario)
-                                                    <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
-                                                @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
                                         <div class="form-group row">
                                             <label for="" class="col-sm-2 col-form-label">Objetivos</label>
                                             <div class="col-sm-10">
-                                                <textarea class="form-control" id="" required name="acta[objetivos]" rows="20">
+                                                <textarea class="form-control" id="" required name="acta[objetivos]" rows="15">
                                                     @foreach ($tareas as $tarea)
                                                         {{ $tarea->ntarea }}
                                                     @endforeach
                                                 </textarea>
                                             </div>
                                         </div>
-                                        
-
                                     </div>
                                     <div class="col-md-6">
                                             <div class="form-group row">

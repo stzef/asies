@@ -3,7 +3,6 @@
 namespace asies\Models;
 use asies\User;
 use \Auth;
-use \Log;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 /**
