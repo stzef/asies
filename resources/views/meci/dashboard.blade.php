@@ -113,10 +113,25 @@
 				showDetail : {
 					action : function(){
 						var item = $(TREEVIEW_SELECT).jstree('get_selected',true)[0]
-						console.log(item)
-						window.open("/planes/status/__cplan__".set("__cplan__",item.li_attr.cplan))
+						if ( item.li_attr.cplan ){
+							window.open("/planes/status/__cplan__".set("__cplan__",item.li_attr.cplan))
+						}else{
+							alertify.warning("Este item no es un Plan")
+						}
+
 					},
 					label : "Ver en Detalle"
+				},
+				reprogramTask : {
+					action : function(){
+						var item = $(TREEVIEW_SELECT).jstree('get_selected',true)[0]
+						if ( item.li_attr.ctarea ){
+
+						}else{
+							alertify.warning("Este item no es Una Tarea")
+						}
+					},
+					label : "Reprogramar Tarea"
 				}
 			}
 			for ( var action of response ){

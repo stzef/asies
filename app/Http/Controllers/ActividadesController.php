@@ -86,10 +86,11 @@ class ActividadesController extends Controller
 				"usuarios" => $usuarios,
 				"relaciones" => $relaciones,
 				"ajax" => array(
-					"url" => "/tareas/edit/$cactividad" ,
+					"url" => "/actividades/edit/$cactividad" ,
 					"method" => "POST" ,
 				),
 				"action" => "edit",
+				"crud_action" => "edit",
 				"actividad" => $actividad,
 			);
 			return view('actividades/create',$context);
@@ -106,7 +107,6 @@ class ActividadesController extends Controller
 				'ffin' => 'required|date',
 				'ifacta' => 'required|boolean',
 				'ifarchivos' => 'required|boolean',
-				'descripcion' => 'required',
 			],
 			[
 				#'cestado.required' => 'required',
@@ -118,7 +118,6 @@ class ActividadesController extends Controller
 				'ffin.required' => 'required',
 				'ifacta.required' => 'required',
 				'ifarchivos.required' => 'required',
-				'descripcion.required' => 'required',
 			]
 		);
 
@@ -126,9 +125,10 @@ class ActividadesController extends Controller
 			$messages = $validator->messages();
 			return response()->json(array("errors_form" => $messages),400);
 		}else{
-			$actividad = Actividades::create($dataBody["actividad"]);
+			Actividades::where("cactividad",$cactividad)->update($dataBody["actividad"]);
 			//dump($actividad->id);exit();
 			$user = Auth::user();
+			$actividad = Actividades::where('cactividad',$cactividad)->first();
 			Log::info('Creacion de actividad,',['actividad'=>$actividad->id,'ctiactividad'=> $dataBody['actividad']['ctiactividad'],'user' => $user->id ]);
 		}
 
@@ -150,10 +150,11 @@ class ActividadesController extends Controller
 				"usuarios" => $usuarios,
 				"relaciones" => $relaciones,
 				"ajax" => array(
-					"url" => "/tareas/create" ,
+					"url" => "/actividades/create" ,
 					"method" => "POST" ,
 				),
 				"action" => "create",
+				"crud_action" => "create",
 				"actividad" => null,
 			);
 			return view('actividades/create',$context);
@@ -170,7 +171,6 @@ class ActividadesController extends Controller
 				'ffin' => 'required|date',
 				'ifacta' => 'required|boolean',
 				'ifarchivos' => 'required|boolean',
-				'descripcion' => 'required',
 			],
 			[
 				#'cestado.required' => 'required',
@@ -182,7 +182,6 @@ class ActividadesController extends Controller
 				'ffin.required' => 'required',
 				'ifacta.required' => 'required',
 				'ifarchivos.required' => 'required',
-				'descripcion.required' => 'required',
 			]
 		);
 

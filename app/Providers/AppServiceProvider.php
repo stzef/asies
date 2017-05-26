@@ -16,16 +16,12 @@ class AppServiceProvider extends ServiceProvider
             Blade::directive('ucfirst', function($string) {
             return "<?php echo ucfirst($string); ?>";
             });
-            Blade::directive('select', function($arreglo){
-                    //$arreglo = explode(',', preg_replace("/[\(\)]/", '', $expression), 2);
-
-                dump($arreglo);exit();
-                $select = "<select name =".'"'.'"'." id =".'"'.'"'.">";
-                foreach ($arreglo as $options) {
-                    $select = ($select . ' <option value = "' . $options->ctiactividad . '">' . $options->ntiactividad . '</option>');
-                }
-                $select = $select . " </select>";
-               return '<?php echo $select ?>';
+            Blade::directive('select', function($expression){
+               // $w = (['model'=>'App\Model\TiRelacion']);
+              //  dump(
+              //      $w["model"]
+              //      );exit();
+               return '<?php echo gettype($expression); ?><?php echo count($expression); ?><?php echo $expression['.'"model"'.']; ?>';
             });
     }
 

@@ -75,7 +75,7 @@ class TareasController extends Controller
 					"url" => "/tareas/edit/$ctarea" ,
 					"method" => "POST" ,
 				),
-				"action" => "edit",
+				"crud_action" => "edit",
 				"tarea" => $tarea,
 				)
 			);
@@ -115,7 +115,10 @@ class TareasController extends Controller
 				$user = Auth::user();
 				Tareas::where('ctarea',$ctarea)->update($dataBody["tarea"]);
 				Log::info('Edicion Tarea ,',['tarea'=> $tarea->id,'user' => $user->id,'estado edicion'=> $tarea->ifhecha ]);
-				return response()->json(array());
+				$tarea = Tareas::where("ctarea",$ctarea)->first();
+
+				return response()->json(array("obj" => $tarea->toArray()));
+
 			}else{
 				return response()->json(array("errors_form"=>array("cplan"=>"El plan no es un Producto Minimo")),400);
 			}
@@ -130,7 +133,7 @@ class TareasController extends Controller
 					"url" => "/tareas/create" ,
 					"method" => "POST" ,
 				),
-				"action" => "create",
+				"crud_action" => "create",
 				"tarea" => null,
 				)
 			);
@@ -167,7 +170,8 @@ class TareasController extends Controller
 				$user = Auth::user();
 				$tarea = Tareas::create($dataBody["tarea"]);
 				Log::info('Creacion Tarea ,',['tarea'=> $tarea->id,'user' => $user->id,'estado creacion'=> $tarea->ifhecha ]);
-				return response()->json(array());
+				return response()->json(array("obj" => $tarea->toArray()));
+
 			}else{
 				return response()->json(array("errors_form"=>array("cplan"=>"El plan no es un Producto Minimo")),400);
 			}

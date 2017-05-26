@@ -190,6 +190,13 @@
 
     </div>
     <!-- /#wrapper -->
+    <script>
+        @if( isset($crud_action) )
+            var CRUD_ACTION = "{{ $crud_action }}"
+        @else
+            var CRUD_ACTION = null
+        @endif
+    </script>
 
     <!-- jQuery -->
     <script src="{{ URL::asset('layout/js/jquery.js') }}"></script>

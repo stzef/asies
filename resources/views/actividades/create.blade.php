@@ -46,7 +46,7 @@
 							<div class="form-group row">
 								<label for="" class="col-sm-2 col-form-label">Objetivos</label>
 								<div class="col-sm-10">
-									<textarea class="form-control" id="" name="actividad[descripcion]" value="@if( $actividad){{ $actividad->descripcion }}@endif" required></textarea>
+									<textarea class="form-control" id="" name="actividad[descripcion]" required>@if( $actividad){{ $actividad->descripcion }}@endif</textarea>
 								</div>
 							</div>
 						</div>
@@ -57,7 +57,7 @@
 									<select name="actividad[ctiactividad]" id="" required class="form-control">
 										<option value="">Seleccione el tipo de actividad</option>
 										@foreach ($tiactividades as $tiactividad)
-											<option value="{{$tiactividad->ctiactividad}}">{{$tiactividad->ntiactividad}}</option>
+											<option value="{{$tiactividad->ctiactividad}}" @if( $actividad) @if($actividad->ctiactividad == $tiactividad->ctiactividad) selected @endif @endif >{{$tiactividad->ntiactividad}}</option>
 										@endforeach
 									</select>
 								</div>
@@ -123,7 +123,7 @@
 										<tr>
 											<td width="50%">
 												<div class="input-group">
-													<select @if( $action == "create" ) disabled @else @endif name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
+													<select  name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
 														<option value="">Tareas</option>}
 														@foreach ($tareas as $tarea)
 															<option value="{{$tarea->ctarea}}">{{$tarea->ntarea}}</option>
@@ -133,7 +133,7 @@
 												</div>
 											</td>
 											<td width="25%">
-												<select @if( $action == "create" ) disabled @else @endif name="tareasusuarios[user]" id="respo" required class="form-control">
+												<select  name="tareasusuarios[user]" id="respo" required class="form-control">
 													<option value="">Responsable</option>
 													@foreach ($usuarios as $usuario)
 														<option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
@@ -141,7 +141,7 @@
 												</select>
 											</td>
 											<td width="25%">
-												<select @if( $action == "create" ) disabled @else @endif name="tareasusuarios[ctirelacion]" id="tirespo" required class="form-control" >
+												<select  name="tareasusuarios[ctirelacion]" id="tirespo" required class="form-control" >
 													<option value="">Tipo de responsabilidad</option>
 													@foreach ($relaciones as $relacion)
 														<option value = "{{$relacion->ctirelacion}}">{{$relacion->ntirelacion}}</option>
@@ -149,7 +149,7 @@
 												</select>
 											</td>
 											<td>
-												<button @if( $action == "create" ) disabled @else @endif id="agregar" type="submit" class="btn btn-info">
+												<button  id="agregar" type="submit" class="btn btn-info">
 													<i class="glyphicon glyphicon-plus"></i>
 												</button>
 											</td>
@@ -181,8 +181,8 @@
 												<td> {{ $asignacion->tarea->ntarea }} </td>
 												<td> {{ $asignacion->usuario->id }} </td>
 												<td> {{ $asignacion->usuario->name }} </td>
-												<td> {{ $asignacion->relacion->ntirelacion }} </td>
 												<td> {{ $asignacion->relacion->ctirelacion }} </td>
+												<td> {{ $asignacion->relacion->ntirelacion }} </td>
 												<td>
 													<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>
 														<i class='fa fa-pencil-square-o'></i>
@@ -208,9 +208,17 @@
 						<a type="button" class="btn btn-danger" href="{{ URL::route('app_dashboard') }}" data-dismiss="modal">
 							<i class="glyphicon glyphicon-remove"></i> Cancelar
 						</a>
-						<button type="submit" class="btn btn-success" form="form_crear_actividad">
-							<i class="glyphicon glyphicon-plus"></i> Crear
-						</button>
+						@if ( $action == "create" )
+							<button type="submit" class="btn btn-success" form="form_crear_actividad">
+								<i class="glyphicon glyphicon-plus"></i>
+								Crear
+							</button>
+						@else
+							<button type="submit" class="btn btn-success" form="form_crear_actividad">
+								<i class="glyphicon glyphicon-pencil"></i>
+								Editar
+							</button>
+						@endif
 					</div>
 				</div>
 			</div>
@@ -237,30 +245,11 @@
 		$.jstree.defaults.plugins = [ "wholerow", "checkbox" ]
 		$.jstree.defaults.checkbox.keep_selected_style = true
 		$.jstree.defaults.core.multiple = false
-		var idioma_espanol = {
-			"sProcessing":     "Procesando...",
-			"sLengthMenu":     "Mostrar _MENU_ registros",
-			"sZeroRecords":    "No se encontraron resultados",
-			"sEmptyTable":     "Ningún dato disponible en esta tabla",
-			"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-			"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-			"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-			"sInfoPostFix":    "",
-			"sSearch":         "Buscar:",
-			"sUrl":            "",
-			"sInfoThousands":  ",",
-			"sLoadingRecords": "Cargando...",
-			"oPaginate": {
-				"sFirst":    "Primero",
-				"sLast":     "Último",
-				"sNext":     "Siguiente",
-				"sPrevious": "Anterior"
-			},
-			"oAria": {
-				"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-				"sSortDescending": ": Activar para ordenar la columna de manera descendente"
-			}
+
+		if ( CRUD_ACTION == "create" ){
+			$("#usuario_planes").find(":input").prop("disabled",true)
 		}
+
 		var cols = {
 			ctarea : 0,
 			ntarea : 1,
@@ -270,11 +259,11 @@
 			ntirela: 5,
 		}
 		var table= $("#usuarios").DataTable({
-			"paging":   false,
-			"ordering": false,
+			"paging":   true,
+			"ordering": true,
 			"info":     false,
 			"searching":false,
-			"language": idioma_espanol,
+			"language": DTspanish,
 			"columnDefs": [
 				{
 					"targets": [ cols.ctarea,cols.crespo,cols.ctirela ],
@@ -304,7 +293,9 @@
 				success : function(response){
 					//$("#modalCrearActividad").modal("hide")
 					$("#usuario_planes").find("[disabled]").prop("disabled",false)
-					$("#form_crear_actividad").find(":input").prop("disabled",true)
+					if ( CRUD_ACTION == "create" ){
+						$("#form_crear_actividad").find(":input").prop("disabled",true)
+					}
 					alertify.success(Models.Planes.messages.create.success)
 					$('#treeview').jstree("destroy")
 
