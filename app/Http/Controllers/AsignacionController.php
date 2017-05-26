@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use asies\Models\Tareas;
 use asies\Models\Actividades;
 use View;
+use \Auth;
 use Illuminate\Support\Facades\Log;
 use asies\User;
 use \Auth;

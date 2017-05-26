@@ -64,11 +64,81 @@ class TareasController extends Controller
 		}
 	}
 
-	public function create(Request $request){
+	public function edit(Request $request, $ctarea){
+		$tarea = Tareas::where("ctarea",$ctarea)->first();
 
-		if ($request->isMethod('get')) return view( 'tareas.create');
+		if ( !$tarea ) return view('errors/generic',array('title' => 'Error Codigo.', 'message' => "La Tarea $ctarea no existe" ));
+
+		if ($request->isMethod('get')){
+			return view( 'tareas.create', array(
+				"ajax" => array(
+					"url" => "/tareas/edit/$ctarea" ,
+					"method" => "POST" ,
+				),
+				"action" => "edit",
+				"tarea" => $tarea,
+				)
+			);
+
+		}
 
 		$dataBody = $request->all();
+		//dump($dataBody);exit();
+		$validator = Validator::make($dataBody["tarea"],
+			[
+				'ctarea' => 'required|exists:tareas,ctarea',
+				'cplan' => 'required|exists:planes,cplan',
+				'ntarea' => 'required|max:255',
+				'valor_tarea' => 'required|numeric',
+				'ifhecha' => 'required|boolean',
+			],
+			[
+				'ctarea.required' => 'Eliga una Tarea',
+				'ctarea.exists' => 'La Tarea no Existe.',
+				'cplan.required' => 'Eliga un Producto Minimo',
+				'cplan.exists' => 'El Pructo Minimo No existe.',
+				'ntarea.required' => 'El nombre del plan es requerido',
+				'valor_tarea.required' => 'Ingrese un valor para la Tarea',
+				'valor_tarea.numeric' => 'El valor de la tarea debe ser numerico',
+				'ifhecha.required' => 'La Tarea esta Completada?',
+			]
+		);
+
+		if ($validator->fails()){
+			$messages = $validator->messages();
+			return response()->json(array("errors_form"=>$messages),400);
+		}else{
+			$plan = Planes::where("cplan",$dataBody["tarea"]["cplan"])->first();
+
+			// Verificar que el tiplo del plan sea producto minimo
+			if ( $plan->ctiplan == 4 ){
+				$user = Auth::user();
+				Tareas::where('ctarea',$ctarea)->update($dataBody["tarea"]);
+				Log::info('Edicion Tarea ,',['tarea'=> $tarea->id,'user' => $user->id,'estado edicion'=> $tarea->ifhecha ]);
+				return response()->json(array());
+			}else{
+				return response()->json(array("errors_form"=>array("cplan"=>"El plan no es un Producto Minimo")),400);
+			}
+		}
+	}
+
+	public function create(Request $request){
+
+		if ($request->isMethod('get')) {
+			return view( 'tareas.create', array(
+				"ajax" => array(
+					"url" => "/tareas/create" ,
+					"method" => "POST" ,
+				),
+				"action" => "create",
+				"tarea" => null,
+				)
+			);
+
+		}
+
+		$dataBody = $request->all();
+		dump($dataBody["tarea"]);
 		$validator = Validator::make($dataBody["tarea"],
 			[
 				'cplan' => 'required|exists:planes,cplan',

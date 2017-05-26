@@ -1,7 +1,6 @@
 <?php
 $app->detectEnvironment(function () use ($app) {
-    //var_dump($app);exit();
-    if( array_key_exists("HTTP_HOST", $_SERVER) ){
+    /*if( array_key_exists("HTTP_HOST", $_SERVER) ){*/
         if (!isset($_SERVER['HTTP_HOST'])) {
             /*Dotenv::load($app['path.base'], $app->environmentFile());*/
 
@@ -20,17 +19,12 @@ $app->detectEnvironment(function () use ($app) {
             $file = '.env';
         }
 
-        //var_dump($app['path.base'] . '/' . $file);exit();
-        //Dotenv::load($app['path.base'], $file);
         $dotenv = new Dotenv\Dotenv($app['path.base'], $file);
         $dotenv->overload(); //this is important
 
-    }else{
+    /*}else{
         $file = '.env';
         $dotenv = new Dotenv\Dotenv($app['path.base'], $file);
         $dotenv->overload(); //this is important
-    }
+    }*/
 });
-//var_dump(env("QUIEN_SOY"));exit();
-///$dotenv = new Dotenv\Dotenv(__DIR__ . '/../', '.' . getenv('APP_ENV') . '.env');
-//$dotenv->overload(); //this is important

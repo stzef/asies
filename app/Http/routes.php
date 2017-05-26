@@ -72,6 +72,9 @@ Route::group(['prefix' => 'actividades'], function(){
 	Route::post('create', "ActividadesController@create")->middleware("permission:activities.crud");
 	Route::get('create', "ActividadesController@create")->name("GET_actividades_create")->middleware("permission:activities.crud");
 
+	Route::post('edit/{cactividad}', "ActividadesController@edit")->middleware("permission:activities.crud");
+	Route::get('edit/{cactividad}', "ActividadesController@edit")->name("GET_actividades_edit")->middleware("permission:activities.crud");
+
 	Route::get('do/{cactividad}', "ActividadesController@doActivity")->name('realizar_actividad');
 	Route::get('summary/{cactividad}', "ActividadesController@summaryActivity")->name('GET_resumen_actividad');
 	Route::post('evidence/{cactividad}', "ActividadesController@store");
@@ -91,6 +94,9 @@ Route::group(['prefix' => 'asignacion'], function(){
 Route::group(['prefix' => 'tareas'], function(){
 	Route::get('create', "TareasController@create")->name("GET_tareas_create")->middleware("permission:task.crud");
 	Route::post('create', "TareasController@create")->middleware("permission:task.crud");
+
+	Route::get('edit/{ctarea}', "TareasController@edit")->middleware("permission:task.crud");
+	Route::post('edit/{ctarea}', "TareasController@edit")->middleware("permission:task.crud");
 
 	Route::post('/{ctarea}/change_state', "TareasController@change_state")->name("POST_cambiar_estado_tarea");
 });

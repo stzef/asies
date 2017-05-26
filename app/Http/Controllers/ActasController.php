@@ -41,7 +41,6 @@ class ActasController extends Controller
 			[
 				'numeroacta' => 'required',
 				'objetivos' => 'required',
-				'ordendeldia' => 'required|max:400',
 				'fhini' => 'required|date',
 				'fhfin' => 'required|date',
 				'sefirma' => 'required|max:100',
@@ -52,7 +51,6 @@ class ActasController extends Controller
 			[
 				'numeroacta.required' => 'required',
 				'objetivos.required' => 'required',
-				'ordendeldia.required' => 'required',
 				'fhini.required' => 'required',
 				'fhfin.required' => 'required',
 				'sefirma.required' => 'required',
@@ -102,8 +100,12 @@ class ActasController extends Controller
 				$dir_path = base_path()."/public/evidencias/actividades/actividad_{$actividad->cactividad}";
 				$file_path = "$dir_path/$namefile";
 		    	$message->attach($file_path);
-		    	$message->to('sistematizaref.programador4@gmail.com')->subject('Testing mail');
+		    	$message->to('sistematizaref.programador5@gmail.com')->subject('Testing mail');
 			});
+<<<<<<< HEAD
+=======
+			dump($prueba);exit();
+>>>>>>> 7733955988b8330171c1b751a1caa4c06cee49c4
 	}
 
 	public function pdf(Request $request,$numeroacta){
@@ -133,7 +135,7 @@ class ActasController extends Controller
 			if ( mkdir( $dir_path, 0777 ) ){
 				return $pdf->save( $file_path )->stream();
 			}else{
-				
+
 				return view('errors/generic',array('title' => 'Error Interno.', 'message' => "Hay Ocurrido un error Interno, Por favor Intente de Nuevo" ));
 			}
 		}else{

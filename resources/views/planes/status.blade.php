@@ -58,7 +58,6 @@
 					plan.porcentaje = parseInt((100*plan.valor_plan)/plan.valor_total)
 					data.push([plan.ncplan,plan.porcentaje])
 				})
-				console.log(data)
 				var data = google.visualization.arrayToDataTable(data);
 				var options = {
 					width: 800, height: 240,
@@ -81,8 +80,11 @@
 				showDetail : {
 					action : function(){
 						var item = $(TREEVIEW_SELECT).jstree('get_selected',true)[0]
-						console.log(item)
-						window.open("/planes/status/__cplan__".set("__cplan__",item.li_attr.cplan))
+						if ( item.li_attr.cplan != undefined ){
+							window.open("/planes/status/__cplan__".set("__cplan__",item.li_attr.cplan))
+						}else{
+							alertify.warning("El item escogido no es un plan")
+						}
 					},
 					label : "Ver en Detalle"
 				}

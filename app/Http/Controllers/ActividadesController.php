@@ -74,6 +74,73 @@ class ActividadesController extends Controller
 		}
 	}
 
+	public function edit(Request $request,$cactividad){
+		$actividad = Actividades::where('cactividad',$cactividad)->first();
+
+		if ( !$actividad ) return view('errors/generic',array('title' => 'Error Codigo.', 'message' => "La actividad $cactividad no existe" ));
+
+		if ($request->isMethod('get')){
+			$tareas = Tareas::all();
+
+			$usuarios = User::all();
+
+			$tiactividades = TiActividades::all();
+			$relaciones = TiRelaciones::all();
+			$context = array(
+				"tareas" => $tareas,
+				"tiactividades" => $tiactividades,
+				"usuarios" => $usuarios,
+				"relaciones" => $relaciones,
+				"ajax" => array(
+					"url" => "/tareas/edit/$cactividad" ,
+					"method" => "POST" ,
+				),
+				"action" => "edit",
+				"actividad" => $actividad,
+			);
+			return view('actividades/create',$context);
+		}
+		$dataBody = $request->all();
+		$validator = Validator::make($dataBody["actividad"],
+			[
+				#'cestado' => 'required',
+				'ctiactividad' => 'required|exists:tiactividades,ctiactividad',
+				#'cacta' => 'required',
+				'nactividad' => 'required|max:255',
+				'descripcion' => 'required|max:500',
+				'fini' => 'required|date',
+				'ffin' => 'required|date',
+				'ifacta' => 'required|boolean',
+				'ifarchivos' => 'required|boolean',
+				'descripcion' => 'required',
+			],
+			[
+				#'cestado.required' => 'required',
+				'ctiactividad.required' => 'required',
+				#'cacta.required' => 'required',
+				'nactividad.required' => 'required',
+				'descripcion.required' => 'required',
+				'fini.required' => 'required',
+				'ffin.required' => 'required',
+				'ifacta.required' => 'required',
+				'ifarchivos.required' => 'required',
+				'descripcion.required' => 'required',
+			]
+		);
+
+		if ($validator->fails()){
+			$messages = $validator->messages();
+			return response()->json(array("errors_form" => $messages),400);
+		}else{
+			$actividad = Actividades::create($dataBody["actividad"]);
+			//dump($actividad->id);exit();
+			$user = Auth::user();
+			Log::info('Creacion de actividad,',['actividad'=>$actividad->id,'ctiactividad'=> $dataBody['actividad']['ctiactividad'],'user' => $user->id ]);
+		}
+
+		return response()->json(array("obj" => $actividad->toArray()));
+	}
+
 	public function create(Request $request){
 
 		if ($request->isMethod('get')){
@@ -87,7 +154,13 @@ class ActividadesController extends Controller
 				"tareas" => $tareas,
 				"tiactividades" => $tiactividades,
 				"usuarios" => $usuarios,
-				"relaciones" => $relaciones
+				"relaciones" => $relaciones,
+				"ajax" => array(
+					"url" => "/tareas/create" ,
+					"method" => "POST" ,
+				),
+				"action" => "create",
+				"actividad" => null,
 			);
 			return view('actividades/create',$context);
 		}

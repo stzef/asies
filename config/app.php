@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Bogota',
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -245,7 +245,7 @@ return [
     |
     */
 
-    'empresas' => ["guataqui","anapoima","jerusalen"],
+    'empresas' => ["guataqui","demo"],
     'CTE' => [
         'TIRELACION_RESPONSABLE' => 1,
     ],

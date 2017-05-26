@@ -91,7 +91,6 @@
     <!-- Datetimepicker JS -->
     <script src="{{ URL::asset('vendor/datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
 
-    <script src="{{ URL::asset('layout/js/app.js') }}"></script>
 
     <!-- AlertifyJS -->
     <script src="{{ URL::asset('vendor/alertifyjs/alertify.min.js') }}"></script>
@@ -102,6 +101,7 @@
 
     <!-- Select2 -->
     <script src="{{ URL::asset('vendor/select2-4.0.3/dist/js/select2.full.min.js') }}"></script>
+    <script src="{{ URL::asset('layout/js/app.js') }}"></script>
 
 
     <script>

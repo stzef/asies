@@ -33,20 +33,20 @@
 					<form id="form_crear_actividad" class="form-horizontal">
 
 						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-						<input type="hidden" name="actividad[cactividad]" value="" id="actividad_cactividad">
+						<input type="hidden" name="actividad[cactividad]" value="@if( $actividad){{ $actividad->cactividad }}@endif" id="actividad_cactividad">
 
 						<div class="col-md-6">
 							<div class="form-group row">
 								<label for="plan_nombre" class="col-sm-2 col-form-label">Nombre</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="plan_nombre" name="actividad[nactividad]" required placeholder="Nombre">
+									<input type="text" class="form-control" id="plan_nombre" name="actividad[nactividad]" value="@if( $actividad){{ $actividad->nactividad }}@endif" required placeholder="Nombre">
 								</div>
 							</div>
 
 							<div class="form-group row">
 								<label for="" class="col-sm-2 col-form-label">Objetivos</label>
 								<div class="col-sm-10">
-									<textarea class="form-control" id="" name="actividad[descripcion]" required></textarea>
+									<textarea class="form-control" id="" name="actividad[descripcion]" value="@if( $actividad){{ $actividad->descripcion }}@endif" required></textarea>
 								</div>
 							</div>
 						</div>
@@ -69,7 +69,7 @@
 									<div class="form-group row">
 										<label for="" class="col-sm-4 col-form-label" >Fecha Final</label>
 										<div class='col-sm-8 input-group date'>
-											<input type='text' class="form-control" name="actividad[fini]" required />
+											<input type='text' class="form-control" name="actividad[fini]" value="@if( $actividad){{ $actividad->fini }}@endif" required />
 											<span class="input-group-addon">
 												<span class="glyphicon glyphicon-calendar"></span>
 											</span>
@@ -79,7 +79,7 @@
 									<div class="form-group row">
 										<label for="" class="col-sm-4 col-form-label">Fecha Final</label>
 										<div class='col-sm-8 input-group date'>
-											<input type='text' class="form-control" name="actividad[ffin]" required />
+											<input type='text' class="form-control" name="actividad[ffin]" value="@if( $actividad){{ $actividad->ffin }}@endif" required />
 											<span class="input-group-addon">
 												<span class="glyphicon glyphicon-calendar"></span>
 											</span>
@@ -94,7 +94,7 @@
 										<div class="col-sm-10">
 											<div class="form-check">
 												<label class="form-check-label">
-													<input class="form-check-input" type="checkbox" name="actividad[ifarchivos]"> Archivos
+													<input class="form-check-input" type="checkbox" name="actividad[ifarchivos]" @if( $actividad) @if( $actividad->ifarchivos ) checked @endif @endif> Archivos
 												</label>
 											</div>
 										</div>
@@ -105,7 +105,7 @@
 										<div class="col-sm-10">
 											<div class="form-check">
 											<label class="form-check-label">
-												<input class="form-check-input" type="checkbox" name="actividad[ifacta]"> Acta
+												<input class="form-check-input" type="checkbox" name="actividad[ifacta]" @if( $actividad) @if( $actividad->ifacta ) checked @endif @endif> Acta
 											</label>
 											</div>
 										</div>
@@ -123,7 +123,8 @@
 										<tr>
 											<td width="50%">
 												<div class="input-group">
-													<select  name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
+
+													<select @if( $action == "create" ) disabled @else @endif name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
 														<option value="">Tareas</option>}
 														@foreach ($tareas as $tarea)
 															<option value="{{$tarea->ctarea}}">{{$tarea->ntarea}}</option>
@@ -133,7 +134,8 @@
 												</div>
 											</td>
 											<td width="25%">
-												<select  name="tareasusuarios[user]" id="respo" required class="form-control">
+
+												<select @if( $action == "create" ) disabled @else @endif name="tareasusuarios[user]" id="respo" required class="form-control">
 													<option value="">Responsable</option>
 													@foreach ($usuarios as $usuario)
 														<option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
@@ -141,7 +143,8 @@
 												</select>
 											</td>
 											<td width="25%">
-												<select  name="tareasusuarios[ctirelacion]" id="tirespo" required class="form-control" >
+
+												<select @if( $action == "create" ) disabled @else @endif name="tareasusuarios[ctirelacion]" id="tirespo" required class="form-control" >
 													<option value="">Tipo de responsabilidad</option>
 													@foreach ($relaciones as $relacion)
 														<option value = "{{$relacion->ctirelacion}}">{{$relacion->ntirelacion}}</option>
@@ -149,7 +152,8 @@
 												</select>
 											</td>
 											<td>
-												<button  id="agregar" type="submit" class="btn btn-info">
+
+												<button @if( $action == "create" ) disabled @else @endif id="agregar" type="submit" class="btn btn-info">
 													<i class="glyphicon glyphicon-plus"></i>
 												</button>
 											</td>
@@ -173,6 +177,30 @@
 										<th> </th>
 									</tr>
 								</thead>
+								<tbody>
+									@if ( $actividad )
+										@foreach ( $actividad->getAsignacion() as $asignacion )
+											<tr>
+												<td> {{ $asignacion->tarea->ctarea }} </td>
+												<td> {{ $asignacion->tarea->ntarea }} </td>
+												<td> {{ $asignacion->usuario->id }} </td>
+												<td> {{ $asignacion->usuario->name }} </td>
+												<td> {{ $asignacion->relacion->ntirelacion }} </td>
+												<td> {{ $asignacion->relacion->ctirelacion }} </td>
+												<td>
+													<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>
+														<i class='fa fa-pencil-square-o'></i>
+													</button>
+												</td>
+												<td>
+													<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)'>
+														<i class='fa fa-trash-o'></i>
+													</button>
+												</td>
+											</tr>
+										@endforeach
+									@endif
+								</tbody>
 							</table>
 						</div>
 
@@ -271,8 +299,8 @@
 			var that = this
 
 			$.ajax({
-				type : "POST",
-				url : "{{ action('ActividadesController@create') }}",
+				url : "{{ $ajax['url'] }}",
+				type : "{{ $ajax['method'] }}",
 				data : serializeForm(that),
 				cache : false,
 				contentType : false,
@@ -311,51 +339,50 @@
 		var ctarea = $( "#tarea option:selected" ).val();
 		var cactividad = $("input#actividad_cactividad").val();
 
-		var data = serializeForm(that)
-		data.append("tareasusuarios[cactividad]",cactividad)
-		/*arreglar*/
-		var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
-		$.ajax({
-			"url":base_url_add_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
-			"type":"POST",
-			data: data,
-			cache:false,
-			contentType: false,
-			processData: false,
-			success: function(){
-				listar();
-			}
-		})
-	});
-	function editar(event,button){
-		var data = table.row( $(button).parents("tr")).data();
-		table.row( $(button).parents("tr")).remove().draw(false);
-		var tarea = $("#tarea").val(data[cols.ctarea]).change();
-		var responsable = $("#respo").val(data[cols.crespo]).change();
-		var tiresponsable = $("#tirespo").val(data[cols.ctirela]).change();
-		console.log(tarea)
-		console.log(data)
-	}
-	function borrar(event,button){
-		table.row( $(button).parents("tr")).remove().draw(false);
-	}
-	var listar = function(){
-		var ctarea = $( "#tarea option:selected" ).val();
-		var cresponsable = $( "#respo option:selected" ).val();
-		var ctirespo = $( "#tirespo option:selected" ).val();
-		var ntarea = $( "#tarea option:selected" ).text();
-		var nresponsable = $( "#respo option:selected" ).text();
-		var ntirespo = $( "#tirespo option:selected" ).text();
-		//$("#tarea").val()
-		table
-			.row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,
-				"<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>"+
-					"<i class='fa fa-pencil-square-o'></i>"+
-				"</button>",
-				"<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)''>"+
-					"<i class='fa fa-trash-o'></i>"+
-				"</button>"])
-			.draw()
-	}
+
+	var data = serializeForm(that)
+	data.append("tareasusuarios[cactividad]",cactividad)
+	/*arreglar*/
+	var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
+	$.ajax({
+		"url":base_url_add_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
+		"type":"POST",
+		data: data,
+		cache:false,
+		contentType: false,
+		processData: false,
+		success: function(){
+			listar();
+		}
+	})
+});
+function editar(event,button){
+	var data = table.row( $(button).parents("tr")).data();
+	table.row( $(button).parents("tr")).remove().draw(false);
+	var tarea = $("#tarea").val(data[cols.ctarea]).change();
+	var responsable = $("#respo").val(data[cols.crespo]).change();
+	var tiresponsable = $("#tirespo").val(data[cols.ctirela]).change();
+}
+function borrar(event,button){
+	table.row( $(button).parents("tr")).remove().draw(false);
+}
+var listar = function(){
+	var ctarea = $( "#tarea option:selected" ).val();
+	var cresponsable = $( "#respo option:selected" ).val();
+	var ctirespo = $( "#tirespo option:selected" ).val();
+	var ntarea = $( "#tarea option:selected" ).text();
+	var nresponsable = $( "#respo option:selected" ).text();
+	var ntirespo = $( "#tirespo option:selected" ).text();
+	//$("#tarea").val()
+	table
+		.row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,
+			"<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>"+
+				"<i class='fa fa-pencil-square-o'></i>"+
+			"</button>",
+			"<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)''>"+
+				"<i class='fa fa-trash-o'></i>"+
+			"</button>"])
+		.draw()
+}
 </script>
 @endsection
