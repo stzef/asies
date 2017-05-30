@@ -132,6 +132,17 @@
 						}
 					},
 					label : "Reprogramar Tarea"
+				},
+				edit : {
+					action : function(){
+						var item = $(TREEVIEW_SELECT).jstree('get_selected',true)[0]
+						if ( item.li_attr.ctarea ){
+							window.open("/tareas/edit/"+item.li_attr.ctarea)
+						}else{
+							alertify.warning("La opcion de Edición de Planes aun no se encuentra habilitada.")
+						}
+					},
+					label : "Editar"
 				}
 			}
 			for ( var action of response ){

@@ -15,7 +15,6 @@
 @endsection
 
 @section('content')
-    {{-- phpinfo() --}}
     <div class="row">
 
         <div class="col-md-12">
@@ -287,7 +286,7 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
-                                        </div>                                
+                                        </div>
                                     </div>
                             </div>
                         </div>
@@ -326,8 +325,8 @@
                                                                     <button width="50%" id="agregar" type="submit" class="btn btn-info">
                                                                         <i class="glyphicon glyphicon-plus"></i>
                                                                     </button>
-                                                                                                       
-                                                               </div>                                             
+
+                                                               </div>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -345,7 +344,7 @@
                                                         <th>Borrar</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>  
+                                                <tbody>
                                                         <tr>
                                                             <td></td>
                                                             <td></td>
@@ -355,7 +354,7 @@
                                                         </tr>
                                                 </tbody>
                                             </table>
-                                        </div>                                
+                                        </div>
                                     </div>
                             </div>
                         </div>
@@ -510,7 +509,7 @@
                 "targets": [ cols.ctarea,cols.crespo,cols.ctirela ],
                 "visible": false,
             },]
-        }) 
+        })
 
         var table= $("#nuevas").DataTable({
             "paging":   false,
