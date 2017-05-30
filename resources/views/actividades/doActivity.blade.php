@@ -15,7 +15,6 @@
 @endsection
 
 @section('content')
-    {{-- phpinfo() --}}
     <div class="row">
 
         <div class="col-md-12">
@@ -287,7 +286,7 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
-                                        </div>                                
+                                        </div>
                                     </div>
                             </div>
                         </div>
@@ -337,8 +336,8 @@
                                                                     <button width="50%" id="agregar" type="submit" class="btn btn-info">
                                                                         <i class="glyphicon glyphicon-plus"></i>
                                                                     </button>
-                                                                                                       
-                                                               </div>                                             
+
+                                                               </div>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -356,6 +355,7 @@
                                                         <th>Borrar</th>
                                                     </tr>
                                                 </thead>
+
                                                 <tbody>  
                                                     <tr>
                                                         <td></td>
@@ -523,7 +523,7 @@
                 "targets": [ cols.ctarea,cols.crespo,cols.ctirela ],
                 "visible": false,
             },]
-        }) 
+        })
 
         var tabletask= $("#nuevas").DataTable({
             "paging":   false,

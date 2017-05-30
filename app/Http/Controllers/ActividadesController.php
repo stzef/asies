@@ -74,6 +74,20 @@ class ActividadesController extends Controller
 		}
 	}
 
+	public function checkDates(Request $request){
+
+		if ($request->isMethod('get')){
+			$actividades = Actividades::whereDate('ffin', '<', date('Y-m-d'))->get();
+			//dump($actividades);exit();
+
+			return view( 'actividades.checkDates' , array(
+				'actividades' => $actividades,
+				)
+			);
+
+		}
+	}
+
 	public function edit(Request $request,$cactividad){
 		$actividad = Actividades::where('cactividad',$cactividad)->first();
 
@@ -222,8 +236,7 @@ class ActividadesController extends Controller
 		return $size;
 	}
 
-	public function store(Request $request,$cactividad)
-	{
+	public function store(Request $request,$cactividad){
 
 		if ($request->hasFile('files')) {
 			$file = $request->file('files');
