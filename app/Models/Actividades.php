@@ -121,20 +121,30 @@ class Actividades extends Model
     }
     public function getAsignacion()
     {
-            $asignaciones = \DB::table('asignaciontareas')
-                ->join('users', 'asignaciontareas.user', '=', 'users.id')
-                ->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
-                ->select('asignaciontareas.*')
-                ->where('asignaciontareas.cactividad', $this->cactividad)
-                //->where('users.id', $iduser)
-                ->get();
-                foreach ($asignaciones as $asignacion) {
-                    $asignacion->tarea = Tareas::where('ctarea',$asignacion->ctarea)->first();
-                    $asignacion->actividad =Actividades::where('cactividad',$asignacion->cactividad)->first();
-                    $asignacion->relacion = TiRelaciones::where('ctirelacion',$asignacion->ctirelacion)->first();
-                    $asignacion->usuario = User::where('id',$asignacion->user)->first();
-                }
+        $asignaciones = \DB::table('asignaciontareas')
+            ->join('users', 'asignaciontareas.user', '=', 'users.id')
+            ->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
+            ->select('asignaciontareas.*')
+            ->where('asignaciontareas.cactividad', $this->cactividad)
+            //->where('users.id', $iduser)
+            ->get();
+            foreach ($asignaciones as $asignacion) {
+                $asignacion->tarea = Tareas::where('ctarea',$asignacion->ctarea)->first();
+                $asignacion->actividad =Actividades::where('cactividad',$asignacion->cactividad)->first();
+                $asignacion->relacion = TiRelaciones::where('ctirelacion',$asignacion->ctirelacion)->first();
+                $asignacion->usuario = User::where('id',$asignacion->user)->first();
+            }
         return $asignaciones;
+    }
+    public function getEmails()
+    {
+        $emails = array();
+        $asignaciones = $this->getAsignacion();
+        foreach ($asignaciones as $asignacion) {
+            array_push($emails, $asignacion->usuario->email);
+        }
+        $emails = array_unique($emails);
+        return $emails;
     }
     public function getEvidencias()
     {

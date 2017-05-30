@@ -31,6 +31,8 @@
                                 <th>Actividad</th>
                                 <th>F Inicio</th>
                                 <th>F Final</th>
+                                <th>Dias Faltantes</th>
+                                <th>Dias Retraso</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,6 +41,8 @@
                                     <td>{{ $actividad->nactividad }}</td>
                                     <td>{{ $actividad->fini }}</td>
                                     <td>{{ $actividad->ffin }}</td>
+                                    <td>{{ $actividad->dias_faltantas }}</td>
+                                    <td>{{ $actividad->dias_retraso }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

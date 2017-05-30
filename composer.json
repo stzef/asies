@@ -13,7 +13,8 @@
         "barryvdh/laravel-dompdf": "^0.8.0",
         "rap2hpoutre/laravel-log-viewer": "^0.10.0",
         "weblee/mandrill": "dev-master",
-        "mandrill/mandrill": "1.0.*"
+        "mandrill/mandrill": "1.0.*",
+        "nesbot/carbon": "~1.14"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
