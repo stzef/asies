@@ -356,15 +356,7 @@
                                                     </tr>
                                                 </thead>
 
-                                                <tbody>  
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
+                                                <tbody>
                                                 </tbody>
                                             </table>
                                         </div>                                
@@ -507,7 +499,7 @@
             ctirela: 4,
             ntirela: 5,
         }
-        var cols2 = {
+        var colstask = {
             ntarea : 0,
             cplan : 1,
             nplan : 2,
@@ -533,43 +525,13 @@
             "info":     false,
             "language": DTspanish,
             "columnDefs": [{
-                "targets": [ cols2.cplan ],
+                "targets": [ colstask.cplan ],
                 "visible": false,
             },]
         })
         $(table).on("ready",function(){ table.add.row() })
 
-        $("#form_crear_acta").submit(function(event){
-            event.preventDefault()
-            var that = this
-            
-            var data = serializeForm(that)
-            
-            data.append("acta[cactividad]",$("#cactividad").val())
 
-            table.data().toArray().forEach( function(element, index) {
-                data.append("acta[asistentes][]",element[cols.crespo])
-            });
-            $.ajax({
-                type : "POST",
-                url : "{{ URL::action('ActasController@create') }}",
-                data:data,
-                cache:false,
-                contentType: false,
-                processData: false,
-                success : function(){
-                    alertify.success("El Acta se ha creado.")
-                    var tabla = tabletask.data();
-                    $.ajax({
-                        type: "POST",
-                        url: ""
-                    })
-                },
-                error : function(){
-                    alertify.error(Models.Planes.messages.create.error)
-                },
-            })
-        })
     </script>
     <script type="text/javascript">
         $("#nuevas_tareas").on("submit" , function(event){
@@ -629,9 +591,9 @@
     }
     function taskchange(event,button){
         var data = table.row($(button).parent("tr")).data();
-        table.row( $(button).parents("tr")).remove().draw(false);
-        var ntarea = $("#tarea_ntarea").val(data[cols2.ntarea]).change();
-        var ntarea = $("#tarea_nplan").val(data[cols2.nplan]).change();
+        tabletask.row( $(button).parents("tr")).remove().draw(false);
+        var ntarea = $("#tarea_ntarea").val(data[colstask.ntarea]).change();
+        var ntarea = $("#tarea_nplan").val(data[colstask.nplan]).change();
     }
     function borrar(event,button){
         table.row( $(button).parents("tr")).remove().draw(false);
@@ -654,6 +616,57 @@
                 "</button>"])
             .draw()
     }
+            $("#form_crear_acta").submit(function(event){
+            event.preventDefault()
+            var that = this
+            
+            var data = serializeForm(that)
+            
+            data.append("acta[cactividad]",$("#cactividad").val())
+
+            table.data().toArray().forEach( function(element, index) {
+                data.append("acta[asistentes][]",element[cols.crespo])
+            });
+            $.ajax({
+                type : "POST",
+                url : "{{ URL::action('ActasController@create') }}",
+                data:data,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success : function(){
+                    alertify.success("El Acta se ha creado.")
+                    var data = tabletask.data().toArray();
+                    
+                    data.forEach(function(item){ 
+                        
+                        var data_request = new FormData()
+                        data_request.append("tarea[cplan]",item[colstask.cplan])
+                        data_request.append("tarea[ntarea]",item[colstask.ntarea])
+                        data_request.append("tarea[valor_tarea]",item[colstask.valor])
+                        data_request.append("tarea[ifhecha]",0)
+
+                        $.ajax({
+                            type: "POST",
+                            url:  "{{ URL::action('TareasController@create') }}",
+                            data: data_request,
+                            cache:false,
+                            contentType: false,
+                            processData: false,
+                            success : function(){
+                                alertify.success("Compromisos agregados");
+                            },
+                            error : function(){
+                                alertify.error(Models.Planes.message.create.error);
+                            },                        
+                        })
+                    })
+                },
+                error : function(){
+                    alertify.error(Models.Planes.messages.create.error)
+                },
+            })
+        })
     </script>
 	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
 	<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
