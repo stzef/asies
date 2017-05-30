@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9497b94b458ba22b344cc8c7601ce979",
+    "content-hash": "e3b3495fe1b3969d80e4c896cd76ae2a",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.28.3",
+            "version": "3.28.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "8c3c45f73abfa377f37599da49d053e5d2347059"
+                "reference": "a02d10b668ce905c627c6ce149e095b159538341"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/8c3c45f73abfa377f37599da49d053e5d2347059",
-                "reference": "8c3c45f73abfa377f37599da49d053e5d2347059",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a02d10b668ce905c627c6ce149e095b159538341",
+                "reference": "a02d10b668ce905c627c6ce149e095b159538341",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +84,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-05-24T18:18:21+00:00"
+            "time": "2017-05-25T22:17:39+00:00"
         },
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1642,16 +1642,16 @@
         },
         {
             "name": "rap2hpoutre/laravel-log-viewer",
-            "version": "v0.10.0",
+            "version": "v0.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rap2hpoutre/laravel-log-viewer.git",
-                "reference": "990fe6b1db13fef918b07fb541148e8b5d6e3841"
+                "reference": "971243e8a98c4f68c50df3c2b714517ad9fc90ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rap2hpoutre/laravel-log-viewer/zipball/990fe6b1db13fef918b07fb541148e8b5d6e3841",
-                "reference": "990fe6b1db13fef918b07fb541148e8b5d6e3841",
+                "url": "https://api.github.com/repos/rap2hpoutre/laravel-log-viewer/zipball/971243e8a98c4f68c50df3c2b714517ad9fc90ab",
+                "reference": "971243e8a98c4f68c50df3c2b714517ad9fc90ab",
                 "shasum": ""
             },
             "require": {
@@ -1686,7 +1686,7 @@
                 "logging",
                 "lumen"
             ],
-            "time": "2017-04-23T07:25:46+00:00"
+            "time": "2017-05-28T15:51:16+00:00"
         },
         {
             "name": "sabberworm/php-css-parser",
@@ -1902,25 +1902,28 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v3.2.8",
+            "version": "v3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "b8a401f733b43251e1d088c589368b2a94155e40"
+                "reference": "a9f8b02b0ef07302eca92cd4bba73200b7980e9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/b8a401f733b43251e1d088c589368b2a94155e40",
-                "reference": "b8a401f733b43251e1d088c589368b2a94155e40",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/a9f8b02b0ef07302eca92cd4bba73200b7980e9c",
+                "reference": "a9f8b02b0ef07302eca92cd4bba73200b7980e9c",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5.9"
             },
+            "conflict": {
+                "symfony/dependency-injection": "<3.3"
+            },
             "require-dev": {
                 "psr/log": "~1.0",
                 "symfony/config": "~2.8|~3.0",
-                "symfony/dependency-injection": "~2.8|~3.0",
+                "symfony/dependency-injection": "~3.3",
                 "symfony/expression-language": "~2.8|~3.0",
                 "symfony/stopwatch": "~2.8|~3.0"
             },
@@ -1931,7 +1934,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.2-dev"
+                    "dev-master": "3.3-dev"
                 }
             },
             "autoload": {
@@ -1958,7 +1961,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2017-05-01T14:58:48+00:00"
+            "time": "2017-05-04T12:23:07+00:00"
         },
         {
             "name": "symfony/finder",
@@ -4401,16 +4404,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.2.8",
+            "version": "v3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "acec26fcf7f3031e094e910b94b002fa53d4e4d6"
+                "reference": "885db865f6b2b918404a1fae28f9ac640f71f994"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/acec26fcf7f3031e094e910b94b002fa53d4e4d6",
-                "reference": "acec26fcf7f3031e094e910b94b002fa53d4e4d6",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/885db865f6b2b918404a1fae28f9ac640f71f994",
+                "reference": "885db865f6b2b918404a1fae28f9ac640f71f994",
                 "shasum": ""
             },
             "require": {
@@ -4425,7 +4428,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.2-dev"
+                    "dev-master": "3.3-dev"
                 }
             },
             "autoload": {
@@ -4452,7 +4455,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-05-01T14:55:58+00:00"
+            "time": "2017-05-28T10:56:20+00:00"
         },
         {
             "name": "webmozart/assert",

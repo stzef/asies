@@ -18,6 +18,9 @@ use \Auth;
 use View;
 use Storage;
 
+use Carbon\Carbon;
+
+
 use Illuminate\Support\Facades\Validator;
 
 class ActividadesController extends Controller
@@ -75,17 +78,54 @@ class ActividadesController extends Controller
 	}
 
 	public function checkDates(Request $request){
+		$now = Carbon::now();
+		$actividades = Actividades::whereDate('ffin', '<', date('Y-m-d'))->get();
+
+		foreach ($actividades as $actividad) {
+			$actividad->dias_faltantas = 0;
+			$actividad->dias_retraso = 0;
+			$factividad = Carbon::parse($actividad->fini);
+			if( $factividad > $now ) {
+				$actividad->dias_faltantas = $factividad->diffInDays($now);
+			}else{
+				$actividad->dias_retraso = $factividad->diffInDays($now);
+			}
+		}
+
+		$actividades = array($actividades[0]);
 
 		if ($request->isMethod('get')){
-			$actividades = Actividades::whereDate('ffin', '<', date('Y-m-d'))->get();
-			//dump($actividades);exit();
+			$response = array();
+			foreach ($actividades as $actividad) {
+				$status = $this->sendEmailsReminder($actividad);
+				array_push($response, $status);
+			}
+			return response()->json($response);
 
 			return view( 'actividades.checkDates' , array(
 				'actividades' => $actividades,
 				)
 			);
 
+		}elseif($request->isMethod('post')){
 		}
+	}
+	public function sendEmailsReminder($actividad = null){
+		$emails = $actividad->getEmails();
+		array_push($emails, 'sistematizaref.programador5@gmail.com');
+		$emails = array('sistematizaref.programador5@gmail.com');
+		$data = array(
+			'actividad' => $actividad,
+			'emails' => $emails,
+		);
+
+
+		$status = \Mail::send('emails.reminderActivity', [], function ($message) use ($data){
+			$message->to($data["emails"])->subject('Recordatorio de Actividades');
+		});
+		//dump( \Mail:: failures());exit();
+
+		return $status;
 	}
 
 	public function edit(Request $request,$cactividad){
