@@ -66,7 +66,6 @@ class Planes extends Model
         $plan->subplanes = Planes::with('tiplan')->where('cplanmayor', $plan->cplan)->get();
 
         if (Tareas::where('cplan',$cplan)->first()){
-            //dump("Hola");exit();
             $plan->subplanes = Tareas::where('cplan', $cplan)->get();
         }else{
             if ( count($plan->subplanes) != 0 ){
@@ -86,23 +85,12 @@ class Planes extends Model
         foreach ($planes as $plan) {
             $plan->subplanes = Planes::getSubPlanes($plan->cplan,$json);
         }
-            //dump($planes->toArray()[0]["tiplan"]);exit();
         if ( $json ){
             return $planes->toArray();
         }else{
             return $planes;
         }
     }
-    /*public function getSubplanes($json=false){
-        $plan = Planes::with('tiplan')->where('cplan', $this->cplan)->first();
-        $subplanes = Planes::getSubPlanes($plan->cplan,$json);
-            //dump($planes->toArray()[0]["tiplan"]);exit();
-        if ( $json ){
-            return $subplanes->toArray();
-        }else{
-            return $subplanes;
-        }
-    }*/
     static function recalcularPuntosPlanes($cplan,$puntos,$puntos_acumulativos)
     {
         $plan = Planes::where('cplan', $cplan)->first();

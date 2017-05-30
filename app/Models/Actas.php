@@ -82,7 +82,6 @@ class Actas extends Model
             $number = (int)substr($last->numeroacta, -8);
             $number += 1;
             $number = sprintf("%08d", $number);
-            //dump($number);exit();
         }else
         {
             $number = "00000001";
@@ -114,7 +113,7 @@ class Actas extends Model
     public function getActividad()
     {
         $acta = $this;
-        $actividad = Actividades::where("cacta",$acta->id)->first();
+        $actividad = Actividades::where("cacta",$acta->idacta)->first();
         return $actividad;
     }
 }

@@ -33,12 +33,6 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="" class="col-sm-4 col-form-label">Orden del dia</label>
-                                        <div class="col-sm-8">
-                                            <p> {{ $actividad->acta->ordendeldia }} </p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
                                         <label for="plan_nombre" class="col-sm-4 col-form-label">Pie de firma</label>
                                         <div class="col-sm-8">
                                             <p> {{ $actividad->acta->sefirma }} </p>

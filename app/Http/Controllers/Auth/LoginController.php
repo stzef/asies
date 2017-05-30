@@ -20,12 +20,9 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
 		$dataBody = $request->all();
-    	//dump($dataBody);exit();
 		$email = $dataBody["email"];
 		$password = $dataBody["password"];
         if (Auth::attempt(['email' => $email, 'password' => $password, 'active' => 1])) {
-            // Authentication passed...
-            //dump("hola");exit();
 			Log::info('Inicio de Session',['email' => $email,'date' => date("Y-m-d H:i:s")]);
 
             return redirect()->intended('dashboard');

@@ -29,8 +29,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //$planes = Planes::recalcularPuntos();
-        //dump($planes);exit();
         return view('home');
     }
 

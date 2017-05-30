@@ -62,7 +62,6 @@ class ActividadesController extends Controller
 				$tiactividades = TiActividades::all();
 				$relaciones = TiRelaciones::all();
 				$asignacion = $actividad->getAsignacion();
-				//dump($asignacion);exit();
 				return view( 'actividades.doActivity' , array(
 					'tareas' => $tareas,
 					'actividad' => $actividad,
@@ -111,9 +110,9 @@ class ActividadesController extends Controller
 		}
 	}
 	public function sendEmailsReminder($actividad = null){
-		$emails = $actividad->getEmails();
-		array_push($emails, 'sistematizaref.programador5@gmail.com');
-		$emails = array('sistematizaref.programador5@gmail.com');
+		//$emails = $actividad->getEmails();
+		//array_push($emails, 'sistematizaref.programador5@gmail.com');
+		$emails = ['sistematizaref.programador5@gmail.com'];
 		$data = array(
 			'actividad' => $actividad,
 			'emails' => $emails,
@@ -121,9 +120,8 @@ class ActividadesController extends Controller
 
 
 		$status = \Mail::send('emails.reminderActivity', [], function ($message) use ($data){
-			$message->to($data["emails"])->subject('Recordatorio de Actividades');
+			$message->to("sistematizaref.programador5@gmail.com")->subject('Recordatorio de Actividades');
 		});
-		//dump( \Mail:: failures());exit();
 
 		return $status;
 	}
@@ -186,7 +184,6 @@ class ActividadesController extends Controller
 			return response()->json(array("errors_form" => $messages),400);
 		}else{
 			Actividades::where("cactividad",$cactividad)->update($dataBody["actividad"]);
-			//dump($actividad->id);exit();
 			$user = Auth::user();
 			$actividad = Actividades::where('cactividad',$cactividad)->first();
 			Log::info('Creacion de actividad,',['actividad'=>$actividad->id,'ctiactividad'=> $dataBody['actividad']['ctiactividad'],'user' => $user->id ]);
@@ -250,7 +247,6 @@ class ActividadesController extends Controller
 			return response()->json(array("errors_form" => $messages),400);
 		}else{
 			$actividad = Actividades::create($dataBody["actividad"]);
-			//dump($actividad->id);exit();
 			$user = Auth::user();
 			Log::info('Creacion de actividad,',['actividad'=>$actividad->id,'ctiactividad'=> $dataBody['actividad']['ctiactividad'],'user' => $user->id ]);
 		}
@@ -281,13 +277,11 @@ class ActividadesController extends Controller
 		if ($request->hasFile('files')) {
 			$file = $request->file('files');
 			$data = $request->all();
-			//dump($data);exit();
 			foreach($file as $files){
 				$filename = $files->getClientOriginalName();
 				$extension = $files->getClientOriginalExtension();
 				$picture = sha1($filename . time()) . '.' . $extension;
 
-				//var_dump($extension);exit();
 				$destinationPath1='http://'.$_SERVER['HTTP_HOST'].'/evidencias/actividades/actividad_' .$cactividad. '/';
 
 				$ext_img = array("ani","bmp","cal","fax","gif","img","jbg","jpe","jpe","jpg","mac","pbm","pcd","pcx","pct","pgm","png","ppm","psd","ras","tga","tif","wmf");

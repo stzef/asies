@@ -49,7 +49,6 @@ class APIController extends Controller
 	}
 	public function update_evidencia(Request $request,$cevidencia){
 		$dataBody = $request->all();
-		//dump($dataBody);exit();
 		foreach ($dataBody as $data) {
 			Evidencias::where("cevidencia",$cevidencia)->update([$data["0"]=>$data["1"]]);
 		}

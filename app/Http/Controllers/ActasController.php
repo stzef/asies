@@ -32,7 +32,6 @@ class ActasController extends Controller
 
 
 		$dataBody = $request->all();
-		dump($dataBody);exit();
 		$actividad = Actividades::where("cactividad",$dataBody["acta"]["cactividad"])->first();
 
 		if ( $actividad->cacta ) return response()->json(array("warning" => "La Actividad ya acta {$actividad->cacta}"),400);
@@ -100,12 +99,11 @@ class ActasController extends Controller
 			$dir_path = base_path()."/public/evidencias/actividades/actividad_{$actividad->cactividad}";
 			$file_path = "$dir_path/$namefile";
 			$message->attach($file_path);
-			$message->to('sistematizaref.programador5@gmail.com')->subject('Testing mail');
+			$message->to('carlosturnerbenites@gmail.com')->subject('Testing mail');
 		});
 	}
 
 	public function pdf(Request $request,$numeroacta){
-		//dump(phpinfo());exit();
 		$acta = Actas::where("numeroacta",$numeroacta)->first();
 
 		if ( !$acta ) return view('errors/generic',array('title' => 'Error PDF.', 'message' => "El acta $numeroacta no existe" ));
@@ -115,8 +113,6 @@ class ActasController extends Controller
 		$actividad = $acta->getActividad();
 
 		$data = array("acta" => $acta,"actividad" => $actividad,);
-		//return view('actas.pdf',$data);
-
 		PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
 		$pdf = PDF::loadView('actas.pdf', $data);
 

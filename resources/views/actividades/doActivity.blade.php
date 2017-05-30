@@ -163,12 +163,6 @@
                                                     </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="" class="col-sm-2 col-form-label">Orden del dia</label>
-                                                <div class="col-sm-10">
-                                                    <textarea class="form-control" id="" required name="acta[ordendeldia]"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
                                                 <label for="plan_nombre" class="col-sm-2 col-form-label">Pie de firma</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" class="form-control" id="plan_nombre" required name="acta[sefirma]" placeholder="Ciudad, DD/MM/AA">
@@ -356,7 +350,7 @@
                                                     </tr>
                                                 </thead>
 
-                                                <tbody>  
+                                                <tbody>
                                                     <tr>
                                                         <td></td>
                                                         <td></td>
@@ -367,7 +361,7 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                        </div>                                
+                                        </div>
                                       </form>
                                     </div>
                             </div>
@@ -542,9 +536,9 @@
         $("#form_crear_acta").submit(function(event){
             event.preventDefault()
             var that = this
-            
+
             var data = serializeForm(that)
-            
+
             data.append("acta[cactividad]",$("#cactividad").val())
 
             table.data().toArray().forEach( function(element, index) {

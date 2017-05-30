@@ -38,9 +38,6 @@ class ASIES extends Command
      */
     public function handle()
     {
-        //
-        dump("Hola");
-
         Tareas::where('ctarea',1)->update(["ntarea"=>"Hola"]);
     }
 }

@@ -84,7 +84,6 @@ class TareasController extends Controller
 		}
 
 		$dataBody = $request->all();
-		//dump($dataBody);exit();
 		$validator = Validator::make($dataBody["tarea"],
 			[
 				'ctarea' => 'required|exists:tareas,ctarea',
@@ -143,7 +142,6 @@ class TareasController extends Controller
 		}
 
 		$dataBody = $request->all();
-		dump($dataBody["tarea"]);
 		$validator = Validator::make($dataBody["tarea"],
 			[
 				'cplan' => 'required|exists:planes,cplan',
