@@ -12,7 +12,6 @@ use View;
 use \Auth;
 use Illuminate\Support\Facades\Log;
 use asies\User;
-use \Auth;
 class AsignacionController extends Controller
 {
 	public function __construct()

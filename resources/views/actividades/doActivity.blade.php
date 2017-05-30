@@ -297,7 +297,7 @@
                                             <table class="table">
                                                 <tbody>
                                                     <tr>
-                                                        <td width="50%">
+                                                        <td width="33%">
                                                             <div class="form-group">
                                                                 <label for="tarea_cplan" class="col-sm-2 control-label">Nombre Tarea</label>
                                                                 <div class="col-sm-10">
@@ -308,7 +308,18 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td width="50%">
+                                                        <td width="33%">
+                                                            <div class="form-group">
+                                                                <label for="tarea_cplan" class="col-sm-2 control-label">Valor Tarea</label>
+                                                                <div class="col-sm-10">
+                                                                    <div class="input-group">
+                                                                        <input type="number" class="form-control" id="tarea_valor" name="tarea[valor_tarea]" placeholder="Valor Tarea">
+                                                                        <span class="input-group-addon"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td width="33%">
                                                             <div class="form-group">
                                                                 <label for="tarea_cplan" class="col-sm-2 control-label">Prod. Min</label>
                                                                 <div class="col-sm-10">
@@ -332,7 +343,6 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                      </form>
                                       <div class="col-md-12">
                                             <table id="nuevas" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
                                                 <thead>
@@ -340,21 +350,24 @@
                                                         <th>Tarea</th>
                                                         <th>cplan</th>
                                                         <th>Producto Minimo</th>
+                                                        <th>Valor Tarea</th>
                                                         <th>Editar</th>
                                                         <th>Borrar</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                        <tr>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
-                                                        </tr>
+
+                                                <tbody>  
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
-                                        </div>
+                                        </div>                                
+                                      </form>
                                     </div>
                             </div>
                         </div>
@@ -367,7 +380,7 @@
                         <button type="button" class="btn btn-primary">
                             <i class="glyphicon glyphicon-send"></i> Enviar
                         </button>
-                        <button type="submit" class="btn btn-primary" form="form_crear_acta">
+                        <button type="submit" class="btn btn-primary" form="form_crear_acta" form="nuevas_tareas">
                             <i class="glyphicon glyphicon-plus"></i> Guardar
                         </button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">
@@ -497,6 +510,7 @@
             ntarea : 0,
             cplan : 1,
             nplan : 2,
+            valor : 3,
         }
 
         var table= $("#usuarios").DataTable({
@@ -511,7 +525,7 @@
             },]
         })
 
-        var table= $("#nuevas").DataTable({
+        var tabletask= $("#nuevas").DataTable({
             "paging":   false,
             "ordering": false,
             "searching": false,
@@ -527,8 +541,9 @@
         $("#form_crear_acta").submit(function(event){
             event.preventDefault()
             var that = this
-
+            
             var data = serializeForm(that)
+            
             data.append("acta[cactividad]",$("#cactividad").val())
 
             table.data().toArray().forEach( function(element, index) {
@@ -543,6 +558,11 @@
                 processData: false,
                 success : function(){
                     alertify.success("El Acta se ha creado.")
+                    var tabla = tabletask.data();
+                    $.ajax({
+                        type: "POST",
+                        url: ""
+                    })
                 },
                 error : function(){
                     alertify.error(Models.Planes.messages.create.error)
@@ -557,12 +577,13 @@
             var cactividad = $("#cactividad").val();
             var data = serializeForm(that);
             data.append("actividad",cactividad)
-            var cplan = "202";
+            var cplan = $( "#tarea_cplan" ).val();
             var ntarea = $( "#tarea_ntarea" ).val();
             var nplan = $( "#tarea_cplan" ).val();
-            table
-                .row.add([ntarea,cplan,nplan,
-                    "<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>"+
+            var valor = $( "#tarea_valor" ).val();
+            tabletask
+                .row.add([ntarea,cplan,nplan,valor,
+                    "<button type='button' class='editar btn btn-primary' onclick='taskchange(event,this)'>"+
                         "<i class='fa fa-pencil-square-o'></i>"+
                     "</button>",
                     "<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)''>"+
@@ -591,6 +612,7 @@
             contentType: false,
             processData: false,
             success: function(){
+                alert("hola");
                 listar();
             }
         })
@@ -603,6 +625,12 @@
         var tiresponsable = $("#tirespo").val(data[cols.ctirela]).change();
         console.log(tarea)
         console.log(data)
+    }
+    function taskchange(event,button){
+        var data = table.row($(button).parent("tr")).data();
+        table.row( $(button).parents("tr")).remove().draw(false);
+        var ntarea = $("#tarea_ntarea").val(data[cols2.ntarea]).change();
+        var ntarea = $("#tarea_nplan").val(data[cols2.nplan]).change();
     }
     function borrar(event,button){
         table.row( $(button).parents("tr")).remove().draw(false);

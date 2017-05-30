@@ -32,7 +32,7 @@ class ActasController extends Controller
 
 
 		$dataBody = $request->all();
-
+		dump($dataBody);exit();
 		$actividad = Actividades::where("cactividad",$dataBody["acta"]["cactividad"])->first();
 
 		if ( $actividad->cacta ) return response()->json(array("warning" => "La Actividad ya acta {$actividad->cacta}"),400);
