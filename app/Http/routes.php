@@ -76,7 +76,10 @@ Route::group(['prefix' => 'actividades'], function(){
 	Route::get('edit/{cactividad}', "ActividadesController@edit")->name("GET_actividades_edit")->middleware("permission:activities.crud");
 
 	Route::get('do/{cactividad}', "ActividadesController@doActivity")->name('realizar_actividad');
-	Route::get('checkDates/', "ActividadesController@checkDates")->name('verificar_fechas_actividades');
+
+	Route::get('checkDates/', "ActividadesController@checkDates")->name('GET_verificar_fechas_actividades');
+	Route::post('checkDates/', "ActividadesController@checkDates")->name('POST_verificar_fechas_actividades');
+
 	Route::get('summary/{cactividad}', "ActividadesController@summaryActivity")->name('GET_resumen_actividad');
 	Route::post('evidence/{cactividad}', "ActividadesController@store");
 });

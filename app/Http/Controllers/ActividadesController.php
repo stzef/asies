@@ -94,12 +94,6 @@ class ActividadesController extends Controller
 		$actividades = array($actividades[0]);
 
 		if ($request->isMethod('get')){
-			$response = array();
-			foreach ($actividades as $actividad) {
-				$status = $this->sendEmailsReminder($actividad);
-				array_push($response, $status);
-			}
-			return response()->json($response);
 
 			return view( 'actividades.checkDates' , array(
 				'actividades' => $actividades,
@@ -107,6 +101,12 @@ class ActividadesController extends Controller
 			);
 
 		}elseif($request->isMethod('post')){
+			$response = array();
+			foreach ($actividades as $actividad) {
+				$status = $this->sendEmailsReminder($actividad);
+				array_push($response, $status);
+			}
+			return response()->json($response);
 		}
 	}
 	public function sendEmailsReminder($actividad = null){

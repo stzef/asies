@@ -25,6 +25,7 @@
 
                 <div class="panel-body">
                     <div class="col-md-12">
+                    <button class="btn btn success" onclick="Models.Actividades.sendReminders()">Enviar Recordatorios</button>
                     <table class="actividades_atrasadas table">
                         <thead>
                             <tr>
