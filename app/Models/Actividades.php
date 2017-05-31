@@ -3,6 +3,8 @@
 namespace asies\Models;
 use asies\User;
 use \Auth;
+use Carbon\Carbon;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 /**
@@ -134,6 +136,17 @@ class Actividades extends Model
                 $asignacion->usuario = User::where('id',$asignacion->user)->first();
             }
         return $asignaciones;
+    }
+    public function calcularDias(){
+        $now = Carbon::now();
+        $this->dias_faltantas = 0;
+        $this->dias_retraso = 0;
+        $factividad = Carbon::parse($this->fini);
+        if( $factividad > $now ) {
+            $this->dias_faltantas = $factividad->diffInDays($now);
+        }else{
+            $this->dias_retraso = $factividad->diffInDays($now);
+        }
     }
     public function getEmails()
     {

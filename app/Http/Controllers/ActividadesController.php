@@ -77,10 +77,17 @@ class ActividadesController extends Controller
 	}
 
 	public function checkDates(Request $request){
-		$now = Carbon::now();
-		$actividades = Actividades::whereDate('ffin', '<', date('Y-m-d'))->get();
+		//$now = Carbon::now();
+		//$actividades = Actividades::whereDate('ffin', '<', date('Y-m-d'))->get();
+		$actividades = Actividades::all();
+
+		$actividades_retrasadas = array();
+		$actividades_pendientes = array();
 
 		foreach ($actividades as $actividad) {
+			$actividad->calcularDias();
+			$actividad->tareas->getTareas();
+			/*
 			$actividad->dias_faltantas = 0;
 			$actividad->dias_retraso = 0;
 			$factividad = Carbon::parse($actividad->fini);
@@ -89,26 +96,36 @@ class ActividadesController extends Controller
 			}else{
 				$actividad->dias_retraso = $factividad->diffInDays($now);
 			}
+			*/
+
+			if ( $actividad->dias_faltantas ){
+				array_push($actividades_pendientes, $actividad);
+			}elseif( $actividad->dias_retraso ){
+				array_push($actividades_retrasadas, $actividad);
+			}
 		}
 
-		$actividades = array($actividades[0]);
+		//$actividades = array($actividades[0]);
 
 		if ($request->isMethod('get')){
 
 			return view( 'actividades.checkDates' , array(
 				'actividades' => $actividades,
+				'actividades_retrasadas' => $actividades_retrasadas,
+				'actividades_pendientes' => $actividades_pendientes,
 				)
 			);
 
 		}elseif($request->isMethod('post')){
 			$response = array();
-			foreach ($actividades as $actividad) {
+			foreach ($actividades_retrasadas as $actividad) {
 				$status = $this->sendEmailsReminder($actividad);
 				array_push($response, $status);
 			}
 			return response()->json($response);
 		}
 	}
+
 	public function sendEmailsReminder($actividad = null){
 		//$emails = $actividad->getEmails();
 		//array_push($emails, 'sistematizaref.programador5@gmail.com');
@@ -119,7 +136,7 @@ class ActividadesController extends Controller
 		);
 
 
-		$status = \Mail::send('emails.reminderActivity', [], function ($message) use ($data){
+		$status = \Mail::send('emails.reminderActivity', $data, function ($message) use ($data){
 			$message->to("sistematizaref.programador5@gmail.com")->subject('Recordatorio de Actividades');
 		});
 

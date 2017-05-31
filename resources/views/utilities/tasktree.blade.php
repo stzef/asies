@@ -59,7 +59,14 @@
 			console.log(treeview)
 			var tarea = treeview.jstree('get_selected',true)[0]
 			var rvalue = tarea.li_attr.cplan | tarea.li_attr.ctarea
-			alertify.confirm("Desea escoger esta Tarea",function(){
+			var mensaje = ""
+			if ( tarea.li_attr.cplan ){
+				mensaje = "Desea Escoger este Plan"
+			}else{
+				mensaje = "Desea Escoger esta Tarea"
+			}
+			//tarea.li_attr.ctarea
+			alertify.confirm(mensaje,function(){
 				window.opener.$(window.INPUT_REFERENCE)
 					.val(rvalue)
 					.focus()

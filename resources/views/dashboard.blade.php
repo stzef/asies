@@ -1,25 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-		<div class="row">
-				<div class="col-md-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">Dashboard <b>{{ Auth::user()->persona->nombreCompleto() }}</b></div>
-							<div class="panel-body">
-								<div id="chart_div" ></div>
-							</div>
+	<div class="row">
+			<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">Dashboard <b>{{ Auth::user()->persona->nombreCompleto() }}</b></div>
+						<div class="panel-body">
+							<div id="chart_div" ></div>
 						</div>
-				</div>
-		</div>
-
-
+					</div>
+			</div>
+	</div>
 @endsection
 
 @section('scripts')
 
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
 		waitingDialog.show("Cargando Estadisticas...")
+	</script>
+
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+	<script type="text/javascript">
 
 		google.charts.load('current', {'packages':['gauge']});
 		google.charts.setOnLoadCallback(drawChart);

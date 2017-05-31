@@ -33,16 +33,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($acta as $actas)
+                    @foreach ($actas as $acta)
                         <tr>
-                            <td>{{$actas->numeroacta}}</td>
-                            <td>{{$actas->fhini}}</td>
-                            <td>{{$actas->fhfin}}</td>
-                            <td>{{$actas->user_elaboro}}</td>
-                            <td>{{$actas->user_reviso}}</td>
-                            <td>{{$actas->user_aprobo}}</td>
-                            <td><a type="button" class="btn btn-primary" href="{{ URL::route('GET_send_acta',['numeroacta' => $actas->numeroacta]) }}"><i class="glyphicon glyphicon-send"></i> Enviar </a></td>
-                            <td><a type="button" class="btn btn-primary" href="{{ URL::route('GET_pdf_acta',['numeroacta' => $actas->numeroacta]) }}"><i class="glyphicon glyphicon-print"></i> Imprimir </a></td>
+                            <td>{{$acta->numeroacta}}</td>
+                            <td>{{$acta->fhini}}</td>
+                            <td>{{$acta->fhfin}}</td>
+                            <td>{{$acta->elaboro->persona->nombreCompleto()}}</td>
+                            <td>{{$acta->reviso->persona->nombreCompleto()}}</td>
+                            <td>{{$acta->aprobo->persona->nombreCompleto()}}</td>
+                            <td><a type="button" class="btn btn-primary" href="{{ URL::route('GET_send_acta',['numeroacta' => $acta->numeroacta]) }}"><i class="glyphicon glyphicon-send"></i> Enviar </a></td>
+                            <td><a type="button" class="btn btn-primary" href="{{ URL::route('GET_pdf_acta',['numeroacta' => $acta->numeroacta]) }}"><i class="glyphicon glyphicon-print"></i> Imprimir </a></td>
                         </tr>
                     @endforeach
                 </tbody>

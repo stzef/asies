@@ -25,8 +25,8 @@
 
                 <div class="panel-body">
                     <div class="col-md-12">
-                    <button class="btn btn success" onclick="Models.Actividades.sendReminders()">Enviar Recordatorios</button>
-                    <table class="actividades_atrasadas table">
+
+                    <!--<table class="actividades_atrasadas table">
                         <thead>
                             <tr>
                                 <th>Actividad</th>
@@ -47,7 +47,68 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                    </table>
+                    </table>-->
+
+                    <div class="row">
+                        <ul class="nav nav-tabs">
+                          <li><a data-toggle="tab" href="#retrasadas">Retrasadas</a></li>
+                          <li><a data-toggle="tab" href="#pendientes">Pendientes</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div id="retrasadas" class="tab-pane fade in active">
+                            @permission('activities.send_reminders')
+                                <div class="panel">
+                                    <button class="btn btn-success" onclick="Models.Actividades.sendReminders()">Enviar Recordatorios</button>
+                                </div>
+                            @endpermission
+                            <h3>Retrasadas</h3>
+                            <table class="actividades_retrasadas table">
+                                <thead>
+                                    <tr>
+                                        <th>Actividad</th>
+                                        <th>F Inicio</th>
+                                        <th>F Final</th>
+                                        <th>Dias Retraso</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($actividades_retrasadas as $actividad)
+                                        <tr>
+                                            <td>{{ $actividad->nactividad }}</td>
+                                            <td>{{ $actividad->fini }}</td>
+                                            <td>{{ $actividad->ffin }}</td>
+                                            <td>{{ $actividad->dias_retraso }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                          </div>
+                          <div id="pendientes" class="tab-pane fade">
+                            <h3>Pendientes</h3>
+                            <table class="actividades_pendientes table">
+                                <thead>
+                                    <tr>
+                                        <th>Actividad</th>
+                                        <th>F Inicio</th>
+                                        <th>F Final</th>
+                                        <th>Dias Faltantes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($actividades_pendientes as $actividad)
+                                        <tr>
+                                            <td>{{ $actividad->nactividad }}</td>
+                                            <td>{{ $actividad->fini }}</td>
+                                            <td>{{ $actividad->ffin }}</td>
+                                            <td>{{ $actividad->dias_faltantas }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                          </div>
+                        </div>
+                    </div>
 
                     </div>
 
@@ -62,7 +123,14 @@
     <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>
     <script type="text/javascript">
-        $(".actividades_atrasadas").DataTable({
+        $(".actividades_retrasadas").DataTable({
+            "paging":   true,
+            "ordering": true,
+            "searching": true,
+            "info":     true,
+            "language": DTspanish,
+        })
+        $(".actividades_pendientes").DataTable({
             "paging":   true,
             "ordering": true,
             "searching": true,

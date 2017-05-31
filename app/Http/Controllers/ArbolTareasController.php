@@ -12,6 +12,7 @@ use asies\Models\Planes;
 use asies\Models\Personas;
 use asies\Models\TiActividades;
 use asies\Models\TiRelaciones;
+use asies\Models\TiPlanes;
 use View;
 
 class ArbolTareasController extends Controller
@@ -35,18 +36,10 @@ class ArbolTareasController extends Controller
      */
     public function treeview()
     {
-        $tareas = Tareas::all();
-
-        $usuarios = User::all();
-
-        $tiactividades = TiActividades::all();
-        $relaciones = TiRelaciones::all();
+        $tiplanes = TiPlanes::all();
         $context = array(
-            "tareas" => $tareas,
-            "tiactividades" => $tiactividades,
-            "usuarios" => $usuarios,
-            "relaciones" => $relaciones
+            "tiplanes" => $tiplanes,
         );
-        return view('meci/dashboard',$context);
+        return view('planes/tasktree',$context);
     }
 }

@@ -77,8 +77,8 @@ Route::group(['prefix' => 'actividades'], function(){
 
 	Route::get('do/{cactividad}', "ActividadesController@doActivity")->name('realizar_actividad');
 
-	Route::get('checkDates/', "ActividadesController@checkDates")->name('GET_verificar_fechas_actividades');
-	Route::post('checkDates/', "ActividadesController@checkDates")->name('POST_verificar_fechas_actividades');
+	Route::get('checkDates/', "ActividadesController@checkDates")->name('GET_verificar_fechas_actividades')->middleware("permission:activities.check_dates");
+	Route::post('checkDates/', "ActividadesController@checkDates")->name('POST_verificar_fechas_actividades')->middleware("permission:activities.send_reminders");
 
 	Route::get('summary/{cactividad}', "ActividadesController@summaryActivity")->name('GET_resumen_actividad');
 	Route::post('evidence/{cactividad}', "ActividadesController@store");

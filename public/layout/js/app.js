@@ -220,7 +220,7 @@ Models = {
 				url : "/actividades/checkDates",
 				type : "POST",
 				success : function (response) {
-					alertify.error("Los Recordatorios se han enviado.")
+					alertify.success("Los Recordatorios se han enviado.")
 				},
 				error : function (response) {
 					alertify.error("Ha ocurrido un error al enviar los Recordatorios.")

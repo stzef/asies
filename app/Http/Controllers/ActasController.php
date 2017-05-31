@@ -93,13 +93,15 @@ class ActasController extends Controller
 		$data = array(
 			'acta' => Actas::where("numeroacta",$numeroacta)->first()
 		);
-		$prueba=\Mail::send('welcome', [], function ($message) use ($data){
-			$actividad = $data['acta']->getActividad();
+		$data["actividad"] = $data["acta"]->getActividad();
+			//$actividad = $data['acta']->getActividad();
+		$prueba=\Mail::send('emails.acta', $data, function ($message) use ($data){
+			$actividad = $data['actividad'];
 			$namefile = "acta_{$data['acta']->numeroacta}.pdf";
 			$dir_path = base_path()."/public/evidencias/actividades/actividad_{$actividad->cactividad}";
 			$file_path = "$dir_path/$namefile";
 			$message->attach($file_path);
-			$message->to('carlosturnerbenites@gmail.com')->subject('Testing mail');
+			$message->to('sistematizaref.programador5@gmail.com')->subject('Acta de Reunión');
 		});
 	}
 
@@ -139,7 +141,7 @@ class ActasController extends Controller
 	public function list_actas(Request $request){
 		if ($request->isMethod('get')){
 			$actas = Actas::all();
-			return view( 'actas.list' , array("acta" => $actas));
+			return view( 'actas.list' , array("actas" => $actas));
 		}
 	}
 }

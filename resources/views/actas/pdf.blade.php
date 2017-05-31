@@ -35,7 +35,6 @@
 		<td> {{ $asistente->usuario->persona->nombreCompleto() }} </td>
 	</tr>
 	@endforeach
-
 </table>
 
 <h2> Tareas </h2>

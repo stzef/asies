@@ -218,7 +218,7 @@
                                                                 <select name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
                                                                     <option value="">Tareas</option>}
                                                                     @foreach ($tareas as $tarea)
-                                                                        <option value="{{$tarea->ctarea}}">{{$tarea->ntarea}}</option>
+                                                                        <option value="{{$tarea->ctarea}}" title="{{$tarea->ntarea}}">{{ str_limit($tarea->ntarea, $limit = 45, $end = '...') }}</option>
                                                                     @endforeach
                                                                 </select>
                                                                 <span class="input-group-addon" data-find-task data-input-reference="#tarea"><i class="fa fa-search"></i></span>
@@ -250,7 +250,7 @@
                                             </table>
                                         </form>
                                       <div class="col-md-12">
-                                            <table id="usuarios" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
+                                            <table id="usuarios" width="100%" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
                                                 <thead>
                                                     <tr>
                                                         <th>ctarea</th>
@@ -287,18 +287,20 @@
                         <div id="tabla_compromisos" class="tab-pane fade">
                             <div class="col-md-12">
                                     <div class="table-responsive col-md-12">
+                                        @if ( Auth::check() && Auth::user()->can('task.crud') )
+
+                                        @else
+                                            <p>No Tiene Permisos Para Agregar Compromisos</p>
+                                        @endif
                                         <form id="nuevas_tareas">
-                                            <table class="table">
+                                            <table class="table" width="100%">
                                                 <tbody>
                                                     <tr>
                                                         <td width="33%">
                                                             <div class="form-group">
-                                                                <label for="tarea_cplan" class="col-sm-2 control-label">Nombre Tarea</label>
-                                                                <div class="col-sm-10">
-                                                                    <div class="input-group">
-                                                                        <input type="text" class="form-control" id="tarea_ntarea" name="tarea[ntarea]" placeholder="Nombre Tarea">
-                                                                        <span class="input-group-addon"></span>
-                                                                    </div>
+                                                                <label for="tarea_cplan" class="col-sm-4 control-label">Nombre Tarea</label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" class="form-control" id="tarea_ntarea" name="tarea[ntarea]" placeholder="Nombre Tarea">
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -306,10 +308,7 @@
                                                             <div class="form-group">
                                                                 <label for="tarea_cplan" class="col-sm-2 control-label">Valor Tarea</label>
                                                                 <div class="col-sm-10">
-                                                                    <div class="input-group">
-                                                                        <input type="number" class="form-control" id="tarea_valor" name="tarea[valor_tarea]" placeholder="Valor Tarea">
-                                                                        <span class="input-group-addon"></span>
-                                                                    </div>
+                                                                    <input type="number" class="form-control" id="tarea_valor" name="tarea[valor_tarea]" placeholder="Valor Tarea">
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -325,48 +324,50 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="form-group row">
-                                                                <div class="input-group">
-                                                                    <button width="50%" id="agregar" type="submit" class="btn btn-info">
-                                                                        <i class="glyphicon glyphicon-plus"></i>
-                                                                    </button>
+                                                            @if ( Auth::check() && Auth::user()->can('task.crud') )
+                                                                <div class="form-group row">
+                                                                    <div class="input-group">
+                                                                        <button width="50%" id="agregar" type="submit" class="btn btn-info">
+                                                                            <i class="glyphicon glyphicon-plus"></i>
+                                                                        </button>
 
-                                                               </div>
-                                                            </div>
+                                                                   </div>
+                                                                </div>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                      <div class="col-md-12">
-                                            <table id="nuevas" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Tarea</th>
-                                                        <th>cplan</th>
-                                                        <th>Producto Minimo</th>
-                                                        <th>Valor Tarea</th>
-                                                        <th>Editar</th>
-                                                        <th>Borrar</th>
-                                                    </tr>
-                                                </thead>
+                                            <div class="col-md-12">
+                                                <table id="nuevas" width="100%" class="table table-bordered tabla-hover table-responsive" cellspacing="0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Tarea</th>
+                                                            <th>cplan</th>
+                                                            <th>Producto Minimo</th>
+                                                            <th>Valor Tarea</th>
+                                                            <th>Editar</th>
+                                                            <th>Borrar</th>
+                                                        </tr>
+                                                    </thead>
 
-                                                <tbody>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                      </form>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </form>
                                     </div>
                             </div>
                         </div>
                     </div>
                 </div>
             <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">
+                        <!--<button type="button" class="btn btn-primary">
                             <i class="glyphicon glyphicon-print"></i> Imprimir
-                        </button>
-                        <button type="button" class="btn btn-primary">
+                        </button>-->
+                        <!--<button type="button" class="btn btn-primary">
                             <i class="glyphicon glyphicon-send"></i> Enviar
-                        </button>
+                        </button>-->
                         <button type="submit" class="btn btn-primary" form="form_crear_acta" form="nuevas_tareas">
                             <i class="glyphicon glyphicon-plus"></i> Guardar
                         </button>
