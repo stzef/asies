@@ -5,6 +5,8 @@ namespace asies\Http\Controllers;
 use Illuminate\Http\Request;
 
 use asies\Http\Requests;
+use asies\Models\TiPlanes;
+
 use View;
 
 class UtilitiesController extends Controller
@@ -27,6 +29,10 @@ class UtilitiesController extends Controller
      */
     public function tasktree()
     {
-        return view('utilities.tasktree');
+        $tiplanes = TiPlanes::all();
+        $context = array(
+            "tiplanes" => $tiplanes,
+        );
+        return view('utilities.tasktree', $context);
     }
 }

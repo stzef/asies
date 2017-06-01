@@ -78,10 +78,12 @@
                                     El acta de esta actividad ya se ha creado.
                                 </div>
                             @else
-                                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modalCrearActa">
-                                    <i class="glyphicon glyphicon-plus"></i>
-                                    Crear Acta
-                                </button>
+                                @permission('actas.crud')
+                                    <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modalCrearActa">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        Crear Acta
+                                    </button>
+                                @endpermission
                             @endif
                         </div>
                         @foreach ($tareas as $tarea)

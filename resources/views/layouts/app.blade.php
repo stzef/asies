@@ -51,6 +51,12 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <style>
+        #chart_div table{
+            margin: 0 auto !important;
+        }
+    </style>
     @yield('styles')
 
 </head>
@@ -148,9 +154,14 @@
                         <a href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}"><i class="fa fa-fw fa-file-text-o"></i> Mis Actividades</a>
                     </li>
                     <li>
-                    @permission('actas.list')
-                        <a href="{{ URL::route('list_actas',['user'=>Auth::user()->name]) }}"><i class="fa fa-file-pdf-o"></i> Actas</a>
-                    @endpermission
+                        <a href="javascript:;" data-toggle="collapse" data-target="#actas"><i class="fa fa-fw fa-file-pdf-o"></i> Actas <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="actas" class="collapse">
+                            <li>
+                                @permission('actas.crud.list')
+                                    <a href="{{ URL::route('GET_list_actas',['user'=>Auth::user()->name]) }}"><i class="fa fa-file-pdf-o"></i> Actas</a>
+                                @endpermission
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Datos <i class="fa fa-fw fa-caret-down"></i></a>

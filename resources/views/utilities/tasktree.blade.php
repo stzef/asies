@@ -12,7 +12,17 @@
 
 @section('content')
 	<div class="row">
+		<table class="table">
+			<tr>
+				@foreach( $tiplanes as $tiplan )
+					<td>
 
+					<img src="{{ URL::asset( $tiplan->icono ) }}" alt="">
+					<label for="">{{$tiplan->ntiplan}}</label>
+					</td>
+				@endforeach
+			</tr>
+		</table>
 		<div class="col-md-12">
 			<div class="panel panel-default">
 
@@ -106,7 +116,7 @@
 							"icon" : "/vendor/jstree/img/module.png"
 						},
 						"tareas" : {
-							"icon" : "/vendor/jstree/img/tarea.png"
+							"icon" : "/vendor/jstree/img/task.png"
 						},
 						"componente" : {
 							"icon" : "/vendor/jstree/img/component.png"

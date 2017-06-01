@@ -34,7 +34,8 @@
 		</table>
 		<div class="col-md-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Planes <button class="btn btn-info" onclick="Models.Planes.recalcular(pos_recalculo)">Recalcular Puntos</button></div>
+				<div class="panel-heading">Planes @permission("planes.calculate_points")<button class="btn btn-info" onclick="Models.Planes.recalcular(pos_recalculo)">Recalcular Puntos</button>@endpermission
+				</div>
 
 				<div class="panel-body">
 					<ul class="nav nav-tabs">
@@ -75,46 +76,6 @@
 	<script src="{{ URL::asset('vendor/jstree/js/jstree.min.js') }}"></script>
 
 	<script>
-
-	function pos_recalculo(response){
-
-	}
-
-	$(".nav.nav-tabs li").click(function(){
-		var that = this
-		TREEVIEW_SELECT = $(that).data("treeview")
-		$('#treeview_find').val("")
-	})
-	$(".nav.nav-tabs li").first().trigger("click")
-
-		//$.jstree.defaults.plugins = [ "wholerow", "checkbox" ]
-		//$.jstree.defaults.checkbox.keep_selected_style = false
-		//$.jstree.defaults.core.multiple = false
-
-		var cols = {
-			ctarea : 0,
-			ntarea : 1,
-			crespo : 2,
-			nrespo : 3,
-			ctirela: 4,
-			ntirela: 5,
-		}
-		var table= $("#usuarios").DataTable({
-			"paging":   false,
-			"ordering": false,
-			"info":     false,
-			"language": DTspanish,
-			"columnDefs": [
-				{
-					"targets": [ cols.ctarea,cols.crespo,cols.ctirela ],
-					"visible": false,
-				},
-			]
-
-		})
-		function getPlanSelect(){
-			var plan = $('#treeview').jstree('get_selected',true)
-		}
 
 		waitingDialog.show("Cargando Arbol...")
 		Models.Planes.treeview(function(response){
@@ -167,7 +128,7 @@
 							"icon" : "/vendor/jstree/img/module.png"
 						},
 						"tareas" : {
-							"icon" : "/vendor/jstree/img/tarea.png"
+							"icon" : "/vendor/jstree/img/task.png"
 						},
 						"componente" : {
 							"icon" : "/vendor/jstree/img/component.png"
@@ -193,6 +154,43 @@
 			});
 
 		})
+
+		function pos_recalculo(response){
+
+		}
+
+		$(".nav.nav-tabs li").click(function(){
+			var that = this
+			TREEVIEW_SELECT = $(that).data("treeview")
+			$('#treeview_find').val("")
+		})
+		$(".nav.nav-tabs li").first().trigger("click")
+
+
+		var cols = {
+			ctarea : 0,
+			ntarea : 1,
+			crespo : 2,
+			nrespo : 3,
+			ctirela: 4,
+			ntirela: 5,
+		}
+		var table= $("#usuarios").DataTable({
+			"paging":   false,
+			"ordering": false,
+			"info":     false,
+			"language": DTspanish,
+			"columnDefs": [
+				{
+					"targets": [ cols.ctarea,cols.crespo,cols.ctirela ],
+					"visible": false,
+				},
+			]
+
+		})
+		function getPlanSelect(){
+			var plan = $('#treeview').jstree('get_selected',true)
+		}
 	</script>
 
 @endsection

@@ -52,6 +52,8 @@
 		google.charts.setOnLoadCallback(drawChart);
 
 		function drawChart() {
+
+			waitingDialog.show("Cargando Graficas...")
 			Models.Planes.findOne("{{ $plan->cplan}}",function(plan){
 				var data = [['Label', 'Porcentaje'],]
 				plan.subplanes.forEach(function(plan){
@@ -64,15 +66,18 @@
 					redFrom: 0, redTo: 60,
 					yellowFrom:61, yellowTo: 80,
 					greenFrom:81, greenTo: 100,
-					minorTicks: 5
+					minorTicks: 5,
 				};
 				var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
 				chart.draw(data, options);
+				waitingDialog.hide("")
 			})
 		}
 	</script>
 
 	<script>
+
+		waitingDialog.show("Cargando Arbol...")
 		var TREEVIEW_SELECT = "#treeview"
 		Models.Planes.findOne("{{ $plan->cplan}}",function(response){
 			var data = Models.Utils.dataToTreeview([response])
@@ -119,7 +124,7 @@
 					$(TREEVIEW_SELECT).jstree(true).search(v);
 				}, 250);
 			});
-
+			waitingDialog.hide("")
 		})
 	</script>
 

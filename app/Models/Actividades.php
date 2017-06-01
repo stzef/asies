@@ -142,7 +142,7 @@ class Actividades extends Model
         $this->dias_faltantas = 0;
         $this->dias_retraso = 0;
         $factividad = Carbon::parse($this->fini);
-        if( $factividad > $now ) {
+        if( $factividad >= $now ) {
             $this->dias_faltantas = $factividad->diffInDays($now);
         }else{
             $this->dias_retraso = $factividad->diffInDays($now);

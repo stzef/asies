@@ -133,10 +133,12 @@
                         <table class="table table-hover">
                             <tr>
                                 <td>
-                                    <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modalActa">
-                                        <i class="glyphicon glyphicon-plus"></i>
-                                        Ver Acta
-                                    </button>
+                                    @permission('actas.see')
+                                        <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modalActa">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                            Ver Acta
+                                        </button>
+                                    @endpermission
                                 </td>
                             </tr>
                             @foreach ($evidencias as $evidencia)

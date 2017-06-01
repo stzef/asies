@@ -86,17 +86,7 @@ class ActividadesController extends Controller
 
 		foreach ($actividades as $actividad) {
 			$actividad->calcularDias();
-			$actividad->tareas->getTareas();
-			/*
-			$actividad->dias_faltantas = 0;
-			$actividad->dias_retraso = 0;
-			$factividad = Carbon::parse($actividad->fini);
-			if( $factividad > $now ) {
-				$actividad->dias_faltantas = $factividad->diffInDays($now);
-			}else{
-				$actividad->dias_retraso = $factividad->diffInDays($now);
-			}
-			*/
+			$actividad->tareas = $actividad->getTareas();
 
 			if ( $actividad->dias_faltantas ){
 				array_push($actividades_pendientes, $actividad);
