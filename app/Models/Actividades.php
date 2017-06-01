@@ -129,14 +129,17 @@ class Actividades extends Model
                 ->select('tareas.*')
                 ->where('asignaciontareas.cactividad', $this->cactividad)
                 ->where('users.id', $iduser)
+                ->groupBy('ctarea')
                 ->get();
         }else{
             $tareas = \DB::table('asignaciontareas')
                 ->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
                 ->select('tareas.*')
                 ->where('asignaciontareas.cactividad', $this->cactividad)
+                ->groupBy('ctarea')
                 ->get();
         }
+        //dump($tareas);exit();
         return $tareas;
     }
     public function getAsignacion()

@@ -321,7 +321,7 @@
                                                             <div class="form-group">
                                                                 <label for="tarea_cplan" class="col-sm-4 control-label">Nombre Tarea</label>
                                                                 <div class="col-sm-8">
-                                                                    <input type="text" class="form-control" id="tarea_ntarea" name="tarea[ntarea]" placeholder="Nombre Tarea">
+                                                                    <input required type="text" class="form-control" id="tarea_ntarea" name="tarea[ntarea]" placeholder="Nombre Tarea">
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -329,7 +329,7 @@
                                                             <div class="form-group">
                                                                 <label for="tarea_cplan" class="col-sm-2 control-label">Valor Tarea</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="number" class="form-control" id="tarea_valor" name="tarea[valor_tarea]" placeholder="Valor Tarea">
+                                                                    <input required value="1" type="number" class="form-control" id="tarea_valor" name="tarea[valor_tarea]" placeholder="Valor Tarea">
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -338,7 +338,7 @@
                                                                 <label for="tarea_cplan" class="col-sm-2 control-label">Prod. Min</label>
                                                                 <div class="col-sm-10">
                                                                     <div class="input-group">
-                                                                        <input type="text" class="form-control" id="tarea_cplan" name="tarea[cplan]" placeholder="Producto Minimo">
+                                                                        <input required type="text" class="form-control" id="tarea_cplan" name="tarea[cplan]" placeholder="Producto Minimo">
                                                                         <span class="input-group-addon"><i class="fa fa-search" data-find-task data-input-reference="#tarea_cplan"></i></span>
                                                                     </div>
                                                                 </div>
@@ -564,10 +564,11 @@
                     "<button type='button' class='editar btn btn-primary' onclick='taskchange(event,this)'>"+
                         "<i class='fa fa-pencil-square-o'></i>"+
                     "</button>",
-                    "<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)''>"+
+                    "<button type='button' class='eliminar btn btn-danger' onclick='borrartask(event,this)''>"+
                         "<i class='fa fa-trash-o'></i>"+
                     "</button>"])
                 .draw()
+            $(that).trigger("reset")
         })
 
 
@@ -589,9 +590,12 @@
             cache:false,
             contentType: false,
             processData: false,
-            success: function(){
-                alert("hola");
+            success: function(response){
+                alertify.success(response.data.message)
                 listar();
+            },
+            error: function(response){
+                alertify.error("Algo ha salido mal.")
             }
         })
     });
@@ -605,13 +609,49 @@
         console.log(data)
     }
     function taskchange(event,button){
-        var data = table.row($(button).parent("tr")).data();
+        var data = tabletask.row($(button).closest("tr")).data();
+        console.info(data)
+        console.info(button)
+        tabletask.row( $(button).closest("tr")).remove().draw(false);
+        $("#tarea_ntarea").val(data[colstask.ntarea]).change();
+        $("#tarea_cplan").val(data[colstask.nplan]).change();
+    }
+    function borrartask(event,button){
         tabletask.row( $(button).parents("tr")).remove().draw(false);
-        var ntarea = $("#tarea_ntarea").val(data[colstask.ntarea]).change();
-        var ntarea = $("#tarea_nplan").val(data[colstask.nplan]).change();
     }
     function borrar(event,button){
-        table.row( $(button).parents("tr")).remove().draw(false);
+        //table.row( $(button).parents("tr")).remove().draw(false);
+
+        var ctarea = table.row($(button).closest("tr")).data()[cols.ctarea]
+        var ctirelacion = table.row($(button).closest("tr")).data()[cols.ctirela]
+        var cresponsable = table.row($(button).closest("tr")).data()[cols.crespo]
+
+        var cactividad = $("input#cactividad").val();
+
+
+        var data = new FormData()
+        data.append("tareasusuarios[cactividad]",cactividad)
+        data.append("tareasusuarios[ctarea]",ctarea)
+        data.append("tareasusuarios[ctirelacion]",ctirelacion)
+        data.append("tareasusuarios[user]",cresponsable)
+
+        var base_url_remove_user_tarea = "{{ URL::route('DELETE_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
+        $.ajax({
+            "url":base_url_remove_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
+            "type":"POST",
+            data: data,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success: function(response){
+                table.row( $(button).parents("tr")).remove().draw(false);
+                alertify.success(response.data.message)
+                //listar();
+            },
+            error: function(response){
+                alertify.error("Algo ha salido mal.")
+            }
+        })
     }
     var listar = function(){
         var ctarea = $( "#tarea option:selected" ).val();
@@ -622,7 +662,7 @@
         var ntirespo = $( "#tirespo option:selected" ).text();
         //$("#tarea").val()
         table
-            .row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,
+            .row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,"No",
                 "<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>"+
                     "<i class='fa fa-pencil-square-o'></i>"+
                 "</button>",
