@@ -41,10 +41,6 @@ class APIController extends Controller
 	public function usuarios()
 	{
 		$usuarios = User::all();
-		/*foreach ($usuarios as $usuario) {
-			$persona = Personas::where('usuario', $usuario->id)->first();
-			$usuario->persona = $persona;
-		}*/
 		return response()->json($usuarios);
 	}
 	public function update_evidencia(Request $request,$cevidencia){
@@ -57,10 +53,6 @@ class APIController extends Controller
 	public function usuarios_plan($ctarea)
 	{
 		$usuarios = TareasUsuarios::where('ctarea', $ctarea)->get();
-		/*foreach ($usuarios as $usuario) {
-			$persona = Personas::where('usuario', $usuario->id)->first();
-			$usuario->persona = $persona;
-		}*/
 		return response()->json($usuarios);
 	}
 }

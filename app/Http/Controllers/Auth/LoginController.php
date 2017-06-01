@@ -32,7 +32,7 @@ class LoginController extends Controller
     }
     public function logout(Request $request)
     {
-			$user = Auth::user();
+		$user = Auth::user();
 
 		Log::info('Cierra de Session',['user' => $user,'date' => date("Y-m-d H:i:s")]);
 		Auth::logout();

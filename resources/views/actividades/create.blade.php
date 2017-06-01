@@ -338,8 +338,12 @@
 		cache:false,
 		contentType: false,
 		processData: false,
-		success: function(){
+		success: function(response){
+			alertify.success(response.data.message)
 			listar();
+		},
+		error: function(response){
+			alertify.error("Algo ha salido mal.")
 		}
 	})
 });
@@ -351,7 +355,37 @@ function editar(event,button){
 	var tiresponsable = $("#tirespo").val(data[cols.ctirela]).change();
 }
 function borrar(event,button){
-	table.row( $(button).parents("tr")).remove().draw(false);
+
+	var ctarea = table.row($(button).closest("tr")).data()[cols.ctarea]
+	var ctirelacion = table.row($(button).closest("tr")).data()[cols.ctirela]
+	var cresponsable = table.row($(button).closest("tr")).data()[cols.crespo]
+
+	var cactividad = $("input#actividad_cactividad").val();
+
+
+	var data = new FormData()
+	data.append("tareasusuarios[cactividad]",cactividad)
+	data.append("tareasusuarios[ctarea]",ctarea)
+	data.append("tareasusuarios[ctirelacion]",ctirelacion)
+	data.append("tareasusuarios[user]",cresponsable)
+
+	var base_url_remove_user_tarea = "{{ URL::route('DELETE_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
+	$.ajax({
+		"url":base_url_remove_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
+		"type":"POST",
+		data: data,
+		cache:false,
+		contentType: false,
+		processData: false,
+		success: function(response){
+			table.row( $(button).parents("tr")).remove().draw(false);
+			alertify.success(response.data.message)
+			//listar();
+		},
+		error: function(response){
+			alertify.error("Algo ha salido mal.")
+		}
+	})
 }
 var listar = function(){
 	var ctarea = $( "#tarea option:selected" ).val();

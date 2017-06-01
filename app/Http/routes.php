@@ -75,6 +75,8 @@ Route::group(['prefix' => 'actividades'], function(){
 	Route::post('edit/{cactividad}', "ActividadesController@edit")->middleware("permission:activities.crud");
 	Route::get('edit/{cactividad}', "ActividadesController@edit")->name("GET_actividades_edit")->middleware("permission:activities.crud");
 
+	Route::get('list', "ActividadesController@list_activities")->name("GET_actividades_list")->middleware("permission:activities.crud");
+
 	Route::get('do/{cactividad}', "ActividadesController@doActivity")->name('realizar_actividad');
 
 	Route::get('checkDates/', "ActividadesController@checkDates")->name('GET_verificar_fechas_actividades')->middleware("permission:activities.check_dates");
@@ -93,6 +95,7 @@ Route::group(['prefix' =>'actas'], function(){
 
 Route::group(['prefix' => 'asignacion'], function(){
 		Route::post('/{cactividad}/{ctarea}/usuarios', "AsignacionController@users")->name("POST_users_task");
+		Route::post('/{cactividad}/{ctarea}/usuarios/delete', "AsignacionController@users_delete")->name("DELETE_users_task");
 });
 
 Route::group(['prefix' => 'tareas'], function(){

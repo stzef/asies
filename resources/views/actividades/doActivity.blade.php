@@ -21,6 +21,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Realizando Actividad : {{ $actividad->nactividad }}
+                    <a class="btn btn-primary" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a>
                 </div>
 
                 <div class="panel-body">
@@ -75,7 +76,7 @@
                         <div class="row">
                             @if ( $actividad->acta )
                                 <div class="alert alert-warning">
-                                    El acta de esta actividad ya se ha creado.
+                                    El acta de esta actividad ya se ha creado. Para ver el acta ir a Resumen.
                                 </div>
                             @else
                                 @permission('actas.crud')
@@ -86,18 +87,36 @@
                                 @endpermission
                             @endif
                         </div>
-                        @foreach ($tareas as $tarea)
-                            <div class="form-group row">
-                                <!--<label class="col-sm-2"></label>-->
-                                <div class="col-sm-12">
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" onclick="Models.Tareas.cambiarEstado(this.dataset.ctarea,this.checked)" type="checkbox" data-ctarea="{{ $tarea->ctarea }}" name="ctarea_{{ $tarea->ctarea }}" @if ($tarea->ifhecha) checked @endif> {{ $tarea->ntarea }}
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Tarea</th>
+                                    <th>Realizada</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($tareas as $tarea)
+                                    <tr>
+                                        <td>
+                                            {{ $tarea->ntarea }}
+                                        </td>
+                                        <td>
+                                            <input class="form-check-input" onclick="Models.Tareas.cambiarEstado(this.dataset.ctarea,this.checked)" type="checkbox" data-ctarea="{{ $tarea->ctarea }}" name="ctarea_{{ $tarea->ctarea }}" @if ($tarea->ifhecha) checked @endif>
+                                        </td>
+                                    </tr>
+                                    <!--<div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" onclick="Models.Tareas.cambiarEstado(this.dataset.ctarea,this.checked)" type="checkbox" data-ctarea="{{ $tarea->ctarea }}" name="ctarea_{{ $tarea->ctarea }}" @if ($tarea->ifhecha) checked @endif> {{ $tarea->ntarea }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>

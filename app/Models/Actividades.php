@@ -97,6 +97,25 @@ class Actividades extends Model
         }
         return array("obj"=>$obj,"data"=>$data);
     }
+
+    public function remove_task_user($data,$cactividad=null)
+    {
+        $user = Auth::user();
+        $actividad = $this;
+        if ( $cactividad ){
+            $actividad = Tareas::where('cactividad', $cactividad)->first();
+        }
+
+        $dataCreataion = array('cactividad' => $actividad->cactividad , 'ctirelacion'=>$data["ctirelacion"],'ctarea'=>$data["ctarea"],'user'=>$data["user"]);
+        if( AsignacionTareas::where(array('cactividad' => $actividad->cactividad ,'ctarea'=>$data["ctarea"],'user'=>$data["user"]))->exists() ){
+            AsignacionTareas::where(array('cactividad' => $actividad->cactividad ,'ctarea'=>$data["ctarea"],'user'=>$data["user"]))->delete();
+            Log::info('Asignacion Borrada,',['user (borro)' => $user->id, '' => $actividad->cactividad ,'tarea' => $data['ctarea'] , 'user (responsable)' =>$data["user"]]);
+            $data = array("message"=>"Se Borro la <b>Responsabilidad</b> del Usuario.");
+        }else{
+            $data = array("message"=>"La Asignacion No Existe");
+        }
+        return array("data"=>$data);
+    }
     public function evidencias()
     {
         return $this->hasMany('asies\Models\Evidencia', 'cactividad', 'cactividad');
@@ -127,7 +146,6 @@ class Actividades extends Model
             ->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
             ->select('asignaciontareas.*')
             ->where('asignaciontareas.cactividad', $this->cactividad)
-            //->where('users.id', $iduser)
             ->get();
             foreach ($asignaciones as $asignacion) {
                 $asignacion->tarea = Tareas::where('ctarea',$asignacion->ctarea)->first();
@@ -139,10 +157,15 @@ class Actividades extends Model
     }
     public function calcularDias(){
         $now = Carbon::now();
+        $now->hour   = 0;
+        $now->minute = 0;
+        $now->second = 0;
+
         $this->dias_faltantas = 0;
         $this->dias_retraso = 0;
         $factividad = Carbon::parse($this->fini);
-        if( $factividad >= $now ) {
+
+        if( $factividad > $now ) {
             $this->dias_faltantas = $factividad->diffInDays($now);
         }else{
             $this->dias_retraso = $factividad->diffInDays($now);

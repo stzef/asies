@@ -77,8 +77,6 @@ class ActividadesController extends Controller
 	}
 
 	public function checkDates(Request $request){
-		//$now = Carbon::now();
-		//$actividades = Actividades::whereDate('ffin', '<', date('Y-m-d'))->get();
 		$actividades = Actividades::all();
 
 		$actividades_retrasadas = array();
@@ -95,8 +93,6 @@ class ActividadesController extends Controller
 			}
 		}
 
-		//$actividades = array($actividades[0]);
-
 		if ($request->isMethod('get')){
 
 			return view( 'actividades.checkDates' , array(
@@ -112,14 +108,21 @@ class ActividadesController extends Controller
 				$status = $this->sendEmailsReminder($actividad);
 				array_push($response, $status);
 			}
-			return response()->json($response);
+
+			$request->session()->flash('message', 'Se han Enviado los recodatorios!');
+
+			if($request->ajax()){
+				$response["message"] = "Se han Enviado los recodatorios!";
+				return response()->json($response);
+			}
+			return redirect( 'dashboard');
+
 		}
 	}
 
-	public function sendEmailsReminder($actividad = null){
-		//$emails = $actividad->getEmails();
-		//array_push($emails, 'sistematizaref.programador5@gmail.com');
-		$emails = ['sistematizaref.programador5@gmail.com'];
+	public function sendEmailsReminder($actividad){
+		$emails = $actividad->getEmails();
+		//$emails = ['sistematizaref.programador5@gmail.com'];
 		$data = array(
 			'actividad' => $actividad,
 			'emails' => $emails,
@@ -127,7 +130,7 @@ class ActividadesController extends Controller
 
 
 		$status = \Mail::send('emails.reminderActivity', $data, function ($message) use ($data){
-			$message->to("sistematizaref.programador5@gmail.com")->subject('Recordatorio de Actividades');
+			$message->to($data["emails"])->subject('Recordatorio de Actividades');
 		});
 
 		return $status;
@@ -277,6 +280,13 @@ class ActividadesController extends Controller
 			$size += 2.0 * (PHP_INT_MAX + 1);
 		}
 		return $size;
+	}
+
+	public function list_activities(Request $request){
+		if ($request->isMethod('get')){
+			$actividades = Actividades::all();
+			return view( 'actividades.list' , array("actividades" => $actividades));
+		}
 	}
 
 	public function store(Request $request,$cactividad){

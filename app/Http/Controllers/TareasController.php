@@ -47,7 +47,7 @@ class TareasController extends Controller
 
 			$response["ok"] = true;
 			if ( $tarea->checkUser($user->id) ){
-				Tareas::where('ctarea', $ctarea)->update(['ifhecha' => $dataBody["ifhecha"]]);//->first();
+				Tareas::where('ctarea', $ctarea)->update(['ifhecha' => $dataBody["ifhecha"]]);
 				if ( $tarea->ifhecha ){
 					$response["message"] = "";
 				}else{

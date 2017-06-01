@@ -81,28 +81,29 @@ class ActasController extends Controller
 		return response()->json(array());
 	}
 
-	/**
-	 * Send Welcome Email throught mandriall APP
-	 * https://mandrillapp.com/api/docs/messages.php.html
-	 * @param  int  $activationLink
-	 * @param  int  $userEmail
-	 * @param  int  $userName
-	 * @return Response
-	 */
 	public function send(request $request,$numeroacta){
 		$data = array(
-			'acta' => Actas::where("numeroacta",$numeroacta)->first()
+			'acta' => Actas::where("numeroacta",$numeroacta)->first(),
+			'message_session' => "Se ha Enviado el Acta!",
 		);
 		$data["actividad"] = $data["acta"]->getActividad();
-			//$actividad = $data['acta']->getActividad();
+		$data["emails"] = $data["actividad"]->getEmails();
+
 		$prueba=\Mail::send('emails.acta', $data, function ($message) use ($data){
 			$actividad = $data['actividad'];
 			$namefile = "acta_{$data['acta']->numeroacta}.pdf";
 			$dir_path = base_path()."/public/evidencias/actividades/actividad_{$actividad->cactividad}";
 			$file_path = "$dir_path/$namefile";
-			$message->attach($file_path);
-			$message->to('sistematizaref.programador5@gmail.com')->subject('Acta de Reunión');
+			if( file_exists($file_path) ){
+				$message->attach($file_path);
+			}else{
+				$data["message_session"] += ". No se puedo Adjuntar el Archivo $namefile. Verifique que se encuentre generado.";
+			}
+			$message->to($data['emails'])->subject('Acta de Reunión');
 		});
+		$request->session()->flash('message', $data["message_session"]);
+		return redirect( 'dashboard');
+
 	}
 
 	public function pdf(Request $request,$numeroacta){
@@ -117,8 +118,6 @@ class ActasController extends Controller
 		$data = array("acta" => $acta,"actividad" => $actividad,);
 		PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
 		$pdf = PDF::loadView('actas.pdf', $data);
-
-		//return $pdf->download('invoice.pdf');
 
 		$namefile = "acta_{$acta->numeroacta}.pdf";
 		$dir_path = base_path()."/public/evidencias/actividades/actividad_{$actividad->cactividad}";

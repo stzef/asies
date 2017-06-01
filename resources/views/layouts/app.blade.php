@@ -140,6 +140,9 @@
                     <li >
                         <a href="{{ URL::action('AppController@dashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
+                    <li>
+                        <a href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}"><i class="fa fa-fw fa-file-text-o"></i> Mis Actividades</a>
+                    </li>
                     @permission('tasktree.see')
                         <li>
                             <a href="{{ URL::route('GET_treetask') }}"><i class="fa fa-fw fa-tree"></i>Arbol de Tareas</a>
@@ -151,28 +154,34 @@
                         </li>
                     @endpermission
                     <li>
-                        <a href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}"><i class="fa fa-fw fa-file-text-o"></i> Mis Actividades</a>
-                    </li>
-                    <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#actas"><i class="fa fa-fw fa-file-pdf-o"></i> Actas <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="actas" class="collapse">
+                            @permission('actas.crud.list')
+                                <li>
+                                    <a href="{{ URL::route('GET_list_actas',['user'=>Auth::user()->name]) }}"><i class="fa fa-list"></i> Listar</a>
+                                </li>
+                            @endpermission
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#tareas"><i class="fa fa-fw fa-tasks"></i> Tareas <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="tareas" class="collapse">
                             <li>
-                                @permission('actas.crud.list')
-                                    <a href="{{ URL::route('GET_list_actas',['user'=>Auth::user()->name]) }}"><i class="fa fa-file-pdf-o"></i> Actas</a>
+                                @permission('task.crud')
+                                    <a href="{{ URL::route('GET_tareas_create') }}"><i class="fa fa-fw fa-plus"></i>Crear</a>
                                 @endpermission
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Datos <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo" class="collapse">
+                        <a href="javascript:;" data-toggle="collapse" data-target="#actividades"><i class="fa fa-fw fa-cubes"></i> Actividades <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="actividades" class="collapse">
                             <li>
-                                @permission('task.crud')
-                                    <a href="{{ URL::route('GET_tareas_create') }}"><i class="fa fa-fw fa-pencil"></i>Tareas</a>
-                                @endpermission
-
                                 @permission('activities.crud')
-                                    <a href="{{ URL::route('GET_actividades_create') }}"><i class="fa fa-fw fa-file-text-o"></i>Actividades</a>
+                                    <a href="{{ URL::route('GET_actividades_create') }}"><i class="fa fa-fw fa-plus"></i>Crear</a>
+                                @endpermission
+                                @permission('activities.all')
+                                    <a href="{{ URL::route('GET_actividades_list') }}"><i class="fa fa-fw fa-list"></i>Listar</a>
                                 @endpermission
                             </li>
                         </ul>

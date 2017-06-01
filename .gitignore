@@ -10,6 +10,7 @@ Homestead.json
 .sh
 *.sql
 *.xls
+*.ods
 *.xlsx
 readme.dev
 change.log

@@ -125,6 +125,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Resumen Actividad : {{ $actividad->nactividad }}
+                    <a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a>
+
                 </div>
 
                 <div class="panel-body">
@@ -158,10 +160,10 @@
                     <div class="col-md-6">
                         <h2>Tareas</h2>
                         <table class="table">
-                                <tr>
-                                    <th>Tarea</th>
-                                    <th>Realizada</th>
-                                </tr>
+                            <tr>
+                                <th>Tarea</th>
+                                <th>Realizada</th>
+                            </tr>
                             @foreach ($tareas as $tarea)
                                 <tr>
                                     <td>

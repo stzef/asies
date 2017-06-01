@@ -97,7 +97,6 @@ class Actas extends Model
         }
         $asistentes = \DB::table('asignaciontareas')
             ->join('actasasistentes', 'asignaciontareas.user', '=', 'actasasistentes.user')
-            //->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
             ->select('asignaciontareas.*')
             ->where('actasasistentes.cacta', $acta->idacta)
             ->groupBy("asignaciontareas.user")
