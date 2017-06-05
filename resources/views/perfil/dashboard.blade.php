@@ -45,9 +45,9 @@
 									<span class="alert alert-success">
 										Acta
 									</span>
-								@if ( $actividad->getEvidencias(true) > 0 )
+								@if ( $actividad->n_eviencias > 0 )
 									<span class="alert alert-success">
-										{{ $actividad->getEvidencias(true) }} E...
+										{{ $actividad->n_eviencias }} E...
 										</span>
 								@endif
 								@endif
