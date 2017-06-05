@@ -78,13 +78,16 @@ class ActasController extends Controller
 
 		Actividades::where("cactividad",$dataBody["acta"]["cactividad"])->update(["cacta"=>$acta->id]);
 
-		return response()->json(array());
+		return response()->json(array("obj"=>$acta->toArray()));
 	}
 
 	public function send(request $request,$numeroacta){
+		$slug = env("SLUG_APP","shared");
+
 		$data = array(
 			'acta' => Actas::where("numeroacta",$numeroacta)->first(),
 			'message_session' => "Se ha Enviado el Acta!",
+			'slug' => $slug,
 		);
 		$data["actividad"] = $data["acta"]->getActividad();
 		$data["emails"] = $data["actividad"]->getEmails();
@@ -92,7 +95,7 @@ class ActasController extends Controller
 		$prueba=\Mail::send('emails.acta', $data, function ($message) use ($data){
 			$actividad = $data['actividad'];
 			$namefile = "acta_{$data['acta']->numeroacta}.pdf";
-			$dir_path = base_path()."/public/evidencias/actividades/actividad_{$actividad->cactividad}";
+			$dir_path = base_path()."/public/evidencias/{$data['slug']}/actividades/actividad_{$actividad->cactividad}";
 			$file_path = "$dir_path/$namefile";
 			if( file_exists($file_path) ){
 				$message->attach($file_path);
@@ -107,6 +110,7 @@ class ActasController extends Controller
 	}
 
 	public function pdf(Request $request,$numeroacta){
+		$slug = env("SLUG_APP","shared");
 		$acta = Actas::where("numeroacta",$numeroacta)->first();
 
 		if ( !$acta ) return view('errors/generic',array('title' => 'Error PDF.', 'message' => "El acta $numeroacta no existe" ));
@@ -120,7 +124,7 @@ class ActasController extends Controller
 		$pdf = PDF::loadView('actas.pdf', $data);
 
 		$namefile = "acta_{$acta->numeroacta}.pdf";
-		$dir_path = base_path()."/public/evidencias/actividades/actividad_{$actividad->cactividad}";
+		$dir_path = base_path()."/public/evidencias/$slug/actividades/actividad_{$actividad->cactividad}";
 		$file_path = "$dir_path/$namefile";
 
 		if ( ! is_dir( $dir_path ) ) {
@@ -128,7 +132,6 @@ class ActasController extends Controller
 			if ( mkdir( $dir_path, 0777 ) ){
 				return $pdf->save( $file_path )->stream();
 			}else{
-
 				return view('errors/generic',array('title' => 'Error Interno.', 'message' => "Hay Ocurrido un error Interno, Por favor Intente de Nuevo" ));
 			}
 		}else{

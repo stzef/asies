@@ -1,3 +1,6 @@
+/* Custom */.jstree{
+  font-size: 24px;
+}
 /* jsTree default theme */
 .jstree-node,
 .jstree-children,
@@ -7,6 +10,7 @@
   padding: 0;
   list-style-type: none;
   list-style-image: none;
+  /* Custom padding: 9px 0;*/
 }
 .jstree-node {
   white-space: nowrap;
@@ -389,9 +393,9 @@
   line-height: 24px;
 }
 .jstree-default .jstree-icon:empty {
-  width: 24px;
-  height: 24px;
-  line-height: 24px;
+  /* Custom */width: 35px;
+  /* Custom */height: 35px;
+  /* Custom */line-height: 35px;
 }
 .jstree-default.jstree-rtl .jstree-node {
   margin-right: 24px;

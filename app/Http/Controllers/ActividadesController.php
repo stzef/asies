@@ -292,6 +292,8 @@ class ActividadesController extends Controller
 	public function store(Request $request,$cactividad){
 
 		if ($request->hasFile('files')) {
+			$slug = env("SLUG_APP","shared");
+
 			$file = $request->file('files');
 			$data = $request->all();
 			foreach($file as $files){
@@ -299,7 +301,7 @@ class ActividadesController extends Controller
 				$extension = $files->getClientOriginalExtension();
 				$picture = sha1($filename . time()) . '.' . $extension;
 
-				$destinationPath1='http://'.$_SERVER['HTTP_HOST'].'/evidencias/actividades/actividad_' .$cactividad. '/';
+				$destinationPath1='http://'.$_SERVER['HTTP_HOST'].'/evidencias/$slug/actividades/actividad_' .$cactividad. '/';
 
 				$ext_img = array("ani","bmp","cal","fax","gif","img","jbg","jpe","jpe","jpg","mac","pbm","pcd","pcx","pct","pgm","png","ppm","psd","ras","tga","tif","wmf");
 				if ( in_array($extension, $ext_img) ){
@@ -308,7 +310,7 @@ class ActividadesController extends Controller
 					$thumbnailUrl = "/evidencias/generic-file.png";
 				}
 
-				$path_files = '/evidencias/actividades/actividad_' .$cactividad. '/';
+				$path_files = "/evidencias/$slug/actividades/actividad_$cactividad/";
 				$destinationPath = public_path().$path_files;
 
 				$files->move($destinationPath, $picture);

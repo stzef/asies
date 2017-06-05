@@ -1,7 +1,7 @@
 @extends('layouts.independent')
 
 @section('styles')
-	<link rel="stylesheet" href="{{ URL::asset('vendor/jstree/css/themes/default/style.min.css') }}" >
+	<link rel="stylesheet" href="{{ URL::asset('vendor/jstree/css/themes/default/style.css') }}" >
 	<style>
 		body{
 			background: inherit;

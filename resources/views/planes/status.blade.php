@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('styles')
-	<link rel="stylesheet" href="{{ URL::asset('vendor/jstree/css/themes/default/style.min.css') }}" >
+	<link rel="stylesheet" href="{{ URL::asset('vendor/jstree/css/themes/default/style.css') }}" >
 
 @endsection
 
@@ -27,8 +27,10 @@
 				<div class="panel-heading">Planes</div>
 
 				<div class="panel-body">
-					<div id="treeview"></div>
-					<div id="chart_div"></div>
+					<div class="row" style="overflow: overlay;">
+						<div id="treeview"></div>
+						<div id="chart_div"></div>
+					</div>
 
 				</div>
 			</div>

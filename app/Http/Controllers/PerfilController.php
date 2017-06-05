@@ -27,9 +27,10 @@ class PerfilController extends Controller
 		foreach ($actividades as $actividad) {
 			$objactividad = Actividades::where("cactividad",$actividad->cactividad)->first();
 			$actividad->tareas = $objactividad->getTareas($user->id);
+			$actividad->n_eviencias = $objactividad->getEvidencias(true);
 		}
 
-		return view('perfil.dashboard', array( "tareas" => $tareas, "actividades" => $actividades ) );
+		return view('perfil/dashboard', array( "tareas" => $tareas, "actividades" => $actividades ) );
 
 	}
 }

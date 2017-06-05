@@ -74,7 +74,8 @@ class Actas extends Model
     }
     static function genCode()
     {
-        $empresa = "GUA";
+
+        $empresa = env("PREFJIFO_APP","");
         $date = date('Ymd');
         $last = Actas::all()->last();
         if($last)

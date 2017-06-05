@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('styles')
-	<link rel="stylesheet" href="{{ URL::asset('vendor/jstree/css/themes/default/style.min.css') }}" >
+	<link rel="stylesheet" href="{{ URL::asset('vendor/jstree/css/themes/default/style.css') }}" >
 
 @endsection
 
@@ -47,13 +47,19 @@
 					<input type="text" id="treeview_find" value="" placeholder="Buscar..." class="input" style="margin:0em auto 1em auto; display:block; padding:4px; border-radius:4px; border:1px solid silver;">
 					<div class="tab-content">
 						<div id="home" class="tab-pane fade in active" data-treeview="#treeview_1">
-							<div id="treeview_1"></div>
+							<div class="row" style="overflow: overlay;">
+								<div id="treeview_1"></div>
+							</div>
 						</div>
 						<div id="menu1" class="tab-pane fade" data-treeview="#treeview_2">
-							<div id="treeview_2"></div>
+							<div class="row" style="overflow: overlay;">
+								<div id="treeview_2"></div>
+							</div>
 						</div>
 						<div id="menu2" class="tab-pane fade" data-treeview="#treeview_3">
-							<div id="treeview_3"></div>
+							<div class="row" style="overflow: overlay;">
+								<div id="treeview_3"></div>
+							</div>
 						</div>
 					</div>
 				</div>

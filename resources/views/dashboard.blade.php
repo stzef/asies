@@ -5,7 +5,7 @@
 			<div class="col-md-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">Dashboard <b>{{ Auth::user()->persona->nombreCompleto() }}</b></div>
-						<div class="panel-body">
+						<div class="panel-body" style="overflow: overlay">
 							<div id="chart_div" ></div>
 							<table class="table buttons">
 								<tr></tr>

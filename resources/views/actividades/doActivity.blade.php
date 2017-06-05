@@ -86,6 +86,9 @@
                                     </button>
                                 @endpermission
                             @endif
+                            <div class="alert alert-info">
+                                {{ $actividad->getEvidencias(true) }} EVidencias
+                            </div>
                         </div>
 
                         <table class="table">
@@ -671,6 +674,7 @@
                 "</button>"])
             .draw()
     }
+            var base_url_print_acta = "{{ URL::route('GET_pdf_acta',['numeroacta'=>'__numeroacta__']) }}"
             $("#form_crear_acta").submit(function(event){
             event.preventDefault()
             var that = this
@@ -689,9 +693,11 @@
                 cache:false,
                 contentType: false,
                 processData: false,
-                success : function(){
+                success : function(response){
+                    console.log(response)
                     alertify.success("El Acta se ha creado.")
                     var data = tabletask.data().toArray();
+                    window.open(base_url_print_acta.set("__numeroacta__",response.obj.numeroacta))
 
                     data.forEach(function(item){
 

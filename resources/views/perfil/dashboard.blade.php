@@ -30,17 +30,27 @@
 				<div class="panel-body">
 					@foreach ($actividades as $actividad)
 						<div class="well">
-							<div class="col-md-8">
+							<div class="col-md-7">
 								<h4>
 									Actividad : {{ $actividad->nactividad }}
 								</h4>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-5">
 								<a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a>
 								<a class="btn btn-primary" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a>
 								@permission('activities.crud')
 									<a class="btn btn-primary" href="{{ URL::route('GET_actividades_edit',['cactividad'=>$actividad->cactividad]) }}">Editar</a>
 								@endpermission
+								@if ( $actividad->cacta )
+									<span class="alert alert-success">
+										Acta
+									</span>
+								@if ( $actividad->getEvidencias(true) > 0 )
+									<span class="alert alert-success">
+										{{ $actividad->getEvidencias(true) }} E...
+										</span>
+								@endif
+								@endif
 							</div>
 							<table class="table">
 								<thead>

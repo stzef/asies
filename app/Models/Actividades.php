@@ -184,19 +184,23 @@ class Actividades extends Model
         $emails = array_unique($emails);
         return $emails;
     }
-    public function getEvidencias()
+    public function getEvidencias($only_count=false)
     {
         $evidencias = Evidencias::where('cactividad', $this->cactividad)->get();
 
-        $ext_img = array("ani","bmp","cal","fax","gif","img","jbg","jpe","jpe","jpg","mac","pbm","pcd","pcx","pct","pgm","png","ppm","psd","ras","tga","tif","wmf");
-        foreach ($evidencias as $evidencia) {
-            $ext = pathinfo($evidencia->path, PATHINFO_EXTENSION);
-            if ( in_array($ext, $ext_img) ){
-                $evidencia->previewimg = $evidencia->path;
-            }else{
-                $evidencia->previewimg = "/evidencias/generic-file.png";
+        if ( $only_count ){
+            return count($evidencias);
+        }else{
+            $ext_img = array("ani","bmp","cal","fax","gif","img","jbg","jpe","jpe","jpg","mac","pbm","pcd","pcx","pct","pgm","png","ppm","psd","ras","tga","tif","wmf");
+            foreach ($evidencias as $evidencia) {
+                $ext = pathinfo($evidencia->path, PATHINFO_EXTENSION);
+                if ( in_array($ext, $ext_img) ){
+                    $evidencia->previewimg = $evidencia->path;
+                }else{
+                    $evidencia->previewimg = "/evidencias/generic-file.png";
+                }
             }
+            return $evidencias;
         }
-        return $evidencias;
     }
 }

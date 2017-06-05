@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="icon" href="{{ URL::asset('img/logo.png') }}" type="image/png" sizes="16x16">
 
     <title>  </title>
@@ -59,7 +59,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li> <a class="btn btn-primary" type="button" href="{{ url('/login') }}"> Ingresar </a></li>
+                        <li> <a class="" style="" type="button" href="{{ url('/login') }}"> Ingresar </a></li>
                         <!--<li><a href="{{-- {{ url('/register') }} --}}">Register</a></li>-->
                     @else
                         <li class="dropdown">

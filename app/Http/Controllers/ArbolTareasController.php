@@ -36,28 +36,6 @@ class ArbolTareasController extends Controller
      */
     public function treeview()
     {
-        /*
-        $user = new User();
-        $user->password = \Hash::make('ejecutor1');
-        $user->email = 'ejecutor1@gmail.com';
-        $user->name = "ejecutor1";
-        $user->cpersona = 1;
-        $user->save();
-
-        $user = new User();
-        $user->password = \Hash::make('responsable1');
-        $user->email = 'responsable1@gmail.com';
-        $user->name = "responsable1";
-        $user->cpersona = 1;
-        $user->save();
-
-        $user = new User();
-        $user->password = \Hash::make('alcalde1');
-        $user->email = 'alcalde1@gmail.com';
-        $user->name = "alcalde1";
-        $user->cpersona = 1;
-        $user->save();
-        */
 
         $tiplanes = TiPlanes::all();
         $context = array(
