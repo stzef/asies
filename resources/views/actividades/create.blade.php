@@ -7,19 +7,6 @@
 
 
 @section('content')
-	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header">
-				Actividades <small>Vista General</small>
-			</h1>
-			<ol class="breadcrumb">
-				<li class="active">
-					<i class="fa fa-dashboard"></i> Actividades
-				</li>
-
-			</ol>
-		</div>
-	</div>
 
 	<div class="row">
 
@@ -67,7 +54,7 @@
 								<div class="col-md-8">
 
 									<div class="form-group row">
-										<label for="" class="col-sm-4 col-form-label" >Fecha Final</label>
+										<label for="" class="col-sm-4 col-form-label" >Fecha Inicial</label>
 										<div class='col-sm-8 input-group date'>
 											<input type='text' class="form-control" name="actividad[fini]" value="@if( $actividad){{ $actividad->fini }}@endif" required />
 											<span class="input-group-addon">
@@ -129,7 +116,7 @@
 															<option value="{{$tarea->ctarea}}" title="{{$tarea->ntarea}}">{{ str_limit($tarea->ntarea, $limit = 45, $end = '...') }}</option>
 														@endforeach
 													</select>
-													<span class="input-group-addon" data-find-task data-input-reference="#tarea"><i class="fa fa-search"></i></span>
+													<span class="input-group-addon" data-find-task="true" data-find-treetask data-input-reference="#tarea"><i class="fa fa-search"></i></span>
 												</div>
 											</td>
 											<td width="25%">

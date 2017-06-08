@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use asies\Http\Requests;
 
 use asies\Models\Planes;
+use asies\Models\Tareas;
 use asies\User;
 use asies\Models\Personas;
 use asies\Models\Evidencias;
@@ -30,8 +31,21 @@ class APIController extends Controller
 	public function plan($cplan)
 	{
 		$plan = Planes::with('tiplan')->where("cplan",$cplan)->first();
-		$plan->subplanes = Planes::getSubplanes($plan->cplan,true);
+		if ( $plan ){
+			$plan->subplanes = Planes::getSubplanes($plan->cplan,true);
+		}else{
+			return response()->json(array("obj"=>null),404);
+		}
 		return response()->json($plan );
+	}
+	public function tarea($ctarea)
+	{
+		$tarea = Tareas::where("ctarea",$ctarea)->first();
+		if ( $tarea ){
+			return response()->json($tarea);
+		}else{
+			return response()->json(array("obj"=>null),404);
+		}
 	}
 	public function tirelaciones()
 	{

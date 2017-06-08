@@ -245,7 +245,7 @@
                                                                         <option value="{{$tarea->ctarea}}" title="{{$tarea->ntarea}}">{{ str_limit($tarea->ntarea, $limit = 45, $end = '...') }}</option>
                                                                     @endforeach
                                                                 </select>
-                                                                <span class="input-group-addon" data-find-task data-input-reference="#tarea"><i class="fa fa-search"></i></span>
+                                                                <span class="input-group-addon" data-find-task="true" data-find-treetask data-input-reference="#tarea"><i class="fa fa-search"></i></span>
                                                             </div>
                                                         </td>
                                                         <td width="25%">
@@ -342,7 +342,7 @@
                                                                 <div class="col-sm-10">
                                                                     <div class="input-group">
                                                                         <input required type="text" class="form-control" id="tarea_cplan" name="tarea[cplan]" placeholder="Producto Minimo">
-                                                                        <span class="input-group-addon"><i class="fa fa-search" data-find-task data-input-reference="#tarea_cplan"></i></span>
+                                                                        <span class="input-group-addon" data-find-plan data-type-plan="4" data-find-treetask data-input-reference="#tarea_cplan"><i class="fa fa-search"></i></span>
                                                                     </div>
                                                                 </div>
                                                             </div>

@@ -7,19 +7,7 @@
 
 
 @section('content')
-	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header">
-				{{ $plan->nplan }} <small>Vista General</small>
-			</h1>
-			<ol class="breadcrumb">
-				<li class="active">
-					<i class="fa fa-dashboard"></i> Planes
-				</li>
 
-			</ol>
-		</div>
-	</div>
 	<div class="row">
 
 		<div class="col-md-12">
@@ -60,6 +48,10 @@
 				var data = [['Label', 'Porcentaje'],]
 				plan.subplanes.forEach(function(plan){
 					plan.porcentaje = parseInt((100*plan.valor_plan)/plan.valor_total)
+					plan.porcentaje = isNaN(plan.porcentaje) ? 0 : plan.porcentaje
+					console.log(plan.valor_plan)
+					console.log(plan.valor_total)
+					console.log(plan.porcentaje)
 					data.push([plan.ncplan,plan.porcentaje])
 				})
 				var data = google.visualization.arrayToDataTable(data);

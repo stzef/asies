@@ -51,16 +51,23 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
         return $tareas;
     }
 
+    public function callback($n) {return $n->cactividad;}
     public function getActividades(){
         $TIRELACION_RESPONSABLE = \Config::get("app.CTE")["TIRELACION_RESPONSABLE"];
 
         $actividades = \DB::table('asignaciontareas')
             ->join('users', 'asignaciontareas.user', '=', 'users.id')
             ->join('actividades', 'asignaciontareas.cactividad', '=', 'actividades.cactividad')
-            ->select('actividades.*')
+            ->select('actividades.cactividad')
             ->where('users.id', $this->id)
             ->groupBy('actividades.cactividad')
             ->get();
+
+        $cactividades = array_map(array($this, 'callback'), $actividades);
+        $actividades = Actividades::select()->whereIn('cactividad', $cactividades)->get();
+        //dump($actividades);exit();
+
+
 
         return $actividades;
     }

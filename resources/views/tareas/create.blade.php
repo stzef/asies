@@ -31,7 +31,7 @@
 							<div class="col-sm-10">
 								<div class="input-group">
 									<input type="text" class="form-control" id="tarea_cplan" name="tarea[cplan]" placeholder="Producto Minimo" value="@if( $tarea){{ $tarea->cplan }}@endif">
-									<span class="input-group-addon"><i class="fa fa-search" data-find-task data-input-reference="#tarea_cplan"></i></span>
+									<span class="input-group-addon" data-find-plan data-type-plan="4" data-find-treetask data-input-reference="#tarea_cplan"><i class="fa fa-search"></i></span>
 								</div>
 							</div>
 						</div>

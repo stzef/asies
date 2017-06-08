@@ -2,24 +2,12 @@
 
 @section('styles')
 	<link rel="stylesheet" href="{{ URL::asset('vendor/jstree/css/themes/default/style.min.css') }}" >
+	<link rel="stylesheet" href="{{ URL::asset('vendor/jstree/css/themes/default/style.min.css') }}" >
+
 @endsection
 
 
 @section('content')
-
-	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header">
-				{{ Auth::user()->persona->nombreCompleto() }} <small></small>
-			</h1>
-			<ol class="breadcrumb">
-				<li class="active">
-					<i class="fa fa-dashboard"></i> Perfil
-				</li>
-
-			</ol>
-		</div>
-	</div>
 
 	<div class="row">
 		<div class="col-md-12">
@@ -28,31 +16,58 @@
 					Actividades
 				</div>
 				<div class="panel-body">
+					<!--<ul class="nav nav-tabs">
+						<li><a data-toggle="tab" href="#retrasadas">Retrasadas</a></li>
+						<li><a data-toggle="tab" href="#pendientes">Pendientes</a></li>
+					</ul>
+
+					<div class="tab-content">
+						<div id="retrasadas" class="tab-pane fade in active">
+						</div>
+						<div id="pendientes" class="tab-pane fade">
+						</div>
+					</div>-->
+
+
+
+
+
+
+
 					@foreach ($actividades as $actividad)
-						<div class="well">
-							<div class="col-md-7">
-								<h4>
-									Actividad : {{ $actividad->nactividad }}
-								</h4>
+						<div class="well container-actividad">
+							<div class="row">
+
+								<div class="col-md-7">
+									<h4>
+										Actividad : {{ $actividad->nactividad }}
+									</h4>
+								</div>
+								<div class="col-md-5">
+									<a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a>
+									<a class="btn btn-primary" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a>
+									@permission('activities.crud')
+										<a class="btn btn-primary" href="{{ URL::route('GET_actividades_edit',['cactividad'=>$actividad->cactividad]) }}">Editar</a>
+									@endpermission
+									<button class="btn btn-primary show-hide-tareas">+</button>
+								</div>
 							</div>
-							<div class="col-md-5">
-								<a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a>
-								<a class="btn btn-primary" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a>
-								@permission('activities.crud')
-									<a class="btn btn-primary" href="{{ URL::route('GET_actividades_edit',['cactividad'=>$actividad->cactividad]) }}">Editar</a>
-								@endpermission
-								@if ( $actividad->cacta )
-									<span class="alert alert-success">
-										Acta
-									</span>
-								@if ( $actividad->n_eviencias > 0 )
-									<span class="alert alert-success">
-										{{ $actividad->n_eviencias }} E...
-										</span>
-								@endif
-								@endif
+							<div class="row">
+								<div class="col-md-12">
+									@if ( $actividad->cacta )
+										<p class="alert alert-success col-md-6">
+											Acta Generada
+										</p>
+									@endif
+									@if ( $actividad->getEvidencias(true) > 0 )
+										<p class="alert alert-success col-md-6">
+											{{ $actividad->getEvidencias(true) }} Evidencia(s)
+										</p>
+									@endif
+								</div>
 							</div>
-							<table class="table">
+
+							<table class="table tareas-actividad">
 								<thead>
 									<tr>
 										<th>Tareas</th>
@@ -78,4 +93,28 @@
 @endsection
 
 @section('scripts')
+	<script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>
+	<script>
+		$(".tareas-actividad").DataTable({
+			"paging":   true,
+			"ordering": true,
+			"info":     false,
+			"searching":false,
+			"language": DTspanish,
+		})
+
+		$(".dataTables_wrapper").addClass("hide")
+		$(".show-hide-tareas").click(function(){
+			var that = this
+			var table = $(that).closest(".container-actividad").find(".dataTables_wrapper")//find(".tareas-actividad")
+			if ( table.hasClass("hide") ){
+				table.removeClass("hide")
+				$(that).html("-").attr("title","Esconder las Tareas")
+			}else{
+				table.addClass("hide")
+				$(that).html("+").attr("title","Mostrar las Tareas")
+			}
+		})
+	</script>
 @endsection

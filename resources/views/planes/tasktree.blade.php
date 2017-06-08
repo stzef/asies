@@ -7,58 +7,54 @@
 
 
 @section('content')
+
 	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header">
-				Planes <small>Vista General</small>
-			</h1>
-			<ol class="breadcrumb">
-				<li class="active">
-					<i class="fa fa-dashboard"></i> Planes
-				</li>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Arbol de Tareas
+			</div>
+			<div class="panel-body">
 
-			</ol>
-		</div>
-	</div>
-	<div class="row">
-		<table class="table">
-			<tr>
-				@foreach( $tiplanes as $tiplan )
-					<td>
+				<table class="table">
+					<tr>
+						@foreach( $tiplanes as $tiplan )
+							<td>
 
-					<img src="{{ URL::asset( $tiplan->icono ) }}" alt="">
-					<label for="">{{$tiplan->ntiplan}}</label>
-					</td>
-				@endforeach
-			</tr>
-		</table>
-		<div class="col-md-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">Planes @permission("planes.calculate_points")<button class="btn btn-info" onclick="Models.Planes.recalcular(pos_recalculo)">Recalcular Puntos</button>@endpermission
-				</div>
-
-				<div class="panel-body">
-					<ul class="nav nav-tabs">
-						<li data-treeview="#treeview_1" class="active"><a data-toggle="tab" href="#home">Sistema 1</a></li>
-						<li data-treeview="#treeview_2" ><a data-toggle="tab" href="#menu1">Sistema 2</a></li>
-						<li data-treeview="#treeview_3" ><a data-toggle="tab" href="#menu2">Sistema 3</a></li>
-					</ul>
-
-					<input type="text" id="treeview_find" value="" placeholder="Buscar..." class="input" style="margin:0em auto 1em auto; display:block; padding:4px; border-radius:4px; border:1px solid silver;">
-					<div class="tab-content">
-						<div id="home" class="tab-pane fade in active" data-treeview="#treeview_1">
-							<div class="row" style="overflow: overlay;">
-								<div id="treeview_1"></div>
-							</div>
+							<img src="{{ URL::asset( $tiplan->icono ) }}" alt="">
+							<label for="">{{$tiplan->ntiplan}}</label>
+							</td>
+						@endforeach
+					</tr>
+				</table>
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">Planes @permission("planes.calculate_points")<button class="btn btn-info" onclick="Models.Planes.recalcular(pos_recalculo)">Recalcular Puntos</button>@endpermission
 						</div>
-						<div id="menu1" class="tab-pane fade" data-treeview="#treeview_2">
-							<div class="row" style="overflow: overlay;">
-								<div id="treeview_2"></div>
-							</div>
-						</div>
-						<div id="menu2" class="tab-pane fade" data-treeview="#treeview_3">
-							<div class="row" style="overflow: overlay;">
-								<div id="treeview_3"></div>
+
+						<div class="panel-body">
+							<ul class="nav nav-tabs">
+								<li data-treeview="#treeview_1" class="active"><a data-toggle="tab" href="#home">Sistema 1</a></li>
+								<li data-treeview="#treeview_2" ><a data-toggle="tab" href="#menu1">Sistema 2</a></li>
+								<li data-treeview="#treeview_3" ><a data-toggle="tab" href="#menu2">Sistema 3</a></li>
+							</ul>
+
+							<input type="text" id="treeview_find" value="" placeholder="Buscar..." class="input" style="margin:0em auto 1em auto; display:block; padding:4px; border-radius:4px; border:1px solid silver;">
+							<div class="tab-content">
+								<div id="home" class="tab-pane fade in active" data-treeview="#treeview_1">
+									<div class="row" style="overflow: overlay;">
+										<div id="treeview_1"></div>
+									</div>
+								</div>
+								<div id="menu1" class="tab-pane fade" data-treeview="#treeview_2">
+									<div class="row" style="overflow: overlay;">
+										<div id="treeview_2"></div>
+									</div>
+								</div>
+								<div id="menu2" class="tab-pane fade" data-treeview="#treeview_3">
+									<div class="row" style="overflow: overlay;">
+										<div id="treeview_3"></div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

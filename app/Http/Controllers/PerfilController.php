@@ -25,9 +25,10 @@ class PerfilController extends Controller
 		$actividades = $user->getActividades();
 
 		foreach ($actividades as $actividad) {
-			$objactividad = Actividades::where("cactividad",$actividad->cactividad)->first();
-			$actividad->tareas = $objactividad->getTareas($user->id);
-			$actividad->n_eviencias = $objactividad->getEvidencias(true);
+			$actividad->calcularDias();
+			//$objactividad = Actividades::where("cactividad",$actividad->cactividad)->first();
+			$actividad->tareas = $actividad->getTareas($user->id);
+			//$actividad->n_eviencias = $actividad->getEvidencias(true);
 		}
 
 		return view('perfil/dashboard', array( "tareas" => $tareas, "actividades" => $actividades ) );

@@ -110,19 +110,35 @@ var spanishMessagesJTable = {
 	deleteProggress: 'Eliminando {0} de {1} registros, Procesando...'
 }
 
-$("[data-find-task]").click(function(event){
-	var selector = $(this).data("input-reference")
-	openNewWindow("/utilities/tasktree",selector)
+//$("[data-find-task]").click(function(event){
+$("[data-find-treetask]").change(function(event){
+	if ( eval($(this).data("find-task")) ){
+		if ( ! Models.Tareas.exists(this.value) ) this.value = ""
+	}else if (eval($(this).data("find-plan"))){
+		if ( ! Models.Planes.exists(this.value) ) this.value = ""
+	}
 })
-function openNewWindow(href,input_reference){
+$("[data-find-treetask]").click(function(event){
+	var selector = $(this).data("input-reference")
+	var data = {
+		find_task : eval($(this).data("find-task")) || false,
+		find_plan : eval($(this).data("find-plan")) || false,
+		type_plan : $(this).data("type-plan") || null,
+	}
+	console.log(data)
+	openNewWindow("/utilities/tasktree",selector,data)
+})
+function openNewWindow(href,input_reference,data){
 	if(window.location.href == href) return
-
 	var h = (window.innerHeight > 0) ? window.innerHeight : screen.height,
 		w = (window.innerWidth > 0) ? window.innerWidth : screen.width,
 		x = screen.width/2 - w/2,
 		y = screen.height/2 - h/2;
 	var win = window.open(href,"", "height="+h+",width="+w+",left="+x+",top="+y);
 	win.ASIES_IS_WIN_POPUOT = true
+	win.FIND_TASK = data.find_task || false
+	win.FIND_PLAN = data.find_plan || true
+	win.TYPE_PLAN = data.type_plan || null
 	win.INPUT_REFERENCE = input_reference
 }
 
@@ -152,6 +168,7 @@ Models = {
 							li_attr : {
 								cplan : subplan.cplan,
 								valor : subplan.valor_plan,
+								ctiplan : subplan.ctiplan,
 							},
 							type:subplan.tiplan.slug,
 							children:subplan.subplanes
@@ -195,6 +212,24 @@ Models = {
 		}
 	},
 	"Tareas" : {
+		"findOne" : function(key,cb){
+			$.ajax({
+				type : "GET",
+				url : "/api/tareas/"+key,
+				success : cb,
+				error : cb
+			})
+		},
+		"exists" : function(key,cb){
+			Models.Tareas.findOne(key,function(response){
+				console.warn(response)
+				if ( response.status == 404 ){
+					cb(false)
+				}if ( response.cplan) {
+					cb(true)
+				}
+			})
+		},
 		cambiarEstado : function(ctarea,ifhecha){
 			var ifhecha = ifhecha ? 1 : 0
 			var base_url_cambio_estado_tarea = "/tareas/__ctarea__/change_state"
@@ -240,12 +275,22 @@ Models = {
 				"notSelectCorrectParent" : "Debe Seleccionar el plan correcto",
 			}
 		},
+		"exists" : function(key,cb){
+			Models.Planes.findOne(key,function(response){
+				console.warn(response)
+				if ( response.status == 404 ){
+					cb(false)
+				}if ( response.cplan) {
+					cb(true)
+				}
+			})
+		},
 		"findOne" : function(key,cb){
 			$.ajax({
 				type : "GET",
 				url : "/api/planes/"+key,
 				success : cb,
-				error : function(){}
+				error : cb
 			})
 		},
 		"all" : function(cb){

@@ -57,7 +57,6 @@
 
 
 	<script>
-
 	$(".nav.nav-tabs li").click(function(){
 		var that = this
 		TREEVIEW_SELECT = $(that).data("treeview")
@@ -68,13 +67,21 @@
 			var treeview = $(this)
 			console.log(treeview)
 			var tarea = treeview.jstree('get_selected',true)[0]
-			var rvalue = tarea.li_attr.cplan | tarea.li_attr.ctarea
+
 			var mensaje = ""
-			if ( tarea.li_attr.cplan ){
-				mensaje = "Desea Escoger este Plan"
-			}else{
+			if ( window.FIND_TASK ){
+				if( ! tarea.li_attr.ctarea ) return alertify.warning("No Selecciono una Tarea")
+				var rvalue = tarea.li_attr.ctarea
 				mensaje = "Desea Escoger esta Tarea"
+			}else if ( window.FIND_PLAN ){
+				if( ! tarea.li_attr.cplan ) return alertify.warning("No Selecciono un Plan ")
+				if( window.TYPE_PLAN ){
+					if ( tarea.li_attr.ctiplan != window.TYPE_PLAN ) return alertify.warning("El Plan no es del tipo Correspondiente ")
+				}
+				var rvalue = tarea.li_attr.cplan
+				mensaje = "Desea Escoger este Plan"
 			}
+
 			//tarea.li_attr.ctarea
 			alertify.confirm(mensaje,function(){
 				window.opener.$(window.INPUT_REFERENCE)
@@ -94,16 +101,6 @@
 		waitingDialog.show("Cargando Arbol...")
 		Models.Planes.treeview(function(response){
 			waitingDialog.hide()
-			$.jstree.defaults.contextmenu.items = {
-				showDetail : {
-					action : function(){
-						var item = $(TREEVIEW_SELECT).jstree('get_selected',true)[0]
-						console.log(item)
-						window.open("/planes/status/__cplan__".set("__cplan__",item.li_attr.cplan))
-					},
-					label : "Ver en Detalle"
-				}
-			}
 			for ( var action of response ){
 				var select_treeview = "#"+action.li_attr.select_treeview
 				var select_label_treeview = "li[data-treeview=#"+action.li_attr.select_treeview+"] a"

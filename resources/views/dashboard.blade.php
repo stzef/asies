@@ -37,6 +37,7 @@
 				var data = [['Label', 'Porcentaje'],]
 				planes.forEach(function(plan){
 					plan.porcentaje = parseInt((100*plan.valor_plan)/plan.valor_total)
+					plan.porcentaje = isNaN(plan.porcentaje) ? 0 : plan.porcentaje
 					data.push([plan.ncplan,plan.porcentaje])
 				})
 				console.log(data)

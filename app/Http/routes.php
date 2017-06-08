@@ -43,6 +43,10 @@ Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->m
 Route::get('/dashboard', 'AppController@dashboard')->name('app_dashboard')->middleware('auth');
 
 Route::group(['prefix' => 'api'], function(){
+	Route::group(['prefix' => 'tareas'], function(){
+		//Route::get('/', "APIController@tareas");
+		Route::get('/{ctarea}', "APIController@tarea");
+	});
 	Route::group(['prefix' => 'planes'], function(){
 		Route::get('/', "APIController@planes");
 		Route::get('/{cplan}', "APIController@plan");

@@ -43,7 +43,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Inicio
+                    <img width="70px" src="{{ URL::asset('img/logo-extend.png') }}" alt="">
                 </a>
             </div>
 

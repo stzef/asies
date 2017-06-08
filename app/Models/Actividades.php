@@ -174,6 +174,16 @@ class Actividades extends Model
             $this->dias_retraso = $factividad->diffInDays($now);
         }
     }
+
+    public function generarEstado(){
+        $this->calcularDias();
+        if( $this->dias_faltantas != 0 ) {
+            $this->state = "to_do";
+        }else if( $this->dias_retraso != 0){
+            $this->state = "pending";
+        }
+    }
+
     public function getEmails()
     {
         $emails = array();
