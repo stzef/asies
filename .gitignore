@@ -14,3 +14,9 @@ Homestead.json
 *.xlsx
 readme.dev
 change.log
+
+/node_modules
+/bower_components
+/public/bower_components/
+/test
+/tests
