@@ -77,6 +77,7 @@ class ActividadesController extends Controller
 	}
 
 	public function checkDates(Request $request){
+		//dump(Actividades::getGrouped()["retrasadas"][3]->nactividad);exit();
 		$actividades = Actividades::all();
 
 		$actividades_retrasadas = array();
@@ -96,7 +97,7 @@ class ActividadesController extends Controller
 		if ($request->isMethod('get')){
 
 			return view( 'actividades.checkDates' , array(
-				'actividades' => $actividades,
+				'actividades' => Actividades::getGrouped(),
 				'actividades_retrasadas' => $actividades_retrasadas,
 				'actividades_pendientes' => $actividades_pendientes,
 				)

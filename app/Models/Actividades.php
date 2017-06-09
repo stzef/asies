@@ -117,6 +117,41 @@ class Actividades extends Model
         }
         return array("data"=>$data);
     }
+
+    static function getGrouped(){
+
+        $actividades = array(
+            "realizadas"=>array(),
+            "retrasadas"=>array(),
+            "pendientes"=>array(),
+        );
+        $actividades["realizadas"] = Actividades::where("ifhecha",1)->get();
+
+        $resto_actividades = Actividades::where("ifhecha",0)->get();
+
+        foreach ($resto_actividades as $actividad) {
+            $actividad->calcularDias();
+
+            if ( $actividad->dias_faltantas ){
+                array_push($actividades["pendientes"], $actividad);
+            }elseif( $actividad->dias_retraso ){
+                array_push($actividades["retrasadas"], $actividad);
+            }
+        }
+
+        usort($actividades["pendientes"], function ($a, $b) {
+            if($a->dias_faltantas == $b->dias_faltantas){ return 0 ; }
+            return ($a->dias_faltantas < $b->dias_faltantas) ? -1 : 1;
+        });
+        usort($actividades["retrasadas"], function ($a, $b) {
+            if($a->dias_retraso == $b->dias_retraso){ return 0 ; }
+            return ($a->dias_retraso < $b->dias_retraso) ? -1 : 1;
+        });
+
+        return $actividades;
+    }
+
+
     public function evidencias()
     {
         return $this->hasMany('asies\Models\Evidencia', 'cactividad', 'cactividad');

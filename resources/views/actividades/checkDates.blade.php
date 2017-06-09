@@ -26,33 +26,12 @@
                 <div class="panel-body">
                     <div class="col-md-12">
 
-                    <!--<table class="actividades_atrasadas table">
-                        <thead>
-                            <tr>
-                                <th>Actividad</th>
-                                <th>F Inicio</th>
-                                <th>F Final</th>
-                                <th>Dias Faltantes</th>
-                                <th>Dias Retraso</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($actividades as $actividad)
-                                <tr>
-                                    <td>{{ $actividad->nactividad }}</td>
-                                    <td>{{ $actividad->fini }}</td>
-                                    <td>{{ $actividad->ffin }}</td>
-                                    <td>{{ $actividad->dias_faltantas }}</td>
-                                    <td>{{ $actividad->dias_retraso }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>-->
 
                     <div class="row">
                         <ul class="nav nav-tabs">
                           <li><a data-toggle="tab" href="#retrasadas">Retrasadas</a></li>
                           <li><a data-toggle="tab" href="#pendientes">Pendientes</a></li>
+                          <li><a data-toggle="tab" href="#realizadas">Realizadas</a></li>
                         </ul>
 
                         <div class="tab-content">
@@ -73,7 +52,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($actividades_retrasadas as $actividad)
+                                    @foreach ($actividades["retrasadas"] as $actividad)
                                         <tr>
                                             <td>{{ $actividad->nactividad }}</td>
                                             <td>{{ $actividad->fini }}</td>
@@ -96,12 +75,33 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($actividades_pendientes as $actividad)
+                                    @foreach ($actividades["pendientes"] as $actividad)
                                         <tr>
                                             <td>{{ $actividad->nactividad }}</td>
                                             <td>{{ $actividad->fini }}</td>
                                             <td>{{ $actividad->ffin }}</td>
                                             <td>{{ $actividad->dias_faltantas }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                          </div>
+                          <div id="realizadas" class="tab-pane fade">
+                            <h3>Realizadas</h3>
+                            <table class="actividades_realizadas table">
+                                <thead>
+                                    <tr>
+                                        <th>Actividad</th>
+                                        <th>F Inicio</th>
+                                        <th>F Final</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($actividades["realizadas"] as $actividad)
+                                        <tr>
+                                            <td>{{ $actividad->nactividad }}</td>
+                                            <td>{{ $actividad->fini }}</td>
+                                            <td>{{ $actividad->ffin }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
