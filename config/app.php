@@ -157,7 +157,7 @@ return [
         asies\Providers\RouteServiceProvider::class,
 
         # Mapeador de Bases De Datos
-        #Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
+    Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
 
         /*
          * Laravel Framework Service Providers...

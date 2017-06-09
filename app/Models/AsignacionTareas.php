@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Tarea $tarea
  * @property Tirelacione $tirelacione
  * @property User $user
- * @property Actividade $actividade
+ * @property Actividades $actividad
  */
 class AsignacionTareas extends Model
 {
@@ -58,8 +58,8 @@ class AsignacionTareas extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function actividade()
+    public function actividad()
     {
-        return $this->belongsTo('App\Actividade', 'cactividad', 'cactividad');
+        return $this->belongsTo('asies\Models\Actividades', 'cactividad', 'cactividad');
     }
 }

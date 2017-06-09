@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Log;
  * @property string $descripcion
  * @property string $fini
  * @property string $ffin
+ * @property boolean $ifhecha
  * @property boolean $ifacta
  * @property boolean $ifarchivos
  * @property string $created_at
@@ -32,7 +33,7 @@ class Actividades extends Model
     /**
      * @var array
      */
-    protected $fillable = ['cacta', 'cestado', 'ctiactividad', 'nactividad', 'descripcion', 'fini', 'ffin', 'ifacta', 'ifarchivos', 'created_at', 'updated_at'];
+    protected $fillable = ['cacta', 'cestado', 'ctiactividad', 'nactividad', 'descripcion', 'fini', 'ffin', 'ifhecha', 'ifacta', 'ifarchivos', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -120,6 +121,23 @@ class Actividades extends Model
     {
         return $this->hasMany('asies\Models\Evidencia', 'cactividad', 'cactividad');
     }
+    public function updateState()
+    {
+
+        $tareas_no_hecha = \DB::table('asignaciontareas')
+            ->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
+            ->select('tareas.*')
+            ->where('asignaciontareas.cactividad', $this->cactividad)
+            ->where('tareas.ifhecha', 0)
+            ->groupBy('ctarea')
+            ->get();
+
+        if ( count($tareas_no_hecha) == 0 ){
+            Actividades::where('cactividad', $this->cactividad)->update(['ifhecha' => 1]);
+        }else{
+            Actividades::where('cactividad', $this->cactividad)->update(['ifhecha' => 0]);
+        }
+    }
     public function getTareas($iduser=null)
     {
         if ( $iduser ){
@@ -139,7 +157,6 @@ class Actividades extends Model
                 ->groupBy('ctarea')
                 ->get();
         }
-        //dump($tareas);exit();
         return $tareas;
     }
     public function getAsignacion()

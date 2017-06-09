@@ -15,11 +15,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $ncplan
  * @property integer $valor_plan
  * @property integer $valor_total
+ * @property integer $cpuntuacion
  * @property string $created_at
  * @property string $updated_at
  * @property Estado $estado
  * @property Plane $plane
  * @property TiPlanes $tiplan
+ * @property Puntuaciones $puntuacion
  * @property Tarea[] $tareas
  */
 class Planes extends Model
@@ -27,7 +29,7 @@ class Planes extends Model
     /**
      * @var array
      */
-    protected $fillable = ['cestado', 'cplanmayor', 'ctiplan', 'nplan','ncplan', 'valor_plan', 'valor_total', 'created_at', 'updated_at'];
+    protected $fillable = ['cestado', 'cplanmayor', 'ctiplan', 'nplan','ncplan', 'valor_plan', 'valor_total', 'cpuntuacion' , 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -54,6 +56,14 @@ class Planes extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function puntuacion()
+    {
+        return $this->belongsTo('asies\Models\Puntuaciones', 'cpuntuacion', 'cpuntuacion');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function tareas()
@@ -63,7 +73,7 @@ class Planes extends Model
     static function getSubPlanes($cplan,$json=false)
     {
         $plan = Planes::where('cplan', $cplan)->first();
-        $plan->subplanes = Planes::with('tiplan')->where('cplanmayor', $plan->cplan)->get();
+        $plan->subplanes = Planes::with('tiplan')->with('puntuacion')->where('cplanmayor', $plan->cplan)->get();
 
         if (Tareas::where('cplan',$cplan)->first()){
             $plan->subplanes = Tareas::where('cplan', $cplan)->get();
@@ -81,7 +91,7 @@ class Planes extends Model
         }
     }
     static function getArbolPlanes($json=false){
-        $planes = Planes::with('tiplan')->where('cplanmayor', NULL)->get();
+        $planes = Planes::with('tiplan')->with('puntuacion')->where('cplanmayor', NULL)->get();
         foreach ($planes as $plan) {
             $plan->subplanes = Planes::getSubPlanes($plan->cplan,$json);
         }
@@ -96,8 +106,19 @@ class Planes extends Model
         $plan = Planes::where('cplan', $cplan)->first();
         $npuntos = $plan->valor_plan + $puntos;
         $npuntos_acumulativos =  $plan->valor_total + $puntos_acumulativos;//$puntos_acumulativos += $puntos_acumulativos;
-        Planes::where('cplan', $cplan)->update(["valor_plan" => $npuntos,'valor_total' => $npuntos_acumulativos ]);
 
+        $porcentaje = (int) ( ( 100 * $npuntos) / $npuntos_acumulativos );
+
+        //dump($porcentaje);
+        $puntuacion = DB::table('puntuaciones')->where('vini', '<=', $porcentaje)->where('vfin', '>=', $porcentaje)->first();
+        //dump($puntuacion);exit();
+
+
+        Planes::where('cplan', $cplan)->update([
+            "valor_plan" => $npuntos,
+            'valor_total' => $npuntos_acumulativos,
+            'cpuntuacion' => $puntuacion->cpuntuacion,
+        ]);
 
         if ( $plan->cplanmayor != null){
             Planes::recalcularPuntosPlanes($plan->cplanmayor,$puntos,$puntos_acumulativos);
@@ -107,10 +128,7 @@ class Planes extends Model
     static function recalcularPuntos($cmodulo=null)
     {
         DB::table('planes')->update(array('valor_plan' => 0,'valor_total' => 0));
-
-
         $prods_min = Planes::where("ctiplan",4)->get(); # Equivalente a Model::all()
-
         $stpuntos = 0;
         foreach ($prods_min as $prod_min) {
             $tareas = Tareas::where("cplan",$prod_min->cplan)->orderBy("cplan")->get(); # Equivalente a Model::all()

@@ -27,7 +27,6 @@ String.prototype.truncate = function(len,end){
 }
 
 function callbackSuccessAjax(response){
-	console.log(response)
 		alertify.success("Listo.")
 }
 function callbackErrorAjax(response){
@@ -35,7 +34,6 @@ function callbackErrorAjax(response){
 	if ( responseJSON.errors_form ){
 		alertify.error("Ha Ocurrido un Error")
 	}
-	console.log(response)
 }
 
 var DTspanish = {
@@ -111,23 +109,36 @@ var spanishMessagesJTable = {
 }
 
 //$("[data-find-task]").click(function(event){
-$("[data-find-treetask]").change(function(event){
-	if ( eval($(this).data("find-task")) ){
-		if ( ! Models.Tareas.exists(this.value) ) this.value = ""
-	}else if (eval($(this).data("find-plan"))){
-		if ( ! Models.Planes.exists(this.value) ) this.value = ""
-	}
+$(document).ready(function(){
+	$("[data-find-treetask]").change(function(event){
+		if ( eval($(this).data("find-task")) ){
+			if ( ! Models.Tareas.exists(this.value) ) this.value = ""
+		}else if (eval($(this).data("find-plan"))){
+			if ( ! Models.Planes.exists(this.value) ) this.value = ""
+		}
+	})
+
+	$("[data-find-treetask]").click(function(event){
+		var selector = $(this).data("input-reference")
+		var data = {
+			find_task : eval($(this).data("find-task")) || false,
+			find_plan : eval($(this).data("find-plan")) || false,
+			type_plan : $(this).data("type-plan") || null,
+		}
+		//openNewWindow("/planes/treeview",selector,data)
+		openNewWindow("/utilities/tasktree",selector,data)
+	})
+
+	$(".btn-logout").click(function(event){
+		event.preventDefault()
+		alertify.confirm("Desea cerrar Sesión",function(bool){
+			if(bool){
+				window.location.replace("/logout")
+			}
+		})
+	})
 })
-$("[data-find-treetask]").click(function(event){
-	var selector = $(this).data("input-reference")
-	var data = {
-		find_task : eval($(this).data("find-task")) || false,
-		find_plan : eval($(this).data("find-plan")) || false,
-		type_plan : $(this).data("type-plan") || null,
-	}
-	console.log(data)
-	openNewWindow("/utilities/tasktree",selector,data)
-})
+
 function openNewWindow(href,input_reference,data){
 	if(window.location.href == href) return
 	var h = (window.innerHeight > 0) ? window.innerHeight : screen.height,
@@ -141,6 +152,8 @@ function openNewWindow(href,input_reference,data){
 	win.TYPE_PLAN = data.type_plan || null
 	win.INPUT_REFERENCE = input_reference
 }
+
+
 
 Models = {
 	"Utils" : {
@@ -169,6 +182,8 @@ Models = {
 								cplan : subplan.cplan,
 								valor : subplan.valor_plan,
 								ctiplan : subplan.ctiplan,
+								cpuntuacion : subplan.cpuntuacion,
+								style : "background : " + subplan.puntuacion.color,
 							},
 							type:subplan.tiplan.slug,
 							children:subplan.subplanes
@@ -190,6 +205,8 @@ Models = {
 					li_attr : {
 						cplan : plan.cplan,
 						valor : plan.valor_plan,
+						cpuntuacion : plan.cpuntuacion,
+						style : "background : " + plan.puntuacion.color,
 						"select_treeview":"treeview___cplan__".set("__cplan__",plan.cplan)
 					},
 					type : plan.tiplan.slug,
@@ -222,7 +239,6 @@ Models = {
 		},
 		"exists" : function(key,cb){
 			Models.Tareas.findOne(key,function(response){
-				console.warn(response)
 				if ( response.status == 404 ){
 					cb(false)
 				}if ( response.cplan) {
@@ -277,7 +293,6 @@ Models = {
 		},
 		"exists" : function(key,cb){
 			Models.Planes.findOne(key,function(response){
-				console.warn(response)
 				if ( response.status == 404 ){
 					cb(false)
 				}if ( response.cplan) {
@@ -309,8 +324,7 @@ Models = {
 					url:"/planes/recalcular",
 					success:function(response){
 						waitingDialog.hide();
-						cb(response)
-						console.log(arguments)
+						if ( cb ) cb(response)
 					},
 					error : function(){
 						waitingDialog.hide();
@@ -318,16 +332,28 @@ Models = {
 				})
 			})
 		},
-		"treeview" : function(cb){
-			$.ajax({
-				type : "GET",
-				url : "/api/planes",
-				success : function(response){
-					var data = Models.Utils.dataToTreeview(response)
-					return cb(data);
-				},
-				error : function(){}
-			})
+		"treeview" : function(cb,cplan){
+			if ( typeof cplan == "undefined" ){
+				$.ajax({
+					type : "GET",
+					url : "/api/planes",
+					success : function(response){
+						var data = Models.Utils.dataToTreeview(response)
+						return cb(data);
+					},
+					error : function(){}
+				})
+			}else{
+				$.ajax({
+					type : "GET",
+					url : "/api/planes/"+cplan,
+					success : function(response){
+						var data = Models.Utils.dataToTreeview([response])
+						return cb(data);
+					},
+					error : function(){}
+				})
+			}
 		}
 	}
 }

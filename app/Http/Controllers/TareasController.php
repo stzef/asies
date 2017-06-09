@@ -47,7 +47,7 @@ class TareasController extends Controller
 
 			$response["ok"] = true;
 			if ( $tarea->checkUser($user->id) ){
-				Tareas::where('ctarea', $ctarea)->update(['ifhecha' => $dataBody["ifhecha"]]);
+				$tarea->setState($dataBody["ifhecha"]);
 				if ( $tarea->ifhecha ){
 					$response["message"] = "";
 				}else{
@@ -142,6 +142,10 @@ class TareasController extends Controller
 		}
 
 		$dataBody = $request->all();
+
+		$dataBody["tarea"]["valor_tarea"] = 1;
+		$dataBody["tarea"]["ifhecha"] = 0;
+
 		$validator = Validator::make($dataBody["tarea"],
 			[
 				'cplan' => 'required|exists:planes,cplan',

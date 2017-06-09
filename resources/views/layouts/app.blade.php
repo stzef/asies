@@ -127,7 +127,7 @@
                             <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
                         </li>-->
                         <li class="divider"></li>
-                        <li>
+                        <li class="btn-logout">
                             <a href="{{ url('/logout') }}"><i class="fa fa-fw fa-power-off"></i> Salir </a>
                         </li>
                     </ul>
@@ -195,7 +195,7 @@
             @if(Session::has('message'))
                 <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
             @endif
-            <div class="container-fluid">
+            <div class="container-fluid" id="vue-app">
 
 
                 <!--<div class="row">
@@ -228,8 +228,11 @@
         @endif
     </script>
 
-    <!-- jQuery -->
     <script src="{{ URL::asset('layout/js/jquery.js') }}"></script>
+
+
+
+    <!-- jQuery -->
 
     <!-- JQuery UI -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
@@ -246,7 +249,7 @@
 
     <!-- Moment JS -->
     <script src="{{ URL::asset('vendor/momentjs/moment-with-locales.js') }}"></script>
-    <script src="{{ URL::asset('vendor/momentjs/locale/es.js') }}"></script>
+    <!-- <script src="{{ URL::asset('vendor/momentjs/locale/es.js') }}"></script> -->
 
     <script src="{{ URL::asset('vendor/datetimepicker/bootstrap/js/transition.js') }}"></script>
     <script src="{{ URL::asset('vendor/datetimepicker/bootstrap/js/collapse.js') }}"></script>
@@ -259,7 +262,6 @@
     <!-- AlertifyJS -->
     <script src="{{ URL::asset('vendor/alertifyjs/alertify.min.js') }}"></script>
 
-    <script src="{{ URL::asset('layout/js/app.js') }}"></script>
 
 
 
@@ -269,7 +271,9 @@
     <!-- Select2 -->
     <script src="{{ URL::asset('vendor/select2-4.0.3/dist/js/select2.full.min.js') }}"></script>
 
-
+    <!-- <script src="{{ URL::asset('bower_components/vue/dist/vue.js') }}"></script> -->
+    <script src="{{ URL::asset('layout/js/app.js') }}"></script>
+    <script src="{{ URL::asset('components/dist/build.js') }}"></script>
     <script>
         $.ajaxSetup({
             headers: {
@@ -277,7 +281,6 @@
             }
         });
 
-        $('select').select2({ width: '100%' });
 
         $( document ).ajaxError(function( event, jqxhr, settings, thrownError ) {
           console.log(thrownError)
@@ -290,6 +293,7 @@
             resizable: false
         });
         $( "#dialog" ).dialog("open");
+        $('select').select2({ width: '100%' });
 
     </script>
 

@@ -57,7 +57,7 @@
 
     <div>
         <div id="page-wrapper">
-            <div class="container-fluid">
+            <div class="container-fluid" id="vue-app">
                 @yield('content')
             </div>
         </div>
@@ -102,7 +102,7 @@
     <!-- Select2 -->
     <script src="{{ URL::asset('vendor/select2-4.0.3/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ URL::asset('layout/js/app.js') }}"></script>
-
+    <script src="{{ URL::asset('components/dist/build.js') }}"></script>
 
     <script>
         $.ajaxSetup({

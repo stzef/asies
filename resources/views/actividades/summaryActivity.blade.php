@@ -146,11 +146,17 @@
                             @foreach ($evidencias as $evidencia)
                                 <tr>
                                     <td>
-                                        <a href="{{ $evidencia->path }}">
-                                            <img class="img-thumbnail img-responsive " width="100px" src="{{ $evidencia->previewimg }}" alt="">
-                                        </a>
-                                        <input type="text" value="{{ $evidencia->nombre }}" name="nombre" placeholder="Nombre" data-evidencia="{{$evidencia->cevidencia}}" onchange="setdataEvidencia(this.dataset.evidencia,this.name,this.value)">
-                                        <input type="text" value="{{ $evidencia->descripcion }}" name="descripcion" placeholder="Descripción" data-evidencia="{{$evidencia->cevidencia}}" onchange="setdataEvidencia(this.dataset.evidencia,this.name,this.value)">
+                                        <div class="col-md-5">
+                                            <a href="{{ $evidencia->path }}">
+                                                <img class="img-thumbnail img-responsive " width="100px" src="{{ $evidencia->previewimg }}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <label for="">Nombre</label>
+                                            <input class="form-control" type="text" value="{{ $evidencia->nombre }}" name="nombre" placeholder="Nombre" data-evidencia="{{$evidencia->cevidencia}}" onchange="setdataEvidencia(this.dataset.evidencia,this.name,this.value)">
+                                            <label for="">Descripción</label>
+                                            <textarea class="form-control" type="text" name="descripcion" placeholder="Descripción" data-evidencia="{{$evidencia->cevidencia}}" onchange="setdataEvidencia(this.dataset.evidencia,this.name,this.value)">{{ $evidencia->descripcion }}</textarea>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

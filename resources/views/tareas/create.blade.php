@@ -36,7 +36,7 @@
 							</div>
 						</div>
 
-						<div class="row">
+						<!--<div class="row">
 							<div class="col-md-8">
 								<div class="form-group">
 									<label for="tarea_valor_tarea" class="col-sm-2 control-label">Valor Tarea</label>
@@ -54,7 +54,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div>-->
 
 						<div class="form-group text-center">
 

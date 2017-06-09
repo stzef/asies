@@ -46,6 +46,15 @@ class Tareas extends Model
         return $this->hasMany('App\Asignaciontarea', 'ctarea', 'ctarea');
     }
 
+    public function setState($new_state)
+    {
+        Tareas::where('ctarea', $this->ctarea)->update(['ifhecha' => $new_state]);
+        $asignaciones = AsignacionTareas::where("ctarea",$this->ctarea)->get();
+        foreach ( $asignaciones as $asignacion ){
+            $asignacion->actividad->updateState();
+        }
+
+    }
     public function checkUser($iduser)
     {
         $flag = false;

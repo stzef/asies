@@ -20,3 +20,5 @@ change.log
 /public/bower_components/
 /test
 /tests
+
+/related_files/

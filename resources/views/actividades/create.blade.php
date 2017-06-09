@@ -81,7 +81,7 @@
 										<div class="col-sm-10">
 											<div class="form-check">
 												<label class="form-check-label">
-													<input class="form-check-input" type="checkbox" name="actividad[ifarchivos]" @if( $actividad) @if( $actividad->ifarchivos ) checked @endif @endif> Archivos
+													<input class="form-check-input" type="checkbox" name="actividad[ifarchivos]" id="actividad_ifarchivos" @if( $actividad) @if( $actividad->ifarchivos ) checked @endif @endif> Archivos
 												</label>
 											</div>
 										</div>
@@ -92,7 +92,7 @@
 										<div class="col-sm-10">
 											<div class="form-check">
 											<label class="form-check-label">
-												<input class="form-check-input" type="checkbox" name="actividad[ifacta]" @if( $actividad) @if( $actividad->ifacta ) checked @endif @endif> Acta
+												<input class="form-check-input" type="checkbox" name="actividad[ifacta]" id="actividad_ifacta" @if( $actividad) @if( $actividad->ifacta ) checked @endif @endif> Acta
 											</label>
 											</div>
 										</div>
@@ -101,49 +101,59 @@
 							</div>
 						</div>
 					</form>
-					<div class="row">
+					<div class="row section_asignacion_tareas ">
 						<div class="col-md-12">
 							<div class="table-responsive col-md-12">
-							<form id="usuario_planes">
-								<table class="table">
-									<tbody>
-										<tr>
-											<td width="50%">
-												<div class="input-group">
-													<select  name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
-														<option value="">Tareas</option>}
-														@foreach ($tareas as $tarea)
-															<option value="{{$tarea->ctarea}}" title="{{$tarea->ntarea}}">{{ str_limit($tarea->ntarea, $limit = 45, $end = '...') }}</option>
+								<form id="usuario_planes">
+									<table class="table text-center">
+										<tbody>
+											<tr>
+												<td >
+													<div class="input-group">
+														<select-task name="tareasusuarios[ctarea]" id="tarea" :productos_minimos="productos_minimos" @mounted="getTask" />
+														<!--
+														<select  name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
+															<option value="">Tareas</option>}
+															@foreach ($tareas as $tarea)
+																<option value="{{$tarea->ctarea}}" title="{{$tarea->ntarea}}">{{ str_limit($tarea->ntarea, $limit = 45, $end = '...') }}</option>
+															@endforeach
+														</select>
+														-->
+														<span class="input-group-addon" data-find-task="true" data-find-treetask data-input-reference="#tarea"><i class="fa fa-search"></i></span>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td >
+													<select  name="tareasusuarios[user]" id="respo" required class="form-control">
+														<option value="">Responsable</option>
+														@foreach ($usuarios as $usuario)
+															<option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}}</option>
 														@endforeach
 													</select>
-													<span class="input-group-addon" data-find-task="true" data-find-treetask data-input-reference="#tarea"><i class="fa fa-search"></i></span>
-												</div>
-											</td>
-											<td width="25%">
-												<select  name="tareasusuarios[user]" id="respo" required class="form-control">
-													<option value="">Responsable</option>
-													@foreach ($usuarios as $usuario)
-														<option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
-													@endforeach
-												</select>
-											</td>
-											<td width="25%">
-												<select  name="tareasusuarios[ctirelacion]" id="tirespo" required class="form-control" >
-													<option value="">Tipo de responsabilidad</option>
-													@foreach ($relaciones as $relacion)
-														<option value = "{{$relacion->ctirelacion}}">{{$relacion->ntirelacion}}</option>
-													@endforeach
-												</select>
-											</td>
-											<td>
-												<button  id="agregar" type="submit" class="btn btn-info">
-													<i class="glyphicon glyphicon-plus"></i>
-												</button>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</form>
+												</td>
+											</tr>
+											<tr>
+												<td >
+													<select  name="tareasusuarios[ctirelacion]" id="tirespo" required class="form-control" >
+														<option value="">Tipo de responsabilidad</option>
+														@foreach ($relaciones as $relacion)
+															<option value = "{{$relacion->ctirelacion}}">{{$relacion->ntirelacion}}</option>
+														@endforeach
+													</select>
+												</td>
+											</tr>
+											<tr>
+
+												<td>
+													<button  id="agregar" type="submit" class="btn btn-info">
+														<i class="glyphicon glyphicon-plus"></i>
+													</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
 							</div>
 						</div>
 						<div class="col-md-12">
@@ -167,7 +177,7 @@
 												<td> {{ $asignacion->tarea->ctarea }} </td>
 												<td> {{ $asignacion->tarea->ntarea }} </td>
 												<td> {{ $asignacion->usuario->id }} </td>
-												<td> {{ $asignacion->usuario->name }} </td>
+												<td> {{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} </td>
 												<td> {{ $asignacion->relacion->ctirelacion }} </td>
 												<td> {{ $asignacion->relacion->ntirelacion }} </td>
 												<td>
@@ -216,13 +226,11 @@
 @section('scripts')
 	<script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>
-	<script src="{{ URL::asset('vendor/DataTables-1.10.14/extensions/Buttons/js/buttons.bootstrap.min.js') }}"></script>
-	<script src="{{ URL::asset('vendor/DataTables-1.10.14/extensions/Buttons/js/dataTables.buttons.min.js') }}"></script>
 <script type="text/javascript">
 	$(function () {
 		$('.date').datetimepicker({
-			format: 'YYYY/MM/DD',
-			defaultDate: moment().format("YYYY/MM/DD")
+			format: 'YYYY-MM-DD',
+			defaultDate: moment().format("YYYY-MM-DD")
 		});
 	});
 </script>
@@ -235,6 +243,10 @@
 
 		if ( CRUD_ACTION == "create" ){
 			$("#usuario_planes").find(":input").prop("disabled",true)
+			$("#actividad_ifarchivos").attr("checked",true)
+			$("#actividad_ifacta").attr("checked",true)
+
+			$(".section_asignacion_tareas").addClass("hide")
 		}
 
 		var cols = {
@@ -280,17 +292,18 @@
 				success : function(response){
 					//$("#modalCrearActividad").modal("hide")
 					$("#usuario_planes").find("[disabled]").prop("disabled",false)
+					$(".section_asignacion_tareas").removeClass("hide")
+
 					if ( CRUD_ACTION == "create" ){
 						$("#form_crear_actividad").find(":input").prop("disabled",true)
+						$("input#actividad_cactividad").val(response.obj.id)
 					}
 					alertify.success(Models.Planes.messages.create.success)
-					$('#treeview').jstree("destroy")
-
-					$("input#actividad_cactividad").val(response.obj.id)
+					/*$('#treeview').jstree("destroy")
 
 					Models.Planes.treeview(function(response){
 						$('#treeview').jstree({ 'core' : {'data' : response } })
-					})
+					})*/
 				},
 				error : function(){
 					//$("#modalCrearActividad").modal("hide")

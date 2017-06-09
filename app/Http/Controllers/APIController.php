@@ -12,6 +12,7 @@ use asies\User;
 use asies\Models\Personas;
 use asies\Models\Evidencias;
 use asies\Models\TiRelaciones;
+use asies\Models\TiPlanes;
 use asies\Models\TareasUsuarios;
 use \View;
 
@@ -30,7 +31,7 @@ class APIController extends Controller
 	}
 	public function plan($cplan)
 	{
-		$plan = Planes::with('tiplan')->where("cplan",$cplan)->first();
+		$plan = Planes::with('puntuacion')->with('tiplan')->where("cplan",$cplan)->first();
 		if ( $plan ){
 			$plan->subplanes = Planes::getSubplanes($plan->cplan,true);
 		}else{
@@ -47,10 +48,25 @@ class APIController extends Controller
 			return response()->json(array("obj"=>null),404);
 		}
 	}
+	public function tareas()
+	{
+
+		$ctiplan_prod_min = 4;
+		$productos = Planes::where("ctiplan",$ctiplan_prod_min)->get();
+		foreach ($productos as $producto) {
+			$producto->tareas = Tareas::where("cplan",$producto->cplan)->get();
+		}
+		return response()->json($productos->toArray());
+	}
 	public function tirelaciones()
 	{
 		$tirelaciones = TiRelaciones::all();
 		return response()->json($tirelaciones);
+	}
+	public function tiplanes()
+	{
+		$tiplanes = TiPlanes::all();
+		return response()->json($tiplanes);
 	}
 	public function usuarios()
 	{

@@ -69,11 +69,14 @@ class ActasController extends Controller
 
 		$acta = Actas::create($dataBody["acta"]);
 
-		foreach ($dataBody["acta"]["asistentes"] as $idusuario) {
-			ActasAsistentes::create(array(
-				"cacta" => $acta->id,
-				"user" => $idusuario
-			));
+		if ( array_key_exists("asistentes",$dataBody["acta"]) ){
+
+			foreach ($dataBody["acta"]["asistentes"] as $idusuario) {
+				ActasAsistentes::create(array(
+					"cacta" => $acta->id,
+					"user" => $idusuario
+				));
+			}
 		}
 
 		Actividades::where("cactividad",$dataBody["acta"]["cactividad"])->update(["cacta"=>$acta->id]);

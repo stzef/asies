@@ -198,7 +198,7 @@
                                                     <select required name="acta[user_elaboro]" class="form-control">
                                                         <option value="">Seleccione...</option>
                                                             @foreach ($usuarios as $usuario)
-                                                                <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
+                                                                <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}}</option>
                                                             @endforeach
                                                     </select>
                                                 </div>
@@ -210,7 +210,7 @@
                                                     <select required name="acta[user_reviso]" class="form-control">
                                                         <option value="">Seleccione...</option>
                                                             @foreach ($usuarios as $usuario)
-                                                                <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
+                                                                <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}}</option>
                                                             @endforeach
                                                     </select>
                                                 </div>
@@ -222,7 +222,7 @@
                                                     <select required name="acta[user_aprobo]" class="form-control">
                                                         <option value="">Seleccione...</option>
                                                             @foreach ($usuarios as $usuario)
-                                                                <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
+                                                                <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}}</option>
                                                             @endforeach
                                                     </select>
                                                 </div>
@@ -234,7 +234,7 @@
                             <div class="col-md-12">
                                     <div class="table-responsive col-md-12">
                                         <form id="usuario_planes">
-                                            <table class="table">
+                                            <table class="table text-center">
                                                 <tbody>
                                                     <tr>
                                                         <td width="50%">
@@ -248,14 +248,18 @@
                                                                 <span class="input-group-addon" data-find-task="true" data-find-treetask data-input-reference="#tarea"><i class="fa fa-search"></i></span>
                                                             </div>
                                                         </td>
+                                                    </tr>
+                                                    <tr>
                                                         <td width="25%">
                                                             <select name="tareasusuarios[user]" id="respo" required class="form-control">
                                                                 <option value="">Responsable</option>
                                                                 @foreach ($usuarios as $usuario)
-                                                                    <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} ( {{$usuario->name}} )</option>
+                                                                    <option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}}</option>
                                                                 @endforeach
                                                             </select>
                                                         </td>
+                                                    </tr>
+                                                    <tr>
                                                         <td width="25%">
                                                             <select name="tareasusuarios[ctirelacion]" id="tirespo" required class="form-control" >
                                                                 <option value="">Tipo de responsabilidad</option>
@@ -264,6 +268,8 @@
                                                                 @endforeach
                                                             </select>
                                                         </td>
+                                                    </tr>
+                                                    <tr>
                                                         <td>
                                                             <button id="agregar" type="submit" class="btn btn-info">
                                                                 <i class="glyphicon glyphicon-plus"></i>
@@ -294,7 +300,7 @@
                                                             <td>{{$asignar->ctarea}}</td>
                                                             <td title="{{$asignar->tarea->ntarea}}">{{ str_limit($asignar->tarea->ntarea, 30 ,$end="...") }}</td>
                                                             <td>{{$asignar->user}}</td>
-                                                            <td>{{$asignar->usuario->name}}</td>
+                                                            <td>{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}}</td>
                                                             <td>{{$asignar->ctirelacion}}</td>
                                                             <td>{{$asignar->relacion->ntirelacion}}</td>
                                                             <td> @if( $asignar->tarea->ifhecha ) Si @else No @endif </td>
@@ -317,26 +323,20 @@
                                             <p>No Tiene Permisos Para Agregar Compromisos</p>
                                         @endif
                                         <form id="nuevas_tareas">
-                                            <table class="table" width="100%">
+                                            <table class="table text-center" width="100%">
                                                 <tbody>
                                                     <tr>
-                                                        <td width="33%">
+                                                        <td >
                                                             <div class="form-group">
-                                                                <label for="tarea_cplan" class="col-sm-4 control-label">Nombre Tarea</label>
-                                                                <div class="col-sm-8">
+                                                                <label for="tarea_cplan" class="col-sm-2 control-label">Nombre Tarea</label>
+                                                                <div class="col-sm-10">
                                                                     <input required type="text" class="form-control" id="tarea_ntarea" name="tarea[ntarea]" placeholder="Nombre Tarea">
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td width="33%">
-                                                            <div class="form-group">
-                                                                <label for="tarea_cplan" class="col-sm-2 control-label">Valor Tarea</label>
-                                                                <div class="col-sm-10">
-                                                                    <input required value="1" type="number" class="form-control" id="tarea_valor" name="tarea[valor_tarea]" placeholder="Valor Tarea">
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td width="33%">
+                                                    </tr>
+                                                    <tr>
+                                                        <td >
                                                             <div class="form-group">
                                                                 <label for="tarea_cplan" class="col-sm-2 control-label">Prod. Min</label>
                                                                 <div class="col-sm-10">
@@ -347,15 +347,14 @@
                                                                 </div>
                                                             </div>
                                                         </td>
+                                                    </tr>
+                                                    <tr>
                                                         <td>
                                                             @if ( Auth::check() && Auth::user()->can('task.crud') )
                                                                 <div class="form-group row">
-                                                                    <div class="input-group">
-                                                                        <button width="50%" id="agregar" type="submit" class="btn btn-info">
+                                                                        <button id="agregar" type="submit" class="btn btn-info">
                                                                             <i class="glyphicon glyphicon-plus"></i>
                                                                         </button>
-
-                                                                   </div>
                                                                 </div>
                                                             @endif
                                                         </td>
@@ -369,7 +368,6 @@
                                                             <th>Tarea</th>
                                                             <th>cplan</th>
                                                             <th>Producto Minimo</th>
-                                                            <th>Valor Tarea</th>
                                                             <th>Editar</th>
                                                             <th>Borrar</th>
                                                         </tr>
@@ -453,10 +451,12 @@
                     </span>
                 </td>
                 <td>
+                    <label for="">Nombre</label>
                     <input class="form-control" placeholder="Nombre" type="text" name="nombre" data-evidencia="{%=file.evidencia%}" onchange="setdataEvidencia(this.dataset.evidencia,this.name,this.value)">
                 </td>
                 <td>
-                    <input class="form-control" placeholder="Descripción" type="text" name="descripcion" data-evidencia="{%=file.evidencia%}" onchange="setdataEvidencia(this.dataset.evidencia,this.name,this.value)">
+                    <label for="">Descripción</label>
+                    <textarea class="form-control" placeholder="Descripción" type="text" name="descripcion" data-evidencia="{%=file.evidencia%}" onchange="setdataEvidencia(this.dataset.evidencia,this.name,this.value)"></textarea>
                 </td>
                 <td>
                     <p class="name">
@@ -505,8 +505,8 @@
         }
         $(function () {
             $('.datetime').datetimepicker({
-                format: 'YYYY/MM/DD HH:mm:ss',
-                defaultDate: moment().format("YYYY/MM/DD HH:mm:ss")
+                format: 'YYYY-MM-DD HH:mm:ss',
+                defaultDate: moment().format("YYYY-MM-DD HH:mm:ss")
             });
         });
 
@@ -561,9 +561,8 @@
             var cplan = $( "#tarea_cplan" ).val();
             var ntarea = $( "#tarea_ntarea" ).val();
             var nplan = $( "#tarea_cplan" ).val();
-            var valor = $( "#tarea_valor" ).val();
             tabletask
-                .row.add([ntarea,cplan,nplan,valor,
+                .row.add([ntarea,cplan,nplan,
                     "<button type='button' class='editar btn btn-primary' onclick='taskchange(event,this)'>"+
                         "<i class='fa fa-pencil-square-o'></i>"+
                     "</button>",
@@ -676,58 +675,59 @@
     }
             var base_url_print_acta = "{{ URL::route('GET_pdf_acta',['numeroacta'=>'__numeroacta__']) }}"
             $("#form_crear_acta").submit(function(event){
-            event.preventDefault()
-            var that = this
+                event.preventDefault()
+                var that = this
 
-            var data = serializeForm(that)
+                var data = serializeForm(that)
 
-            data.append("acta[cactividad]",$("#cactividad").val())
+                data.append("acta[cactividad]",$("#cactividad").val())
 
-            table.data().toArray().forEach( function(element, index) {
-                data.append("acta[asistentes][]",element[cols.crespo])
-            });
-            $.ajax({
-                type : "POST",
-                url : "{{ URL::action('ActasController@create') }}",
-                data:data,
-                cache:false,
-                contentType: false,
-                processData: false,
-                success : function(response){
-                    console.log(response)
-                    alertify.success("El Acta se ha creado.")
-                    var data = tabletask.data().toArray();
-                    window.open(base_url_print_acta.set("__numeroacta__",response.obj.numeroacta))
+                table.data().toArray().forEach( function(element, index) {
+                    data.append("acta[asistentes][]",element[cols.crespo])
+                });
+                $.ajax({
+                    type : "POST",
+                    url : "{{ URL::action('ActasController@create') }}",
+                    data:data,
+                    cache:false,
+                    contentType: false,
+                    processData: false,
+                    success : function(response){
+                        console.log(response)
+                        alertify.success("El Acta se ha creado.")
+                        var data = tabletask.data().toArray();
+                        window.open(base_url_print_acta.set("__numeroacta__",response.obj.numeroacta))
+                        $("#modalCrearActa").modal("hide")
+                        $(that).find(":input").attr("disabled",true)
+                        data.forEach(function(item){
 
-                    data.forEach(function(item){
+                            var data_request = new FormData()
+                            data_request.append("tarea[cplan]",item[colstask.cplan])
+                            data_request.append("tarea[ntarea]",item[colstask.ntarea])
+                            data_request.append("tarea[valor_tarea]",item[colstask.valor])
+                            data_request.append("tarea[ifhecha]",0)
 
-                        var data_request = new FormData()
-                        data_request.append("tarea[cplan]",item[colstask.cplan])
-                        data_request.append("tarea[ntarea]",item[colstask.ntarea])
-                        data_request.append("tarea[valor_tarea]",item[colstask.valor])
-                        data_request.append("tarea[ifhecha]",0)
-
-                        $.ajax({
-                            type: "POST",
-                            url:  "{{ URL::action('TareasController@create') }}",
-                            data: data_request,
-                            cache:false,
-                            contentType: false,
-                            processData: false,
-                            success : function(){
-                                alertify.success("Compromisos agregados");
-                            },
-                            error : function(){
-                                alertify.error(Models.Planes.message.create.error);
-                            },
+                            $.ajax({
+                                type: "POST",
+                                url:  "{{ URL::action('TareasController@create') }}",
+                                data: data_request,
+                                cache:false,
+                                contentType: false,
+                                processData: false,
+                                success : function(){
+                                    alertify.success("Compromisos agregados");
+                                },
+                                error : function(){
+                                    alertify.error(Models.Planes.message.create.error);
+                                },
+                            })
                         })
-                    })
-                },
-                error : function(){
-                    alertify.error(Models.Planes.messages.create.error)
-                },
+                    },
+                    error : function(){
+                        alertify.error(Models.Planes.messages.create.error)
+                    },
+                })
             })
-        })
     </script>
 	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
 	<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
