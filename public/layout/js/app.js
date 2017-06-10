@@ -125,8 +125,8 @@ $(document).ready(function(){
 			find_plan : eval($(this).data("find-plan")) || false,
 			type_plan : $(this).data("type-plan") || null,
 		}
-		//openNewWindow("/planes/treeview",selector,data)
-		openNewWindow("/utilities/tasktree",selector,data)
+		openNewWindow("/planes/treeview",selector,data)
+		//openNewWindow("/utilities/tasktree",selector,data)
 	})
 
 	$(".btn-logout").click(function(event){
@@ -183,7 +183,8 @@ Models = {
 								valor : subplan.valor_plan,
 								ctiplan : subplan.ctiplan,
 								cpuntuacion : subplan.cpuntuacion,
-								style : "background : " + subplan.puntuacion.color,
+								"data-state" : subplan.puntuacion.sigla,
+								"data-color" : subplan.puntuacion.color,
 							},
 							type:subplan.tiplan.slug,
 							children:subplan.subplanes
@@ -206,7 +207,8 @@ Models = {
 						cplan : plan.cplan,
 						valor : plan.valor_plan,
 						cpuntuacion : plan.cpuntuacion,
-						style : "background : " + plan.puntuacion.color,
+						"data-state" : plan.puntuacion.sigla,
+						"data-color" : plan.puntuacion.color,
 						"select_treeview":"treeview___cplan__".set("__cplan__",plan.cplan)
 					},
 					type : plan.tiplan.slug,

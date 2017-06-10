@@ -121,9 +121,9 @@ class Actividades extends Model
     static function getGrouped(){
 
         $actividades = array(
-            "realizadas"=>array(),
-            "retrasadas"=>array(),
-            "pendientes"=>array(),
+            "realizadas"=>collect(),
+            "retrasadas"=>collect(),
+            "pendientes"=>collect(),
         );
         $actividades["realizadas"] = Actividades::where("ifhecha",1)->get();
 
@@ -133,20 +133,25 @@ class Actividades extends Model
             $actividad->calcularDias();
 
             if ( $actividad->dias_faltantas ){
-                array_push($actividades["pendientes"], $actividad);
+                $actividades["pendientes"]->push($actividad);
             }elseif( $actividad->dias_retraso ){
-                array_push($actividades["retrasadas"], $actividad);
+                $actividades["retrasadas"]->push($actividad);
             }
         }
 
-        usort($actividades["pendientes"], function ($a, $b) {
+        /* No funciona el ordenamiento */
+        $actividades["pendientes"] = $actividades["pendientes"]->sort(function ($a, $b) {
             if($a->dias_faltantas == $b->dias_faltantas){ return 0 ; }
             return ($a->dias_faltantas < $b->dias_faltantas) ? -1 : 1;
         });
-        usort($actividades["retrasadas"], function ($a, $b) {
+
+        $actividades["pendientes"]->values()->all();
+
+        $actividades["retrasadas"] = $actividades["retrasadas"]->sort(function ($a, $b) {
             if($a->dias_retraso == $b->dias_retraso){ return 0 ; }
             return ($a->dias_retraso < $b->dias_retraso) ? -1 : 1;
         });
+        $actividades["retrasadas"]->values()->all();
 
         return $actividades;
     }

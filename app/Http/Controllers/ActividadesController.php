@@ -8,6 +8,7 @@ use asies\Http\Requests;
 use asies\Models\Actividades;
 use asies\Models\Evidencias;
 use asies\Models\Personas;
+use asies\Models\Planes;
 use asies\Models\Tareas;
 use asies\Models\Actas;
 use asies\Models\TiActividades;
@@ -30,6 +31,18 @@ class ActividadesController extends Controller
 		View::share('SHORT_NAME_APP', env("SHORT_NAME_APP"," - "));
 		View::share('LONG_NAME_APP', env("LONG_NAME_APP"," - "));
 		$this->middleware('auth');
+	}
+
+	public function detailActivity(Request $request,$cactividad){
+		if ($request->isMethod('get')){
+			if ( $actividad = Actividades::where("cactividad", $cactividad)->first() ) {
+				$actividad->asignaciones = $actividad->getAsignacion();
+				return view( 'actividades.detailActivity' , array(
+					"actividad" => $actividad,
+					)
+				);
+			}
+		}
 	}
 
 	public function summaryActivity(Request $request,$cactividad){
@@ -76,36 +89,27 @@ class ActividadesController extends Controller
 		}
 	}
 
-	public function checkDates(Request $request){
-		//dump(Actividades::getGrouped()["retrasadas"][3]->nactividad);exit();
-		$actividades = Actividades::all();
+	public function checkDates(Request $request,$cplan=null){
 
-		$actividades_retrasadas = array();
-		$actividades_pendientes = array();
 
-		foreach ($actividades as $actividad) {
-			$actividad->calcularDias();
-			$actividad->tareas = $actividad->getTareas();
-
-			if ( $actividad->dias_faltantas ){
-				array_push($actividades_pendientes, $actividad);
-			}elseif( $actividad->dias_retraso ){
-				array_push($actividades_retrasadas, $actividad);
-			}
+		if ( $cplan ){
+			$plan = Planes::where("cplan",$cplan)->first();
+			$actividades = $plan->getActividadesGrouped();
+			//dump($actividades);exit();
+			//if ( $plan )
+		}else{
+			$actividades = Actividades::getGrouped();
 		}
 
-		if ($request->isMethod('get')){
 
+		if ($request->isMethod('get')){
 			return view( 'actividades.checkDates' , array(
-				'actividades' => Actividades::getGrouped(),
-				'actividades_retrasadas' => $actividades_retrasadas,
-				'actividades_pendientes' => $actividades_pendientes,
+				'actividades' => $actividades,
 				)
 			);
-
 		}elseif($request->isMethod('post')){
 			$response = array();
-			foreach ($actividades_retrasadas as $actividad) {
+			foreach ($actividades["retrasadas"] as $actividad) {
 				$status = $this->sendEmailsReminder($actividad);
 				array_push($response, $status);
 			}

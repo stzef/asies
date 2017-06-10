@@ -46,6 +46,12 @@ export default {
 
 
 
+    recolored: function (evt, data){
+        $("[data-state]").toArray().forEach(li => {
+            var color = $(li).data("color")
+            $(li).find("a").first().find("i").first().css({borderRightColor: color,borderRightWidth: "8px",borderRightStyle: "solid"})
+        })
+    },
     returnTask: function (evt, data){
       var vm = this.$root
       var tarea = $(vm.treetask_select).jstree('get_selected',true)[0]
@@ -147,6 +153,8 @@ export default {
           'core' : { 'data' : plan },
         })
         if ( window.ASIES_IS_WIN_POPUOT ) $(select_treeview).on('changed.jstree', component.returnTask)
+        $(select_treeview).on('open_node.jstree', component.recolored)
+        $(select_treeview).on('ready.jstree', component.recolored)
 
       }
       var to = false;
@@ -158,6 +166,7 @@ export default {
           $(this.$root.treetask_select).jstree(true).search(v);
         }, 250);
       });
+
   }
 }
 </script>

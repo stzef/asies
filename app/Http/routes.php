@@ -45,7 +45,6 @@ Route::get('/dashboard', 'AppController@dashboard')->name('app_dashboard')->midd
 Route::group(['prefix' => 'api'], function(){
 	Route::group(['prefix' => 'tiplanes'], function(){
 		Route::get('/', "APIController@tiplanes");
-		//Route::get('/{ctarea}', "APIController@tarea");
 	});
 	Route::group(['prefix' => 'tareas'], function(){
 		Route::get('/', "APIController@tareas");
@@ -73,7 +72,6 @@ Route::group(['prefix' => 'planes'], function(){
 	Route::get('status/{cplan}', "PlanesController@status")->name('GET_status_plan');
 
 	Route::get('/treeview', 'ArbolTareasController@treeview')->name('GET_treetask')->middleware("permission:tasktree.see")->middleware('auth');
-
 });
 
 Route::group(['prefix' => 'actividades'], function(){
@@ -86,9 +84,10 @@ Route::group(['prefix' => 'actividades'], function(){
 	Route::get('list', "ActividadesController@list_activities")->name("GET_actividades_list")->middleware("permission:activities.crud");
 
 	Route::get('do/{cactividad}', "ActividadesController@doActivity")->name('realizar_actividad');
+	Route::get('detail/{cactividad}', "ActividadesController@detailActivity")->name('GET_detalle_actividad');
 
-	Route::get('checkDates/', "ActividadesController@checkDates")->name('GET_verificar_fechas_actividades')->middleware("permission:activities.check_dates");
-	Route::post('checkDates/', "ActividadesController@checkDates")->name('POST_verificar_fechas_actividades')->middleware("permission:activities.send_reminders");
+	Route::get('checkDates/{cplan?}',"ActividadesController@checkDates")->name('GET_verificar_fechas_actividades')->middleware("permission:activities.check_dates");
+	Route::post('checkDates/{cplan?}',"ActividadesController@checkDates")->name('POST_verificar_fechas_actividades')->middleware("permission:activities.send_reminders");
 
 	Route::get('summary/{cactividad}', "ActividadesController@summaryActivity")->name('GET_resumen_actividad');
 	Route::post('evidence/{cactividad}', "ActividadesController@store");
@@ -116,13 +115,12 @@ Route::group(['prefix' => 'tareas'], function(){
 	Route::post('/{ctarea}/change_state', "TareasController@change_state")->name("POST_cambiar_estado_tarea");
 });
 
-Route::group(['prefix' => 'utilities'], function(){
+/*Route::group(['prefix' => 'utilities'], function(){
 	Route::get('tasktree', "UtilitiesController@tasktree");
-});
+});*/
 
 Route::group(['prefix' => 'users'], function(){
 	Route::group(['prefix' => '{user}'], function(){
 		Route::get('actividades', "PerfilController@actividades")->name('mis_actividades');
-		//Route::post('/{cplan}/add/usuario', "PlanesController@add_user_to_plan");
 	});
 });

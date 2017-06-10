@@ -70,6 +70,62 @@ class Planes extends Model
     {
         return $this->hasMany('App\Tarea', 'cplan', 'cplan');
     }
+    public function getActividades(){
+        $actividades = \DB::table('asignaciontareas')
+            ->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
+            ->join('planes', 'tareas.cplan', '=', 'tareas.cplan')
+            ->select('asignaciontareas.cactividad')
+            //->where('tareas.ifhecha', 0)
+            ->groupBy('cactividad')
+            ->get();
+            $actividades = collect($actividades);
+            $actividades = $actividades->map(function ($actividad) {
+            return Actividades::where("cactividad", $actividad->cactividad)->first();
+        });
+        dump($actividades);exit();
+    }
+    public function getActividadesGrouped(){
+        $actividades = array(
+            "realizadas"=>collect(),
+            "retrasadas"=>collect(),
+            "pendientes"=>collect(),
+        );
+        $actividades_hechas = \DB::table('asignaciontareas')
+            ->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
+            ->join('actividades', 'asignaciontareas.cactividad', '=', 'actividades.cactividad')
+            ->join('planes', 'planes.cplan', '=', 'tareas.cplan')
+            ->select('asignaciontareas.*')
+            ->where('actividades.ifhecha', 1)
+            ->where('tareas.cplan', $this->cplan)
+            ->groupBy('asignaciontareas.cactividad')
+            ->get();
+
+        $actividades_hechas = collect($actividades_hechas);
+        $actividades["realizadas"] = $actividades_hechas->map(function ($actividad) { return Actividades::where("cactividad", $actividad->cactividad)->first(); });
+
+        $resto_actividades = \DB::table('asignaciontareas')
+            ->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
+            ->join('actividades', 'asignaciontareas.cactividad', '=', 'actividades.cactividad')
+            ->join('planes', 'planes.cplan', '=', 'tareas.cplan')
+            ->select('asignaciontareas.*')
+            ->where('actividades.ifhecha', 0)
+            ->where('tareas.cplan', $this->cplan)
+            ->groupBy('asignaciontareas.cactividad')
+            ->get();
+            foreach ($resto_actividades as $actividad) {
+                //dump($actividad);exit();
+                $oa = Actividades::where("cactividad",$actividad->cactividad)->first();
+                $oa->calcularDias();
+
+                if ( $oa->dias_faltantas ){
+                    $actividades["pendientes"]->push($oa);
+                }elseif( $oa->dias_retraso ){
+                    $actividades["retrasadas"]->push($oa);
+                }
+            }
+
+        return $actividades;
+    }
     static function getSubPlanes($cplan,$json=false)
     {
         $plan = Planes::where('cplan', $cplan)->first();

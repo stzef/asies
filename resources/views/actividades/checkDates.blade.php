@@ -1,17 +1,6 @@
 @extends('layouts.app')
 @section('styles')
-    <!-- Bootstrap styles -->
-    <!--<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">-->
-    <!-- Generic page styles -->
-    <link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/style.css') }}">
-    <!-- blueimp Gallery styles -->
-    <link rel="stylesheet" href="https://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
-    <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-    <link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/jquery.fileupload.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/jquery.fileupload-ui.css') }}">
-    <!-- CSS adjustments for browsers with JavaScript disabled -->
-    <noscript><link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/jquery.fileupload-noscript.css') }}"></noscript>
-    <noscript><link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/jquery.fileupload-ui-noscript.css') }}"></noscript>
+
 @endsection
 
 @section('content')
@@ -46,18 +35,20 @@
                                 <thead>
                                     <tr>
                                         <th>Actividad</th>
-                                        <th>F Inicio</th>
-                                        <th>F Final</th>
+                                        <th>Fecha</th>
                                         <th>Dias Retraso</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($actividades["retrasadas"] as $actividad)
                                         <tr>
                                             <td>{{ $actividad->nactividad }}</td>
-                                            <td>{{ $actividad->fini }}</td>
-                                            <td>{{ $actividad->ffin }}</td>
+                                            <td>{{ date('Y-m-d',strtotime($actividad->ffin)) }}</td>
                                             <td>{{ $actividad->dias_retraso }}</td>
+                                            <td>
+                                                <a class="btn btn-primary" href="{{ URL::route('GET_detalle_actividad',['cactividad'=>$actividad->cactividad]) }}">Detalle</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -69,8 +60,7 @@
                                 <thead>
                                     <tr>
                                         <th>Actividad</th>
-                                        <th>F Inicio</th>
-                                        <th>F Final</th>
+                                        <th>Fecha</th>
                                         <th>Dias Faltantes</th>
                                     </tr>
                                 </thead>
@@ -78,8 +68,7 @@
                                     @foreach ($actividades["pendientes"] as $actividad)
                                         <tr>
                                             <td>{{ $actividad->nactividad }}</td>
-                                            <td>{{ $actividad->fini }}</td>
-                                            <td>{{ $actividad->ffin }}</td>
+                                            <td>{{ date('Y-m-d',strtotime($actividad->ffin)) }}</td>
                                             <td>{{ $actividad->dias_faltantas }}</td>
                                         </tr>
                                     @endforeach
@@ -92,16 +81,19 @@
                                 <thead>
                                     <tr>
                                         <th>Actividad</th>
-                                        <th>F Inicio</th>
-                                        <th>F Final</th>
+                                        <th>Fecha</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($actividades["realizadas"] as $actividad)
                                         <tr>
                                             <td>{{ $actividad->nactividad }}</td>
-                                            <td>{{ $actividad->fini }}</td>
-                                            <td>{{ $actividad->ffin }}</td>
+                                            <td>{{ date('Y-m-d',strtotime($actividad->ffin)) }}</td>
+                                            <td>
+                                                <a class="btn btn-primary" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a>
+                                            </td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>
