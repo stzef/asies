@@ -51,9 +51,12 @@ class PlanesController extends Controller
 
 
 		$plan = Planes::where("cplan",$cplan)->first();
+		$actividades = $plan->getActividadesGrouped();
+
 		if ( !$plan ) return view('errors/generic',array('title' => 'Error Plan.', 'message' => "El plan $cplan no existe" ));
 		$context = array(
 			"plan" => $plan,
+			"actividades" => $actividades,
 		);
 		return view('planes/status',$context);
 	}

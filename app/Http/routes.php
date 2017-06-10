@@ -68,7 +68,7 @@ Route::group(['prefix' => 'api'], function(){
 
 Route::group(['prefix' => 'planes'], function(){
 	Route::post('create', "PlanesController@create");
-	Route::post('recalcular', "PlanesController@recalcularPuntos")->name('POST_recaulcular_puntos');
+	Route::post('recalcular', "PlanesController@recalcularPuntos")->name('POST_recaulcular_puntos')->middleware("permission:planes.calculate_points");
 	Route::get('status/{cplan}', "PlanesController@status")->name('GET_status_plan');
 
 	Route::get('/treeview', 'ArbolTareasController@treeview')->name('GET_treetask')->middleware("permission:tasktree.see")->middleware('auth');

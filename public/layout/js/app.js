@@ -320,21 +320,25 @@ Models = {
 		},
 		"recalcular" : function(cb){
 			alertify.confirm("Desea Recalcular los puntos de los Planes, Recuerde que este proceso puede tandar varios minutos, en los cuales no se podran realizar ninguna otra acción.",function(){
-				waitingDialog.show('Recalculando Puntos',{onHide: function () {alertify.success('Puntos Recalculados')}});
+				//waitingDialog.show('Recalculando Puntos',{onHide: function () {}});
 				$.ajax({
 					type:"POST",
 					url:"/planes/recalcular",
 					success:function(response){
+						console.info(arguments)
 						waitingDialog.hide();
+						alertify.success('Puntos Recalculados')
 						if ( cb ) cb(response)
 					},
-					error : function(){
+					error : function(res){
+						alertify.error(res.responseJSON.message)
 						waitingDialog.hide();
 					}
 				})
 			})
 		},
 		"treeview" : function(cb,cplan){
+			console.log(cplan)
 			if ( typeof cplan == "undefined" ){
 				$.ajax({
 					type : "GET",

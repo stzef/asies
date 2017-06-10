@@ -273,7 +273,6 @@
 
     <!-- <script src="{{ URL::asset('bower_components/vue/dist/vue.js') }}"></script> -->
     <script src="{{ URL::asset('layout/js/app.js') }}"></script>
-    <script src="{{ URL::asset('components/dist/build.js') }}"></script>
     <script>
         $.ajaxSetup({
             headers: {
@@ -296,6 +295,7 @@
         $('select').select2({ width: '100%' });
 
     </script>
+    <script src="{{ URL::asset('components/dist/build.js') }}"></script>
 
 
     @yield('scripts')

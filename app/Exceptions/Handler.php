@@ -55,7 +55,11 @@ class Handler extends ExceptionHandler
             $e instanceof \Bican\Roles\Exceptions\LevelDeniedException
         ) {
             $request->session()->flash('message', 'No tiene Persmisos para acceder a este lugar');
-            return redirect()->back();
+            if ( $request->ajax() ){
+                return response()->json(array("message"=>"No tiene permisos para realizar esta Acción"),403);
+            }else{
+                return redirect()->back();
+            }
         }
         return parent::render($request, $e);
     }

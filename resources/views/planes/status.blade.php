@@ -2,11 +2,11 @@
 
 @section('styles')
 	<link rel="stylesheet" href="{{ URL::asset('vendor/jstree/css/themes/default/style.css') }}" >
-
 @endsection
 
 
 @section('content')
+	<input type="hidden" name="treetask_cplan" id="treetask_cplan" value="{{ $plan->cplan }}">
 
 	<div class="row">
 
@@ -16,8 +16,14 @@
 
 				<div class="panel-body">
 					<div class="row" style="overflow: overlay;">
+						<task-tree  :tiplanes="tiplanes" :planes="planes" @tt_mounted="loadDataTaskTree" @ctt="setActiveTaskTree" />
+
 						<div id="treeview"></div>
-						<div id="chart_div"></div>
+						<!-- <div id="chart_div"></div> -->
+
+					</div>
+					<div class="panel">
+						@include('partials.activities_grouped',['actividades',$actividades])
 					</div>
 
 				</div>
@@ -29,13 +35,10 @@
 @section('scripts')
 	<script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>
-<script type="text/javascript">
-</script>
 	<script src="{{ URL::asset('vendor/jstree/js/jstree.min.js') }}"></script>
 
-
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
+	<!-- <script type="text/javascript">
 		google.charts.load('current', {'packages':['gauge']});
 		google.charts.setOnLoadCallback(drawChart);
 
@@ -65,11 +68,11 @@
 				waitingDialog.hide("")
 			})
 		}
-	</script>
+	</script> -->
 
 	<script>
 
-		waitingDialog.show("Cargando Arbol...")
+		/*waitingDialog.show("Cargando Arbol...")
 		var TREEVIEW_SELECT = "#treeview"
 		Models.Planes.findOne("{{ $plan->cplan}}",function(response){
 			var data = Models.Utils.dataToTreeview([response])
@@ -117,7 +120,7 @@
 				}, 250);
 			});
 			waitingDialog.hide("")
-		})
+		})*/
 	</script>
 
 @endsection

@@ -51,7 +51,10 @@ class Tareas extends Model
         Tareas::where('ctarea', $this->ctarea)->update(['ifhecha' => $new_state]);
         $asignaciones = AsignacionTareas::where("ctarea",$this->ctarea)->get();
         foreach ( $asignaciones as $asignacion ){
-            $asignacion->actividad->updateState();
+            $status_act = $asignacion->actividad->updateState();
+            if ( $status_act["ifhecha"] == 1 ){
+
+            }
         }
 
     }

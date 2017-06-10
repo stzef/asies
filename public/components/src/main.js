@@ -13,6 +13,7 @@ var vue_app = new Vue({
 		tiplanes : [],
 		planes : [],
 		treetask_select : "#treeview_cplan_1",
+		treetask_cplan : $("#treetask_cplan").val(),
 	},
 	watch : {
 		planes : function (val,old_val){
@@ -59,10 +60,10 @@ var vue_app = new Vue({
 
 		},
 		getPlanes: function () {
-			console.warn(this.cplan)
+			console.warn(this.treetask_cplan)
 			Models.Planes.treeview(response => {
 				this.planes = response
-			})
+			},this.treetask_cplan)
 		},
 	}
 })

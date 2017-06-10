@@ -163,7 +163,7 @@ class Actividades extends Model
     }
     public function updateState()
     {
-
+        $response = array("message"=>"","ifhecha"=>null);
         $tareas_no_hecha = \DB::table('asignaciontareas')
             ->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
             ->select('tareas.*')
@@ -172,11 +172,17 @@ class Actividades extends Model
             ->groupBy('ctarea')
             ->get();
 
+        $ifhecha = null;
         if ( count($tareas_no_hecha) == 0 ){
-            Actividades::where('cactividad', $this->cactividad)->update(['ifhecha' => 1]);
+            $ifhecha = 1;
+            $response["message"] = "La Actividad se completo";
         }else{
-            Actividades::where('cactividad', $this->cactividad)->update(['ifhecha' => 0]);
+            $ifhecha = 0;
         }
+        Actividades::where('cactividad', $this->cactividad)->update(['ifhecha' => $ifhecha]);
+        $response["ifhecha"] = $ifhecha;
+
+        return $response;
     }
     public function getTareas($iduser=null)
     {

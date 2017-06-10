@@ -4,7 +4,12 @@
 	<div class="row">
 			<div class="col-md-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Dashboard <b>{{ Auth::user()->persona->nombreCompleto() }}</b></div>
+						<div class="panel-heading">
+							Dashboard <b>{{ Auth::user()->persona->nombreCompleto() }}</b>
+							@permission('planes.calculate_points')
+								<button class="btn btn-primary" onclick="Models.Planes.recalcular()">Recaulcular Puntos</button>
+							@endpermission
+						</div>
 						<div class="panel-body" style="overflow: overlay">
 							<div id="chart_div" ></div>
 							<table class="table buttons">
