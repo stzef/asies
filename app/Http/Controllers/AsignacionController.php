@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Log;
 use asies\User;
 class AsignacionController extends Controller
 {
-	public function __construct()
-	{
+	public function __construct(){
 		View::share('SHORT_NAME_APP', env("SHORT_NAME_APP"," - "));
 		View::share('LONG_NAME_APP', env("LONG_NAME_APP"," - "));
 		$this->middleware('auth');
 	}
+
 	public function users(Request $request,$cactividad,$ctarea){
 		$actividad = Actividades::where('cactividad', $cactividad)->first();
 		if ($request->isMethod("POST")){
@@ -62,6 +62,7 @@ class AsignacionController extends Controller
 			}
 		}
 	}
+
 	public function users_delete(Request $request,$cactividad,$ctarea){
 		$actividad = Actividades::where('cactividad', $cactividad)->first();
 

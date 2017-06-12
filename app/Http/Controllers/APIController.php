@@ -18,19 +18,14 @@ use \View;
 
 class APIController extends Controller
 {
-	public function __construct()
-	{
+	public function __construct(){
 		View::share('SHORT_NAME_APP', env("SHORT_NAME_APP"," - "));
 		View::share('LONG_NAME_APP', env("LONG_NAME_APP"," - "));
 		$this->middleware('auth');
 	}
-	public function planes()
-	{
-		$planes = Planes::getArbolPlanes(true);
-		return response()->json($planes );
-	}
-	public function plan($cplan)
-	{
+
+	/* API Planes */
+	public function plan($cplan){
 		$plan = Planes::with('puntuacion')->with('tiplan')->where("cplan",$cplan)->first();
 		if ( $plan ){
 			$plan->subplanes = Planes::getSubplanes($plan->cplan,true);
@@ -39,8 +34,15 @@ class APIController extends Controller
 		}
 		return response()->json($plan );
 	}
-	public function tarea($ctarea)
-	{
+
+	public function planes(){
+		$planes = Planes::getArbolPlanes(true);
+		return response()->json($planes );
+	}
+	/* API Planes */
+
+	/* API Tareas */
+	public function tarea($ctarea){
 		$tarea = Tareas::where("ctarea",$ctarea)->first();
 		if ( $tarea ){
 			return response()->json($tarea);
@@ -48,9 +50,8 @@ class APIController extends Controller
 			return response()->json(array("obj"=>null),404);
 		}
 	}
-	public function tareas()
-	{
 
+	public function tareas(){
 		$ctiplan_prod_min = 4;
 		$productos = Planes::where("ctiplan",$ctiplan_prod_min)->get();
 		foreach ($productos as $producto) {
@@ -58,21 +59,29 @@ class APIController extends Controller
 		}
 		return response()->json($productos->toArray());
 	}
-	public function tirelaciones()
-	{
+	/* API Tareas */
+
+	/* API Tirelaciones */
+	public function tirelaciones(){
 		$tirelaciones = TiRelaciones::all();
 		return response()->json($tirelaciones);
 	}
-	public function tiplanes()
-	{
+	/* API Tirelaciones */
+
+	/* API Tiplanes */
+	public function tiplanes(){
 		$tiplanes = TiPlanes::all();
 		return response()->json($tiplanes);
 	}
-	public function usuarios()
-	{
+	/* API Tiplanes */
+
+	/* API Usuarios */
+	public function usuarios(){
 		$usuarios = User::all();
 		return response()->json($usuarios);
 	}
+	/* API Usuarios */
+
 	public function update_evidencia(Request $request,$cevidencia){
 		$dataBody = $request->all();
 		foreach ($dataBody as $data) {
@@ -80,8 +89,8 @@ class APIController extends Controller
 		}
 		return response()->json(array("message"=>"ok"));
 	}
-	public function usuarios_plan($ctarea)
-	{
+
+	public function usuarios_plan($ctarea){
 		$usuarios = TareasUsuarios::where('ctarea', $ctarea)->get();
 		return response()->json($usuarios);
 	}

@@ -15,24 +15,22 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Estados extends Model
 {
-    /**
-     * @var array
-     */
-    protected $fillable = ['nestados', 'ifcerrado', 'created_at', 'updated_at'];
+	/**
+	 * @var array
+	 */
+	protected $fillable = ['nestados', 'ifcerrado', 'created_at', 'updated_at'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function actividades()
-    {
-        return $this->hasMany('App\Actividade', 'cestado', 'cestados');
-    }
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function actividades(){
+		return $this->hasMany('App\Actividade', 'cestado', 'cestados');
+	}
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function planes()
-    {
-        return $this->hasMany('App\Plane', 'cestado', 'cestados');
-    }
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function planes(){
+		return $this->hasMany('App\Plane', 'cestado', 'cestados');
+	}
 }

@@ -110,6 +110,9 @@ var spanishMessagesJTable = {
 
 //$("[data-find-task]").click(function(event){
 $(document).ready(function(){
+
+	$('select').select2({ width: '100%' });
+
 	$("[data-find-treetask]").change(function(event){
 		if ( eval($(this).data("find-task")) ){
 			if ( ! Models.Tareas.exists(this.value) ) this.value = ""
@@ -175,8 +178,9 @@ Models = {
 							type:"tareas"
 						}
 					}else if ( subplan.cplan ){
+						var porcentaje = Models.Planes.calcular_porcentaje(subplan)
 						return {
-							text : subplan.nplan + "(" + subplan.valor_plan + "/"+subplan.valor_total+")",
+							text : subplan.nplan + "(" + porcentaje +"%)",
 							//icon : subplan.icono,
 							li_attr : {
 								cplan : subplan.cplan,
@@ -197,8 +201,10 @@ Models = {
 				if ( plan.subplanes.length > 0 ){
 					plan.subplanes = recursive(plan.subplanes)
 				}
+				var porcentaje = Models.Planes.calcular_porcentaje(plan)
+
 				return {
-					text : plan.nplan + "("+plan.valor_plan+"/"+plan.valor_total+")",
+					text : plan.nplan + "("+porcentaje+"%)",
 					//icon : plan.icono,
 					state : {
 						opened : true,
@@ -317,6 +323,13 @@ Models = {
 				success : cb,
 				error : function(){}
 			})
+		},
+		"calcular_porcentaje" : function(plan){
+			var porcentaje =  parseInt( ( 100 * plan.valor_plan) / plan.valor_total );
+			if ( isNaN(porcentaje) ){
+				porcentaje = 0
+			}
+			return porcentaje
 		},
 		"recalcular" : function(cb){
 			alertify.confirm("Desea Recalcular los puntos de los Planes, Recuerde que este proceso puede tandar varios minutos, en los cuales no se podran realizar ninguna otra acción.",function(){

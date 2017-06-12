@@ -16,16 +16,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Puntuaciones extends Model
 {
-    /**
-     * @var array
-     */
-    protected $fillable = ['npuntuacion', 'sigla', 'vini', 'vfin', 'orden', 'color'];
+	/**
+	 * @var array
+	 */
+	protected $fillable = ['npuntuacion', 'sigla', 'vini', 'vfin', 'orden', 'color'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function planes()
-    {
-        return $this->hasMany('asies\Models\Planes', 'cpuntuacion', 'cpuntuacion');
-    }
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function planes(){
+		return $this->hasMany('asies\Models\Planes', 'cpuntuacion', 'cpuntuacion');
+	}
 }

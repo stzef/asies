@@ -21,16 +21,13 @@ use Illuminate\Support\Facades\Validator;
 class ActasController extends Controller
 {
 
-	public function __construct()
-	{
+	public function __construct(){
 		View::share('SHORT_NAME_APP', env("SHORT_NAME_APP"," - "));
 		View::share('LONG_NAME_APP', env("LONG_NAME_APP"," - "));
 		$this->middleware('auth');
 	}
 
 	public function create(Request $request){
-
-
 		$dataBody = $request->all();
 		$actividad = Actividades::where("cactividad",$dataBody["acta"]["cactividad"])->first();
 
@@ -108,8 +105,8 @@ class ActasController extends Controller
 			$message->to($data['emails'])->subject('Acta de Reunión');
 		});
 		$request->session()->flash('message', $data["message_session"]);
-		return redirect( 'dashboard');
 
+		return redirect( 'dashboard');
 	}
 
 	public function pdf(Request $request,$numeroacta){
@@ -140,7 +137,6 @@ class ActasController extends Controller
 		}else{
 			return $pdf->save( $file_path )->stream();
 		}
-
 	}
 
 	public function list_actas(Request $request){

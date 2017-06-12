@@ -17,30 +17,17 @@ use View;
 
 class ArbolTareasController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        View::share('SHORT_NAME_APP', env("SHORT_NAME_APP"," - "));
-        View::share('LONG_NAME_APP', env("LONG_NAME_APP"," - "));
-        $this->middleware('auth');
-    }
+	public function __construct(){
+		View::share('SHORT_NAME_APP', env("SHORT_NAME_APP"," - "));
+		View::share('LONG_NAME_APP', env("LONG_NAME_APP"," - "));
+		$this->middleware('auth');
+	}
 
-    /**
-     * Show the application treeview.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function treeview()
-    {
-
-        $tiplanes = TiPlanes::all();
-        $context = array(
-            "tiplanes" => $tiplanes,
-        );
-        return view('planes/tasktree',$context);
-    }
+	public function treeview(){
+		$tiplanes = TiPlanes::all();
+		$context = array(
+			"tiplanes" => $tiplanes,
+		);
+		return view('planes/tasktree',$context);
+	}
 }

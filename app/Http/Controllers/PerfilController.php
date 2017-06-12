@@ -19,6 +19,7 @@ class PerfilController extends Controller
 		View::share('LONG_NAME_APP', env("LONG_NAME_APP"," - "));
 		$this->middleware('auth');
 	}
+
 	public function actividades(Request $request){
 		$user = Auth::user();
 		$tareas = $user->getTareas();
@@ -32,6 +33,5 @@ class PerfilController extends Controller
 		}
 
 		return view('perfil/dashboard', array( "tareas" => $tareas, "actividades" => $actividades ) );
-
 	}
 }

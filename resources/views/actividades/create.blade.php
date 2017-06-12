@@ -127,12 +127,14 @@
 											</tr>
 											<tr>
 												<td >
-													<select  name="tareasusuarios[user]" id="respo" required class="form-control">
-														<option value="">Responsable</option>
-														@foreach ($usuarios as $usuario)
-															<option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}}</option>
-														@endforeach
-													</select>
+													<div>
+														<select  name="tareasusuarios[user]" id="respo" required class="form-control selectFind">
+															<option value="">Responsable</option>
+															@foreach ($usuarios as $usuario)
+																<option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}}</option>
+															@endforeach
+														</select>
+													</div>
 												</td>
 											</tr>
 											<tr>

@@ -239,12 +239,16 @@
                                                     <tr>
                                                         <td width="50%">
                                                             <div class="input-group">
-                                                                <select name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
+                                                                <div>
+                                                                    <select-task name="tareasusuarios[ctarea]" id="tarea" :productos_minimos="productos_minimos" @mounted="getTask" />
+                                                                </div>
+
+                                                                <!--<select name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
                                                                     <option value="">Tareas</option>}
                                                                     @foreach ($tareas as $tarea)
                                                                         <option value="{{$tarea->ctarea}}" title="{{$tarea->ntarea}}">{{ str_limit($tarea->ntarea, $limit = 45, $end = '...') }}</option>
                                                                     @endforeach
-                                                                </select>
+                                                                </select>-->
                                                                 <span class="input-group-addon" data-find-task="true" data-find-treetask data-input-reference="#tarea"><i class="fa fa-search"></i></span>
                                                             </div>
                                                         </td>

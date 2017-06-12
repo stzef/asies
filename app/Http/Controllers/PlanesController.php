@@ -18,12 +18,12 @@ use Illuminate\Support\Facades\Validator;
 
 class PlanesController extends Controller
 {
-	public function __construct()
-	{
+	public function __construct(){
 		View::share('SHORT_NAME_APP', env("SHORT_NAME_APP"," - "));
 		View::share('LONG_NAME_APP', env("LONG_NAME_APP"," - "));
 		$this->middleware('auth');
 	}
+
 	public function create(Request $request){
 		$user = Auth::user();
 
@@ -34,19 +34,7 @@ class PlanesController extends Controller
 		$plan->add_user($data);
 		return response()->json(array("text"=>"ok"));
 	}
-	public function recalcularPuntos(Request $request){
-		$user = Auth::user();
 
-		try {
-			Planes::recalcularPuntos();
-			Log::info('Recaulculo de Puntos',['user' => $user->id ]);
-			return response()->json(array("text"=>"ok"));
-		} catch (Exception $e) {
-			return response()->json(array("text"=>"Ha ocurrido un error"),400);
-
-		}
-
-	}
 	public function status(Request $request,$cplan){
 
 
@@ -71,12 +59,22 @@ class PlanesController extends Controller
 		}
 		$realizadas = $realizadas->unique(function ($item) {return $item->cactividad;});
 		$realizadas->values()->all();
+		$realizadas = $realizadas->sortBy(function ($item, $key) {return $item->dias_retraso;});
+		$realizadas->values()->all();
+
 
 		$retrasadas = $retrasadas->unique(function ($item) {return $item->cactividad;});
 		$retrasadas->values()->all();
+		$retrasadas = $retrasadas->sortByDesc(function ($item, $key) {return $item->dias_retraso;});
+		$retrasadas->values()->all();
+
 
 		$pendientes = $pendientes->unique(function ($item) {return $item->cactividad;});
 		$pendientes->values()->all();
+		$pendientes = $pendientes->sortBy(function ($item, $key) {return $item->dias_faltantas;});
+		$pendientes->values()->all();
+
+
 
 		$actividades = array(
 			"realizadas"=>$realizadas,
@@ -89,4 +87,17 @@ class PlanesController extends Controller
 		);
 		return view('planes/status',$context);
 	}
+
+	public function recalcularPuntos(Request $request){
+		$user = Auth::user();
+
+		try {
+			Planes::recalcularPuntos();
+			Log::info('Recaulculo de Puntos',['user' => $user->id ]);
+			return response()->json(array("text"=>"ok"));
+		} catch (Exception $e) {
+			return response()->json(array("text"=>"Ha ocurrido un error"),400);
+		}
+	}
+
 }

@@ -13,23 +13,23 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TiRelaciones extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'tirelaciones';
+	/**
+	 * The table associated with the model.
+	 *
+	 * @var string
+	 */
+	protected $table = 'tirelaciones';
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['ntirelacion', 'created_at', 'updated_at'];
+	/**
+	 * @var array
+	 */
+	protected $fillable = ['ntirelacion', 'created_at', 'updated_at'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function asignaciontareas()
-    {
-        return $this->hasMany('App\Asignaciontarea', 'ctirelacion', 'ctirelacion');
-    }
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function asignaciontareas(){
+		return $this->hasMany('App\Asignaciontarea', 'ctirelacion', 'ctirelacion');
+	}
+
 }

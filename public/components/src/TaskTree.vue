@@ -22,8 +22,8 @@
           <input type="text" id="treeview_find" value="" placeholder="Buscar..." class="input" style="margin:0em auto 1em auto; display:block; padding:4px; border-radius:4px; border:1px solid silver;">
 
           <div class="tab-content" >
-              <div v-for="plan in planes" :id="'cplan_' + plan.li_attr.cplan" class="tab-pane fade in active" :data-treeview="'#treeview_cplan_' + plan.li_attr.cplan">
-                <div :id="'treeview_cplan_' + plan.li_attr.cplan" style="overflow: overlay;"></div>
+              <div v-for="plan in planes" :id="'cplan_' + plan.li_attr.cplan" class="tab-pane fade" :data-treeview="'#treeview_cplan_' + plan.li_attr.cplan">
+                <div :id="'treeview_cplan_' + plan.li_attr.cplan" style="overflow: overlay;min-height: 300px;"></div>
               </div>
           </div>
         </div>
@@ -48,7 +48,7 @@ export default {
     },
     recolored: function (evt, data){
         //$(".nav.nav-tabs").find("a").first().trigger("click")
-        $(".nav.nav-tabs").find("a").first().click()
+        //$(".nav.nav-tabs").find("a").first().click()
         $("[data-state]").toArray().forEach(li => {
             var color = $(li).data("color")
             $(li).find("a").first().find("i").first().css({borderRightColor: color,borderRightWidth: "8px",borderRightStyle: "solid"})
@@ -106,6 +106,7 @@ export default {
           action : function(){
             var item = $(vm.treetask_select).jstree('get_selected',true)[0]
             if ( item.li_attr.ctarea ){
+              alertify.warning("Opcion en Desarrollo")
 
             }else{
               alertify.warning("Este item no es Una Tarea")

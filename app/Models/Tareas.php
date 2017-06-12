@@ -17,53 +17,49 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Tareas extends Model
 {
-    /**
-     * @var array
-     */
-    protected $fillable = ['cplan', 'ntarea', 'valor_tarea', 'ifhecha', 'created_at', 'updated_at'];
+	/**
+	 * @var array
+	 */
+	protected $fillable = ['cplan', 'ntarea', 'valor_tarea', 'ifhecha', 'created_at', 'updated_at'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function plane()
-    {
-        return $this->belongsTo('App\Plane', 'cplan', 'cplan');
-    }
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function plane(){
+		return $this->belongsTo('App\Plane', 'cplan', 'cplan');
+	}
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function actividadestareas()
-    {
-        return $this->hasMany('App\Actividadestarea', 'ctarea', 'ctarea');
-    }
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function actividadestareas(){
+		return $this->hasMany('App\Actividadestarea', 'ctarea', 'ctarea');
+	}
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function asignaciontareas()
-    {
-        return $this->hasMany('App\Asignaciontarea', 'ctarea', 'ctarea');
-    }
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function asignaciontareas(){
+		return $this->hasMany('App\Asignaciontarea', 'ctarea', 'ctarea');
+	}
 
-    public function setState($new_state)
-    {
-        Tareas::where('ctarea', $this->ctarea)->update(['ifhecha' => $new_state]);
-        $asignaciones = AsignacionTareas::where("ctarea",$this->ctarea)->get();
-        foreach ( $asignaciones as $asignacion ){
-            $status_act = $asignacion->actividad->updateState();
-            if ( $status_act["ifhecha"] == 1 ){
+	public function setState($new_state){
+		Tareas::where('ctarea', $this->ctarea)->update(['ifhecha' => $new_state]);
+		$asignaciones = AsignacionTareas::where("ctarea",$this->ctarea)->get();
+		foreach ( $asignaciones as $asignacion ){
+			$status_act = $asignacion->actividad->updateState();
+			if ( $status_act["ifhecha"] == 1 ){
 
-            }
-        }
+			}
+		}
+	}
 
-    }
-    public function checkUser($iduser)
-    {
-        $flag = false;
-        if ( AsignacionTareas::where("user",$iduser)->where("ctarea",$this->ctarea)->exists() ){
-            $flag = true;
-        }
-        return $flag;
-    }
+	public function checkUser($iduser){
+		$flag = false;
+		if ( AsignacionTareas::where("user",$iduser)->where("ctarea",$this->ctarea)->exists() ){
+			$flag = true;
+		}
+		return $flag;
+	}
+
 }

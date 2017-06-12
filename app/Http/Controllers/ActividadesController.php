@@ -26,119 +26,72 @@ use Illuminate\Support\Facades\Validator;
 
 class ActividadesController extends Controller
 {
-	public function __construct()
-	{
+	public function __construct(){
 		View::share('SHORT_NAME_APP', env("SHORT_NAME_APP"," - "));
 		View::share('LONG_NAME_APP', env("LONG_NAME_APP"," - "));
 		$this->middleware('auth');
 	}
 
-	public function detailActivity(Request $request,$cactividad){
-		if ($request->isMethod('get')){
-			if ( $actividad = Actividades::where("cactividad", $cactividad)->first() ) {
-				$actividad->asignaciones = $actividad->getAsignacion();
-				return view( 'actividades.detailActivity' , array(
-					"actividad" => $actividad,
-					)
-				);
-			}
-		}
-	}
-
-	public function summaryActivity(Request $request,$cactividad){
-		if ($request->isMethod('get')){
-			if ( $actividad = Actividades::where("cactividad", $cactividad)->first() ) {
-				$tareas = $actividad->getTareas();
-				$evidencias = $actividad->getEvidencias();
-				$asignaciones = [];
-				if( $actividad->acta ){
-					$asignaciones = $actividad->acta->getAsistentes();
-				}
-				return view( 'actividades.summaryActivity' , array(
-					'tareas' => $tareas,
-					'actividad' => $actividad,
-					'evidencias' => $evidencias,
-					'asignaciones' => $asignaciones,
-					));
-			}
-		}
-	}
-
-	public function doActivity(Request $request,$cactividad){
+	public function create(Request $request){
 
 		if ($request->isMethod('get')){
-			if ( $actividad = Actividades::where("cactividad", $cactividad)->first() ) {
-				$tareas = $actividad->getTareas();
-				$usuarios = User::all();
-				$numacta = Actas::genCode();
-				$usuarios = User::all();
-				$tiactividades = TiActividades::all();
-				$relaciones = TiRelaciones::all();
-				$asignacion = $actividad->getAsignacion();
-				return view( 'actividades.doActivity' , array(
-					'tareas' => $tareas,
-					'actividad' => $actividad,
-					'usuarios' => $usuarios,
-					'numacta' => $numacta,
-					'asignacion' => $asignacion,
-					"tiactividades" => $tiactividades,
-					"usuarios" => $usuarios,
-					"relaciones" => $relaciones
- 					));
-			}
-		}
-	}
+			$tareas = Tareas::all();
 
-	public function checkDates(Request $request,$cplan=null){
+			$usuarios = User::all();
 
-
-		if ( $cplan ){
-			$plan = Planes::where("cplan",$cplan)->first();
-			$actividades = $plan->getActividadesGrouped();
-			//dump($actividades);exit();
-			//if ( $plan )
-		}else{
-			$actividades = Actividades::getGrouped();
-		}
-
-
-		if ($request->isMethod('get')){
-			return view( 'actividades.checkDates' , array(
-				'actividades' => $actividades,
-				)
+			$tiactividades = TiActividades::all();
+			$relaciones = TiRelaciones::all();
+			$context = array(
+				"tareas" => $tareas,
+				"tiactividades" => $tiactividades,
+				"usuarios" => $usuarios,
+				"relaciones" => $relaciones,
+				"ajax" => array(
+					"url" => "/actividades/create" ,
+					"method" => "POST" ,
+				),
+				"action" => "create",
+				"crud_action" => "create",
+				"actividad" => null,
 			);
-		}elseif($request->isMethod('post')){
-			$response = array();
-			foreach ($actividades["retrasadas"] as $actividad) {
-				$status = $this->sendEmailsReminder($actividad);
-				array_push($response, $status);
-			}
-
-			$request->session()->flash('message', 'Se han Enviado los recodatorios!');
-
-			if($request->ajax()){
-				$response["message"] = "Se han Enviado los recodatorios!";
-				return response()->json($response);
-			}
-			return redirect( 'dashboard');
-
+			return view('actividades/create',$context);
 		}
-	}
-
-	public function sendEmailsReminder($actividad){
-		$emails = $actividad->getEmails();
-		//$emails = ['sistematizaref.programador5@gmail.com'];
-		$data = array(
-			'actividad' => $actividad,
-			'emails' => $emails,
+		$dataBody = $request->all();
+		$validator = Validator::make($dataBody["actividad"],
+			[
+				#'cestado' => 'required',
+				'ctiactividad' => 'required|exists:tiactividades,ctiactividad',
+				#'cacta' => 'required',
+				'nactividad' => 'required|max:255',
+				'descripcion' => 'required|max:500',
+				'fini' => 'required|date',
+				'ffin' => 'required|date',
+				'ifacta' => 'required|boolean',
+				'ifarchivos' => 'required|boolean',
+			],
+			[
+				#'cestado.required' => 'required',
+				'ctiactividad.required' => 'required',
+				#'cacta.required' => 'required',
+				'nactividad.required' => 'required',
+				'descripcion.required' => 'required',
+				'fini.required' => 'required',
+				'ffin.required' => 'required',
+				'ifacta.required' => 'required',
+				'ifarchivos.required' => 'required',
+			]
 		);
 
+		if ($validator->fails()){
+			$messages = $validator->messages();
+			return response()->json(array("errors_form" => $messages),400);
+		}else{
+			$actividad = Actividades::create($dataBody["actividad"]);
+			$user = Auth::user();
+			Log::info('Creacion de actividad,',['actividad'=>$actividad->id,'ctiactividad'=> $dataBody['actividad']['ctiactividad'],'user' => $user->id ]);
+		}
 
-		$status = \Mail::send('emails.reminderActivity', $data, function ($message) use ($data){
-			$message->to($data["emails"])->subject('Recordatorio de Actividades');
-		});
-
-		return $status;
+		return response()->json(array("obj" => $actividad->toArray()));
 	}
 
 	public function edit(Request $request,$cactividad){
@@ -207,91 +160,114 @@ class ActividadesController extends Controller
 		return response()->json(array("obj" => $actividad->toArray()));
 	}
 
-	public function create(Request $request){
-
-		if ($request->isMethod('get')){
-			$tareas = Tareas::all();
-
-			$usuarios = User::all();
-
-			$tiactividades = TiActividades::all();
-			$relaciones = TiRelaciones::all();
-			$context = array(
-				"tareas" => $tareas,
-				"tiactividades" => $tiactividades,
-				"usuarios" => $usuarios,
-				"relaciones" => $relaciones,
-				"ajax" => array(
-					"url" => "/actividades/create" ,
-					"method" => "POST" ,
-				),
-				"action" => "create",
-				"crud_action" => "create",
-				"actividad" => null,
-			);
-			return view('actividades/create',$context);
-		}
-		$dataBody = $request->all();
-		$validator = Validator::make($dataBody["actividad"],
-			[
-				#'cestado' => 'required',
-				'ctiactividad' => 'required|exists:tiactividades,ctiactividad',
-				#'cacta' => 'required',
-				'nactividad' => 'required|max:255',
-				'descripcion' => 'required|max:500',
-				'fini' => 'required|date',
-				'ffin' => 'required|date',
-				'ifacta' => 'required|boolean',
-				'ifarchivos' => 'required|boolean',
-			],
-			[
-				#'cestado.required' => 'required',
-				'ctiactividad.required' => 'required',
-				#'cacta.required' => 'required',
-				'nactividad.required' => 'required',
-				'descripcion.required' => 'required',
-				'fini.required' => 'required',
-				'ffin.required' => 'required',
-				'ifacta.required' => 'required',
-				'ifarchivos.required' => 'required',
-			]
-		);
-
-		if ($validator->fails()){
-			$messages = $validator->messages();
-			return response()->json(array("errors_form" => $messages),400);
-		}else{
-			$actividad = Actividades::create($dataBody["actividad"]);
-			$user = Auth::user();
-			Log::info('Creacion de actividad,',['actividad'=>$actividad->id,'ctiactividad'=> $dataBody['actividad']['ctiactividad'],'user' => $user->id ]);
-		}
-
-		return response()->json(array("obj" => $actividad->toArray()));
-	}
-
-	protected function get_file_size($file_path, $clear_stat_cache = false) {
-		if ($clear_stat_cache) {
-			if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
-				clearstatcache(true, $file_path);
-			} else {
-				clearstatcache();
-			}
-		}
-		return $this->fix_integer_overflow(filesize($file_path));
-	}
-
-	protected function fix_integer_overflow($size) {
-		if ($size < 0) {
-			$size += 2.0 * (PHP_INT_MAX + 1);
-		}
-		return $size;
-	}
-
 	public function list_activities(Request $request){
 		if ($request->isMethod('get')){
 			$actividades = Actividades::all();
 			return view( 'actividades.list' , array("actividades" => $actividades));
 		}
+	}
+
+	public function doActivity(Request $request,$cactividad){
+
+		if ($request->isMethod('get')){
+			if ( $actividad = Actividades::where("cactividad", $cactividad)->first() ) {
+				$tareas = $actividad->getTareas();
+				$usuarios = User::all();
+				$numacta = Actas::genCode();
+				$usuarios = User::all();
+				$tiactividades = TiActividades::all();
+				$relaciones = TiRelaciones::all();
+				$asignacion = $actividad->getAsignacion();
+				return view( 'actividades.doActivity' , array(
+					'tareas' => $tareas,
+					'actividad' => $actividad,
+					'usuarios' => $usuarios,
+					'numacta' => $numacta,
+					'asignacion' => $asignacion,
+					"tiactividades" => $tiactividades,
+					"usuarios" => $usuarios,
+					"relaciones" => $relaciones
+ 					));
+			}
+		}
+	}
+
+	public function detailActivity(Request $request,$cactividad){
+		if ($request->isMethod('get')){
+			if ( $actividad = Actividades::where("cactividad", $cactividad)->first() ) {
+				$actividad->asignaciones = $actividad->getAsignacion();
+				return view( 'actividades.detailActivity' , array(
+					"actividad" => $actividad,
+					)
+				);
+			}
+		}
+	}
+
+	public function summaryActivity(Request $request,$cactividad){
+		if ($request->isMethod('get')){
+			if ( $actividad = Actividades::where("cactividad", $cactividad)->first() ) {
+				$tareas = $actividad->getTareas();
+				$evidencias = $actividad->getEvidencias();
+				$asignaciones = [];
+				if( $actividad->acta ){
+					$asignaciones = $actividad->acta->getAsistentes();
+				}
+				return view( 'actividades.summaryActivity' , array(
+					'tareas' => $tareas,
+					'actividad' => $actividad,
+					'evidencias' => $evidencias,
+					'asignaciones' => $asignaciones,
+					));
+			}
+		}
+	}
+
+	public function checkDates(Request $request,$cplan=null){
+		if ( $cplan ){
+			$plan = Planes::where("cplan",$cplan)->first();
+			$actividades = $plan->getActividadesGrouped();
+		}else{
+			$actividades = Actividades::getGrouped();
+		}
+
+		if ($request->isMethod('get')){
+			return view( 'actividades.checkDates' , array(
+				'actividades' => $actividades,
+				)
+			);
+		}elseif($request->isMethod('post')){
+			$response = array();
+			foreach ($actividades["retrasadas"] as $actividad) {
+				$status = $this->sendEmailsReminder($actividad);
+				array_push($response, $status);
+			}
+
+			$request->session()->flash('message', 'Se han Enviado los recodatorios!');
+
+			if($request->ajax()){
+				$response["message"] = "Se han Enviado los recodatorios!";
+				return response()->json($response);
+			}
+			return redirect( 'dashboard');
+
+		}
+	}
+
+	public function sendEmailsReminder($actividad){
+		$emails = $actividad->getEmails();
+		//$emails = ['sistematizaref.programador5@gmail.com'];
+		$data = array(
+			'actividad' => $actividad,
+			'emails' => $emails,
+		);
+
+
+		$status = \Mail::send('emails.reminderActivity', $data, function ($message) use ($data){
+			$message->to($data["emails"])->subject('Recordatorio de Actividades');
+		});
+
+		return $status;
 	}
 
 	public function store(Request $request,$cactividad){
@@ -338,5 +314,25 @@ class ActividadesController extends Controller
 			return  $filesa;
 		}
 	}
+
+	protected function get_file_size($file_path, $clear_stat_cache = false) {
+		if ($clear_stat_cache) {
+			if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
+				clearstatcache(true, $file_path);
+			} else {
+				clearstatcache();
+			}
+		}
+		return $this->fix_integer_overflow(filesize($file_path));
+	}
+
+	protected function fix_integer_overflow($size) {
+		if ($size < 0) {
+			$size += 2.0 * (PHP_INT_MAX + 1);
+		}
+		return $size;
+	}
+
+
 
 }

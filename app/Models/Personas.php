@@ -23,37 +23,33 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Personas extends Model
 {
-    /**
-     * @var array
-     */
-    protected $fillable = ['ccargo', 'ctiempleado', 'identificacion', 'nombres', 'apellidos', 'direccion', 'telefono', 'celular', 'email', 'created_at', 'updated_at'];
+	/**
+	 * @var array
+	 */
+	protected $fillable = ['ccargo', 'ctiempleado', 'identificacion', 'nombres', 'apellidos', 'direccion', 'telefono', 'celular', 'email', 'created_at', 'updated_at'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function cargo()
-    {
-        return $this->belongsTo('App\Cargo', 'ccargo', 'ccargo');
-    }
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function cargo(){
+		return $this->belongsTo('App\Cargo', 'ccargo', 'ccargo');
+	}
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function tiempleado()
-    {
-        return $this->belongsTo('App\Tiempleado', 'ctiempleado', 'ctiempleado');
-    }
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function tiempleado(){
+		return $this->belongsTo('App\Tiempleado', 'ctiempleado', 'ctiempleado');
+	}
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function users()
-    {
-        return $this->hasMany('App\User', 'cpersona', 'cpersona');
-    }
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function users(){
+		return $this->hasMany('App\User', 'cpersona', 'cpersona');
+	}
 
-    public function nombreCompleto()
-    {
-        return $this->nombres . " " . $this->apellidos;
-    }
+	public function nombreCompleto(){
+		return $this->nombres . " " . $this->apellidos;
+	}
 }

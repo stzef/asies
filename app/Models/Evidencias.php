@@ -17,16 +17,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Evidencias extends Model
 {
-    /**
-     * @var array
-     */
-    protected $fillable = ['cactividad', 'descripcion', 'nombre', 'path', 'fregistro', 'created_at', 'updated_at'];
+	/**
+	 * @var array
+	 */
+	protected $fillable = ['cactividad', 'descripcion', 'nombre', 'path', 'fregistro', 'created_at', 'updated_at'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function actividade()
-    {
-        return $this->belongsTo('App\Actividade', 'cactividad', 'cactividad');
-    }
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function actividade(){
+		return $this->belongsTo('App\Actividade', 'cactividad', 'cactividad');
+	}
 }

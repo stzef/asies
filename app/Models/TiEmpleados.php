@@ -13,23 +13,23 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TiEmpleados extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'tiempleados';
+	/**
+	 * The table associated with the model.
+	 *
+	 * @var string
+	 */
+	protected $table = 'tiempleados';
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['ntiempleado', 'created_at', 'updated_at'];
+	/**
+	 * @var array
+	 */
+	protected $fillable = ['ntiempleado', 'created_at', 'updated_at'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function personas()
-    {
-        return $this->hasMany('App\Persona', 'ctiempleado', 'ctiempleado');
-    }
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function personas(){
+		return $this->hasMany('App\Persona', 'ctiempleado', 'ctiempleado');
+	}
+
 }

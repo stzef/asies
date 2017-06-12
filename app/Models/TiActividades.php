@@ -13,23 +13,22 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TiActividades extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'tiactividades';
+	/**
+	 * The table associated with the model.
+	 *
+	 * @var string
+	 */
+	protected $table = 'tiactividades';
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['ntiactividad', 'created_at', 'updated_at'];
+	/**
+	 * @var array
+	 */
+	protected $fillable = ['ntiactividad', 'created_at', 'updated_at'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function actividades()
-    {
-        return $this->hasMany('App\Actividade', 'ctiactividad', 'ctiactividad');
-    }
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function actividades(){
+		return $this->hasMany('App\Actividade', 'ctiactividad', 'ctiactividad');
+	}
 }

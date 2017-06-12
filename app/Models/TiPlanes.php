@@ -16,23 +16,22 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TiPlanes extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'tiplanes';
+	/**
+	 * The table associated with the model.
+	 *
+	 * @var string
+	 */
+	protected $table = 'tiplanes';
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['ntiplan','slug', 'nivel', 'icono', 'created_at', 'updated_at'];
+	/**
+	 * @var array
+	 */
+	protected $fillable = ['ntiplan','slug', 'nivel', 'icono', 'created_at', 'updated_at'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function planes()
-    {
-        return $this->hasMany('App\Plane', 'ctiplan', 'ctiplan');
-    }
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function planes(){
+		return $this->hasMany('App\Plane', 'ctiplan', 'ctiplan');
+	}
 }

@@ -8,20 +8,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $ncargo
  * @property string $created_at
  * @property string $updated_at
- * @property Persona[] $personas
+ * @property Personas[] $personas
  */
 class Cargos extends Model
 {
-    /**
-     * @var array
-     */
-    protected $fillable = ['ncargo', 'created_at', 'updated_at'];
+	/**
+	 * @var array
+	 */
+	protected $fillable = ['ncargo', 'created_at', 'updated_at'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function personas()
-    {
-        return $this->hasMany('App\Persona', 'ccargo', 'ccargo');
-    }
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function persona(){
+		return $this->hasMany('asies\Models\Personas', 'ccargo', 'ccargo');
+	}
 }
