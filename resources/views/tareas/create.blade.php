@@ -36,26 +36,6 @@
 							</div>
 						</div>
 
-						<!--<div class="row">
-							<div class="col-md-8">
-								<div class="form-group">
-									<label for="tarea_valor_tarea" class="col-sm-2 control-label">Valor Tarea</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" id="tarea_valor_tarea" name="tarea[valor_tarea]" placeholder="Valor Tarea" value="@if( $tarea){{ $tarea->valor_tarea }}@endif">
-									</div>
-								</div>
-							</div>
-							<div class="col-md-2">
-								<div class="form-group">
-									<div class="col-sm-offset-2 col-sm-10">
-										<div class="checkbox">
-											<label> <input type="checkbox" name="tarea[ifhecha]" @if( $tarea) @if( $tarea->ifhecha ) checked @endif @endif> Hecha </label>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>-->
-
 						<div class="form-group text-center">
 
 							<a type="button" class="btn btn-danger" href="{{ URL::route('app_dashboard') }}" data-dismiss="modal">
@@ -77,7 +57,7 @@
 
 					</form>
 
-					<div class="col-md-12">
+					<div class="col-md-12 hide">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								Asociar a Actividades

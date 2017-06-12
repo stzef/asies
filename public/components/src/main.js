@@ -15,7 +15,6 @@ new Vue({
 		treetask_select: '',
 		treetask_cplan: $('#treetask_cplan').val(),
 	},
-	// watch : {planes (val, old_val){},},
 	methods: {
 		setActiveTaskTree(idTaskTree) {
 			this.treetask_select = '#treeview_cplan_' + idTaskTree;
