@@ -325,7 +325,6 @@ Models = {
 					type:"POST",
 					url:"/planes/recalcular",
 					success:function(response){
-						console.info(arguments)
 						waitingDialog.hide();
 						alertify.success('Puntos Recalculados')
 						if ( cb ) cb(response)
@@ -338,7 +337,6 @@ Models = {
 			})
 		},
 		"treeview" : function(cb,cplan){
-			console.log(cplan)
 			if ( typeof cplan == "undefined" ){
 				$.ajax({
 					type : "GET",

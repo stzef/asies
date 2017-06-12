@@ -51,9 +51,38 @@ class PlanesController extends Controller
 
 
 		$plan = Planes::where("cplan",$cplan)->first();
-		$actividades = $plan->getActividadesGrouped();
-
 		if ( !$plan ) return view('errors/generic',array('title' => 'Error Plan.', 'message' => "El plan $cplan no existe" ));
+
+		$realizadas = collect();
+		$retrasadas = collect();
+		$pendientes = collect();
+
+		foreach ($plan->getProdsMinimos() as $planpm) {
+			$ag = $planpm->getActividadesGrouped();
+
+			$realizadas = $realizadas->merge($ag["realizadas"]);
+			$realizadas->all();
+
+			$retrasadas = $retrasadas->merge($ag["retrasadas"]);
+			$retrasadas->all();
+
+			$pendientes = $pendientes->merge($ag["pendientes"]);
+			$pendientes->all();
+		}
+		$realizadas = $realizadas->unique(function ($item) {return $item->cactividad;});
+		$realizadas->values()->all();
+
+		$retrasadas = $retrasadas->unique(function ($item) {return $item->cactividad;});
+		$retrasadas->values()->all();
+
+		$pendientes = $pendientes->unique(function ($item) {return $item->cactividad;});
+		$pendientes->values()->all();
+
+		$actividades = array(
+			"realizadas"=>$realizadas,
+			"retrasadas"=>$retrasadas,
+			"pendientes"=>$pendientes,
+		);
 		$context = array(
 			"plan" => $plan,
 			"actividades" => $actividades,

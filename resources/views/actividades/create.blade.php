@@ -110,7 +110,9 @@
 											<tr>
 												<td >
 													<div class="input-group">
-														<select-task name="tareasusuarios[ctarea]" id="tarea" :productos_minimos="productos_minimos" @mounted="getTask" />
+														<div>
+															<select-task name="tareasusuarios[ctarea]" id="tarea" :productos_minimos="productos_minimos" @mounted="getTask" />
+														</div>
 														<!--
 														<select  name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
 															<option value="">Tareas</option>}
@@ -290,14 +292,17 @@
 				contentType : false,
 				processData : false,
 				success : function(response){
-					//$("#modalCrearActividad").modal("hide")
-					$("#usuario_planes").find("[disabled]").prop("disabled",false)
-					$(".section_asignacion_tareas").removeClass("hide")
 
 					if ( CRUD_ACTION == "create" ){
 						$("#form_crear_actividad").find(":input").prop("disabled",true)
 						$("input#actividad_cactividad").val(response.obj.id)
+						$("[type=submit]").attr("disabled",true)
 					}
+
+					//$("#modalCrearActividad").modal("hide")
+					$("#usuario_planes").find("[disabled]").prop("disabled",false)
+					$(".section_asignacion_tareas").removeClass("hide")
+
 					alertify.success(Models.Planes.messages.create.success)
 					/*$('#treeview').jstree("destroy")
 

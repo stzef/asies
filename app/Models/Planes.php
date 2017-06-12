@@ -78,11 +78,42 @@ class Planes extends Model
             //->where('tareas.ifhecha', 0)
             ->groupBy('cactividad')
             ->get();
-            $actividades = collect($actividades);
-            $actividades = $actividades->map(function ($actividad) {
-            return Actividades::where("cactividad", $actividad->cactividad)->first();
+        $actividades = collect($actividades);
+        $actividades = $actividades->map(function ($actividad) {
+         return Actividades::where("cactividad", $actividad->cactividad)->first();
         });
+        //return $actividades;
         dump($actividades);exit();
+    }
+    public $a = [];
+    public function getProdsMinimosRecursive($plan,&$prods_min){
+        $subplanes = Planes::where("cplanmayor",$plan->cplan)->get();
+        foreach ($subplanes as $subplan) {
+            if ( $subplan->ctiplan == 4 ){
+                array_push($prods_min, $subplan);
+            }else{
+                $this->getProdsMinimosRecursive($subplan,$prods_min);
+            }
+        }
+    }
+    public function getProdsMinimos(){
+        $plan = $this;
+        if ( $plan->ctiplan == 4 ){
+            return [$plan];
+        }else{
+            $subplanes = Planes::where("cplanmayor",$plan->cplan)->get();
+            //dump($subplanes);exit();
+
+            $prods_min = array();
+            foreach ($subplanes as $subplan) {
+                if ( $subplan->ctiplan == 4 ){
+                    array_push($prods_min, $subplan);
+                }else{
+                    $this->getProdsMinimosRecursive($subplan,$prods_min);
+                }
+            }
+            return $prods_min;
+        }
     }
     public function getActividadesGrouped(){
         $actividades = array(
@@ -124,7 +155,7 @@ class Planes extends Model
                 }
             }
 
-        return $actividades;
+        return collect($actividades);
     }
     static function getSubPlanes($cplan,$json=false)
     {

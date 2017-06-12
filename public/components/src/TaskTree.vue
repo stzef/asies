@@ -1,33 +1,35 @@
 <template>
-<div class="row">
-          <table class="table">
-            <tr >
-                <td v-for="tiplan in tiplanes">
-                  <img :src="'/'+tiplan.icono" alt="">
-                  <label>{{ tiplan.ntiplan }}</label>
-                </td>
-            </tr>
-          </table>
-          <div class="col-md-12">
-            <div class="panel panel-default">
+  <div class="">
+    <table class="table">
+      <tr >
+          <td v-for="tiplan in tiplanes">
+            <img :src="'/'+tiplan.icono" alt="">
+            <label>{{ tiplan.ntiplan }}</label>
+          </td>
+      </tr>
+    </table>
+    <div class="col-md-12">
+      <div class="panel panel-default">
 
-              <div class="panel-body">
+        <div class="panel-body">
 
-                <ul class="nav nav-tabs" >
-                    <li v-for="plan in planes" @click="changeSelectTaskTree(plan.li_attr.cplan)" :data-treeview="'#treeview_cplan_' + plan.li_attr.cplan"><a data-toggle="tab" :href="'#cplan_'+plan.li_attr.cplan">{{ plan.text }}</a></li>
-                </ul>
+          <ul class="nav nav-tabs" >
+              <li v-for="plan in planes" :data-treeview="'#treeview_cplan_' + plan.li_attr.cplan">
+                <a data-toggle="tab" @click="changeSelectTaskTree(plan.li_attr.cplan)" :href="'#cplan_'+plan.li_attr.cplan">{{ plan.text }}</a>
+              </li>
+          </ul>
 
-                <input type="text" id="treeview_find" value="" placeholder="Buscar..." class="input" style="margin:0em auto 1em auto; display:block; padding:4px; border-radius:4px; border:1px solid silver;">
+          <input type="text" id="treeview_find" value="" placeholder="Buscar..." class="input" style="margin:0em auto 1em auto; display:block; padding:4px; border-radius:4px; border:1px solid silver;">
 
-                <div class="tab-content" >
-                    <div v-for="plan in planes" :id="'cplan_' + plan.li_attr.cplan" class="tab-pane fade in active" :data-treeview="'#treeview_cplan_' + plan.li_attr.cplan">
-                      <div :id="'treeview_cplan_' + plan.li_attr.cplan"></div>
-                    </div>
-                </div>
+          <div class="tab-content" >
+              <div v-for="plan in planes" :id="'cplan_' + plan.li_attr.cplan" class="tab-pane fade in active" :data-treeview="'#treeview_cplan_' + plan.li_attr.cplan">
+                <div :id="'treeview_cplan_' + plan.li_attr.cplan" style="overflow: overlay;"></div>
               </div>
-            </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -41,12 +43,12 @@ export default {
   },
   methods : {
     changeSelectTaskTree : function(id){
+      console.warn(id)
       this.$emit("ctt",id)
     },
-
-
-
     recolored: function (evt, data){
+        //$(".nav.nav-tabs").find("a").first().trigger("click")
+        $(".nav.nav-tabs").find("a").first().click()
         $("[data-state]").toArray().forEach(li => {
             var color = $(li).data("color")
             $(li).find("a").first().find("i").first().css({borderRightColor: color,borderRightWidth: "8px",borderRightStyle: "solid"})
@@ -80,16 +82,11 @@ export default {
         window.close()
       })
     },
-
-
-
   },
   mounted :function(){
     this.$emit("tt_mounted")
   },
   updated :function(){
-
-
       var component = this
       var vm = this.$root
       $.jstree.defaults.contextmenu.items = {
@@ -128,7 +125,6 @@ export default {
           label : "Editar"
         }
       }
-
       for ( var plan of this.planes ){
         var select_treeview = "#treeview_cplan_"+plan.li_attr.cplan
         $(select_treeview).jstree({
@@ -161,7 +157,6 @@ export default {
       $('#treeview_find').keyup(() => {
         if(to) { clearTimeout(to); }
         to = setTimeout(() => {
-          console.info(this)
           var v = $('#treeview_find').val();
           $(this.$root.treetask_select).jstree(true).search(v);
         }, 250);

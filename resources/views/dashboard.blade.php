@@ -43,9 +43,8 @@
 				planes.forEach(function(plan){
 					plan.porcentaje = parseInt((100*plan.valor_plan)/plan.valor_total)
 					plan.porcentaje = isNaN(plan.porcentaje) ? 0 : plan.porcentaje
-					data.push([plan.ncplan,plan.porcentaje])
+					data.push(["",plan.porcentaje])
 				})
-				console.log(data)
 				var data = google.visualization.arrayToDataTable(data);
 				var options = {
 					width: 800, height: 240,
@@ -58,7 +57,6 @@
 
 				};
 				planes.forEach(function(plan){
-					console.log(plan)
 					$("table.buttons").find("tr").append(
 						$("<td>").append(
 							$("<a>",{html:plan.nplan,href:"/planes/status/"+plan.cplan,class:"btn btn-success"})

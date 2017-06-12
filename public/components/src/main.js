@@ -12,7 +12,7 @@ var vue_app = new Vue({
 		productos_minimos : [],
 		tiplanes : [],
 		planes : [],
-		treetask_select : "#treeview_cplan_1",
+		treetask_select : "",
 		treetask_cplan : $("#treetask_cplan").val(),
 	},
 	watch : {
@@ -60,7 +60,6 @@ var vue_app = new Vue({
 
 		},
 		getPlanes: function () {
-			console.warn(this.treetask_cplan)
 			Models.Planes.treeview(response => {
 				this.planes = response
 			},this.treetask_cplan)

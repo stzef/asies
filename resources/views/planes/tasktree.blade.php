@@ -2,7 +2,6 @@
 
 @section('styles')
 	<link rel="stylesheet" href="{{ URL::asset('vendor/jstree/css/themes/default/style.css') }}" >
-
 @endsection
 
 
