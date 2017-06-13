@@ -1,161 +1,1704 @@
 PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
 
-                                         
-  [InvalidArgumentException]             
-  Database [asies_demo] not configured.  
-                                         
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
 
 PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
 
-                                         
-  [InvalidArgumentException]             
-  Database [asies_demo] not configured.  
-                                         
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
 
 PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
 
-                                         
-  [InvalidArgumentException]             
-  Database [asies_demo] not configured.  
-                                         
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
 
 PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
 
-                                         
-  [InvalidArgumentException]             
-  Database [asies_demo] not configured.  
-                                         
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
 
 PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
-PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+
+PHP Notice:  Undefined index: HTTP_HOST in /var/www/html/asies/bootstrap/env.php on line 11
+
+                                                                                                                                                                
+  [Illuminate\Database\QueryException]                                                                                                                          
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist (SQL: update `tareas` set `ntarea` = Hola where `ctarea` = 1)  
+                                                                                                                                                                
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'asies_default.tareas' doesn't exist  
+                                                                                                  
+

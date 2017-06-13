@@ -179,8 +179,9 @@ Models = {
 						}
 					}else if ( subplan.cplan ){
 						var porcentaje = Models.Planes.calcular_porcentaje(subplan)
+						var rel = "("+subplan.valor_plan + "/" + subplan.valor_total+")"
 						return {
-							text : subplan.nplan + "(" + porcentaje +"%)",
+							text : subplan.nplan + rel + "(" + porcentaje +"%)",
 							//icon : subplan.icono,
 							li_attr : {
 								cplan : subplan.cplan,
@@ -202,9 +203,9 @@ Models = {
 					plan.subplanes = recursive(plan.subplanes)
 				}
 				var porcentaje = Models.Planes.calcular_porcentaje(plan)
-
+				var rel = "("+plan.valor_plan + "/" + plan.valor_total+")"
 				return {
-					text : plan.nplan + "("+porcentaje+"%)",
+					text : plan.nplan + rel + "("+porcentaje+"%)",
 					//icon : plan.icono,
 					state : {
 						opened : true,

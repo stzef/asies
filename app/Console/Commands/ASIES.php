@@ -39,9 +39,12 @@ class ASIES extends Command
      */
     public function handle()
     {
-        //$dotenv = new Dotenv\Dotenv($app['path.base'], $file);
-        //$dotenv->overload(); //this is important
-        //DB::connection('asies_demo')->table('tareas')->where('ctarea',1)->update(["ntarea"=>"Hola"]);
+
+        $file = ".demo.env";
+        $dotenv = new \Dotenv\Dotenv(base_path(), $file);
+        $dotenv->overload(); //this is important
+        DB::connection('mysql_demo')->table('tareas')->where('ctarea',1)->update(["ntarea"=>"Hola"]);
         //Tareas::where('ctarea',1)->update(["ntarea"=>"Hola"]);
+        //var_dump($path = app_path());exit();
     }
 }
