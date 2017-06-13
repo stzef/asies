@@ -44,14 +44,14 @@ class Actas extends Model
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function reviso(){
-		return $this->belongsTo('asies\User', 'user_elaboro', 'id');
+		return $this->belongsTo('asies\User', 'user_reviso', 'id');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function aprobo(){
-		return $this->belongsTo('asies\User', 'user_elaboro', 'id');
+		return $this->belongsTo('asies\User', 'user_aprobo', 'id');
 	}
 
 	/**

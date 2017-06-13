@@ -80,7 +80,7 @@
                                 </div>
                             @else
                                 @permission('actas.crud')
-                                    <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modalCrearActa">
+                                    <button type="button" class="btn btn-primary " id="btn_crear_acta" data-toggle="modal" data-target="#modalCrearActa">
                                         <i class="glyphicon glyphicon-plus"></i>
                                         Crear Acta
                                     </button>
@@ -171,7 +171,7 @@
                                             <div class="form-group row">
                                                     <label for="" class="col-sm-4 col-form-label">Hora Inicial</label>
                                                     <div class='col-sm-8 input-group datetime'>
-                                                        <input type='text' class="form-control" required name="acta[fhini]"/>
+                                                        <input type='text' class="form-control" required id="acta_fhini" name="acta[fhini]"/>
                                                         <span class="input-group-addon">
                                                             <span class="glyphicon glyphicon-time"></span>
                                                         </span>
@@ -180,7 +180,7 @@
                                             <div class="form-group row">
                                                     <label for="" class="col-sm-4 col-form-label">Hora Final</label>
                                                     <div class='col-sm-8 input-group datetime'>
-                                                        <input type='text' class="form-control" required name="acta[fhfin]"/>
+                                                        <input type='text' class="form-control" required id="acta_fhfin" name="acta[fhfin]"/>
                                                         <span class="input-group-addon">
                                                             <span class="glyphicon glyphicon-time"></span>
                                                         </span>
@@ -456,7 +456,7 @@
                 </td>
                 <td>
                     <label for="">Nombre</label>
-                    <input class="form-control" placeholder="Nombre" type="text" name="nombre" data-evidencia="{%=file.evidencia%}" onchange="setdataEvidencia(this.dataset.evidencia,this.name,this.value)">
+                    <input class="form-control" placeholder="Nombre" type="text" name="nombre" value="{%=file.nombre%}" data-evidencia="{%=file.evidencia%}" onchange="setdataEvidencia(this.dataset.evidencia,this.name,this.value)">
                 </td>
                 <td>
                     <label for="">Descripción</label>
@@ -513,6 +513,11 @@
                 defaultDate: moment().format("YYYY-MM-DD HH:mm:ss")
             });
         });
+
+        $('#modalCrearActa').on('shown.bs.modal', function() {
+            $("#acta_fhini").val(moment().subtract(1, 'hour').format("YYYY-MM-DD HH:mm:ss"))
+            $("#acta_fhfin").val(moment().format("YYYY-MM-DD HH:mm:ss"))
+        })
 
         var cols = {
             ctarea : 0,
@@ -703,6 +708,11 @@
                         window.open(base_url_print_acta.set("__numeroacta__",response.obj.numeroacta))
                         $("#modalCrearActa").modal("hide")
                         $(that).find(":input").attr("disabled",true)
+
+                        $("#btn_crear_acta").replaceWith(`<div class="alert alert-warning">
+                                                                El acta de esta actividad ya se ha creado. Para ver el acta ir a Resumen.
+                                                            </div>`)
+
                         data.forEach(function(item){
 
                             var data_request = new FormData()

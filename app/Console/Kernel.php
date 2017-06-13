@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
     {
         $filePath = base_path()."/public/log_emails.log";
         #$schedule->command("ASIES_Tareas:verificarFechas")->dailyAt('15:57')->timezone('America/Bogota');
-        $schedule->command("ASIES_Tareas:verificarFechas")->everyMinute()->timezone('America/Bogota')->sendOutputTo($filePath);;
+        $schedule->command("ASIES_Tareas:verificarFechas")->everyMinute()->timezone('America/Bogota')->appendOutputTo($filePath);;
         /*$schedule->call(function () {
             Tareas::where('ctarea',1)->update(["ntarea"=>"Hola"]);
         })->dailyAt('14:48')

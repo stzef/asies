@@ -4,6 +4,7 @@ namespace asies\Console\Commands;
 use asies\Models\Tareas;
 
 use Illuminate\Console\Command;
+use \DB;
 
 class ASIES extends Command
 {
@@ -38,6 +39,9 @@ class ASIES extends Command
      */
     public function handle()
     {
-        Tareas::where('ctarea',1)->update(["ntarea"=>"Hola"]);
+        //$dotenv = new Dotenv\Dotenv($app['path.base'], $file);
+        //$dotenv->overload(); //this is important
+        //DB::connection('asies_demo')->table('tareas')->where('ctarea',1)->update(["ntarea"=>"Hola"]);
+        //Tareas::where('ctarea',1)->update(["ntarea"=>"Hola"]);
     }
 }

@@ -332,8 +332,8 @@ Models = {
 			return porcentaje
 		},
 		"recalcular" : function(cb){
-			alertify.confirm("Desea Recalcular los puntos de los Planes, Recuerde que este proceso puede tandar varios minutos, en los cuales no se podran realizar ninguna otra acción.",function(){
-				//waitingDialog.show('Recalculando Puntos',{onHide: function () {}});
+			alertify.confirm("Desea recalcular los puntos de los Planes, recuerde que este proceso puede tardar varios minutos, en los cuales no se podrán realizar ninguna otra acción.",function(){
+				waitingDialog.show('Recalculando Puntos',{onHide: function () {}});
 				$.ajax({
 					type:"POST",
 					url:"/planes/recalcular",

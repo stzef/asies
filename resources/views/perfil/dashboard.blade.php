@@ -34,6 +34,9 @@
 
 
 
+					@if ( count($actividades) == 0)
+						<h2>No tiene actividades asignadas</h2>
+					@endif
 					@foreach ($actividades as $actividad)
 						<div class="well container-actividad">
 							<div class="row">

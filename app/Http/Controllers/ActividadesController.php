@@ -224,6 +224,7 @@ class ActividadesController extends Controller
 	}
 
 	public function checkDates(Request $request,$cplan=null){
+
 		if ( $cplan ){
 			$plan = Planes::where("cplan",$cplan)->first();
 			$actividades = $plan->getActividadesGrouped();
@@ -243,6 +244,9 @@ class ActividadesController extends Controller
 				array_push($response, $status);
 			}
 
+			Log::info('Envio de Recordatorios de Actividades',$response);
+
+
 			$request->session()->flash('message', 'Se han Enviado los recodatorios!');
 
 			if($request->ajax()){
@@ -255,8 +259,8 @@ class ActividadesController extends Controller
 	}
 
 	public function sendEmailsReminder($actividad){
-		$emails = $actividad->getEmails();
-		//$emails = ['sistematizaref.programador5@gmail.com'];
+		//$emails = $actividad->getEmails();
+		$emails = ['sistematizaref.programador5@gmail.com'];
 		$data = array(
 			'actividad' => $actividad,
 			'emails' => $emails,
@@ -267,7 +271,7 @@ class ActividadesController extends Controller
 			$message->to($data["emails"])->subject('Recordatorio de Actividades');
 		});
 
-		return $status;
+		return [ "status" => $status, "emails" => $emails, "actividad" => $actividad ];
 	}
 
 	public function store(Request $request,$cactividad){
@@ -300,12 +304,14 @@ class ActividadesController extends Controller
 					'cactividad' => $cactividad,
 					'path' => $path_files.$picture,
 					'fregistro' => date("Y-m-d H:i:s"),
+					'nombre' => $filename,
 				));
 						$filest = array();
 						$filest['name'] = $picture;
 						$filest['size'] = $this->get_file_size($destinationPath.$picture);
 						$filest['url'] = $destinationPath1.$picture;
 						$filest['evidencia'] = $evidencia->id;
+						$filest['nombre'] = $evidencia->nombre;
 				$filest['thumbnailUrl'] = $thumbnailUrl;
 				$filesa['files'][]=$filest;
 

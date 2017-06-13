@@ -54,6 +54,7 @@
 
 
 
+<p>{{ $acta->sefirma }}</p>
 <table class="text-center" width="100%">
 	<tr>
 		<td>________________________</td>

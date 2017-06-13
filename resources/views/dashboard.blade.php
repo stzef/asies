@@ -7,7 +7,7 @@
 						<div class="panel-heading">
 							Dashboard <b>{{ Auth::user()->persona->nombreCompleto() }}</b>
 							@permission('planes.calculate_points')
-								<button class="btn btn-primary" onclick="Models.Planes.recalcular()">Recaulcular Puntos</button>
+								<button class="btn btn-primary" onclick="Models.Planes.recalcular()">Recalcular Puntos</button>
 							@endpermission
 						</div>
 						<div class="panel-body" style="overflow: overlay">
