@@ -22,3 +22,5 @@ change.log
 /tests
 
 /related_files/
+
+/includes/database.php

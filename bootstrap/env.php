@@ -1,30 +1,25 @@
 <?php
 $app->detectEnvironment(function () use ($app) {
-    /*if( array_key_exists("HTTP_HOST", $_SERVER) ){*/
-        if (!isset($_SERVER['HTTP_HOST'])) {
-            /*Dotenv::load($app['path.base'], $app->environmentFile());*/
 
-            $dotenv = new Dotenv\Dotenv($app['path.base'], $app->environmentFile());
-            $dotenv->overload(); //this is important
-        }
+	if (!isset($_SERVER['HTTP_HOST'])) {
+		$dotenv = new Dotenv\Dotenv($app['path.base'], $app->environmentFile());
+		$dotenv->overload(); //this is important
+	}
 
-        $pos = mb_strpos($_SERVER['HTTP_HOST'], '.');
-        $prefix = '';
-        if ($pos) {
-            $prefix = mb_substr($_SERVER['HTTP_HOST'], 0, $pos);
-        }
-        $file = '.' . $prefix . '.env';
+	$pos = mb_strpos($_SERVER['HTTP_HOST'], '.');
+	$prefix = '';
 
-        if (!file_exists($app['path.base'] . '/' . $file)) {
-            $file = '.env';
-        }
+	if ($pos) {
+		$prefix = mb_substr($_SERVER['HTTP_HOST'], 0, $pos);
+	}
 
-        $dotenv = new Dotenv\Dotenv($app['path.base'], $file);
-        $dotenv->overload(); //this is important
+	$file = '.' . $prefix . '.env';
 
-    /*}else{
-        $file = '.env';
-        $dotenv = new Dotenv\Dotenv($app['path.base'], $file);
-        $dotenv->overload(); //this is important
-    }*/
+	if (!file_exists($app['path.base'] . '/' . $file)) {
+		$file = '.env';
+	}
+
+	$dotenv = new Dotenv\Dotenv($app['path.base'], $file);
+	$dotenv->overload(); //this is important
+
 });

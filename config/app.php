@@ -174,6 +174,9 @@ return [
         #Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
         #Intervention\Image\ImageServiceProvider::class,
 
+        Barryvdh\Elfinder\ElfinderServiceProvider::class,
+
+
         #PDF
         Barryvdh\DomPDF\ServiceProvider::class,
 

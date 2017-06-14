@@ -16,6 +16,7 @@ class Kernel extends HttpKernel
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \asies\Http\Middleware\verificarEmpresa::class,
+        \asies\Http\Middleware\seleccionDirElFinder::class,
     ];
 
     /**

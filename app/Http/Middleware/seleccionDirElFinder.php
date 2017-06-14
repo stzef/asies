@@ -1,0 +1,21 @@
+<?php
+
+namespace asies\Http\Middleware;
+
+use Closure;
+
+class seleccionDirElFinder
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        \Config::set('elfinder.dir',["evidencias/".env("SLUG_APP")]);
+        return $next($request);
+    }
+}
