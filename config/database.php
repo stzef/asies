@@ -1,5 +1,7 @@
 <?php
 
+// include(base_path() . '/includes/database.php');
+
 return [
 
     /*
@@ -45,13 +47,11 @@ return [
     */
 
     'connections' => [
-
         'sqlite' => [
             'driver' => 'sqlite',
             'database' => database_path(env('DB_DATABASE', 'database.sqlite')),
             'prefix' => '',
         ],
-
         'mysql_default' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', 'localhost'),
@@ -65,7 +65,6 @@ return [
             'strict' => false,
             'engine' => null,
         ],
-
         'mysql_demo' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', 'localhost'),
@@ -79,7 +78,6 @@ return [
             'strict' => false,
             'engine' => null,
         ],
-
         'mysql_guataqui' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', 'localhost'),
@@ -93,7 +91,7 @@ return [
             'strict' => false,
             'engine' => null,
         ],
-    ],
+    ],,
 
     /*
     |--------------------------------------------------------------------------

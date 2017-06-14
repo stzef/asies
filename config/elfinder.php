@@ -40,7 +40,7 @@ return array(
 
     'route' => [
         'prefix' => 'elfinder',
-        'middleware' => '\asies\Http\Middleware\seleccionDirElFinder', //Set to null to disable middleware filter
+        'middleware' => array('web', 'auth')//'\asies\Http\Middleware\seleccionDirElFinder', //Set to null to disable middleware filter
     ],
 
     /*

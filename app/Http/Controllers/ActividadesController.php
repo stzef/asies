@@ -170,9 +170,6 @@ class ActividadesController extends Controller
 
 	public function doActivity(Request $request,$cactividad){
 
-		$ndays = Parametros::get("REMINDERS__NUMBER_OF_DAYS_FOR_REMINDERS");
-		dump($ndays);exit();
-
 		if ($request->isMethod('get')){
 			if ( $actividad = Actividades::where("cactividad", $cactividad)->first() ) {
 				$tareas = $actividad->getTareas();
@@ -243,8 +240,9 @@ class ActividadesController extends Controller
 			);
 		}elseif($request->isMethod('post')){
 			$response = array();
+
 			foreach ($actividades["retrasadas"] as $actividad) {
-				$status = $this->sendEmailsReminder($actividad);
+				$status = Actividades::sendEmailsReminder($actividad);
 				array_push($response, $status);
 			}
 
@@ -260,22 +258,6 @@ class ActividadesController extends Controller
 			return redirect( 'dashboard');
 
 		}
-	}
-
-	public function sendEmailsReminder($actividad){
-		//$emails = $actividad->getEmails();
-		$emails = ['sistematizaref.programador5@gmail.com'];
-		$data = array(
-			'actividad' => $actividad,
-			'emails' => $emails,
-		);
-
-
-		$status = \Mail::send('emails.reminderActivity', $data, function ($message) use ($data){
-			$message->to($data["emails"])->subject('Recordatorio de Actividades');
-		});
-
-		return [ "status" => $status, "emails" => $emails, "actividad" => $actividad ];
 	}
 
 	public function store(Request $request,$cactividad){

@@ -52,8 +52,8 @@ class Actividades extends Model
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function tiactividade(){
-		return $this->belongsTo('asies\Models\Tiactividade', 'ctiactividad', 'ctiactividad');
+	public function tiactividades(){
+		return $this->belongsTo('asies\Models\Tiactividades', 'ctiactividad', 'ctiactividad');
 	}
 
 	/**
@@ -110,6 +110,44 @@ class Actividades extends Model
 			$data = array("message"=>"La Asignacion No Existe");
 		}
 		return array("data"=>$data);
+	}
+
+	static function getPendientes($ndias = null){
+		$now = Carbon::now();
+		$now->hour   = 0;
+		$now->minute = 0;
+		$now->second = 0;
+
+		$actividades = Actividades::where('ffin', '<', $now)->get();
+		$actividades_filtradas = collect();
+		foreach ($actividades as $actividad ) {
+			$actividad->calcularDias();
+			if ( $ndias ){
+				if ( $actividad->dias_faltantas <= $ndias ){
+					$actividades_filtradas->push($actividad);
+				}
+			}else{
+				$actividades_filtradas->push($actividad);
+			}
+		}
+
+		return $actividades_filtradas;
+	}
+
+	static function sendEmailsReminder($actividad){
+		//$emails = $actividad->getEmails();
+		$emails = ['sistematizaref.programador5@gmail.com'];
+		$data = array(
+			'actividad' => $actividad,
+			'emails' => $emails,
+		);
+
+
+		$status = \Mail::send('emails.reminderActivity', $data, function ($message) use ($data){
+			$message->to($data["emails"])->subject('Recordatorio de Actividades');
+		});
+
+		return [ "status" => $status, "emails" => $emails, "actividad" => $actividad ];
 	}
 
 	static function getGrouped(){
@@ -217,7 +255,7 @@ class Actividades extends Model
 
 		$this->dias_faltantas = 0;
 		$this->dias_retraso = 0;
-		$factividad = Carbon::parse($this->fini);
+		$factividad = Carbon::parse($this->ffin);
 
 		if( $factividad > $now ) {
 			$this->dias_faltantas = $factividad->diffInDays($now);

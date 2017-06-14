@@ -2,6 +2,8 @@
 
 namespace asies\Console\Commands;
 use asies\Models\Tareas;
+use asies\Models\Actividades;
+use Carbon\Carbon;
 
 use Illuminate\Console\Command;
 use \DB;
@@ -39,7 +41,35 @@ class ASIES extends Command
 	 */
 	public function handle()
 	{
-		//dump(\Config::get('database'));
-		Tareas::on('mysql_demo')->where('ctarea',1)->update(["ntarea"=>"Hola"]);
+		$confdb = \Config::get('database');
+		$ndias = 5;
+		foreach ($confdb["connections"] as $key => $connection) {
+			try {
+
+				$now = Carbon::now();
+				$now->hour   = 0;
+				$now->minute = 0;
+				$now->second = 0;
+
+				$actividades = Actividades::on($key)->whereDate('ffin', '>', $now->toDateString())->get();
+				$actividades_filtradas = collect();
+				foreach ($actividades as $actividad ) {
+					$actividad->calcularDias();
+					if ( $ndias ){
+						if ( $actividad->dias_faltantas /*<= $ndias*/ ){
+							$actividades_filtradas->push($actividad);
+						}
+					}else{
+						$actividades_filtradas->push($actividad);
+					}
+				}
+				/*foreach ($actividades_filtradas as $actividad) {
+					$status = Actividades::sendEmailsReminder($actividad);
+					dump($status);
+				}*/
+			} catch ( \Exception $e){
+				//dump($e->getMessage());
+			}
+		}
 	}
 }
