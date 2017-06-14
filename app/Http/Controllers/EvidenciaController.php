@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use asies\Http\Requests;
 use asies\Models\Evidencias;
+use asies\Models\Actividades;
 use View;
 
 class EvidenciaController extends Controller
@@ -17,10 +18,15 @@ class EvidenciaController extends Controller
 	}
 	public function index($cactividad=null){
 		if ( $cactividad ){
-			$evidencias = Evidencias::where("cactividad",$cac);
+			$actividad = Actividades::where("cactividad",$cactividad)->first();
+			$evidencias = $actividad->getEvidencias();
 		}else{
 			$evidencias = Evidencias::all();
+			$actividad = null;
 		}
-		return view('evidencias/list');
+		return view('evidencias/list',[
+			"evidencias" => $evidencias,
+			"actividad" => $actividad,
+		]);
 	}
 }

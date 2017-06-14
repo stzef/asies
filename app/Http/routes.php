@@ -91,11 +91,11 @@ Route::group(['prefix' => 'actividades'], function(){
 
 	Route::get('summary/{cactividad}', "ActividadesController@summaryActivity")->name('GET_resumen_actividad');
 	Route::post('evidence/{cactividad}', "ActividadesController@store");
+
+	Route::get('archivos/{cactividad?}', "EvidenciaController@index")->name("GET_lista_evidencias")/*->middleware("permission:activities.crud")*/;
 });
 
-Route::group(['prefix' => 'evidencias'], function(){
-	Route::post('/{?cactividad}', "EvidenciaController@index")/*->middleware("permission:activities.crud")*/;
-});
+Route::group(['prefix' => 'archivos'], function(){});
 
 Route::group(['prefix' =>'actas'], function(){
 	Route::post('create','ActasController@create');

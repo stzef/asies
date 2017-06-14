@@ -162,6 +162,9 @@
                     <li >
                         <a href="{{ URL::route('GET_tareas_create') }}"><i class="fa fa-fw fa-tasks"></i> Tareas</a>
                     </li>
+                    <li >
+                        <a href="{{ URL::route('GET_lista_evidencias') }}"><i class="fa fa-fw fa-tasks"></i> Evidencias</a>
+                    </li>
                     <!-- <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#tareas"><i class="fa fa-fw fa-tasks"></i> Tareas <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="tareas" class="collapse">

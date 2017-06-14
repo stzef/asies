@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $fregistro
  * @property string $created_at
  * @property string $updated_at
- * @property Actividade $actividade
+ * @property Actividades $actividad
  */
 class Evidencias extends Model
 {
@@ -25,7 +25,7 @@ class Evidencias extends Model
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function actividade(){
-		return $this->belongsTo('App\Actividade', 'cactividad', 'cactividad');
+	public function actividad(){
+		return $this->belongsTo('asies\Models\Actividades', 'cactividad', 'cactividad');
 	}
 }

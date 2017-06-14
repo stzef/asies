@@ -12,6 +12,7 @@ use asies\Models\Planes;
 use asies\Models\Tareas;
 use asies\Models\Actas;
 use asies\Models\TiActividades;
+use asies\Models\Parametros;
 use asies\Models\TiRelaciones;
 use asies\User;
 use Illuminate\Support\Facades\Log;
@@ -169,6 +170,9 @@ class ActividadesController extends Controller
 
 	public function doActivity(Request $request,$cactividad){
 
+		$ndays = Parametros::get("REMINDERS__NUMBER_OF_DAYS_FOR_REMINDERS");
+		dump($ndays);exit();
+
 		if ($request->isMethod('get')){
 			if ( $actividad = Actividades::where("cactividad", $cactividad)->first() ) {
 				$tareas = $actividad->getTareas();
@@ -305,7 +309,7 @@ class ActividadesController extends Controller
 					'cactividad' => $cactividad,
 					'path' => $path_files.$picture,
 					'fregistro' => date("Y-m-d H:i:s"),
-					'nombre' => $picture,
+					'nombre' => $filename_clean,
 				));
 						$filest = array();
 						$filest['name'] = $picture;

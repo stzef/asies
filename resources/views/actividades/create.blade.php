@@ -230,14 +230,14 @@
 @section('scripts')
 	<script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>
-<script type="text/javascript">
-	$(function () {
-		$('.date').datetimepicker({
-			format: 'YYYY-MM-DD',
-			defaultDate: moment().format("YYYY-MM-DD")
+	<script type="text/javascript">
+		$(function () {
+			$('.date').datetimepicker({
+				format: 'YYYY-MM-DD',
+				defaultDate: moment().format("YYYY-MM-DD")
+			});
 		});
-	});
-</script>
+	</script>
 	<script src="{{ URL::asset('vendor/jstree/js/jstree.min.js') }}"></script>
 
 	<script>
