@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>elFinder 2.0</title>
+    <title>Sistema de Archivos</title>
 
     <!-- jQuery and jQuery UI (REQUIRED) -->
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
@@ -31,7 +31,7 @@
                 <?php if($locale){ ?>
                     lang: '<?= $locale ?>', // locale
                 <?php } ?>
-                customData: { 
+                customData: {
                     _token: '<?= csrf_token() ?>'
                 },
                 url : '<?= route("elfinder.connector") ?>',  // connector URL

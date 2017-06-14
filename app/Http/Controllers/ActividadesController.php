@@ -283,8 +283,9 @@ class ActividadesController extends Controller
 			$data = $request->all();
 			foreach($file as $files){
 				$filename = $files->getClientOriginalName();
+				$filename_clean = UtilitiesController::slugify($filename);
 				$extension = $files->getClientOriginalExtension();
-				$picture = sha1($filename . time()) . '.' . $extension;
+				$picture = $filename_clean.sha1($filename_clean . time()) . '.' . $extension;
 
 				$destinationPath1='http://'.$_SERVER['HTTP_HOST'].'/evidencias/$slug/actividades/actividad_' .$cactividad. '/';
 
@@ -304,7 +305,7 @@ class ActividadesController extends Controller
 					'cactividad' => $cactividad,
 					'path' => $path_files.$picture,
 					'fregistro' => date("Y-m-d H:i:s"),
-					'nombre' => $filename,
+					'nombre' => $picture,
 				));
 						$filest = array();
 						$filest['name'] = $picture;

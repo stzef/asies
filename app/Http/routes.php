@@ -93,6 +93,10 @@ Route::group(['prefix' => 'actividades'], function(){
 	Route::post('evidence/{cactividad}', "ActividadesController@store");
 });
 
+Route::group(['prefix' => 'evidencias'], function(){
+	Route::post('/{?cactividad}', "EvidenciaController@index")/*->middleware("permission:activities.crud")*/;
+});
+
 Route::group(['prefix' =>'actas'], function(){
 	Route::post('create','ActasController@create');
 	Route::get('/','ActasController@list_actas')->name("GET_list_actas");
