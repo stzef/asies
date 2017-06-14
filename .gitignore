@@ -24,3 +24,5 @@ change.log
 /related_files/
 
 /includes/database.php
+
+/public/log_emails.log
