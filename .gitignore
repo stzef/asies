@@ -26,3 +26,5 @@ change.log
 /includes/database.php
 
 /public/log_emails.log
+
+/public/schedule/logs/*
