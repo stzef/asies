@@ -3,6 +3,7 @@
 namespace asies\Console\Commands;
 use asies\Models\Tareas;
 use asies\Models\Actividades;
+use asies\Models\Parametros;
 use Carbon\Carbon;
 
 use Illuminate\Console\Command;
@@ -42,9 +43,12 @@ class ASIES extends Command
 	public function handle()
 	{
 		$confdb = \Config::get('database');
-		$ndias = 5;
+
 		foreach ($confdb["connections"] as $key => $connection) {
 			try {
+				dump($key);
+				$ndias = Parametros::on($key)->get("REMINDERS__NUMBER_OF_DAYS_FOR_REMINDERS");//->val();
+				dump($ndias);
 
 				$now = Carbon::now();
 				$now->hour   = 0;
@@ -56,7 +60,7 @@ class ASIES extends Command
 				foreach ($actividades as $actividad ) {
 					$actividad->calcularDias();
 					if ( $ndias ){
-						if ( $actividad->dias_faltantas /*<= $ndias*/ ){
+						if ( $actividad->dias_faltantas <= $ndias ){
 							$actividades_filtradas->push($actividad);
 						}
 					}else{
@@ -68,7 +72,9 @@ class ASIES extends Command
 					dump($status);
 				}*/
 			} catch ( \Exception $e){
-				//dump($e->getMessage());
+				dump("---------------------");
+				dump($e->getMessage());
+				dump("---------------------");
 			}
 		}
 	}
