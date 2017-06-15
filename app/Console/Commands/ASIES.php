@@ -43,38 +43,42 @@ class ASIES extends Command
 	public function handle()
 	{
 		$confdb = \Config::get('database');
-
 		foreach ($confdb["connections"] as $key => $connection) {
 			try {
-				dump($key);
-				$ndias = Parametros::on($key)->get("REMINDERS__NUMBER_OF_DAYS_FOR_REMINDERS");//->val();
-				dump($ndias);
 
-				$now = Carbon::now();
-				$now->hour   = 0;
-				$now->minute = 0;
-				$now->second = 0;
+				$ifsendreminders = Parametros::on($key)->where("cparam","REMINDERS__ENABLE_REMINDER_SENDING")->first()->val();
+				//dump("ifsendreminders");
+				//dump($ifsendreminders);
+				if ( $ifsendreminders ){
 
-				$actividades = Actividades::on($key)->whereDate('ffin', '>', $now->toDateString())->get();
-				$actividades_filtradas = collect();
-				foreach ($actividades as $actividad ) {
-					$actividad->calcularDias();
-					if ( $ndias ){
-						if ( $actividad->dias_faltantas <= $ndias ){
+					$ndias = Parametros::on($key)->where("cparam","REMINDERS__NUMBER_OF_DAYS_FOR_REMINDERS")->first()->val();
+
+					$now = Carbon::now();
+					$now->hour   = 0;
+					$now->minute = 0;
+					$now->second = 0;
+
+					$actividades = Actividades::on($key)->whereDate('ffin', '>', $now->toDateString())->get();
+					$actividades_filtradas = collect();
+					foreach ($actividades as $actividad ) {
+						$actividad->calcularDias();
+						if ( $ndias ){
+							if ( $actividad->dias_faltantas <= $ndias ){
+								$actividades_filtradas->push($actividad);
+							}
+						}else{
 							$actividades_filtradas->push($actividad);
 						}
-					}else{
-						$actividades_filtradas->push($actividad);
 					}
+					/*foreach ($actividades_filtradas as $actividad) {
+						$status = Actividades::sendEmailsReminder($actividad);
+						//dump($status);
+					}*/
 				}
-				/*foreach ($actividades_filtradas as $actividad) {
-					$status = Actividades::sendEmailsReminder($actividad);
-					dump($status);
-				}*/
 			} catch ( \Exception $e){
-				dump("---------------------");
-				dump($e->getMessage());
-				dump("---------------------");
+				//dump("---------------------");
+				//dump($e->getMessage());
+				//dump("---------------------");
 			}
 		}
 	}

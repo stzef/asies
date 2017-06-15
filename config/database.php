@@ -1,6 +1,6 @@
 <?php
 
-// include(base_path() . '/includes/database.php');
+ include(base_path() . '/includes/database.php');
 
 return [
 
@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'mysql_default'),
 
     /*
     |--------------------------------------------------------------------------
@@ -46,7 +46,8 @@ return [
     |
     */
 
-    'connections' => [
+    'connections' => $connections_db,
+    /*[
         'sqlite' => [
             'driver' => 'sqlite',
             'database' => database_path(env('DB_DATABASE', 'database.sqlite')),
@@ -91,8 +92,8 @@ return [
             'strict' => false,
             'engine' => null,
         ],
-    ],
-    /* $connections_db, */
+    ],*/
+
 
     /*
     |--------------------------------------------------------------------------

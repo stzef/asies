@@ -26,7 +26,12 @@ class Kernel extends ConsoleKernel
 	 */
 	protected function schedule(Schedule $schedule)
 	{
-		$filePath = base_path()."/public/log_emails.log";
-		$schedule->command("ASIES_Tareas:verificarFechas")->everyMinute()->timezone('America/Bogota')->appendOutputTo($filePath);;
+		$date = date("Ym");
+		$filePath = base_path()."/public/schedule/logs/log_$date.log";
+		$schedule
+			->command("ASIES_Tareas:verificarFechas")
+			->everyMinute()
+			->timezone('America/Bogota')
+			->appendOutputTo($filePath);;
 	}
 }
