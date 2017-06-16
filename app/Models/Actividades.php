@@ -135,8 +135,8 @@ class Actividades extends Model
 	}
 
 	static function sendEmailsReminder($actividad){
-		//$emails = $actividad->getEmails();
-		$emails = ['sistematizaref.programador5@gmail.com'];
+		$emails = $actividad->getEmails();
+		//$emails = ['sistematizaref.programador5@gmail.com','foo@bar.baz'];
 
 		$data = array(
 			'actividad' => $actividad,
@@ -147,7 +147,12 @@ class Actividades extends Model
 			$message->to($data["emails"])->subject('Recordatorio de Actividades');
 		});
 
-		return [ "status" => $status, "emails" => $emails, "actividad" => $actividad ];
+		return [
+			"status" => $status,
+			"emails" => $emails,
+			"actividad" => $actividad->toArray(),
+			"failures" => \Mail::failures(),
+		];
 	}
 
 	static function getGrouped(){

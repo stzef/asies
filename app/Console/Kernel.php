@@ -30,7 +30,8 @@ class Kernel extends ConsoleKernel
 		$filePath = base_path()."/public/schedule/logs/log_$date.log";
 		$schedule
 			->command("ASIES_Tareas:verificarFechas")
-			->everyMinute()
+			//->everyMinute()
+			->daily()
 			->timezone('America/Bogota')
 			->appendOutputTo($filePath);;
 	}

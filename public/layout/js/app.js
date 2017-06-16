@@ -280,7 +280,14 @@ Models = {
 				url : "/actividades/checkDates",
 				type : "POST",
 				success : function (response) {
+					console.log(response)
+					var status = response.status.map(state => { return {emails:state.emails,failures:state.failures} })
+					var msg = "Se han enviado recordatorios a : "
+					status.forEach(o => {console.log( msg += o.emails.join(",<br>"))})
+					msg += "<br> Han Ocurrido los errores : "
+					status.forEach(o => {console.log( msg += o.failures.join(",<br>"))})
 					alertify.success("Los Recordatorios se han enviado.")
+					alertify.alert(msg)
 				},
 				error : function (response) {
 					alertify.error("Ha ocurrido un error al enviar los Recordatorios.")

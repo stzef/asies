@@ -44,6 +44,10 @@ class ASIES extends Command
 	{
 		$confdb = \Config::get('database');
 		foreach ($confdb["connections"] as $key => $connection) {
+			$now = Carbon::now();
+			$now->hour   = 0;
+			$now->minute = 0;
+			$now->second = 0;
 			try {
 
 				$ifsendreminders = Parametros::on($key)->where("cparam","REMINDERS__ENABLE_REMINDER_SENDING")->first()->val();
@@ -53,10 +57,8 @@ class ASIES extends Command
 
 					$ndias = Parametros::on($key)->where("cparam","REMINDERS__NUMBER_OF_DAYS_FOR_REMINDERS")->first()->val();
 
-					$now = Carbon::now();
-					$now->hour   = 0;
-					$now->minute = 0;
-					$now->second = 0;
+
+					dump($key,"Envio Automatico de Emails",$now->toDateString());
 
 					$actividades = Actividades::on($key)->whereDate('ffin', '>', $now->toDateString())->get();
 					$actividades_filtradas = collect();
@@ -72,11 +74,14 @@ class ASIES extends Command
 					}
 					/*foreach ($actividades_filtradas as $actividad) {
 						$status = Actividades::sendEmailsReminder($actividad);
-						//dump($status);
+						dump($status);
 					}*/
 				}
-			} catch ( \Exception $e){
 				//dump("---------------------");
+				dump("---------------------");
+			} catch ( \Exception $e){
+				dump("---------------------");
+				dump($key,"Error en el Envio Automatico de Emails",$now->toDateString());
 				//dump($e->getMessage());
 				//dump("---------------------");
 			}
