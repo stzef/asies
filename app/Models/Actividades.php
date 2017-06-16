@@ -135,6 +135,7 @@ class Actividades extends Model
 	}
 
 	static function sendEmailsReminder($actividad){
+
 		$emails = $actividad->getEmails();
 		//$emails = ['sistematizaref.programador5@gmail.com','foo@bar.baz'];
 
