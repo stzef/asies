@@ -136,13 +136,13 @@ class Actividades extends Model
 
 	static function sendEmailsReminder($actividad){
 		//$emails = $actividad->getEmails();
-		$emails = ['sistematizaref.programador5@gmail.com'];
+		$emails = ['sistematizaref.programador4@gmail.com'];
 
 		$data = array(
 			'actividad' => $actividad,
 			'emails' => $emails,
 		);
-
+		
 		$status = \Mail::send('emails.reminderActivity', $data, function ($message) use ($data){
 			$message->to($data["emails"])->subject('Recordatorio de Actividades');
 		});
