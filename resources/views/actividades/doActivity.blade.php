@@ -240,7 +240,7 @@
                                                         <td width="50%">
                                                             <div class="input-group">
                                                                 <div>
-                                                                    <select-task name="tareasusuarios[ctarea]" id="tarea" :productos_minimos="productos_minimos" @mounted="getTask" />
+                                                                    <select-task required="required" name="tareasusuarios[ctarea]" id="tarea" :productos_minimos="productos_minimos" @mounted="getTask" />
                                                                 </div>
 
                                                                 <!--<select name="tareasusuarios[ctarea]" id="tarea" required class="form-control">

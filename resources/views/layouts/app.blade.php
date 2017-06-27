@@ -64,6 +64,10 @@
             overflow: overlay;
             */
         }
+        .navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse{
+            max-height: 200px !important;
+            overflow: overlay
+        }
     </style>
     @yield('styles')
 
