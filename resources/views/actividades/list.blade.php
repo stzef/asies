@@ -23,8 +23,7 @@
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Fecha Inicial</th>
-                        <th>Fecha Final</th>
+                        <!-- <th>Fecha</th> -->
                         <th>Editar</th>
                         <th>Realizar</th>
                         <th>Resumen</th>
@@ -34,8 +33,7 @@
                     @foreach ($actividades as $actividad)
                         <tr>
                             <td>{{$actividad->nactividad}}</td>
-                            <td>{{$actividad->fini}}</td>
-                            <td>{{$actividad->ffin}}</td>
+                            <!-- <td>{{$actividad->ffin}}</td> -->
                             <td>
                                 @permission('activities.crud')
                                     <a class="btn btn-primary" href="{{ URL::route('GET_actividades_edit',['cactividad'=>$actividad->cactividad]) }}">Editar</a>
@@ -53,4 +51,18 @@
             </table>
 		</div>
 	</div>
+@endsection
+
+@section('scripts')
+    <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>
+    <script>
+        var table = $(".table").DataTable({
+            "paging":   true,
+            "ordering": true,
+            "info":     true,
+            "searching":true,
+            "language": DTspanish,
+        })
+    </script>
 @endsection

@@ -56,6 +56,14 @@
         #chart_div table{
             margin: 0 auto !important;
         }
+        .nav.navbar-nav{
+            font-size : 18px;
+            font-weight: bold;
+            /*
+            height: 200px;
+            overflow: overlay;
+            */
+        }
     </style>
     @yield('styles')
 
@@ -143,6 +151,22 @@
                     <li>
                         <a href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}"><i class="fa fa-fw fa-file-text-o"></i> Mis Actividades</a>
                     </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#actividades"><i class="fa fa-fw fa-cubes"></i> Actividades <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="actividades" class="collapse">
+                            <li>
+                                @permission('activities.crud')
+                                    <a href="{{ URL::route('GET_actividades_create') }}"><i class="fa fa-fw fa-plus"></i>Crear</a>
+                                @endpermission
+                                @permission('activities.all')
+                                    <a href="{{ URL::route('GET_actividades_list') }}"><i class="fa fa-fw fa-list"></i>Listar</a>
+                                @endpermission
+                                @permission('activities.check_dates')
+                                    <a href="{{ URL::route('GET_verificar_fechas_actividades') }}"><i class="fa fa-fw fa-calendar"></i>Estado</a>
+                                @endpermission
+                            </li>
+                        </ul>
+                    </li>
                     @permission('tasktree.see')
                         <li>
                             <a href="{{ URL::route('GET_treetask') }}"><i class="fa fa-fw fa-tree"></i>Arbol de Tareas</a>
@@ -175,22 +199,6 @@
                             </li>
                         </ul>
                     </li>-->
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#actividades"><i class="fa fa-fw fa-cubes"></i> Actividades <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="actividades" class="collapse">
-                            <li>
-                                @permission('activities.crud')
-                                    <a href="{{ URL::route('GET_actividades_create') }}"><i class="fa fa-fw fa-plus"></i>Crear</a>
-                                @endpermission
-                                @permission('activities.all')
-                                    <a href="{{ URL::route('GET_actividades_list') }}"><i class="fa fa-fw fa-list"></i>Listar</a>
-                                @endpermission
-                                @permission('activities.check_dates')
-                                    <a href="{{ URL::route('GET_verificar_fechas_actividades') }}"><i class="fa fa-fw fa-calendar"></i>Estado</a>
-                                @endpermission
-                            </li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
