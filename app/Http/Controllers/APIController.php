@@ -16,6 +16,9 @@ use asies\Models\TiPlanes;
 use asies\Models\TareasUsuarios;
 use \View;
 
+use Illuminate\Support\Facades\Validator;
+
+
 class APIController extends Controller
 {
 	public function __construct(){
@@ -81,6 +84,75 @@ class APIController extends Controller
 		return response()->json($usuarios);
 	}
 	/* API Usuarios */
+
+	/* API Actividades */
+	public function property(Request $request,$model,$id){
+		$response = array(
+			"error" => False,
+			"object" => array(),
+		);
+
+		$dataBody = $request->all();
+		$validator = Validator::make($dataBody,
+			[
+				'property' => 'required',
+				#'value' => 'required_if:property',
+				//'id' => 'required_with:property',
+				//'model' => 'required',
+			],
+			[
+				'property.required' => 'El valor "propiedad" es requerido',
+				//'model.required' => 'El valor "model" es requerido',
+				//'id.required_with' => 'El valor "id" es requerido',
+			]
+		);
+
+		if ($validator->fails()){
+			$messages = $validator->messages();
+			return response()->json(array("errors" => $messages),400);
+		}else{
+			$property = $request->get("property");
+			$value = $request->get("value");
+			if( $model == "User" ){
+				$class = "asies\\$model";
+			}else{
+				$class = "asies\Models\\$model";
+			}
+
+			$object = $class::find($id);
+
+			if ( $object ){
+				if ( $value ){
+					$object[$property] = $value;
+					if( !$object->save() ){
+						$response["message"] = "No se actualizo la propiedad";
+						$response["error"] = True;
+					}
+				}else{
+					$response["object"][$property] = $object[$property];
+				}
+			}else{
+				$response["message"] = "No se encontro el objeto";
+				$response["error"] = True;
+			}
+
+			/*
+				$.ajax({
+				    url : "/api/User/1/property?property=name&value=Carlos",
+				    type : "POST",
+				    dataType : "json",
+				    success : function(response){
+				        console.log(response)
+				    }
+				})
+			*/
+
+			return response()->json($response);
+		}
+
+
+	}
+	/* API Actividades */
 
 	public function update_evidencia(Request $request,$cevidencia){
 		$dataBody = $request->all();
