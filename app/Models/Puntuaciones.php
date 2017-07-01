@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Puntuaciones extends Model
 {
+	protected $primaryKey = "cpuntuacion";
 	/**
 	 * @var array
 	 */

@@ -57,7 +57,7 @@
 
 					</form>
 
-					<div class="col-md-12 hide">
+					<div class="asig_tareas col-md-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								Asociar a Actividades
@@ -78,6 +78,11 @@
 
 @section('scripts')
 <script>
+
+		if ( CRUD_ACTION == "create" ){
+			$(".asig_tareas").addClass("hide")
+		}
+
 	$("form").submit(function(event){
 		var that = this
 		event.preventDefault()

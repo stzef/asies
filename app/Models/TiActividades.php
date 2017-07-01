@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TiActividades extends Model
 {
+	protected $primaryKey = "ctiactividad";
 	/**
 	 * The table associated with the model.
 	 *

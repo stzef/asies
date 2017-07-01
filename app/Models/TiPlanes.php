@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TiPlanes extends Model
 {
+	protected $primaryKey = "ctiplan";
 	/**
 	 * The table associated with the model.
 	 *

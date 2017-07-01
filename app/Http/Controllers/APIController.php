@@ -118,11 +118,13 @@ class APIController extends Controller
 			}else{
 				$class = "asies\Models\\$model";
 			}
+			$keyName = \App::make($class)->getKeyName();
 
-			$object = $class::find($id);
+
+			$object = $class::where($keyName,$id)->first();
 
 			if ( $object ){
-				if ( $value ){
+				if ( $value != "" ){
 					$object[$property] = $value;
 					if( !$object->save() ){
 						$response["message"] = "No se actualizo la propiedad";

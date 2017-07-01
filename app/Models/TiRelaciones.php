@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TiRelaciones extends Model
 {
+	protected $primaryKey = "ctirelacion";
 	/**
 	 * The table associated with the model.
 	 *

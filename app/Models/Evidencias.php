@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Evidencias extends Model
 {
+	protected $primaryKey = "cevidencia";
 	/**
 	 * @var array
 	 */

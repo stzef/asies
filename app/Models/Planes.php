@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Planes extends Model
 {
+	protected $primaryKey = "cplan";
 	/**
 	 * @var array
 	 */

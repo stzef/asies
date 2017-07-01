@@ -293,6 +293,25 @@ Models = {
 					alertify.error("Ha ocurrido un error al enviar los Recordatorios.")
 				},
 			})
+		},
+		changeState : function(id,newcstate){
+			var url = "/api/Actividades/__id__/property?property=cestado",
+			url = url.replace("__id__",id)
+			if( typeof newcstate != "undefined" ){
+				url = url + "&value=__cestado__"
+				url = url.replace("__cestado__",newcstate)
+			}
+			$.ajax({
+				url : url,
+				type : "POST",
+				dataType : "json",
+				success : function(response){
+					console.log(response)
+				},
+				error : function(response){
+
+				}
+			})
 		}
 	},
 	"Planes" : {

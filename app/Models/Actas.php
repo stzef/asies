@@ -28,6 +28,8 @@ use asies\User;
  */
 class Actas extends Model
 {
+	protected $primaryKey = "idacta";
+
 	/**
 	 * @var array
 	 */

@@ -30,6 +30,7 @@ use Illuminate\Support\Facades\Log;
  */
 class Actividades extends Model
 {
+	protected $primaryKey = "cactividad";
 	/**
 	 * @var array
 	 */

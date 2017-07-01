@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TiEmpleados extends Model
 {
+	protected $primaryKey = "ctiempleado";
 	/**
 	 * The table associated with the model.
 	 *
