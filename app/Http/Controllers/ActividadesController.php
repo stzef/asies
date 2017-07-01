@@ -89,7 +89,7 @@ class ActividadesController extends Controller
 		}else{
 			$actividad = Actividades::create($dataBody["actividad"]);
 			$user = Auth::user();
-			Log::info('Creacion de actividad,',['actividad'=>$actividad->id,'ctiactividad'=> $dataBody['actividad']['ctiactividad'],'user' => $user->id ]);
+			Log::info('Creacion de actividad,',['actividad'=>$actividad->cactividad,'ctiactividad'=> $dataBody['actividad']['ctiactividad'],'user' => $user->id ]);
 		}
 
 		return response()->json(array("obj" => $actividad->toArray()));
@@ -155,7 +155,7 @@ class ActividadesController extends Controller
 			Actividades::where("cactividad",$cactividad)->update($dataBody["actividad"]);
 			$user = Auth::user();
 			$actividad = Actividades::where('cactividad',$cactividad)->first();
-			Log::info('Creacion de actividad,',['actividad'=>$actividad->id,'ctiactividad'=> $dataBody['actividad']['ctiactividad'],'user' => $user->id ]);
+			Log::info('Edicion de actividad,',['actividad'=>$actividad->cactividad,'ctiactividad'=> $dataBody['actividad']['ctiactividad'],'user' => $user->id ]);
 		}
 
 		return response()->json(array("obj" => $actividad->toArray()));
@@ -301,7 +301,7 @@ class ActividadesController extends Controller
 						$filest['name'] = $picture;
 						$filest['size'] = $this->get_file_size($destinationPath.$picture);
 						$filest['url'] = $destinationPath1.$picture;
-						$filest['evidencia'] = $evidencia->id;
+						$filest['evidencia'] = $evidencia->cevidencia;
 						$filest['nombre'] = $evidencia->nombre;
 				$filest['thumbnailUrl'] = $thumbnailUrl;
 				$filesa['files'][]=$filest;

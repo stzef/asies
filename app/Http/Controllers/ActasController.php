@@ -70,13 +70,13 @@ class ActasController extends Controller
 
 			foreach ($dataBody["acta"]["asistentes"] as $idusuario) {
 				ActasAsistentes::create(array(
-					"cacta" => $acta->id,
+					"cacta" => $acta->idacta,
 					"user" => $idusuario
 				));
 			}
 		}
 
-		Actividades::where("cactividad",$dataBody["acta"]["cactividad"])->update(["cacta"=>$acta->id]);
+		Actividades::where("cactividad",$dataBody["acta"]["cactividad"])->update(["cacta"=>$acta->idacta]);
 
 		return response()->json(array("obj"=>$acta->toArray()));
 	}
@@ -121,7 +121,7 @@ class ActasController extends Controller
 
 		$data = array("acta" => $acta,"actividad" => $actividad,);
 		PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
-		$pdf = PDF::loadView('actas.pdf', $data);
+		$pdf = PDF::loadView('actas/pdf', $data);
 
 		$namefile = "acta_{$acta->numeroacta}.pdf";
 		$dir_path = base_path()."/public/evidencias/$slug/actividades/actividad_{$actividad->cactividad}";

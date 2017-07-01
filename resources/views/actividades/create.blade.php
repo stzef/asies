@@ -297,7 +297,7 @@
 
 					if ( CRUD_ACTION == "create" ){
 						$("#form_crear_actividad").find(":input").prop("disabled",true)
-						$("input#actividad_cactividad").val(response.obj.id)
+						$("input#actividad_cactividad").val(response.obj.cactividad)
 						$("[type=submit]").attr("disabled",true)
 					}
 

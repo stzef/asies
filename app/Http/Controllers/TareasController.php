@@ -69,7 +69,7 @@ class TareasController extends Controller
 			if ( $plan->ctiplan == 4 ){
 				$user = Auth::user();
 				$tarea = Tareas::create($dataBody["tarea"]);
-				Log::info('Creacion Tarea ,',['tarea'=> $tarea->id,'user' => $user->id,'estado creacion'=> $tarea->ifhecha ]);
+				Log::info('Creacion Tarea ,',['tarea'=> $tarea->ctarea,'user' => $user->id,'estado creacion'=> $tarea->ifhecha ]);
 				return response()->json(array("obj" => $tarea->toArray()));
 
 			}else{
@@ -128,7 +128,7 @@ class TareasController extends Controller
 			if ( $plan->ctiplan == 4 ){
 				$user = Auth::user();
 				Tareas::where('ctarea',$ctarea)->update($dataBody["tarea"]);
-				Log::info('Edicion Tarea ,',['tarea'=> $tarea->id,'user' => $user->id,'estado edicion'=> $tarea->ifhecha ]);
+				Log::info('Edicion Tarea ,',['tarea'=> $tarea->ctarea,'user' => $user->id,'estado edicion'=> $tarea->ifhecha ]);
 				$tarea = Tareas::where("ctarea",$ctarea)->first();
 
 				return response()->json(array("obj" => $tarea->toArray()));
