@@ -33,7 +33,7 @@
 												</a>
 											</div>
 										@empty
-											<div class="list-group-item col-md-4">
+											<div class="list-group-item">
 												<h3>No tiene</h3>
 											</div>
 										@endforelse
