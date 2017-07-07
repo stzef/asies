@@ -24,16 +24,19 @@
 								<div class="col-md-12">
 									<h2>Actividades Proximas</h2>
 									<div class="list-group text-center">
-										@foreach( $actividades_proximas as $actividad )
+										@forelse( $actividades_proximas as $actividad )
 											<div class="list-group-item col-md-4">
 												<a class="btn btn-success btn-block" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">
 													{{$actividad->nactividad}}
 													<br>
 													<span class="badge badge-default badge-pill">{{$actividad->fini}}</span>
 												</a>
-
 											</div>
-										@endforeach
+										@empty
+											<div class="list-group-item col-md-4">
+												<h3>No tiene</h3>
+											</div>
+										@endforelse
 									</div>
 								</div>
 								<div class="col-md-12">
