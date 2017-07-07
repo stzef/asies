@@ -166,16 +166,18 @@
                                     <a href="{{ URL::route('GET_actividades_list') }}"><i class="fa fa-fw fa-list"></i>Listar</a>
                                 @endpermission
                                 @permission('activities.check_dates')
-                                    <a href="{{ URL::route('GET_verificar_fechas_actividades') }}"><i class="fa fa-fw fa-calendar"></i>Estado</a>
+                                    <a href="{{ URL::route('GET_verificar_fechas_actividades') }}"><i class="fa fa-fw fa-calendar"></i>Ver Todas</a>
                                 @endpermission
                             </li>
                         </ul>
                     </li>
+                    <!--
                     @permission('tasktree.see')
                         <li>
                             <a href="{{ URL::route('GET_treetask') }}"><i class="fa fa-fw fa-tree"></i>Arbol de Tareas</a>
                         </li>
                     @endpermission
+                    -->
 
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#actas"><i class="fa fa-fw fa-file-pdf-o"></i> Actas <i class="fa fa-fw fa-caret-down"></i></a>

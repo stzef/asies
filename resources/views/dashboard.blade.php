@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@section('styles')
+	<style>
+		#charts_div table{
+			width: auto;
+			margin: 0 auto !important;
+		}
+	</style>
+@endsection('styles')
+
 @section('content')
 	<div class="row">
 			<div class="col-md-12">
@@ -11,10 +20,26 @@
 							@endpermission
 						</div>
 						<div class="panel-body" style="overflow: overlay">
-							<div id="chart_div" ></div>
-							<table class="table buttons">
-								<tr></tr>
-							</table>
+							<div class="row">
+								<div class="col-md-12">
+									<h2>Actividades Proximas</h2>
+									<div class="list-group text-center">
+										@foreach( $actividades_proximas as $actividad )
+											<div class="list-group-item col-md-4">
+												<a class="btn btn-success btn-block" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">
+													{{$actividad->nactividad}}
+													<br>
+													<span class="badge badge-default badge-pill">{{$actividad->fini}}</span>
+												</a>
+
+											</div>
+										@endforeach
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div id="charts_div" class="row text-center" ></div>
+								</div>
+							</div>
 						</div>
 					</div>
 			</div>
@@ -39,33 +64,42 @@
 		*/
 		function drawChart() {
 			Models.Planes.all(function(planes){
-				var data = [['Label', 'Porcentaje'],]
 				planes.forEach(function(plan){
+					var data = [['Label', 'Porcentaje'],]
+
 					plan.porcentaje = parseInt((100*plan.valor_plan)/plan.valor_total)
 					plan.porcentaje = isNaN(plan.porcentaje) ? 0 : plan.porcentaje
-					data.push(["",plan.porcentaje])
-				})
-				var data = google.visualization.arrayToDataTable(data);
-				var options = {
-					width: 800, height: 240,
-					redFrom: 0, redTo: 60,
-					yellowFrom:61, yellowTo: 80,
-					greenFrom:81, greenTo: 100,
-					minorTicks: 5,
-					legend:{textStyle:{fontSize:'9'}},
-					tooltip: {textStyle:  {fontSize: 9,bold: false}},
 
-				};
-				planes.forEach(function(plan){
+					data.push(["",plan.porcentaje])
+
+					console.log(data)
+					var data = google.visualization.arrayToDataTable(data);
+					var options = {
+						width: 800, height: 240,
+						redFrom: 0, redTo: 60,
+						yellowFrom:61, yellowTo: 80,
+						greenFrom:81, greenTo: 100,
+						minorTicks: 5,
+						legend:{textStyle:{fontSize:'9'}},
+						tooltip: {textStyle:  {fontSize: 9,bold: false}},
+					};
+					var div = $("<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'></div>")[0]
+					var chart = new google.visualization.Gauge(div);
+					chart.draw(data, options);
+
+					$(div).append($("<a>",{html:plan.nplan,href:"/planes/status/"+plan.cplan,class:"btn btn-success"}))
+					$("#charts_div").append($(div))
+				})
+				waitingDialog.hide()
+
+				/*planes.forEach(function(plan){
 					$("table.buttons").find("tr").append(
 						$("<td>").append(
 							$("<a>",{html:plan.nplan,href:"/planes/status/"+plan.cplan,class:"btn btn-success"})
 						)
 					)
-				})
-				var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-				chart.draw(data, options);
-				waitingDialog.hide()
+				})*/
+
 			})
 		}
 	</script>

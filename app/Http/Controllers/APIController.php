@@ -96,14 +96,9 @@ class APIController extends Controller
 		$validator = Validator::make($dataBody,
 			[
 				'property' => 'required',
-				#'value' => 'required_if:property',
-				//'id' => 'required_with:property',
-				//'model' => 'required',
 			],
 			[
 				'property.required' => 'El valor "propiedad" es requerido',
-				//'model.required' => 'El valor "model" es requerido',
-				//'id.required_with' => 'El valor "id" es requerido',
 			]
 		);
 
@@ -119,7 +114,6 @@ class APIController extends Controller
 				$class = "asies\Models\\$model";
 			}
 			$keyName = \App::make($class)->getKeyName();
-
 
 			$object = $class::where($keyName,$id)->first();
 
@@ -140,12 +134,12 @@ class APIController extends Controller
 
 			/*
 				$.ajax({
-				    url : "/api/User/1/property?property=name&value=Carlos",
-				    type : "POST",
-				    dataType : "json",
-				    success : function(response){
-				        console.log(response)
-				    }
+					url : "/api/User/1/property?property=name&value=Carlos",
+					type : "POST",
+					dataType : "json",
+					success : function(response){
+						console.log(response)
+					}
 				})
 			*/
 

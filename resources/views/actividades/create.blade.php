@@ -233,8 +233,8 @@
 	<script type="text/javascript">
 		$(function () {
 			$('.date').datetimepicker({
-				format: 'YYYY-MM-DD',
-				defaultDate: moment().format("YYYY-MM-DD")
+				format: 'YYYY-MM-DD hh:mm:ss',
+				defaultDate: moment().format("YYYY-MM-DD hh:mm:ss")
 			});
 		});
 	</script>
