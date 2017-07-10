@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $ctirelacion
  * @property integer $user
  * @property integer $cactividad
+ * @property boolean $ifhecha
  * @property string $created_at
  * @property string $updated_at
  * @property Tareas $tarea
@@ -29,7 +30,7 @@ class AsignacionTareas extends Model
 	/**
 	 * @var array
 	 */
-	protected $fillable = ['ctarea', 'ctirelacion', 'user', 'cactividad', 'created_at', 'updated_at'];
+	protected $fillable = ['ctarea', 'ctirelacion', 'user', 'cactividad', 'ifhecha', 'created_at', 'updated_at'];
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
