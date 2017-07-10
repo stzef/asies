@@ -277,7 +277,7 @@ class ActividadesController extends Controller
 				$extension = $files->getClientOriginalExtension();
 				$picture = $filename_clean.sha1($filename_clean . time()) . '.' . $extension;
 
-				$destinationPath1='http://'.$_SERVER['HTTP_HOST'].'/evidencias/$slug/actividades/actividad_' .$cactividad. '/';
+				$destinationPath1="http://".$_SERVER['HTTP_HOST']."/evidencias/$slug/actividades/actividad_" .$cactividad. "/";
 
 				$ext_img = array("ani","bmp","cal","fax","gif","img","jbg","jpe","jpe","jpg","mac","pbm","pcd","pcx","pct","pgm","png","ppm","psd","ras","tga","tif","wmf");
 				if ( in_array($extension, $ext_img) ){

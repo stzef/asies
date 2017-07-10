@@ -65,8 +65,14 @@ Route::group(['prefix' => 'api'], function(){
 		Route::get('/', "APIController@actividades");
 
 		Route::group(['prefix' => '{cactividad}'], function(){
+			Route::post('/assign', "APIController@asignar_tarea");
+
 			Route::group(['prefix' => 'tareas'], function(){
-				Route::post('/{ctarea}/do', "APIController@realizar_tarea");
+
+				Route::group(['prefix' => '{ctarea}'], function(){
+					Route::post('/do', "APIController@realizar_tarea");
+				});
+
 			});
 		});
 	});

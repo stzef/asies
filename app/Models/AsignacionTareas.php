@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $updated_at
  * @property Tareas $tarea
  * @property Tirelaciones $tirelacione
- * @property User $user
+ * @property User $usuario
  * @property Actividades $actividad
  */
 class AsignacionTareas extends Model
@@ -50,8 +50,8 @@ class AsignacionTareas extends Model
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function user(){
-		return $this->belongsTo('App\User', 'user');
+	public function usuario(){
+		return $this->belongsTo('App\User', 'user', 'id');
 	}
 
 	/**

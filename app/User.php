@@ -33,7 +33,7 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
 	];
 
 	public function persona(){
-		return $this->hasOne('asies\Models\Personas','cpersona','cpersona');
+		return $this->belongsTo('asies\Models\Personas','cpersona','cpersona');
 		#return $this->belongsTo('asies\Models\Personas','cpersona','cpersona');
 
 	}

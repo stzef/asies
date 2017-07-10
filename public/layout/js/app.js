@@ -271,7 +271,7 @@ Models = {
 		}
 	},
 	"Actividades" : {
-		sendReminders : function(){
+		"sendReminders" : function(){
 			$.ajax({
 				url : "/actividades/checkDates",
 				type : "POST",
@@ -289,7 +289,7 @@ Models = {
 				},
 			})
 		},
-		changeState : function(id,newcstate){
+		"changeState" : function(id,newcstate){
 			var url = "/api/Actividades/__id__/property?property=cestado",
 			url = url.replace("__id__",id)
 			if( typeof newcstate != "undefined" ){
@@ -307,7 +307,32 @@ Models = {
 
 				}
 			})
+		},
+		"asignarTarea" : function(cactividad,data,cb){
+			if ( typeof data != 'object') return false
+			var base_url_asignar_tarea = "/api/actividades/"+cactividad+"/assign"
+			$.ajax({
+				url : base_url_asignar_tarea,
+				type : "POST",
+				data : data,
+				success : function(response){
+					if ( response.ok ){
+						alertify.success( response.msg )
+						if ( typeof cb == "function" ) cb( response )
+					}else{
+						alertify.warning( response.msg )
+						if ( typeof cb == "function" ) cb( response )
+					}
+				},
+				error : function(response){},
+			})
 		}
+	},
+	"Actas" : {
+		"compromisos" :{
+			agregar : function(idacta,compromisos){
+			},
+		},
 	},
 	"Planes" : {
 		"messages" : {

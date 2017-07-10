@@ -17,6 +17,7 @@ use asies\Models\TiPlanes;
 use asies\Models\TareasUsuarios;
 use asies\Models\AsignacionTareas;
 use \View;
+use Auth;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -91,12 +92,105 @@ class APIController extends Controller
 
 	public function verificar_usuario( $cactividad, $ctarea, $iduser){
 		$flag = false;
-		if ( AsignacionTareas::where("user",$iduser)->where("cactividad",$this->cactividad)->where("ctarea",$this->ctarea)->exists() ){
+		if ( AsignacionTareas::where("user",$iduser)->where("cactividad",$cactividad)->where("ctarea",$ctarea)->exists() ){
 			$flag = true;
 		}
 		return $flag;
 	}
 
+	/*
+	public function users(Request $request,$cactividad,$ctarea){
+		$actividad = Actividades::where('cactividad', $cactividad)->first();
+		if ($request->isMethod("POST")){
+			$user = Auth::user();
+			Log::info('Asignacion usuario ,',['user' => $user->id ]);
+			$dataBody = $request->all();
+			$dataBody["tareasusuarios"]["ctarea"] = $ctarea;
+			$dataBody["tareasusuarios"]["cactividad"] = $cactividad;
+
+			$validator = Validator::make($dataBody["tareasusuarios"],
+				[
+					'ctarea' => 'required',
+					'cactividad' => 'required',
+					'user' => 'required|max:255',
+					'ctirelacion' => 'required',
+				],
+				[
+					'ctarea.required' => 'El nombre del plan es requerido',
+					'cactividad.required' => 'El nombre del plan es requerido',
+				]
+			);
+
+			if ($validator->fails()){
+				$messages = $validator->messages();
+				return response()->json(array("errors_form" => $messages),400);
+			}else{
+
+				$tarea = Tareas::where('ctarea', $ctarea)->first();
+				$user = Auth::user();
+				Log::info('Asignacion usuario a tarea ,',['user' => $user->id, 'tarea' => $tarea->ctarea]);
+				$response = $actividad->add_task_user(
+					array(
+						"ctarea" => $dataBody["tareasusuarios"]["ctarea"],
+						"user" => $dataBody["tareasusuarios"]["user"],
+						"ctirelacion" => $dataBody["tareasusuarios"]["ctirelacion"]
+					)
+				);
+				if ( $response["obj"] ) $response["obj"] = $response["obj"]->toArray();
+				return response()->json($response);
+			}
+		}
+	}
+	*/
+
+	public function asignar_tarea( Request $request, $cactividad ){
+		$response = array();
+		$dataBody = $request->all();
+
+		$dataBody["cactividad"] = $cactividad;
+
+		$validator = Validator::make($dataBody,
+			[
+				'ctarea' => 'required|exists:tareas,ctarea',
+				'cactividad' => 'required|exists:actividades,cactividad',
+				'user' => 'required|exists:users,id',
+				'ctirelacion' => 'required|exists:tirelaciones,ctirelacion',
+			],
+			[
+				'ctarea.required' => 'El valor "ctarea" es requerido',
+				'cactividad.required' => 'El valor "cactividad" es requerido',
+				'user.required' => 'El valor "user" es requerido',
+				'ctirelacion.required' => 'El valor "ctirelacion" es requerido',
+			]
+		);
+
+		if ($validator->fails()){
+			$messages = $validator->messages();
+			return response()->json(array("errors" => $messages),400);
+		}else{
+
+			$actividad = Actividades::where("cactividad",$cactividad)->first();
+
+			$asignacion = AsignacionTareas::where([ 'cactividad' => $actividad->cactividad, 'ctarea' => $dataBody["ctarea"] ] )->exists();
+			if( $asignacion ){
+				$asignacion = AsignacionTareas::where([ 'cactividad' => $actividad->cactividad, 'ctarea' => $dataBody["ctarea"] ] )->update($dataBody);
+				$obj = AsignacionTareas::where( [ 'cactividad' => $actividad->cactividad, 'ctarea' => $dataBody["ctarea"] ] )->first();
+				$data = array("msg"=>"Se edito la <b>asignacion</b> de la tarea.");
+			}else{
+				$dataBody["ifhecha"] = 0;
+				$dataBody["valor_tarea"] = 1;
+
+				$obj = AsignacionTareas::create($dataBody);
+				$data = array("msg"=>"Se <b>asigno</b> exitosamente la tarea.");
+			}
+			$data["obj"] = $obj;
+
+
+
+			return response()->json($data);
+		}
+
+	}
 	public function realizar_tarea( $cactividad, $ctarea ){
 		$asignacion = AsignacionTareas::where("cactividad",$cactividad)->where("ctarea",$ctarea)->first();
 		$response = array( "ok" => true );

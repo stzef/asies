@@ -181,7 +181,7 @@
 												<td> {{ $asignacion->tarea->ctarea }} </td>
 												<td> {{ $asignacion->tarea->ntarea }} </td>
 												<td> {{ $asignacion->usuario->id }} </td>
-												<td> {{$usuario->persona->nombres}} {{$usuario->persona->apellidos}} </td>
+												<td> {{ $asignacion->usuario->persona->nombreCompleto() }} </td>
 												<td> {{ $asignacion->relacion->ctirelacion }} </td>
 												<td> {{ $asignacion->relacion->ntirelacion }} </td>
 												<td>
@@ -334,9 +334,15 @@
 		var cactividad = $("input#actividad_cactividad").val();
 
 
+		var user = $(that).find("#respo").val()
+		var ctirelacion = $(that).find("#tirespo").val()
+		Models.Actividades.asignarTarea(cactividad,{ ctarea: ctarea, user: user, ctirelacion: ctirelacion },function(){
+			listar()
+		})
+
+		/*
 		var data = serializeForm(that)
 		data.append("tareasusuarios[cactividad]",cactividad)
-		/*arreglar*/
 		var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
 		$.ajax({
 			"url":base_url_add_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
@@ -353,6 +359,7 @@
 				alertify.error("Algo ha salido mal.")
 			}
 		})
+		*/
 	});
 function editar(event,button){
 	var data = table.row( $(button).parents("tr")).data();
