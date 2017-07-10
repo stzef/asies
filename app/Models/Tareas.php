@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $ctarea
  * @property integer $cplan
  * @property string $ntarea
- * @property integer $valor_tarea
  * @property string $created_at
  * @property string $updated_at
  * @property Plane $plane
@@ -20,7 +19,7 @@ class Tareas extends Model
 	/**
 	 * @var array
 	 */
-	protected $fillable = ['cplan', 'ntarea', 'valor_tarea', 'created_at', 'updated_at'];
+	protected $fillable = ['cplan', 'ntarea', 'created_at', 'updated_at'];
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
