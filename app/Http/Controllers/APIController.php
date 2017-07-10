@@ -20,6 +20,7 @@ use \View;
 use Auth;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 
 class APIController extends Controller
@@ -142,6 +143,36 @@ class APIController extends Controller
 		}
 	}
 	*/
+
+	public function remove_tarea_asignada( Request $request, $cactividad ){
+
+
+		$dataBody = $request->all();
+		$dataBody["cactividad"] = $cactividad;
+
+		$validator = Validator::make($dataBody,
+			[
+				'ctarea' => 'required',
+				'cactividad' => 'required',
+			],
+			[
+				'ctarea.required' => 'El nombre del plan es requerido',
+				'cactividad.required' => 'El nombre del plan es requerido',
+			]
+		);
+
+		$actividad = Actividades::where('cactividad', $cactividad)->first();
+		$user = Auth::user();
+
+		if( AsignacionTareas::where( $dataBody )->exists() ){
+			AsignacionTareas::where( $dataBody )->delete();
+			Log::info('Asignacion Borrada,',['user (borro)' => $user->id, '' => $actividad->cactividad ,'tarea' => $dataBody['ctarea'] ]);
+			$data = array("msg"=>"Se Borro la <b>Asignacion</b> del Usuario.");
+		}else{
+			$data = array("msg"=>"La Asignacion No Existe");
+		}
+		return response()->json($data);
+	}
 
 	public function asignar_tarea( Request $request, $cactividad ){
 		$response = array();

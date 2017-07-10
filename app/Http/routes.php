@@ -65,11 +65,15 @@ Route::group(['prefix' => 'api'], function(){
 		Route::get('/', "APIController@actividades");
 
 		Route::group(['prefix' => '{cactividad}'], function(){
+			# Ex actividades/{cactividad}/assign
 			Route::post('/assign', "APIController@asignar_tarea");
+			Route::delete('/assign', "APIController@remove_tarea_asignada");
 
 			Route::group(['prefix' => 'tareas'], function(){
 
 				Route::group(['prefix' => '{ctarea}'], function(){
+
+					# Ex actividades/{cactividad}/tareas/{ctarea}/do
 					Route::post('/do', "APIController@realizar_tarea");
 				});
 
@@ -129,8 +133,8 @@ Route::group(['prefix' =>'actas'], function(){
 });
 
 Route::group(['prefix' => 'asignacion'], function(){
-		Route::post('/{cactividad}/{ctarea}/usuarios', "AsignacionController@users")->name("POST_users_task");
-		Route::post('/{cactividad}/{ctarea}/usuarios/delete', "AsignacionController@users_delete")->name("DELETE_users_task");
+		// Route::post('/{cactividad}/{ctarea}/usuarios', "AsignacionController@users")->name("POST_users_task");
+		// Route::post('/{cactividad}/{ctarea}/usuarios/delete', "AsignacionController@users_delete")->name("DELETE_users_task");
 });
 
 Route::group(['prefix' => 'tareas'], function(){

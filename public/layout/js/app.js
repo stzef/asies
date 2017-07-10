@@ -308,6 +308,7 @@ Models = {
 				}
 			})
 		},
+
 		"asignarTarea" : function(cactividad,data,cb){
 			if ( typeof data != 'object') return false
 			var base_url_asignar_tarea = "/api/actividades/"+cactividad+"/assign"
@@ -326,7 +327,26 @@ Models = {
 				},
 				error : function(response){},
 			})
+		},
+		"removerTarea" : function(cactividad,ctarea,cb){
+			var base_url_asignar_tarea = "/api/actividades/"+cactividad+"/assign"
+			$.ajax({
+				url : base_url_asignar_tarea,
+				type : "DELETE",
+				data : { ctarea: ctarea },
+				success : function(response){
+					if ( response.ok ){
+						alertify.success( response.msg )
+						if ( typeof cb == "function" ) cb( response )
+					}else{
+						alertify.warning( response.msg )
+						if ( typeof cb == "function" ) cb( response )
+					}
+				},
+				error : function(response){},
+			})
 		}
+
 	},
 	"Actas" : {
 		"compromisos" :{

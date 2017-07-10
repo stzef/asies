@@ -339,85 +339,67 @@
 		Models.Actividades.asignarTarea(cactividad,{ ctarea: ctarea, user: user, ctirelacion: ctirelacion },function(){
 			listar()
 		})
+	});
+	function editar(event,button){
+		var data = table.row( $(button).parents("tr")).data();
+		table.row( $(button).parents("tr")).remove().draw(false);
+		var tarea = $("#tarea").val(data[cols.ctarea]).change();
+		var responsable = $("#respo").val(data[cols.crespo]).change();
+		var tiresponsable = $("#tirespo").val(data[cols.ctirela]).change();
+	}
+	function borrar(event,button){
+
+		var ctarea = table.row($(button).closest("tr")).data()[cols.ctarea]
+		var cactividad = $("input#actividad_cactividad").val();
+
+		Models.Actividades.removerTarea(cactividad,{ ctarea: ctarea },function(){
+			table.row( $(button).parents("tr")).remove().draw(false);
+		})
 
 		/*
-		var data = serializeForm(that)
+		var ctirelacion = table.row($(button).closest("tr")).data()[cols.ctirela]
+		var cresponsable = table.row($(button).closest("tr")).data()[cols.crespo]
+		var data = new FormData()
 		data.append("tareasusuarios[cactividad]",cactividad)
-		var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
+		data.append("tareasusuarios[ctarea]",ctarea)
+		data.append("tareasusuarios[ctirelacion]",ctirelacion)
+		data.append("tareasusuarios[user]",cresponsable)
+
 		$.ajax({
-			"url":base_url_add_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
+			"url":base_url_remove_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
 			"type":"POST",
 			data: data,
 			cache:false,
 			contentType: false,
 			processData: false,
 			success: function(response){
+				table.row( $(button).parents("tr")).remove().draw(false);
 				alertify.success(response.data.message)
-				listar();
+				//listar();
 			},
 			error: function(response){
 				alertify.error("Algo ha salido mal.")
 			}
 		})
 		*/
-	});
-function editar(event,button){
-	var data = table.row( $(button).parents("tr")).data();
-	table.row( $(button).parents("tr")).remove().draw(false);
-	var tarea = $("#tarea").val(data[cols.ctarea]).change();
-	var responsable = $("#respo").val(data[cols.crespo]).change();
-	var tiresponsable = $("#tirespo").val(data[cols.ctirela]).change();
-}
-function borrar(event,button){
-
-	var ctarea = table.row($(button).closest("tr")).data()[cols.ctarea]
-	var ctirelacion = table.row($(button).closest("tr")).data()[cols.ctirela]
-	var cresponsable = table.row($(button).closest("tr")).data()[cols.crespo]
-
-	var cactividad = $("input#actividad_cactividad").val();
-
-
-	var data = new FormData()
-	data.append("tareasusuarios[cactividad]",cactividad)
-	data.append("tareasusuarios[ctarea]",ctarea)
-	data.append("tareasusuarios[ctirelacion]",ctirelacion)
-	data.append("tareasusuarios[user]",cresponsable)
-
-	var base_url_remove_user_tarea = "{{ URL::route('DELETE_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
-	$.ajax({
-		"url":base_url_remove_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
-		"type":"POST",
-		data: data,
-		cache:false,
-		contentType: false,
-		processData: false,
-		success: function(response){
-			table.row( $(button).parents("tr")).remove().draw(false);
-			alertify.success(response.data.message)
-			//listar();
-		},
-		error: function(response){
-			alertify.error("Algo ha salido mal.")
-		}
-	})
-}
-var listar = function(){
-	var ctarea = $( "#tarea option:selected" ).val();
-	var cresponsable = $( "#respo option:selected" ).val();
-	var ctirespo = $( "#tirespo option:selected" ).val();
-	var ntarea = $( "#tarea option:selected" ).text();
-	var nresponsable = $( "#respo option:selected" ).text();
-	var ntirespo = $( "#tirespo option:selected" ).text();
-	//$("#tarea").val()
-	table
-		.row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,
-			"<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>"+
-				"<i class='fa fa-pencil-square-o'></i>"+
-			"</button>",
-			"<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)''>"+
-				"<i class='fa fa-trash-o'></i>"+
-			"</button>"])
-		.draw()
-}
+	}
+	var listar = function(){
+		var ctarea = $( "#tarea option:selected" ).val();
+		var cresponsable = $( "#respo option:selected" ).val();
+		var ctirespo = $( "#tirespo option:selected" ).val();
+		var ntarea = $( "#tarea option:selected" ).text();
+		var nresponsable = $( "#respo option:selected" ).text();
+		var ntirespo = $( "#tirespo option:selected" ).text();
+		//$("#tarea").val()
+		table
+			.row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,
+				"<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>"+
+					"<i class='fa fa-pencil-square-o'></i>"+
+				"</button>",
+				"<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)''>"+
+					"<i class='fa fa-trash-o'></i>"+
+				"</button>"])
+			.draw()
+	}
 </script>
 @endsection
