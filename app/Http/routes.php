@@ -29,16 +29,12 @@ Route::post('password/reset', 'Auth\PasswordController@reset');
 
 Route::get('/', function () {
 	return redirect('/dashboard');
-	//return view('welcome');
 });
-
-# Visualizador de logs
-
 
 Route::get('/alcaldias', 'HomeController@alcaldias')->name('GET_alcaldias');
 
+# Visualizador de logs
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware('auth');
-//Route::get('/home', 'HomeController@index');
 
 Route::get('/dashboard', 'AppController@dashboard')->name('app_dashboard')->middleware('auth');
 
@@ -53,21 +49,36 @@ Route::group(['prefix' => 'api'], function(){
 	Route::group(['prefix' => 'tiplanes'], function(){
 		Route::get('/', "APIController@tiplanes");
 	});
+
 	Route::group(['prefix' => 'tareas'], function(){
 		Route::get('/', "APIController@tareas");
 		Route::get('/{ctarea}', "APIController@tarea");
 	});
+
 	Route::group(['prefix' => 'planes'], function(){
 		Route::get('/', "APIController@planes");
 		Route::get('/{cplan}', "APIController@plan");
 		Route::get('/{cplan}/usuarios', "APIController@usuarios_plan");
 	});
+
+	Route::group(['prefix' => 'actividades'], function(){
+		Route::get('/', "APIController@actividades");
+
+		Route::group(['prefix' => '{cactividad}'], function(){
+			Route::group(['prefix' => 'tareas'], function(){
+				Route::get('/{ctarea}/do', "APIController@realizar_tarea");
+			});
+		});
+	});
+
 	Route::group(['prefix' => 'evidencias'], function(){
 		Route::put('/{cevidencia}/set', "APIController@update_evidencia");
 	});
+
 	Route::group(['prefix' => 'usuarios'], function(){
 		Route::get('/', "APIController@usuarios");
 	});
+
 	Route::group(['prefix' => 'tirelaciones'], function(){
 		Route::get('/', "APIController@tirelaciones");
 	});

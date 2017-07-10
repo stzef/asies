@@ -8,12 +8,14 @@ use asies\Http\Requests;
 
 use asies\Models\Planes;
 use asies\Models\Tareas;
+use asies\Models\Actividades;
 use asies\User;
 use asies\Models\Personas;
 use asies\Models\Evidencias;
 use asies\Models\TiRelaciones;
 use asies\Models\TiPlanes;
 use asies\Models\TareasUsuarios;
+use asies\Models\AsignacionTareas;
 use \View;
 
 use Illuminate\Support\Facades\Validator;
@@ -86,6 +88,32 @@ class APIController extends Controller
 	/* API Usuarios */
 
 	/* API Actividades */
+
+	public function realizar_tarea( $catividad, $ctarea ){
+		$asignacion = AsignacionTareas::where("catividad",$catividad)->where("ctarea",$ctarea)->first();
+		$response = array( "ok" => true );
+		if ( $asignacion ){
+			$ifhecha = ( $asignacion->ifhecha == "1" ) ? "0" : "1";
+			$asignacion->ifhecha = $ifhecha;
+			if ( $asignacion->save() ){
+				$response["msg"] = "Se cambio el estado de la tarea.";
+				if ( $asignacion->ifhecha == "1" ){ $response["msg"] .= " <br> Estado Actual <b>Realizada</b>"; }
+				else{ $response["msg"] .= " <br> Estado Actual <b>No Realizada</b>"; }
+			}else{
+				$response["ok"] = false;
+				$response["msg"] = "No se pudo cambiar el estado de la tarea.";
+			}
+		}else{
+			$response["ok"] = false;
+			$response["msg"] = "No se encontro la asignacion";
+		}
+		return response()->json($response);
+	}
+
+	public function actividades(){
+		$actividades = Actividades::all();
+		return response()->json($actividades->toArray());
+	}
 	public function property(Request $request,$model,$id){
 		$response = array(
 			"error" => False,

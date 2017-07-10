@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Log;
 use asies\Models\Actividades;
 use asies\Models\Tareas;
 use asies\Models\Planes;
+use asies\Models\TiRelaciones;
+use asies\User;
 use Illuminate\Support\Facades\Validator;
 
 class TareasController extends Controller
@@ -24,6 +26,10 @@ class TareasController extends Controller
 	public function create(Request $request){
 
 		if ($request->isMethod('get')) {
+
+			$usuarios = User::all();
+			$relaciones = TiRelaciones::all();
+
 			return view( 'tareas.create', array(
 				"ajax" => array(
 					"url" => "/tareas/create" ,
@@ -32,6 +38,8 @@ class TareasController extends Controller
 				"action" => "create",
 				"crud_action" => "create",
 				"tarea" => null,
+				"usuarios" => $usuarios,
+				"relaciones" => $relaciones,
 				)
 			);
 
@@ -46,16 +54,16 @@ class TareasController extends Controller
 			[
 				'cplan' => 'required|exists:planes,cplan',
 				'ntarea' => 'required|max:255',
-				'valor_tarea' => 'required|numeric',
-				'ifhecha' => 'required|boolean',
+				// 'valor_tarea' => 'required|numeric',
+				// 'ifhecha' => 'required|boolean',
 			],
 			[
 				'cplan.required' => 'Eliga un Producto Minimo',
 				'cplan.exists' => 'El Pructo Minimo No existe.',
 				'ntarea.required' => 'El nombre del plan es requerido',
-				'valor_tarea.required' => 'Ingrese un valor para la Tarea',
-				'valor_tarea.numeric' => 'El valor de la tarea debe ser numerico',
-				'ifhecha.required' => 'La Tarea esta Completada?',
+				// 'valor_tarea.required' => 'Ingrese un valor para la Tarea',
+				// 'valor_tarea.numeric' => 'El valor de la tarea debe ser numerico',
+				// 'ifhecha.required' => 'La Tarea esta Completada?',
 			]
 		);
 
@@ -83,6 +91,9 @@ class TareasController extends Controller
 
 		if ( !$tarea ) return view('errors/generic',array('title' => 'Error Codigo.', 'message' => "La Tarea $ctarea no existe" ));
 
+		$usuarios = User::all();
+		$relaciones = TiRelaciones::all();
+
 		if ($request->isMethod('get')){
 			return view( 'tareas.create', array(
 				"ajax" => array(
@@ -92,6 +103,8 @@ class TareasController extends Controller
 				"action" => "edit",
 				"crud_action" => "edit",
 				"tarea" => $tarea,
+				"usuarios" => $usuarios,
+				"relaciones" => $relaciones,
 				)
 			);
 
@@ -103,8 +116,8 @@ class TareasController extends Controller
 				'ctarea' => 'required|exists:tareas,ctarea',
 				'cplan' => 'required|exists:planes,cplan',
 				'ntarea' => 'required|max:255',
-				'valor_tarea' => 'required|numeric',
-				'ifhecha' => 'required|boolean',
+				// 'valor_tarea' => 'required|numeric',
+				// 'ifhecha' => 'required|boolean',
 			],
 			[
 				'ctarea.required' => 'Eliga una Tarea',
@@ -112,9 +125,9 @@ class TareasController extends Controller
 				'cplan.required' => 'Eliga un Producto Minimo',
 				'cplan.exists' => 'El Pructo Minimo No existe.',
 				'ntarea.required' => 'El nombre del plan es requerido',
-				'valor_tarea.required' => 'Ingrese un valor para la Tarea',
-				'valor_tarea.numeric' => 'El valor de la tarea debe ser numerico',
-				'ifhecha.required' => 'La Tarea esta Completada?',
+				// 'valor_tarea.required' => 'Ingrese un valor para la Tarea',
+				// 'valor_tarea.numeric' => 'El valor de la tarea debe ser numerico',
+				// 'ifhecha.required' => 'La Tarea esta Completada?',
 			]
 		);
 

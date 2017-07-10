@@ -334,26 +334,26 @@
 		var cactividad = $("input#actividad_cactividad").val();
 
 
-	var data = serializeForm(that)
-	data.append("tareasusuarios[cactividad]",cactividad)
-	/*arreglar*/
-	var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
-	$.ajax({
-		"url":base_url_add_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
-		"type":"POST",
-		data: data,
-		cache:false,
-		contentType: false,
-		processData: false,
-		success: function(response){
-			alertify.success(response.data.message)
-			listar();
-		},
-		error: function(response){
-			alertify.error("Algo ha salido mal.")
-		}
-	})
-});
+		var data = serializeForm(that)
+		data.append("tareasusuarios[cactividad]",cactividad)
+		/*arreglar*/
+		var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
+		$.ajax({
+			"url":base_url_add_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
+			"type":"POST",
+			data: data,
+			cache:false,
+			contentType: false,
+			processData: false,
+			success: function(response){
+				alertify.success(response.data.message)
+				listar();
+			},
+			error: function(response){
+				alertify.error("Algo ha salido mal.")
+			}
+		})
+	});
 function editar(event,button){
 	var data = table.row( $(button).parents("tr")).data();
 	table.row( $(button).parents("tr")).remove().draw(false);

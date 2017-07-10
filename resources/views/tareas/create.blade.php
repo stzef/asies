@@ -15,7 +15,7 @@
 				</div>
 
 				<div class="panel-body">
-					<form class="form-horizontal">
+					<form class="form-horizontal" id="crear_tarea" >
 
 						<input type="hidden" class="form-control" id="tarea_ctarea" name="tarea[ctarea]" value="@if( $tarea){{ $tarea->ctarea }}@endif">
 						<div class="form-group">
@@ -57,13 +57,43 @@
 
 					</form>
 
-					<div class="asig_tareas col-md-12">
+					<div class="asig_tareas col-md-12 hide">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								Asociar a Actividades
 							</div>
 
 							<div class="panel-body">
+								<form action="" id="asignacion" class="form-horizontal">
+									<div class="form-group">
+										<label for="cactividad" class="col-sm-2 control-label">Actividad</label>
+										<div class="col-sm-10">
+											<select-activity required="required" name="tareasusuarios[cactividad]" id="cactividad" :activities="activities" @mounted="getActivities" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="cactividad" class="col-sm-2 control-label">Responsable</label>
+										<div class="col-sm-10">
+											<select  name="tareasusuarios[user]" id="respo" required class="form-control selectFind">
+												<option value="">Responsable</option>
+												@foreach ($usuarios as $usuario)
+													<option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="cactividad" class="col-sm-2 control-label">Responsabilidad</label>
+										<div class="col-sm-10">
+											<select  name="tareasusuarios[ctirelacion]" id="tirespo" required class="form-control" >
+												<option value="">Tipo de responsabilidad</option>
+												@foreach ($relaciones as $relacion)
+													<option value = "{{$relacion->ctirelacion}}">{{$relacion->ntirelacion}}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -79,11 +109,43 @@
 @section('scripts')
 <script>
 
-		if ( CRUD_ACTION == "create" ){
-			$(".asig_tareas").addClass("hide")
-		}
+	if ( CRUD_ACTION == "create" ){
+		$(".asig_tareas").addClass("hide")
+	}
 
-	$("form").submit(function(event){
+
+
+	$("#asignacion").submit(function(event){
+		event.preventDefault()
+		var that = this
+		var ctarea = $("#tarea_ctarea").val();
+		var cactividad = $("#cactividad").val();
+
+
+		var data = serializeForm(that)
+		data.append("tareasusuarios[ctarea]",ctarea)
+		/*arreglar*/
+		var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
+		$.ajax({
+			"url":base_url_add_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
+			"type":"POST",
+			data: data,
+			cache:false,
+			contentType: false,
+			processData: false,
+			success: function(response){
+				alertify.success(response.data.message)
+				listar();
+			},
+			error: function(response){
+				alertify.error("Algo ha salido mal.")
+			}
+		})
+	});
+
+
+
+	$("#crear_tarea").submit(function(event){
 		var that = this
 		event.preventDefault()
 		$.ajax({

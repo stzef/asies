@@ -1,15 +1,18 @@
 import Vue from 'vue';
 import SelectTask from './SelectTask.vue';
+import SelectActivity from './SelectActivity.vue';
 import TaskTree from './TaskTree.vue';
 
 new Vue({
 	el: '#vue-app',
 	components: {
-		'select-task': SelectTask,
-		'task-tree': TaskTree,
+		SelectTask,
+		SelectActivity,
+		TaskTree,
 	},
 	data: {
 		productos_minimos: [],
+		activities: [],
 		tiplanes: [],
 		planes: [],
 		treetask_select: '',
@@ -25,6 +28,15 @@ new Vue({
 				url: '/api/tareas',
 				success: (data) => {
 					this.productos_minimos = data;
+				},
+			});
+		},
+		getActivities() {
+			$.ajax({
+				type: 'GET',
+				url: '/api/actividades',
+				success: (data) => {
+					this.activities = data;
 				},
 			});
 		},
