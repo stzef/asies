@@ -38,11 +38,11 @@
                             </thead>
                             <tbody>
                                 @foreach($actividad->asignaciones as $asignacion)
-                                    <tr class="tarea @if( $asignacion->tarea->ifhecha == 1 ) hecha @else nohecha @endif ">
+                                    <tr class="tarea @if( $asignacion->ifhecha == 1 ) hecha @else nohecha @endif ">
                                         <td>{{ $asignacion->tarea->ntarea }}</td>
                                         <td>{{ $asignacion->relacion->ntirelacion }}</td>
                                         <td>{{ $asignacion->usuario->persona->nombreCompleto() }}</td>
-                                        <td> @if( $asignacion->tarea->ifhecha == 1 ) Si @else No @endif </td>
+                                        <td> @if( $asignacion->ifhecha == 1 ) Si @else No @endif </td>
                                         <td>{{ $asignacion->usuario->persona->telefono }}</td>
                                         <td>{{ $asignacion->usuario->persona->celular }}</td>
                                         <td>{{ $asignacion->usuario->email }}</td>

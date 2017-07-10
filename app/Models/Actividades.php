@@ -195,12 +195,12 @@ class Actividades extends Model
 	}
 
 	public function updateState(){
-		$response = array("message"=>"","ifhecha"=>null);
+		$response = array( "message" => "", "ifhecha" => null );
 		$tareas_no_hecha = \DB::table('asignaciontareas')
 			->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
-			->select('tareas.*')
+			->select('tareas.*','asignaciontareas.ifhecha','asignaciontareas.valor_tarea')
 			->where('asignaciontareas.cactividad', $this->cactividad)
-			->where('tareas.ifhecha', 0)
+			->where('asignaciontareas.ifhecha', 0)
 			->groupBy('ctarea')
 			->get();
 

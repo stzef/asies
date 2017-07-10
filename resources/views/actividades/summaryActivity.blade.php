@@ -89,7 +89,7 @@
                                                         <td title="{{$asignacion->tarea->ntarea}}">{{ str_limit($asignacion->tarea->ntarea, 30 ,$end="...") }}</td>
                                                         <td>{{$asignacion->usuario->name}}</td>
                                                         <td>{{$asignacion->relacion->ntirelacion}}</td>
-                                                        <td> @if( $asignacion->tarea->ifhecha ) Si @else No @endif </td>
+                                                        <td> @if( $asignacion->ifhecha ) Si @else No @endif </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

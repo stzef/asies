@@ -105,7 +105,7 @@
                                             {{ $tarea->ntarea }}
                                         </td>
                                         <td>
-                                            <input class="form-check-input" onclick="Models.Tareas.cambiarEstado(this.dataset.cactividad,this.dataset.ctarea,this.checked)" type="checkbox" data-ctarea="{{ $tarea->ctarea }}" data-cactividad="{{ $actividad->cactividad }}" name="ctarea_{{ $tarea->ctarea }}" @if ($tarea->ifhecha) checked @endif>
+                                            <input class="form-check-input" onclick="Models.Tareas.cambiarEstado(this.dataset.cactividad,this.dataset.ctarea)" type="checkbox" data-ctarea="{{ $tarea->ctarea }}" data-cactividad="{{ $actividad->cactividad }}" name="ctarea_{{ $tarea->ctarea }}" @if ($tarea->ifhecha) checked @endif>
                                         </td>
                                     </tr>
                                     <!--<div class="form-group row">
@@ -718,8 +718,6 @@
                             var data_request = new FormData()
                             data_request.append("tarea[cplan]",item[colstask.cplan])
                             data_request.append("tarea[ntarea]",item[colstask.ntarea])
-                            data_request.append("tarea[valor_tarea]",item[colstask.valor])
-                            data_request.append("tarea[ifhecha]",0)
 
                             $.ajax({
                                 type: "POST",

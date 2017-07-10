@@ -170,7 +170,6 @@ Models = {
 						var valor = subplan.ifhecha == "1" ? subplan.valor_tarea : 0
 						return {
 							text : subplan.ntarea + "(" + valor + ")",
-							//icon : subplan.icono,
 							li_attr : {
 								ctarea : subplan.ctarea,
 								valor : valor,
@@ -255,15 +254,12 @@ Models = {
 				}
 			})
 		},
-		cambiarEstado : function(cactividad,ctarea,ifhecha){
-			var ifhecha = ifhecha ? 1 : 0
+		cambiarEstado : function(cactividad,ctarea){
 			var base_url_cambio_estado_tarea = "/api/actividades/__cactividad__/tareas/__ctarea__/do"
 			$.ajax({
 				url : base_url_cambio_estado_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
 				type : "POST",
-				data : { ctarea : ctarea, ifhecha : ifhecha },
 				success : function(response){
-					console.log(response)
 					if ( response.ok ){
 						alertify.success( response.msg )
 					}else{
@@ -280,12 +276,11 @@ Models = {
 				url : "/actividades/checkDates",
 				type : "POST",
 				success : function (response) {
-					console.log(response)
 					var status = response.status.map(state => { return {emails:state.emails,failures:state.failures} })
 					var msg = "Se han enviado recordatorios a : "
-					status.forEach(o => {console.log( msg += o.emails.join(",<br>"))})
+					status.forEach( o => { msg += o.emails.join(",<br>") } )
 					msg += "<br> Han Ocurrido los errores : "
-					status.forEach(o => {console.log( msg += o.failures.join(",<br>"))})
+					status.forEach( o => { msg += o.failures.join(",<br>") } )
 					alertify.success("Los Recordatorios se han enviado.")
 					alertify.alert(msg)
 				},

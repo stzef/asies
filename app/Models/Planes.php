@@ -76,17 +76,26 @@ class Planes extends Model
 				->select('tareas.*','asignaciontareas.ifhecha','asignaciontareas.valor_tarea')
 				->where('tareas.cplan', $this->cplan)
 				->where('users.id', $iduser)
-				->groupBy('ctarea')
+				// ->groupBy('ctarea')
 				->get();
 		}else{
 			$tareas = \DB::table('asignaciontareas')
 				->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
 				->select('tareas.*','asignaciontareas.ifhecha','asignaciontareas.valor_tarea')
 				->where('tareas.cplan', $this->cplan)
-				->groupBy('ctarea')
+				// ->groupBy('ctarea')
 				->get();
 		}
-		return $tareas;
+		$arr = collect();
+		foreach ($tareas as $tarea) {
+			$obj_tarea = Tareas::where("ctarea",$tarea->ctarea)->first();
+			$obj_tarea->ifhecha = $tarea->ifhecha;
+			$obj_tarea->valor_tarea = $tarea->valor_tarea;
+			// dump($obj_tarea);exit();
+			$arr->push($obj_tarea);
+			# code...
+		}
+		return $arr;
 	}
 
 	public function getActividades(){
@@ -94,7 +103,6 @@ class Planes extends Model
 			->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
 			->join('planes', 'tareas.cplan', '=', 'tareas.cplan')
 			->select('asignaciontareas.cactividad')
-			//->where('tareas.ifhecha', 0)
 			->groupBy('cactividad')
 			->get();
 		$actividades = collect($actividades);
@@ -183,8 +191,10 @@ class Planes extends Model
 		$plan = Planes::where('cplan', $cplan)->first();
 		$plan->subplanes = Planes::with('tiplan')->with('puntuacion')->where('cplanmayor', $plan->cplan)->get();
 
-		if (Tareas::where('cplan',$cplan)->first()){
-			$plan->subplanes = Tareas::where('cplan', $cplan)->get();
+		$tareas = $plan->getTareas();
+
+		if ( count($tareas) != 0 ){
+			$plan->subplanes = $tareas;
 		}else{
 			if ( count($plan->subplanes) != 0 ){
 				foreach ($plan->subplanes as $subplan) {

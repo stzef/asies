@@ -89,19 +89,34 @@ class APIController extends Controller
 
 	/* API Actividades */
 
+	public function verificar_usuario( $cactividad, $ctarea, $iduser){
+		$flag = false;
+		if ( AsignacionTareas::where("user",$iduser)->where("cactividad",$this->cactividad)->where("ctarea",$this->ctarea)->exists() ){
+			$flag = true;
+		}
+		return $flag;
+	}
+
 	public function realizar_tarea( $cactividad, $ctarea ){
 		$asignacion = AsignacionTareas::where("cactividad",$cactividad)->where("ctarea",$ctarea)->first();
 		$response = array( "ok" => true );
+		$user = Auth::user();
 		if ( $asignacion ){
-			$ifhecha = ( $asignacion->ifhecha == "1" ) ? "0" : "1";
-			$asignacion->ifhecha = $ifhecha;
-			if ( $asignacion->save() ){
-				$response["msg"] = "Se cambio el estado de la tarea.";
-				if ( $asignacion->ifhecha == "1" ){ $response["msg"] .= " <br> Estado Actual <b>Realizada</b>"; }
-				else{ $response["msg"] .= " <br> Estado Actual <b>No Realizada</b>"; }
+
+			if ( $this->verificar_usuario($cactividad, $ctarea, $user->id) ){
+				$ifhecha = ( $asignacion->ifhecha == "1" ) ? "0" : "1";
+				$asignacion->ifhecha = $ifhecha;
+				if ( $asignacion->save() ){
+					$response["msg"] = "Se cambio el estado de la tarea.";
+					if ( $asignacion->ifhecha == "1" ){ $response["msg"] .= " <br> Estado Actual <b>Realizada</b>"; }
+					else{ $response["msg"] .= " <br> Estado Actual <b>No Realizada</b>"; }
+				}else{
+					$response["ok"] = false;
+					$response["msg"] = "No se pudo cambiar el estado de la tarea.";
+				}
 			}else{
 				$response["ok"] = false;
-				$response["msg"] = "No se pudo cambiar el estado de la tarea.";
+				$response["msg"] = "La tarea no esta asignada al usuario.";
 			}
 		}else{
 			$response["ok"] = false;
