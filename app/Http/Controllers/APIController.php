@@ -89,8 +89,8 @@ class APIController extends Controller
 
 	/* API Actividades */
 
-	public function realizar_tarea( $catividad, $ctarea ){
-		$asignacion = AsignacionTareas::where("catividad",$catividad)->where("ctarea",$ctarea)->first();
+	public function realizar_tarea( $cactividad, $ctarea ){
+		$asignacion = AsignacionTareas::where("cactividad",$cactividad)->where("ctarea",$ctarea)->first();
 		$response = array( "ok" => true );
 		if ( $asignacion ){
 			$ifhecha = ( $asignacion->ifhecha == "1" ) ? "0" : "1";

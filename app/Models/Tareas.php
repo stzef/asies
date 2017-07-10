@@ -1,6 +1,7 @@
 <?php
 
-namespace App;namespace asies\Models;
+// namespace App;
+namespace asies\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**

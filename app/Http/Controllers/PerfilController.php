@@ -22,16 +22,13 @@ class PerfilController extends Controller
 
 	public function actividades(Request $request){
 		$user = Auth::user();
-		$tareas = $user->getTareas();
 		$actividades = $user->getActividades();
 
 		foreach ($actividades as $actividad) {
 			$actividad->calcularDias();
-			//$objactividad = Actividades::where("cactividad",$actividad->cactividad)->first();
 			$actividad->tareas = $actividad->getTareas($user->id);
-			//$actividad->n_eviencias = $actividad->getEvidencias(true);
 		}
 
-		return view('perfil/dashboard', array( "tareas" => $tareas, "actividades" => $actividades ) );
+		return view('perfil/dashboard', array( "actividades" => $actividades ) );
 	}
 }

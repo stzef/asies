@@ -222,7 +222,7 @@ class Actividades extends Model
 			$tareas = \DB::table('asignaciontareas')
 				->join('users', 'asignaciontareas.user', '=', 'users.id')
 				->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
-				->select('tareas.*')
+				->select('tareas.*','asignaciontareas.ifhecha','asignaciontareas.valor_tarea')
 				->where('asignaciontareas.cactividad', $this->cactividad)
 				->where('users.id', $iduser)
 				->groupBy('ctarea')
@@ -230,7 +230,7 @@ class Actividades extends Model
 		}else{
 			$tareas = \DB::table('asignaciontareas')
 				->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
-				->select('tareas.*')
+				->select('tareas.*','asignaciontareas.ifhecha','asignaciontareas.valor_tarea')
 				->where('asignaciontareas.cactividad', $this->cactividad)
 				->groupBy('ctarea')
 				->get();

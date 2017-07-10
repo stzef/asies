@@ -3,6 +3,7 @@
 namespace asies\Models;
 
 use \DB;
+use asies\Models\AsignacionTareas;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -65,6 +66,27 @@ class Planes extends Model
 	 */
 	public function tareas(){
 		return $this->hasMany('App\Tarea', 'cplan', 'cplan');
+	}
+
+	public function getTareas($iduser=null){
+		if ( $iduser ){
+			$tareas = \DB::table('asignaciontareas')
+				->join('users', 'asignaciontareas.user', '=', 'users.id')
+				->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
+				->select('tareas.*','asignaciontareas.ifhecha','asignaciontareas.valor_tarea')
+				->where('tareas.cplan', $this->cplan)
+				->where('users.id', $iduser)
+				->groupBy('ctarea')
+				->get();
+		}else{
+			$tareas = \DB::table('asignaciontareas')
+				->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
+				->select('tareas.*','asignaciontareas.ifhecha','asignaciontareas.valor_tarea')
+				->where('tareas.cplan', $this->cplan)
+				->groupBy('ctarea')
+				->get();
+		}
+		return $tareas;
 	}
 
 	public function getActividades(){
@@ -218,7 +240,8 @@ class Planes extends Model
 		$prods_min = Planes::where("ctiplan",4)->get(); # Equivalente a Model::all()
 		$stpuntos = 0;
 		foreach ($prods_min as $prod_min) {
-			$tareas = Tareas::where("cplan",$prod_min->cplan)->orderBy("cplan")->get(); # Equivalente a Model::all()
+			$tareas = $prod_min->getTareas();
+			// $tareas = Tareas::where("cplan",$prod_min->cplan)->orderBy("cplan")->get(); # Equivalente a Model::all()
 			$spuntos = 0;
 			foreach ($tareas as $tarea) {
 				$puntos = 0;

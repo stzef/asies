@@ -255,19 +255,19 @@ Models = {
 				}
 			})
 		},
-		cambiarEstado : function(ctarea,ifhecha){
+		cambiarEstado : function(cactividad,ctarea,ifhecha){
 			var ifhecha = ifhecha ? 1 : 0
-			var base_url_cambio_estado_tarea = "/tareas/__ctarea__/change_state"
+			var base_url_cambio_estado_tarea = "/api/actividades/__cactividad__/tareas/__ctarea__/do"
 			$.ajax({
-				url : base_url_cambio_estado_tarea.set("__ctarea__",ctarea),
+				url : base_url_cambio_estado_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
 				type : "POST",
 				data : { ctarea : ctarea, ifhecha : ifhecha },
 				success : function(response){
-					var textEstado = response.hecha == 1 ? "Hecha" : "No Hecha"
+					console.log(response)
 					if ( response.ok ){
-						alertify.success("El Estado se ha Cambiado <br> Estado Actual : <b>__estado__</b>".set("__estado__",textEstado))
+						alertify.success( response.msg )
 					}else{
-						alertify.warning(response.message)
+						alertify.warning( response.msg )
 					}
 				},
 				error : function(response){},

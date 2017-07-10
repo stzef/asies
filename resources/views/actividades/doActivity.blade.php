@@ -105,7 +105,7 @@
                                             {{ $tarea->ntarea }}
                                         </td>
                                         <td>
-                                            <input class="form-check-input" onclick="Models.Tareas.cambiarEstado(this.dataset.ctarea,this.checked)" type="checkbox" data-ctarea="{{ $tarea->ctarea }}" name="ctarea_{{ $tarea->ctarea }}" @if ($tarea->ifhecha) checked @endif>
+                                            <input class="form-check-input" onclick="Models.Tareas.cambiarEstado(this.dataset.cactividad,this.dataset.ctarea,this.checked)" type="checkbox" data-ctarea="{{ $tarea->ctarea }}" data-cactividad="{{ $actividad->cactividad }}" name="ctarea_{{ $tarea->ctarea }}" @if ($tarea->ifhecha) checked @endif>
                                         </td>
                                     </tr>
                                     <!--<div class="form-group row">
@@ -299,15 +299,15 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($asignacion as $asignar)
+                                                    @foreach ($asignacion as $asignacion)
                                                         <tr>
-                                                            <td>{{$asignar->ctarea}}</td>
-                                                            <td title="{{$asignar->tarea->ntarea}}">{{ str_limit($asignar->tarea->ntarea, 30 ,$end="...") }}</td>
-                                                            <td>{{$asignar->user}}</td>
-                                                            <td>{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}}</td>
-                                                            <td>{{$asignar->ctirelacion}}</td>
-                                                            <td>{{$asignar->relacion->ntirelacion}}</td>
-                                                            <td> @if( $asignar->tarea->ifhecha ) Si @else No @endif </td>
+                                                            <td>{{ $asignacion->ctarea }}</td>
+                                                            <td title="{{ $asignacion->tarea->ntarea }}">{{ str_limit($asignacion->tarea->ntarea, 30 ,$end="...") }}</td>
+                                                            <td>{{ $asignacion->user }}</td>
+                                                            <td>{{ $usuario->persona->nombres }} {{ $usuario->persona->apellidos }}</td>
+                                                            <td>{{ $asignacion->ctirelacion }}</td>
+                                                            <td>{{ $asignacion->relacion->ntirelacion }}</td>
+                                                            <td> @if( $asignacion->ifhecha ) Si @else No @endif </td>
                                                             <td></td>
                                                             <td></td>
                                                         </tr>

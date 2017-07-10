@@ -66,7 +66,7 @@ Route::group(['prefix' => 'api'], function(){
 
 		Route::group(['prefix' => '{cactividad}'], function(){
 			Route::group(['prefix' => 'tareas'], function(){
-				Route::get('/{ctarea}/do', "APIController@realizar_tarea");
+				Route::post('/{ctarea}/do', "APIController@realizar_tarea");
 			});
 		});
 	});
