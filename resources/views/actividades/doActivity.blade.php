@@ -600,7 +600,7 @@
 			/*
 			var data = serializeForm(that)
 			data.append("tareasusuarios[cactividad]",cactividad)
-			var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
+			{{-- var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}" --}}
 			$.ajax({
 				"url":base_url_add_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
 				"type":"POST",
@@ -635,22 +635,23 @@
 		tabletask.row( $(button).parents("tr")).remove().draw(false);
 	}
 	function borrar(event,button){
-		//table.row( $(button).parents("tr")).remove().draw(false);
 
 		var ctarea = table.row($(button).closest("tr")).data()[cols.ctarea]
-		var ctirelacion = table.row($(button).closest("tr")).data()[cols.ctirela]
-		var cresponsable = table.row($(button).closest("tr")).data()[cols.crespo]
 
 		var cactividad = $("input#cactividad").val();
 
+		Models.Actividades.removerTarea(cactividad,ctarea,function(){
+			table.row( $(button).parents("tr")).remove().draw(false);
+		})
 
+		/*
 		var data = new FormData()
 		data.append("tareasusuarios[cactividad]",cactividad)
 		data.append("tareasusuarios[ctarea]",ctarea)
 		data.append("tareasusuarios[ctirelacion]",ctirelacion)
 		data.append("tareasusuarios[user]",cresponsable)
 
-		var base_url_remove_user_tarea = "{{ URL::route('DELETE_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
+		{{-- var base_url_remove_user_tarea = "{{ URL::route('DELETE_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}" --}}
 		$.ajax({
 			"url":base_url_remove_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
 			"type":"POST",
@@ -667,6 +668,7 @@
 				alertify.error("Algo ha salido mal.")
 			}
 		})
+		*/
 	}
 	var listar = function(){
 		var ctarea = $( "#tarea option:selected" ).val();
