@@ -115,7 +115,7 @@
 
 
 
-	$("#asignacion").submit(function(event){
+	/*$("#asignacion").submit(function(event){
 		event.preventDefault()
 		var that = this
 		var ctarea = $("#tarea_ctarea").val();
@@ -124,8 +124,7 @@
 
 		var data = serializeForm(that)
 		data.append("tareasusuarios[ctarea]",ctarea)
-		/*arreglar*/
-		var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}"
+		{{-- var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}" --}}
 		$.ajax({
 			"url":base_url_add_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
 			"type":"POST",
@@ -141,7 +140,7 @@
 				alertify.error("Algo ha salido mal.")
 			}
 		})
-	});
+	});*/
 
 
 
