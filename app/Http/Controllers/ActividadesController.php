@@ -168,7 +168,7 @@ class ActividadesController extends Controller
 		}
 	}
 
-	public function doActivity(Request $request,$cactividad){
+	public function doActivity(Request $request, $cactividad){
 
 		if ($request->isMethod('get')){
 			if ( $actividad = Actividades::where("cactividad", $cactividad)->first() ) {

@@ -254,7 +254,7 @@ Models = {
 				}
 			})
 		},
-		cambiarEstado : function(cactividad,ctarea){
+		cambiarEstado : function(cactividad,ctarea,cb){
 			var base_url_cambio_estado_tarea = "/api/actividades/__cactividad__/tareas/__ctarea__/do"
 			$.ajax({
 				url : base_url_cambio_estado_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
@@ -265,6 +265,9 @@ Models = {
 					}else{
 						alertify.warning( response.msg )
 					}
+					response.cactividad = cactividad
+					response.ctarea = ctarea
+					if ( typeof cb == "function" ) cb( response )
 				},
 				error : function(response){},
 			})

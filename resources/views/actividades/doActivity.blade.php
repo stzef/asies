@@ -105,7 +105,15 @@
 											{{ $tarea->ntarea }}
 										</td>
 										<td>
-											<input class="form-check-input" onclick="Models.Tareas.cambiarEstado(this.dataset.cactividad,this.dataset.ctarea)" type="checkbox" data-ctarea="{{ $tarea->ctarea }}" data-cactividad="{{ $actividad->cactividad }}" name="ctarea_{{ $tarea->ctarea }}" @if ($tarea->ifhecha) checked @endif>
+											<input
+												type="checkbox"
+												name="ctarea_{{ $tarea->ctarea }}"
+												class="form-check-input"
+												onclick="Models.Tareas.cambiarEstado(this.dataset.cactividad,this.dataset.ctarea, validar)"
+												data-ctarea="{{ $tarea->ctarea }}"
+												data-cactividad="{{ $actividad->cactividad }}"
+												@if ($tarea->ifhecha) checked @endif
+											>
 										</td>
 									</tr>
 									<!--<div class="form-group row">
@@ -502,6 +510,14 @@
 	<script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>
 
 	<script type="text/javascript">
+
+		function validar(response){
+			console.info(response)
+			if ( ! response.ok ){
+				$("[data-ctarea=" + response.ctarea + "]").prop("checked",false)
+			}
+		}
+
 		function setdataEvidencia(key,name,value){
 			Models.Evidencias.set(key,JSON.stringify([[name,value]]),function(response){
 				console.log(response)

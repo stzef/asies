@@ -16,7 +16,7 @@
 						<div class="panel-heading">
 							Dashboard <b>{{ Auth::user()->persona->nombreCompleto() }}</b>
 							@permission('planes.calculate_points')
-								<button class="btn btn-primary" onclick="Models.Planes.recalcular()">Recalcular Puntos</button>
+								<button class="btn btn-primary" onclick="local_recalcular_puntos()">Recalcular Puntos</button>
 							@endpermission
 						</div>
 						<div class="panel-body" style="overflow: overlay">
@@ -58,6 +58,13 @@
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 	<script type="text/javascript">
+
+		function local_recalcular_puntos(){
+			Models.Planes.recalcular(function(){
+				$("#charts_div").empty()
+				drawChart()
+			})
+		}
 
 		google.charts.load('current', {'packages':['gauge']});
 		google.charts.setOnLoadCallback(drawChart);
