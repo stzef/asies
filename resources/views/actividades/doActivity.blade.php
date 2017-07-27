@@ -201,7 +201,7 @@
 												</div>
 											</div>
 											<div class="form-group row">
-												<label for="" class="col-sm-2 col-form-label">Elaboro </label>
+												<label for="" class="col-sm-2 col-form-label">Elaboró </label>
 												<div class="col-sm-10">
 													<select required name="acta[user_elaboro]" class="form-control">
 														<option value="">Seleccione...</option>
@@ -213,7 +213,7 @@
 											</div>
 
 											<div class="form-group row">
-												<label for="" class="col-sm-2 col-form-label">Reviso </label>
+												<label for="" class="col-sm-2 col-form-label">Revisó </label>
 												<div class="col-sm-10">
 													<select required name="acta[user_reviso]" class="form-control">
 														<option value="">Seleccione...</option>
@@ -225,7 +225,7 @@
 											</div>
 
 											<div class="form-group row">
-												<label for="" class="col-sm-2 col-form-label">Aprobo </label>
+												<label for="" class="col-sm-2 col-form-label">Aprobó </label>
 												<div class="col-sm-10">
 													<select required name="acta[user_aprobo]" class="form-control">
 														<option value="">Seleccione...</option>

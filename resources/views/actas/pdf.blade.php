@@ -76,9 +76,9 @@
 			<td>{{ $acta->aprobo->persona->nombreCompleto() }}</td>
 		</tr>
 		<tr>
-			<td>Elaboró</td>
-			<td>Revisó</td>
-			<td>Aproboó</td>
+			<td> Elaboró </td>
+			<td> Revisó </td>
+			<td> Aproboó </td>
 		</tr>
 	</table>
 @endsection
