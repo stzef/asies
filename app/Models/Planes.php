@@ -76,14 +76,14 @@ class Planes extends Model
 				->select('tareas.*','asignaciontareas.ifhecha','asignaciontareas.valor_tarea')
 				->where('tareas.cplan', $this->cplan)
 				->where('users.id', $iduser)
-				// ->groupBy('ctarea')
+				->groupBy('tareas.ctarea')
 				->get();
 		}else{
 			$tareas = \DB::table('asignaciontareas')
 				->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
 				->select('tareas.*','asignaciontareas.ifhecha','asignaciontareas.valor_tarea')
 				->where('tareas.cplan', $this->cplan)
-				// ->groupBy('ctarea')
+				->groupBy('tareas.ctarea')
 				->get();
 		}
 		$arr = collect();
