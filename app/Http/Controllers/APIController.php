@@ -223,25 +223,37 @@ class APIController extends Controller
 
 	}
 	public function realizar_tarea( $cactividad, $ctarea ){
-		$asignacion = AsignacionTareas::where("cactividad",$cactividad)->where("ctarea",$ctarea)->first();
+		$asignaciones = AsignacionTareas::where("cactividad",$cactividad)->where("ctarea",$ctarea)->get();
+
+		$actividad = Actividades::where("cactividad",$cactividad)->first();
+
 		$response = array( "ok" => true );
 		$user = Auth::user();
-		if ( $asignacion ){
+		if ( count($asignaciones) != 0 ){
 
-			if ( $this->verificar_usuario($cactividad, $ctarea, $user->id) ){
-				$ifhecha = ( $asignacion->ifhecha == "1" ) ? "0" : "1";
-				$asignacion->ifhecha = $ifhecha;
-				if ( $asignacion->save() ){
-					$response["msg"] = "Se cambio el estado de la tarea.";
-					if ( $asignacion->ifhecha == "1" ){ $response["msg"] .= " <br> Estado Actual <b>Realizada</b>"; }
-					else{ $response["msg"] .= " <br> Estado Actual <b>No Realizada</b>"; }
+			foreach ($asignaciones as $asignacion ) {
+				// if ( $this->verificar_usuario($cactividad, $ctarea, $user->id) ){
+				if ( true ){
+					$ifhecha = ( $asignacion->ifhecha == "1" ) ? "0" : "1";
+					$asignacion->ifhecha = $ifhecha;
+					if ( $asignacion->save() ){
+						$response["msg"] = "Se cambio el estado de la tarea.";
+						if ( $asignacion->ifhecha == "1" ){ $response["msg"] .= " <br> Estado Actual <b>Realizada</b>"; }
+						else{ $response["msg"] .= " <br> Estado Actual <b>No Realizada</b>"; }
+
+						$actividad->updateState();
+
+						$noactividad = Actividades::where("cactividad",$cactividad)->first();
+						// dump($noactividad);exit();
+						if ( $noactividad->ifhecha == "1" ) $response["msg"] .= "La Actividad se ha completado";
+					}else{
+						$response["ok"] = false;
+						$response["msg"] = "No se pudo cambiar el estado de la tarea.";
+					}
 				}else{
 					$response["ok"] = false;
-					$response["msg"] = "No se pudo cambiar el estado de la tarea.";
+					$response["msg"] = "La tarea no esta asignada al usuario.";
 				}
-			}else{
-				$response["ok"] = false;
-				$response["msg"] = "La tarea no esta asignada al usuario.";
 			}
 		}else{
 			$response["ok"] = false;

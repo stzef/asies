@@ -196,16 +196,30 @@ class Actividades extends Model
 
 	public function updateState(){
 		$response = array( "message" => "", "ifhecha" => null );
+
+		/*
 		$tareas_no_hecha = \DB::table('asignaciontareas')
+			->join('actividades', 'asignaciontareas.cactividad', '=', 'actividades.cactividad')
 			->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
-			->select('tareas.*','asignaciontareas.ifhecha','asignaciontareas.valor_tarea')
+
+			->select('asignaciontareas.*')
+
 			->where('asignaciontareas.cactividad', $this->cactividad)
 			->where('asignaciontareas.ifhecha', 0)
-			->groupBy('ctarea')
-			->get();
 
+			->groupBy('asignaciontareas.ctarea')
+
+			->get();
+		*/
+		$tareas_no_hecha = Asignaciontareas::where("ifhecha",0)->where("cactividad",$this->cactividad)->first();
 		$ifhecha = null;
-		if ( count($tareas_no_hecha) == 0 ){
+
+		// dump($tareas_no_hecha);
+		// dump( $tareas_no_hecha );
+		// dump($this->cactividad);
+		// dump(count($tareas_no_hecha));
+
+		if ( ! $tareas_no_hecha ){
 			$ifhecha = 1;
 			$response["message"] = "La Actividad se completo";
 		}else{
