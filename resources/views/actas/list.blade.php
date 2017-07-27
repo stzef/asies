@@ -18,9 +18,9 @@
                                     <th>Numero del Acta</th>
                                     <th>Inicio de la reunion</th>
                                     <th>Fin de la reunion</th>
-                                    <th>Elaboro</th>
-                                    <th>Reviso</th>
-                                    <th>Aprobo</th>
+                                    <th>Elaboró</th>
+                                    <th>Revisó</th>
+                                    <th>Aprobó</th>
                                     <th>Enviar</th>
                                     <th>Imprimir</th>
                                 </tr>

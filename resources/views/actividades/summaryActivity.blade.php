@@ -39,7 +39,7 @@
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="" class="col-sm-4 col-form-label">Elaboro </label>
+										<label for="" class="col-sm-4 col-form-label">Elaboró </label>
 										<div class="col-sm-8">
 											<p> {{ $actividad->acta->elaboro->persona->nombreCompleto()}} </p>
 
@@ -47,14 +47,14 @@
 									</div>
 
 									<div class="form-group row">
-										<label for="" class="col-sm-4 col-form-label">Reviso </label>
+										<label for="" class="col-sm-4 col-form-label">Revisó </label>
 										<div class="col-sm-8">
 											<p> {{ $actividad->acta->reviso->persona->nombreCompleto()}} </p>
 										</div>
 									</div>
 
 									<div class="form-group row">
-										<label for="" class="col-sm-4 col-form-label">Aprobo </label>
+										<label for="" class="col-sm-4 col-form-label">Aprobó </label>
 										<div class="col-sm-8">
 											<p> {{ $actividad->acta->aprobo->persona->nombreCompleto()}} </p>
 										</div>
