@@ -212,7 +212,8 @@ class ActividadesController extends Controller
 				$evidencias = $actividad->getEvidencias();
 				$asignaciones = [];
 				if( $actividad->acta ){
-					$asignaciones = $actividad->acta->getAsistentes();
+					// $asignaciones = $actividad->acta->getAsistentes();
+					$asignaciones = $actividad->getAsignacion();
 				}
 				return view( 'actividades.summaryActivity' , array(
 					'tareas' => $tareas,
