@@ -39,6 +39,8 @@ Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->m
 Route::get('/dashboard', 'AppController@dashboard')->name('app_dashboard')->middleware('auth');
 
 Route::group(['prefix' => 'api'], function(){
+	Route::post('/testerror', "APIController@testerror");
+	Route::post('/testsuccess', "APIController@testsuccess");
 
 	Route::group(['prefix' => '{model}'], function(){
 		Route::group(['prefix' => '{id}'], function(){

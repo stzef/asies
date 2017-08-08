@@ -18,6 +18,14 @@ class PasswordController extends Controller
 	|
 	*/
 
+	/**
+	 * Where to redirect users after login / registration.
+	 *
+	 * @var string
+	 */
+	protected $redirectTo = '/dashboard';
+
+
 	use ResetsPasswords;
 
 	/**

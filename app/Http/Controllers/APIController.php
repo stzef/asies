@@ -31,6 +31,12 @@ class APIController extends Controller
 		$this->middleware('auth');
 	}
 
+	public function testerror(){
+		response()->json([],404);
+	}
+	public function testsuccess(){
+		response()->json([],200);
+	}
 	/* API Planes */
 	public function plan($cplan){
 		$plan = Planes::with('puntuacion')->with('tiplan')->where("cplan",$cplan)->first();
