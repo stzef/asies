@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Log;
  * @property Tiactividade $tiactividade
  * @property Actividadestarea[] $actividadestareas
  * @property Asignaciontarea[] $asignaciontareas
- * @property Evidencia[] $evidencias
+ * @property Evidencias[] $evidencias
  */
 class Actividades extends Model
 {
@@ -72,7 +72,7 @@ class Actividades extends Model
 	}
 
 	public function evidencias(){
-		return $this->hasMany('asies\Models\Evidencia', 'cactividad', 'cactividad');
+		return $this->hasMany('asies\Models\Evidencias', 'cactividad', 'cactividad');
 	}
 
 	public function add_task_user($data,$cactividad=null){
@@ -211,7 +211,7 @@ class Actividades extends Model
 
 			->get();
 		*/
-		$tareas_no_hecha = Asignaciontareas::where("ifhecha",0)->where("cactividad",$this->cactividad)->first();
+		$tareas_no_hecha = AsignacionTareas::where("ifhecha",0)->where("cactividad",$this->cactividad)->first();
 		$ifhecha = null;
 
 		// dump($tareas_no_hecha);
@@ -219,9 +219,28 @@ class Actividades extends Model
 		// dump($this->cactividad);
 		// dump(count($tareas_no_hecha));
 
+		$ifhecha = 0;
 		if ( ! $tareas_no_hecha ){
-			$ifhecha = 1;
-			$response["message"] = "La Actividad se completo";
+			if ( $this->ifacta ){
+				if ( $this->cacta ){
+					$ifhecha = 1;
+					$response["message"] = "La Actividad se completo";
+				}else{
+					$response["message"] = "Las Tareas se completaron pero no se ha creado acta";
+					$ifhecha = 0;
+				}
+			}else{
+				$ifhecha = 1;
+				$response["message"] = "La Actividad se completo";
+			}
+			if ( count($this->evidencias) > 0 ){
+				$ifhecha = 1;
+				$response["message"] = "La Actividad se completo";
+			}else{
+				$response["message"] = "Las Tareas se completaron pero no se ha creado evidencias";
+				$ifhecha = 0;
+			}
+
 		}else{
 			$ifhecha = 0;
 		}

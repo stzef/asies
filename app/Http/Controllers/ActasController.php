@@ -78,6 +78,9 @@ class ActasController extends Controller
 
 		Actividades::where("cactividad",$dataBody["acta"]["cactividad"])->update(["cacta"=>$acta->idacta]);
 
+		$actividad = Actividades::where("cactividad",$dataBody["acta"]["cactividad"])->first();
+		$actividad->updateState();
+
 		return response()->json(array("obj"=>$acta->toArray()));
 	}
 

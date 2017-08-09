@@ -124,8 +124,24 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					Resumen Actividad : {{ $actividad->nactividad }}
-					<a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a>
+					<div class="row">
+						<div class="col-md-7">
+							<h4>
+								Resumen Actividad : {{ $actividad->nactividad }}
+								@if ( $actividad->ifhecha )
+									<div class="label label-info">
+										Actividad Completada
+									</div>
+								@endif
+							</h4>
+						</div>
+						<div class="col-md-5">
+							@if ( ! $actividad->ifhecha )
+								<a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a>
+							@endif
+							<a class="btn btn-danger" href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}">Salir</a>
+						</div>
+					</div>
 				</div>
 
 				<div class="panel-body">

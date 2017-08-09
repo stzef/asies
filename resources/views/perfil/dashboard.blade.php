@@ -44,10 +44,17 @@
 								<div class="col-md-7">
 									<h4>
 										Actividad : {{ $actividad->nactividad }}
+									@if ( $actividad->ifhecha )
+										<div class="label label-info">
+											Actividad Completada
+										</div>
+									@endif
 									</h4>
 								</div>
 								<div class="col-md-5">
-									<a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a>
+									@if ( ! $actividad->ifhecha )
+										<a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a>
+									@endif
 									<a class="btn btn-primary" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a>
 									@permission('activities.crud')
 										<a class="btn btn-primary" href="{{ URL::route('GET_actividades_edit',['cactividad'=>$actividad->cactividad]) }}">Editar</a>

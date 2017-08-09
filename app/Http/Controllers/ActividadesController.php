@@ -298,12 +298,17 @@ class ActividadesController extends Controller
 					'fregistro' => date("Y-m-d H:i:s"),
 					'nombre' => $filename_clean,
 				));
+
+				$actividad = Actividades::where("cactividad",$cactividad)->first();
+				$actividad->updateState();
+
 						$filest = array();
 						$filest['name'] = $picture;
 						$filest['size'] = $this->get_file_size($destinationPath.$picture);
 						$filest['url'] = $destinationPath1.$picture;
 						$filest['evidencia'] = $evidencia->cevidencia;
 						$filest['nombre'] = $evidencia->nombre;
+
 				$filest['thumbnailUrl'] = $thumbnailUrl;
 				$filesa['files'][]=$filest;
 

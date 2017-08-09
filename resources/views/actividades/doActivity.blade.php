@@ -22,6 +22,7 @@
 				<div class="panel-heading">
 					Realizando Actividad : {{ $actividad->nactividad }}
 					<a class="btn btn-primary" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a>
+					<a class="btn btn-danger" href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}">Salir</a>
 				</div>
 
 				<div class="panel-body">
@@ -80,14 +81,16 @@
 								</div>
 							@else
 								@permission('actas.crud')
-									<button type="button" class="btn btn-primary " id="btn_crear_acta" data-toggle="modal" data-target="#modalCrearActa">
-										<i class="glyphicon glyphicon-plus"></i>
-										Crear Acta
-									</button>
+									<div class="well">
+										<button type="button" class="btn btn-primary " id="btn_crear_acta" data-toggle="modal" data-target="#modalCrearActa">
+											<i class="glyphicon glyphicon-plus"></i>
+											Crear Acta
+										</button>
+									</div>
 								@endpermission
 							@endif
 							<div class="alert alert-info">
-								{{ $actividad->getEvidencias(true) }} EVidencias
+								{{ $actividad->getEvidencias(true) }} Evidencias
 							</div>
 						</div>
 

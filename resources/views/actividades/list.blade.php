@@ -32,7 +32,14 @@
                 <tbody>
                     @foreach ($actividades as $actividad)
                         <tr>
-                            <td>{{$actividad->nactividad}}</td>
+                            <td>
+                                {{$actividad->nactividad}}
+                                @if ( ! $actividad->ifhecha )
+                                    <div class="label label-info">
+                                        Actividad Completada
+                                    </div>
+                                @endif
+                            </td>
                             <!-- <td>{{$actividad->ffin}}</td> -->
                             <td>
                                 @permission('activities.crud')
