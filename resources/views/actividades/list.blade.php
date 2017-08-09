@@ -34,7 +34,7 @@
                         <tr>
                             <td>
                                 {{$actividad->nactividad}}
-                                @if ( ! $actividad->ifhecha )
+                                @if ( $actividad->ifhecha )
                                     <div class="label label-info">
                                         Actividad Completada
                                     </div>
