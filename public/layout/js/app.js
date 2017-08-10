@@ -292,7 +292,6 @@ Models = {
 						for (k in response.emails ) {
 							msg += response.emails[k] + ",<br>"
 						}
-
 					}
 
 					msg += "<br> Han Ocurrido los errores : "

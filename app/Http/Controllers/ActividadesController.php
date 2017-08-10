@@ -246,7 +246,7 @@ class ActividadesController extends Controller
 
 			// $actividades["retrasadas"] = [$actividades["retrasadas"][0]];
 
-			foreach ($actividades["retrasadas"] as $actividad) {
+			foreach ($actividades["pendientes"] as $actividad) {
 				$status = Actividades::sendEmailsReminder($actividad);
 				array_push($response["status"], $status);
 				foreach ($status["emails"] as $email) { array_push($response["emails"], $email); }
