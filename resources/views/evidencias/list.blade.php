@@ -45,7 +45,7 @@
                     		@if ( !$actividad )
 	                            <td>
 		                            <a href="{{ route('GET_lista_evidencias',['cactividad'=>$evidencia->actividad->cactividad]) }}">
-		                                {{$evidencia->actividad->nactividad}}
+		                                {{ $evidencia->actividad->cactividad }} - {{ $evidencia->actividad->nactividad }}
 		                            </a>
 	                            </td>
                     		@endif

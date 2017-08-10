@@ -142,6 +142,9 @@
 							<a class="btn btn-danger" href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}">Salir</a>
 						</div>
 					</div>
+					<div class="label label-info">
+						{{ $actividad->fini }}
+					</div>
 				</div>
 
 				<div class="panel-body">
@@ -191,7 +194,14 @@
 										<p>{{ $tarea->ntarea }}</p>
 									</td>
 									<td>
-										<input class="form-check-input" disabled type="checkbox" data-ctarea="{{ $tarea->ctarea }}" name="ctarea_{{ $tarea->ctarea }}" @if ($tarea->ifhecha) checked @endif>
+										<input
+											class="form-check-input toggle-do"
+											disabled
+											type="checkbox"
+											data-ctarea="{{ $tarea->ctarea }}"
+											name="ctarea_{{ $tarea->ctarea }}"
+											@if ($tarea->ifhecha) checked @endif
+										>
 									</td>
 								</tr>
 							@endforeach

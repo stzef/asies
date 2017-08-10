@@ -22,8 +22,9 @@
             <table class="table table-bordered tabla-hover table-responsive" cellspacing="0">
                 <thead>
                     <tr>
+                        <th>It</th>
                         <th>Nombre</th>
-                        <!-- <th>Fecha</th> -->
+                        <th>Fecha</th>
                         <th>Editar</th>
                         <th>Realizar</th>
                         <th>Resumen</th>
@@ -33,6 +34,9 @@
                     @foreach ($actividades as $actividad)
                         <tr>
                             <td>
+                                {{$actividad->cactividad}}
+                            </td>
+                            <td>
                                 {{$actividad->nactividad}}
                                 @if ( $actividad->ifhecha )
                                     <div class="label label-info">
@@ -40,7 +44,7 @@
                                     </div>
                                 @endif
                             </td>
-                            <!-- <td>{{$actividad->ffin}}</td> -->
+                            <td>{{$actividad->fini}}</td>
                             <td>
                                 @permission('activities.crud')
                                     <a class="btn btn-primary" href="{{ URL::route('GET_actividades_edit',['cactividad'=>$actividad->cactividad]) }}">Editar</a>

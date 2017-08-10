@@ -20,9 +20,21 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					Realizando Actividad : {{ $actividad->nactividad }}
-					<a class="btn btn-primary" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a>
-					<a class="btn btn-danger" href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}">Salir</a>
+
+					<div class="row">
+						<div class="col-md-7">
+							<h4>
+								Realizando Actividad {{ $actividad->cactividad }} : {{ $actividad->nactividad }}
+							</h4>
+						</div>
+						<div class="col-md-5">
+							<a class="btn btn-primary" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a>
+							<a class="btn btn-danger" href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}">Salir</a>
+						</div>
+					</div>
+					<div class="label label-info">
+						{{ $actividad->fini }}
+					</div>
 				</div>
 
 				<div class="panel-body">
@@ -111,8 +123,8 @@
 											<input
 												type="checkbox"
 												name="ctarea_{{ $tarea->ctarea }}"
-												class="form-check-input"
-												onclick="Models.Tareas.cambiarEstado(this.dataset.cactividad,this.dataset.ctarea, validar)"
+												class="form-check-input toggle-do"
+												onchange="Models.Tareas.cambiarEstado(this.dataset.cactividad,this.dataset.ctarea, validar)"
 												data-ctarea="{{ $tarea->ctarea }}"
 												data-cactividad="{{ $actividad->cactividad }}"
 												@if ($tarea->ifhecha) checked @endif

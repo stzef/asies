@@ -16,6 +16,7 @@
         <table class="actividades_retrasadas table">
             <thead>
                 <tr>
+                    <th>It</th>
                     <th>Actividad</th>
                     <th>Fecha</th>
                     <th>Dias Retraso</th>
@@ -25,8 +26,10 @@
             <tbody>
                 @foreach ($actividades["retrasadas"] as $actividad)
                     <tr>
+                        <td>{{ $actividad->cactividad }}</td>
                         <td>{{ $actividad->nactividad }}</td>
-                        <td>{{ date('Y-m-d',strtotime($actividad->ffin)) }}</td>
+                        <!-- <td> {{-- date('Y-m-d',strtotime($actividad->ffin)) --}} </td> -->
+                        <td> {{ $actividad->fini }} </td>
                         <td>{{ $actividad->dias_retraso }}</td>
                         <td>
                             <a class="btn btn-primary" target="_blank" href="{{ URL::route('GET_detalle_actividad',['cactividad'=>$actividad->cactividad]) }}">Detalle</a>
@@ -41,6 +44,7 @@
         <table class="actividades_pendientes table">
             <thead>
                 <tr>
+                    <th>It</th>
                     <th>Actividad</th>
                     <th>Fecha</th>
                     <th>Dias Faltantes</th>
@@ -49,8 +53,9 @@
             <tbody>
                 @foreach ($actividades["pendientes"] as $actividad)
                     <tr>
+                        <td>{{ $actividad->cactividad }}</td>
                         <td>{{ $actividad->nactividad }}</td>
-                        <td>{{ date('Y-m-d',strtotime($actividad->ffin)) }}</td>
+                        <td>{{ $actividad->fini }}</td>
                         <td>{{ $actividad->dias_faltantas }}</td>
                     </tr>
                 @endforeach
@@ -62,6 +67,7 @@
         <table class="actividades_realizadas table">
             <thead>
                 <tr>
+                    <th>It</th>
                     <th>Actividad</th>
                     <th>Fecha</th>
                     <th></th>
@@ -70,8 +76,9 @@
             <tbody>
                 @foreach ($actividades["realizadas"] as $actividad)
                     <tr>
+                        <td>{{ $actividad->cactividad }}</td>
                         <td>{{ $actividad->nactividad }}</td>
-                        <td>{{ date('Y-m-d',strtotime($actividad->ffin)) }}</td>
+                        <td>{{ $actividad->ffin }}</td>
                         <td>
                             <a class="btn btn-primary" target="_blank" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a>
                         </td>

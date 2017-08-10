@@ -44,6 +44,7 @@
     <!-- Datetimepicker JS -->
     <link rel="stylesheet" href="{{ URL::asset('vendor/datetimepicker/css/bootstrap-datetimepicker-standalone.css') }}" >
 
+    <link href="{{ URL::asset('bootstrap-toggle/bootstrap-toggle.min.css') }}" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -292,7 +293,19 @@
 
     <!-- <script src="{{ URL::asset('bower_components/vue/dist/vue.js') }}"></script> -->
     <script src="{{ URL::asset('layout/js/app.js') }}"></script>
+    <script src="{{ URL::asset('bootstrap-toggle/bootstrap-toggle.min.js') }}"></script>
     <script>
+      $(function() {
+
+            $('.toggle-do').bootstrapToggle({
+                on: 'Si',
+                off: 'No',
+                onstyle: 'success',
+                offstyle: 'danger',
+            });
+
+        })
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -315,7 +328,6 @@
 
     </script>
     <script src="{{ URL::asset('components/dist/build.js') }}"></script>
-
 
     @yield('scripts')
 

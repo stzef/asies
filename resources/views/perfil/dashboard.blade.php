@@ -43,13 +43,16 @@
 
 								<div class="col-md-7">
 									<h4>
-										Actividad : {{ $actividad->nactividad }}
+										Actividad {{ $actividad->cactividad }} : {{ $actividad->nactividad }}
 									@if ( $actividad->ifhecha )
 										<div class="label label-info">
 											Actividad Completada
 										</div>
 									@endif
 									</h4>
+									<div class="label label-info">
+										{{ $actividad->fini }}
+									</div>
 								</div>
 								<div class="col-md-5">
 									@if ( ! $actividad->ifhecha )
