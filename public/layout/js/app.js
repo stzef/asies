@@ -285,9 +285,9 @@ Models = {
 					var status = response.status.map(state => { return {emails:state.emails,failures:state.failures} })
 					console.info(status)
 					var msg = "Se han enviado recordatorios a : "
-					status.forEach( o => { msg += o.emails.join(",<br>") } )
+					response.emails.forEach( email => { msg += email + ",<br>" } )
 					msg += "<br> Han Ocurrido los errores : "
-					status.forEach( o => { msg += o.failures.join(",<br>") } )
+					response.failures.forEach( email => { msg += email + ",<br>" } )
 					alertify.success("Los Recordatorios se han enviado.")
 					console.info(msg)
 					alertify.alert(msg)
