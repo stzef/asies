@@ -145,9 +145,11 @@ class Actividades extends Model
 			'emails' => $emails,
 		);
 
-		$status = \Mail::send('emails.reminderActivity', $data, function ($message) use ($data){
+		/*$status = \Mail::send('emails.reminderActivity', $data, function ($message) use ($data){
 			$message->to($data["emails"])->subject('Recordatorio de Actividades');
-		});
+		});*/
+
+		$status = [];
 
 		return [
 			"status" => $status,
