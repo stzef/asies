@@ -242,9 +242,9 @@ class ActividadesController extends Controller
 		}elseif($request->isMethod('post')){
 			$response = array("message"=>"","status"=>array());
 
-			$actividades["retrasadas"] = [$actividades["retrasadas"][0]];
+			// $actividades["retrasadas"] = [$actividades["retrasadas"][0]];
 
-			$actividades["retrasadas"] = [$actividades["retrasadas"][0]];
+			// $actividades["retrasadas"] = [$actividades["retrasadas"][0]];
 
 			foreach ($actividades["retrasadas"] as $actividad) {
 				$status = Actividades::sendEmailsReminder($actividad);
