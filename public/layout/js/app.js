@@ -275,19 +275,25 @@ Models = {
 	},
 	"Actividades" : {
 		"sendReminders" : function(){
+			waitingDialog.show("Enviando Correos")
 			$.ajax({
 				url : "/actividades/checkDates",
 				type : "POST",
 				success : function (response) {
+					waitingDialog.hide()
+					console.info(response)
 					var status = response.status.map(state => { return {emails:state.emails,failures:state.failures} })
+					console.info(status)
 					var msg = "Se han enviado recordatorios a : "
 					status.forEach( o => { msg += o.emails.join(",<br>") } )
 					msg += "<br> Han Ocurrido los errores : "
 					status.forEach( o => { msg += o.failures.join(",<br>") } )
 					alertify.success("Los Recordatorios se han enviado.")
+					console.info(msg)
 					alertify.alert(msg)
 				},
 				error : function (response) {
+					waitingDialog.hide()
 					alertify.error("Ha ocurrido un error al enviar los Recordatorios.")
 				},
 			})
