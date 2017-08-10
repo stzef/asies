@@ -250,6 +250,22 @@ class Actividades extends Model
 		return $response;
 	}
 
+	public function getStateTareas(){
+		$tareas = $this->getTareas();
+		$state = [
+			"ok" => 0,
+			"not_ok" => 0,
+			"total" => count($tareas),
+		];
+		foreach ($tareas as $tarea) {
+			if ( $tarea->ifhecha == "1" ){
+				$state["ok"] += 1;
+			}else{
+				$state["not_ok"] += 1;
+			}
+		}
+		return $state;
+	}
 	public function getTareas($iduser=null){
 		if ( $iduser ){
 			$tareas = \DB::table('asignaciontareas')

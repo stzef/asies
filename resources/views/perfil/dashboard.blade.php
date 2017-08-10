@@ -38,21 +38,42 @@
 						<h2>No tiene actividades asignadas</h2>
 					@endif
 					@foreach ($actividades as $actividad)
-						<div class="well container-actividad">
+						@php
+							$local_state = $actividad->getStateTareas()
+						@endphp
+
+						<div class="
+							@if($actividad->ifhecha)
+								alert alert-success
+							@elseif( $local_state['ok'] > $local_state['not_ok'] )
+								alert alert-warning
+							@else
+								well
+							@endif
+							container-actividad
+						"
+						>
 							<div class="row">
 
 								<div class="col-md-7">
 									<h4>
 										Actividad {{ $actividad->cactividad }} : {{ $actividad->nactividad }}
-									@if ( $actividad->ifhecha )
-										<div class="label label-info">
-											Actividad Completada
-										</div>
-									@endif
 									</h4>
-									<div class="label label-info">
-										{{ $actividad->fini }}
-									</div>
+									<h4>
+										@if ( $actividad->ifhecha )
+											<div class="label label-info">
+												Actividad Completada
+											</div>
+										@endif
+										@if( $local_state["ok"] != $local_state["total"] )
+											<div class="label label-info">
+												{{ $local_state["ok"] }} de {{ $local_state["total"] }} Tareas
+											</div>
+										@endif
+										<div class="label label-info">
+											{{ $actividad->fini }}
+										</div>
+									</h4>
 								</div>
 								<div class="col-md-5">
 									@if ( ! $actividad->ifhecha )
