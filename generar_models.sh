@@ -16,3 +16,13 @@ php artisan krlove:generate:model ActasAsistentes --table-name=actasasistentes
 php artisan krlove:generate:model Tareas --table-name=tareas
 
 php artisan krlove:generate:model AsignacionTareas --table-name=asignaciontareas
+
+
+################################################
+php artisan krlove:generate:model Checklists --table-name=checklists
+php artisan krlove:generate:model TiPreguntas --table-name=tipreguntas
+php artisan krlove:generate:model Preguntas --table-name=preguntas
+php artisan krlove:generate:model Opciones --table-name=opciones
+php artisan krlove:generate:model Respuestas --table-name=respuestas
+php artisan krlove:generate:model ChecklistDeta --table-name=checklistdeta
+php artisan krlove:generate:model OpcionesPregunta --table-name=opcionespregunta
