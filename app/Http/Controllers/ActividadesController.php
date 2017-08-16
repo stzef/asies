@@ -14,6 +14,13 @@ use asies\Models\Actas;
 use asies\Models\TiActividades;
 use asies\Models\Parametros;
 use asies\Models\TiRelaciones;
+
+// use asies\Models\ChecklistPreguntas;
+// use asies\Models\Checklists;
+// use asies\Models\Preguntas;
+// use asies\Models\OpcionesPregunta;
+// use asies\Models\Opciones;
+
 use asies\User;
 use Illuminate\Support\Facades\Log;
 use \Auth;
@@ -179,6 +186,9 @@ class ActividadesController extends Controller
 				$tiactividades = TiActividades::all();
 				$relaciones = TiRelaciones::all();
 				$asignacion = $actividad->getAsignacion();
+
+				$actividad->checklist = $actividad->getChecklist();
+
 				return view( 'actividades.doActivity' , array(
 					'tareas' => $tareas,
 					'actividad' => $actividad,

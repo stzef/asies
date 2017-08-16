@@ -357,4 +357,23 @@ class Actividades extends Model
 			return $evidencias;
 		}
 	}
+	public function getChecklist(){
+
+		$checklist = null;
+		$cactividad = $this->cactividad;
+
+		$checklist = Checklists::where("cactividad",$cactividad)->first();
+		if ( $checklist ){
+			$cpreguntas = ChecklistPreguntas::select('cpregunta')->where("cchecklist",$checklist->cchecklist)->get();
+			$checklist->preguntas = Preguntas::whereIn('cpregunta', $cpreguntas)->get();
+			foreach ($checklist->preguntas as $pregunta) {
+				$copciones = OpcionesPregunta::select("copcion")->where("cpregunta",$pregunta->cpregunta)->get();
+				$pregunta->opciones = Opciones::whereIn("copcion",$copciones)->get();
+				$pregunta->respuesta = ChecklistDeta::where("cchecklist",$checklist->cchecklist)->where("cpregunta",$pregunta->cpregunta)->first();
+			}
+
+			$checklist = $checklist;
+		}
+	return $checklist;
+	}
 }

@@ -5,15 +5,18 @@ namespace asies\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property integer $id
+ * @property integer $cchecklist
  * @property integer $cactividad
  * @property string $fecha
  * @property string $nombre
- * @property Actividade $actividade
- * @property ChecklistDeta[] $checklistdetas
+ * @property Actividades $actividade
+ * @property ChecklistDeta[] $checklistdeta
+ * @property ChecklistPregunta[] $checklistpregunta
  */
 class Checklists extends Model
 {
+    protected $primaryKey = "cchecklist";
+
     /**
      * @var array
      */
@@ -22,7 +25,7 @@ class Checklists extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function actividad()
+    public function actividades()
     {
         return $this->belongsTo('asies\Models\Actividades', 'cactividad', 'cactividad');
     }
@@ -32,6 +35,14 @@ class Checklists extends Model
      */
     public function checklistdeta()
     {
-        return $this->hasMany('asies\Models\ChecklistDeta', 'cchecklist');
+        return $this->hasMany('asies\Models\ChecklistDeta', 'cchecklist', 'cchecklist');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function checklistpregunta()
+    {
+        return $this->hasMany('asies\Models\ChecklistPregunta', 'cchecklist', 'cchecklist');
     }
 }

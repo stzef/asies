@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $cpregunta
  * @property integer $copcion
  * @property Preguntas $pregunta
- * @property Opciones $opcion
+ * @property Opciones $opcione
  */
 class OpcionesPregunta extends Model
 {
@@ -30,7 +30,7 @@ class OpcionesPregunta extends Model
      */
     public function pregunta()
     {
-        return $this->belongsTo('asies\Models\Preguntas', 'cpregunta');
+        return $this->belongsTo('asies\Models\Preguntas', 'cpregunta', 'cpregunta');
     }
 
     /**
@@ -38,6 +38,6 @@ class OpcionesPregunta extends Model
      */
     public function opcion()
     {
-        return $this->belongsTo('asies\Models\Opciones', 'copcion');
+        return $this->belongsTo('asies\Models\Opciones', 'copcion', 'copcion');
     }
 }

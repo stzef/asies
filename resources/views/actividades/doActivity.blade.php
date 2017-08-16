@@ -100,6 +100,16 @@
 										</button>
 									</div>
 								@endpermission
+
+								@if ( $actividad->checklist )
+									<div class="well">
+										<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modalChecklist">
+											<i class="glyphicon glyphicon-plus"></i>
+											Checklist
+										</button>
+									</div>
+								@endif
+
 							@endif
 							<div class="alert alert-info">
 								{{ $actividad->getEvidencias(true) }} Evidencias
@@ -145,6 +155,95 @@
 						</table>
 					</div>
 
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modalChecklist" tabindex="-1" role="dialog" aria-labelledby="modalChecklistLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h2 class="modal-title" id="modalChecklistLabel">Checklist</h2>
+				</div>
+
+				<div class="modal-body">
+					@if( $actividad->checklist )
+						<input type="hidden" value="{{ $actividad->checklist->cchecklist }}" id="cchecklist" name="cchecklist">
+						<table class="table" id="checklist">
+							<thead>
+								<tr>
+									<th>Pregunta</th>
+									<th>Respuesta</th>
+									<th>Anotaciones</th>
+									<th>Evidencia</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach( $actividad->checklist->preguntas as $pregunta )
+									<tr>
+										<td>
+											<input type="hidden" name="cpregunta" value="{{ $pregunta->cpregunta }}" data-text="{{ $pregunta->enunciado }}">
+											{{ $pregunta->enunciado }}
+										</td>
+										<td>
+											@if ( $pregunta->isOpenQuestion() )
+												<input type="hidden" name="isOpenQuestion" value="true">
+												<textarea style="resize:none" class="form-control" name="copcion" data-text="Respuesta Abierta">@if($pregunta->respuesta){{$pregunta->respuesta->respuesta}}@endif</textarea>
+											@else
+												<input type="hidden" name="isOpenQuestion" value="false">
+												@foreach($pregunta->opciones as $opcion)
+													<div>
+														<label for="copcion_{{ $opcion->copcion }}">
+															<input
+																type="radio"
+																name="copcion"
+																data-text="{{ $opcion->detalle }}"
+																id="copcion_{{ $opcion->copcion }}"
+																value="{{ $opcion->copcion }}"
+																@if($pregunta->respuesta)
+																	@if($pregunta->respuesta->copcion == $opcion->copcion )
+																		checked
+																	@endif
+																@endif
+															>
+															</input>
+															<span>{{ $opcion->detalle }}</span>
+														</label>
+													</div>
+												@endforeach
+												<!--
+												<select class="form-control" name="copcion">
+													@foreach($pregunta->opciones as $opcion)
+														<option value="{{ $opcion->id }}"> {{ $opcion->detalle }} </option>
+													@endforeach
+												</select>
+												-->
+											@endif
+										</td>
+										<td>
+											<textarea style="resize:none" class="form-control" name="anotaciones" id="anotaciones">@if($pregunta->respuesta){{$pregunta->respuesta->anotaciones}}@endif</textarea>
+										</td>
+										<td>
+											<input type="file" name="evidencia_{{ $pregunta->cpregunta }}" multiple>
+										</td>
+									</tr>
+								@endforeach
+							</tbody>
+						</table>
+					@endif
+
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" id="btn_guardar_checklist">
+						<i class="glyphicon glyphicon-plus"></i> Guardar
+					</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove"></i> Cancelar
+					</button>
 				</div>
 			</div>
 		</div>
@@ -526,6 +625,58 @@
 
 	<script type="text/javascript">
 
+		function getChecklist(){
+			var data = $("#checklist tbody tr").toArray().map( tr => {
+				var obj = {}
+				obj.cpregunta = $(tr).find("[name=cpregunta]").val()
+				obj.cpregunta_text = $(tr).find("[name=cpregunta]").data("text")
+
+				obj.isOpenQuestion = eval($(tr).find("[name=isOpenQuestion]").val())
+
+				obj.anotaciones = $(tr).find("[name=anotaciones]").val()
+				obj.files = $(tr).find("input[type=file]")[0].files
+
+				if ( obj.isOpenQuestion ){
+					element = $(tr).find("[name=copcion]")
+					obj.respuesta = element.val()
+					obj.respuesta_text = element.data("text")
+				}else{
+					element = $(tr).find("[name=copcion]:checked")
+					obj.copcion = element.val()
+					obj.copcion_text = element.data("text")
+				}
+				return obj
+			})
+			return data
+		}
+
+		@if($actividad->checklist)
+			$("#btn_guardar_checklist").click(function(event){
+
+				$.ajax({
+					// cache: false,
+					// contentType: 'multipart/form-data',
+					// processData: false,
+
+
+					type: "POST",
+					url : "{{ URL::route('answer_checklist', ['cchecklist' => $actividad->checklist->cchecklist]) }}",
+					data: JSON.stringify({
+						answers : getChecklist(),
+						cchecklist : $("#cchecklist").val(),
+					}),
+					contentType: "application/json",
+					dataType: "json",
+					success: function(response){
+						alertify.success("El Checklist se guardo.")
+					},
+					error: function(response){
+						alertify.error("Error al guardar el Checklist")
+					},
+				})
+			})
+		@endif
+
 		function validar(response){
 			console.info(response)
 			if ( ! response.ok ){
@@ -539,11 +690,28 @@
 				alertify.success("Evidencia Editada")
 			})
 		}
+
 		$(function () {
 			$('.datetime').datetimepicker({
 				format: 'YYYY-MM-DD HH:mm:ss',
 				defaultDate: moment().format("YYYY-MM-DD HH:mm:ss")
 			});
+
+			$('.pregunta_evidencia').fileupload({
+				dataType: 'json',
+				add: function (e, data) {
+					data.context = $('<button/>').text('Upload')
+					.appendTo(document.body)
+					.click(function () {
+					data.context = $('<p/>').text('Uploading...').replaceAll($(this));
+					data.submit();
+					});
+				},
+				done: function (e, data) {
+					data.context.text('Upload finished.');
+				}
+			});
+
 		});
 
 		$('#modalCrearActa').on('shown.bs.modal', function() {

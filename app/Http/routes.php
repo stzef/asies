@@ -39,8 +39,9 @@ Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->m
 Route::get('/dashboard', 'AppController@dashboard')->name('app_dashboard')->middleware('auth');
 
 Route::group(['prefix' => 'api'], function(){
-	Route::post('/testerror', "APIController@testerror");
-	Route::post('/testsuccess', "APIController@testsuccess");
+
+	// Route::post('/testerror', "APIController@testerror");
+	// Route::post('/testsuccess', "APIController@testsuccess");
 
 	Route::group(['prefix' => '{model}'], function(){
 		Route::group(['prefix' => '{id}'], function(){
@@ -55,6 +56,11 @@ Route::group(['prefix' => 'api'], function(){
 	Route::group(['prefix' => 'tareas'], function(){
 		Route::get('/', "APIController@tareas");
 		Route::get('/{ctarea}', "APIController@tarea");
+	});
+
+	Route::group(['prefix' => 'checklist'], function(){
+		// Route::get('/', "APIController@");
+		Route::post('/{cchecklist}/answer', "APIController@answer_checklist")->name("answer_checklist");
 	});
 
 	Route::group(['prefix' => 'planes'], function(){

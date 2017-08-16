@@ -5,12 +5,13 @@ namespace asies\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property integer $id
+ * @property integer $ctipregunta
  * @property string $detalle
  * @property Preguntas[] $preguntas
  */
 class TiPreguntas extends Model
 {
+    protected $primaryKey = "ctipregunta";
     /**
      * The table associated with the model.
      *
@@ -28,6 +29,6 @@ class TiPreguntas extends Model
      */
     public function preguntas()
     {
-        return $this->hasMany('asies\Models\Preguntas', 'ctipregunta');
+        return $this->hasMany('asies\Models\Preguntas', 'ctipregunta', 'ctipregunta');
     }
 }

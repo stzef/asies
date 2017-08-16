@@ -16,6 +16,9 @@ use asies\Models\TiRelaciones;
 use asies\Models\TiPlanes;
 use asies\Models\TareasUsuarios;
 use asies\Models\AsignacionTareas;
+
+use asies\Models\ChecklistDeta;
+
 use \View;
 use Auth;
 
@@ -149,6 +152,57 @@ class APIController extends Controller
 		}
 	}
 	*/
+
+	public function answer_checklist( Request $request, $cchecklist ){
+
+		$dataBody = $request->all();
+
+		$response = [
+			"message" => "Se contesto el Checklist",
+			"answers" => [],
+		];
+
+		$dataBody["cchecklist"] = $cchecklist;
+
+		$validator = Validator::make($dataBody,
+			[
+				'cchecklist' => 'required|numeric|exists:checklist,cchecklist',
+				'answers.*.cpregunta' => 'numeric|exists:preguntas,cpregunta',
+				'answers.*.cpregunta' => 'nullable|numeric|exists:opciones,copcion',
+			]
+		);
+
+		foreach ($dataBody["answers"] as $answer) {
+
+
+			$queryRespuesta = ChecklistDeta::where("cchecklist",$cchecklist)->where("cpregunta",$answer["cpregunta"]);
+
+			$arr = [
+				"cpregunta" => $answer["cpregunta"],
+				"anotaciones" => $answer["anotaciones"]
+			];
+
+			$status = $arr;
+
+			if ( $answer["isOpenQuestion"] )
+				{ $arr["respuesta"] = $answer["respuesta"]; }
+			else
+				{ $arr["copcion"] = $answer["copcion"]; }
+
+			if ( $queryRespuesta->first() ){
+				$queryRespuesta->update($arr);
+				$status["message"] = "La respuesta se edito.";
+			}else{
+				$arr["cchecklist"] = $dataBody["cchecklist"];
+				ChecklistDeta::create($arr);
+				$status["message"] = "La respuesta se creo.";
+			}
+
+			array_push($response["answers"], $status);
+		}
+
+		return response()->json($response);
+	}
 
 	public function remove_tarea_asignada( Request $request, $cactividad ){
 

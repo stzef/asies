@@ -5,13 +5,14 @@ namespace asies\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property integer $id
+ * @property integer $copcion
  * @property string $detalle
- * @property OpcionesPregunta[] $opcionespreguntas
- * @property Respuestas[] $respuestas
+ * @property ChecklistDeta[] $checklistdeta
+ * @property OpcionesPregunta[] $opcionespregunta
  */
 class Opciones extends Model
 {
+    protected $primaryKey = "copcion";
     /**
      * @var array
      */
@@ -20,16 +21,16 @@ class Opciones extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function opcionespregunta()
+    public function checklistdeta()
     {
-        return $this->hasMany('asies\Models\OpcionesPregunta', 'copcion');
+        return $this->hasMany('asies\Models\ChecklistDeta', 'copcione', 'copcion');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function respuestas()
+    public function opcionespregunta()
     {
-        return $this->hasMany('asies\Models\Respuestas', 'copcion');
+        return $this->hasMany('asies\Models\OpcionesPregunta', 'copcion', 'copcion');
     }
 }
