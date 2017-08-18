@@ -47,6 +47,10 @@ class ChecklistsController extends Controller
 				]);
 			});
 			$excel->sheet('Estadisticas', function($sheet) use($data) {
+				$sheet->setTitle("Estadisticas");
+				$sheet->loadView('excel/estadisticas',[
+					"actividad" => $data["actividad"]
+				]);
 			});
 		})->download($format);
 

@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property integer $id
- * @property integer $cpregunta
+ * @property integer $ctipregunta
  * @property integer $copcion
- * @property Preguntas $pregunta
+ * @property TiPreguntas $tipregunta
  * @property Opciones $opcione
  */
 class OpcionesPregunta extends Model
@@ -23,14 +23,14 @@ class OpcionesPregunta extends Model
     /**
      * @var array
      */
-    protected $fillable = ['cpregunta', 'copcion'];
+    protected $fillable = ['ctipregunta', 'copcion'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function pregunta()
+    public function tipregunta()
     {
-        return $this->belongsTo('asies\Models\Preguntas', 'cpregunta', 'cpregunta');
+        return $this->belongsTo('asies\Models\TiPreguntas', 'ctipregunta', 'ctipregunta');
     }
 
     /**

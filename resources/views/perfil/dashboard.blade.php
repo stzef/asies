@@ -75,7 +75,7 @@
 										</div>
 									</h4>
 								</div>
-								<div class="col-md-5">
+								<div class="col-md-5 text-center">
 									@if ( ! $actividad->ifhecha )
 										<a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a>
 									@endif
@@ -100,23 +100,24 @@
 									@endif
 								</div>
 							</div>
-
-							<table class="table tareas-actividad">
-								<thead>
-									<tr>
-										<th>Tareas</th>
-										<th>Realizar</th>
-									</tr>
-								</thead>
-								<tbody>
-									@foreach ($actividad->tareas as $tarea)
+							<div id="container_tareas" class="hide" >
+								<table class="table tareas-actividad">
+									<thead>
 										<tr>
-											<td>({{ $tarea->cplan }}) {{ $tarea->ntarea }}</td>
-											<td>@if ($tarea->ifhecha) Si @else No @endif</td>
+											<th>Tareas</th>
+											<th>Realizar</th>
 										</tr>
-									@endforeach
-								</tbody>
-							</table>
+									</thead>
+									<tbody>
+										@foreach ($actividad->tareas as $tarea)
+											<tr>
+												<td>({{ $tarea->cplan }}) {{ $tarea->ntarea }}</td>
+												<td>@if ($tarea->ifhecha) Si @else No @endif</td>
+											</tr>
+										@endforeach
+									</tbody>
+								</table>
+							</div>
 						</div>
 					@endforeach
 				</div>
@@ -137,11 +138,9 @@
 			"searching":false,
 			"language": DTspanish,
 		})
-
-		$(".dataTables_wrapper").addClass("hide")
 		$(".show-hide-tareas").click(function(){
 			var that = this
-			var table = $(that).closest(".container-actividad").find(".dataTables_wrapper")//find(".tareas-actividad")
+			var table = $(that).closest(".container-actividad").find("#container_tareas")//find(".tareas-actividad")
 			if ( table.hasClass("hide") ){
 				table.removeClass("hide")
 				$(that).html("-").attr("title","Esconder las Tareas")

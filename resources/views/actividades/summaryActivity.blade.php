@@ -214,7 +214,7 @@
 								@endif
 							</h4>
 						</div>
-						<div class="col-md-5">
+						<div class="col-md-5 text-center">
 							@if ( ! $actividad->ifhecha )
 								<a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a>
 							@endif

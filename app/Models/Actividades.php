@@ -362,7 +362,7 @@ class Actividades extends Model
 			$cpreguntas = ChecklistPreguntas::select('cpregunta')->where("cchecklist",$checklist->cchecklist)->orderBy("orden")->get();
 			$checklist->preguntas = Preguntas::whereIn('cpregunta', $cpreguntas)->orderBy("ctipregunta")->get();
 			foreach ($checklist->preguntas as $pregunta) {
-				$copciones = OpcionesPregunta::select("copcion")->where("cpregunta",$pregunta->cpregunta)->get();
+				$copciones = OpcionesPregunta::select("copcion")->where("ctipregunta",$pregunta->ctipregunta)->get();
 				$pregunta->opciones = Opciones::whereIn("copcion",$copciones)->get();
 				$pregunta->respuesta = ChecklistDeta::where("cchecklist",$checklist->cchecklist)->where("cpregunta",$pregunta->cpregunta)->first();
 
@@ -380,15 +380,29 @@ class Actividades extends Model
 			foreach ($tipreguntas as $tipregunta) {
 				$cpreguntas = ChecklistPreguntas::select('cpregunta')->where("cchecklist",$checklist->cchecklist)->orderBy("orden")->get();
 				$total_preguntas = Preguntas::whereIn('cpregunta', $cpreguntas)->where("ctipregunta",$tipregunta->ctipregunta)->count();
+
+				$opcionespregunta = OpcionesPregunta::where("ctipregunta",$tipregunta->ctipregunta)->get();
+
 				$data = [];
 
 				$data["total"] = $total_preguntas;
 				$data["tipregunta"] = $tipregunta;
+
+				$opciones = [];
+				foreach ($opcionespregunta as $opcion) {
+					$data2 = [
+						"opcion" => $opcion->opcion,
+						"cantidad" => ChecklistDeta::where("cchecklist",$checklist->cchecklist)->where("copcion",$opcion->copcion)->count(),
+					];
+					array_push($opciones, $data2);
+				}
+
+				$data["opciones"] = $opciones;
 				array_push($estadisticas, $data);
 			}
 			$checklist->estadisticas = $estadisticas;
 		}
-		dump($checklist);exit();
+//		dump($checklist);exit();
 	return $checklist;
 	}
 }

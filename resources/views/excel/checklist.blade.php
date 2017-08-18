@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title> Checklist </title>
 	<style>
 		td.bordered{
 			border: 1px solid #000000;
@@ -12,7 +12,6 @@
 <body>
 
 	<table class="table">
-
 		<tr>
 			<th class="bordered"> Pregunta </th>
 			<th class="bordered"> Respuesta </th>
