@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $cactividad
  * @property string $fecha
  * @property string $nombre
- * @property Actividades $actividade
+ * @property boolean $ifhecha
+ * @property Actividades $actividad
  * @property ChecklistDeta[] $checklistdeta
  * @property ChecklistPregunta[] $checklistpregunta
  */
@@ -27,7 +28,7 @@ class Checklists extends Model
      */
     public function actividades()
     {
-        return $this->belongsTo('asies\Models\Actividades', 'cactividad', 'cactividad');
+        return $this->belongsTo('asies\Models\Actividades', 'cactividad', 'cactividad', 'ifhecha');
     }
 
     /**

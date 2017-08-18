@@ -153,7 +153,14 @@ class APIController extends Controller
 	}
 	*/
 
-	public function answer_checklist( Request $request, $cchecklist ){
+	public function answer_checklist( Request $request, $cactividad ){
+
+		$actividad = Actividades::where("cactividad",$cactividad)->first();
+		if ( !$actividad ) return view('errors/generic',array('title' => 'Error Codigo.', 'message' => "La actividad $cactividad no existe" ));
+
+		$actividad->checklist = $actividad->getChecklist();
+		if ( !$actividad->checklist ) return view('errors/generic',array('title' => 'Error Codigo.', 'message' => "La actividad $cactividad tiene un checklist Asociado" ));
+
 
 		$dataBody = $request->all();
 
@@ -162,7 +169,7 @@ class APIController extends Controller
 			"answers" => [],
 		];
 
-		$dataBody["cchecklist"] = $cchecklist;
+		$dataBody["cchecklist"] = $actividad->checklist->cchecklist;
 
 		$validator = Validator::make($dataBody,
 			[
@@ -175,7 +182,7 @@ class APIController extends Controller
 		foreach ($dataBody["answers"] as $answer) {
 
 
-			$queryRespuesta = ChecklistDeta::where("cchecklist",$cchecklist)->where("cpregunta",$answer["cpregunta"]);
+			$queryRespuesta = ChecklistDeta::where("cchecklist",$dataBody["cchecklist"])->where("cpregunta",$answer["cpregunta"]);
 
 			$arr = [
 				"cpregunta" => $answer["cpregunta"],

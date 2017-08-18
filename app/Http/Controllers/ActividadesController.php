@@ -225,6 +225,7 @@ class ActividadesController extends Controller
 					// $asignaciones = $actividad->acta->getAsistentes();
 					$asignaciones = $actividad->getAsignacion();
 				}
+				$actividad->checklist = $actividad->getChecklist();
 				return view( 'actividades.summaryActivity' , array(
 					'tareas' => $tareas,
 					'actividad' => $actividad,

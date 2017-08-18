@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $id
  * @property integer $cchecklist
  * @property integer $cpregunta
+ * @property integer $orden
  * @property Checklists $checklist
  * @property Preguntas $pregunta
  */
@@ -23,7 +24,7 @@ class ChecklistPreguntas extends Model
     /**
      * @var array
      */
-    protected $fillable = ['cchecklist', 'cpregunta'];
+    protected $fillable = ['cchecklist', 'cpregunta', 'orden'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

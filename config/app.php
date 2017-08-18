@@ -183,6 +183,10 @@ return [
         # Visualizador de logs
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
+        #Excel
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
+
     ],
 
     /*
@@ -231,6 +235,9 @@ return [
 
         #PDF
         'PDF' => Barryvdh\DomPDF\Facade::class,
+
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
 
         #'Image' => Intervention\Image\Facades\Image::class,
 

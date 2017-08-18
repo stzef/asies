@@ -9,9 +9,11 @@
 	<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
 	<link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/jquery.fileupload.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/jquery.fileupload-ui.css') }}">
+	<link rel="stylesheet" href="{{ URL::asset('bower_components/bootstrap-fileinput/css/fileinput.min.css') }}">
 	<!-- CSS adjustments for browsers with JavaScript disabled -->
 	<noscript><link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/jquery.fileupload-noscript.css') }}"></noscript>
 	<noscript><link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/jquery.fileupload-ui-noscript.css') }}"></noscript>
+	<link rel="stylesheet" href="{{ URL::asset('simplePagination.js/simplePagination.css') }}">
 @endsection
 
 @section('content')
@@ -170,9 +172,71 @@
 					<h2 class="modal-title" id="modalChecklistLabel">Checklist</h2>
 				</div>
 
-				<div class="modal-body">
+				<div class="modal-body" id="checklist">
 					@if( $actividad->checklist )
 						<input type="hidden" value="{{ $actividad->checklist->cchecklist }}" id="cchecklist" name="cchecklist">
+						@php $cantidad_preguntas = count($actividad->checklist->preguntas) @endphp
+						@foreach( $actividad->checklist->preguntas as $i => $pregunta )
+							@php $i++ @endphp
+							<div class="panel panel-default hide checklistdeta_page" id="checklistdeta_page_{{$i}}" data-page="{{$i}}">
+								<div class="panel-heading">
+									<div>
+										<input type="hidden" name="cpregunta" value="{{ $pregunta->cpregunta }}" data-text="{{ $pregunta->enunciado }}">
+										{{ $pregunta->enunciado }}
+									</div>
+								</div>
+
+								<div class="panel-body">
+									<div>
+										@if ( $pregunta->isOpenQuestion() )
+											<input type="hidden" name="isOpenQuestion" value="true">
+											<textarea style="resize:none" class="form-control" name="copcion" data-text="Respuesta Abierta">@if($pregunta->respuesta){{$pregunta->respuesta->respuesta}}@endif</textarea>
+										@else
+											<input type="hidden" name="isOpenQuestion" value="false">
+											@foreach($pregunta->opciones as $opcion)
+												<div>
+													<label for="copcion_{{ $opcion->copcion }}">
+														<input
+															type="radio"
+															name="copcion_{{ $opcion->copcion }}_cpregunta_{{ $pregunta->cpregunta }}"
+															data-text="{{ $opcion->detalle }}"
+															id="copcion_{{ $opcion->copcion }}_cpregunta_{{ $pregunta->cpregunta }}"
+															value="{{ $opcion->copcion }}"
+															@if($pregunta->respuesta)
+																@if($pregunta->respuesta->copcion == $opcion->copcion )
+																	checked
+																@endif
+															@endif
+														>
+														</input>
+														<span>{{ $opcion->detalle }}</span>
+													</label>
+												</div>
+											@endforeach
+										@endif
+									</div>
+									<div class="row">
+
+										<div class="col-xs-12 col-sm-12 col-md-6 col-md-6">
+											<textarea style="resize:none" class="form-control" name="anotaciones" id="anotaciones">@if($pregunta->respuesta){{$pregunta->respuesta->anotaciones}}@endif</textarea>
+										</div>
+										<div class="col-xs-12 col-sm-12 col-md-6 col-md-6">
+											<input
+												data-cactividad="{{$actividad->cactividad}}"
+												data-cpregunta="{{$pregunta->cpregunta}}"
+												type="file"
+												name="evidencia_{{ $pregunta->cpregunta }}"
+												multiple
+												class="files_checklist"
+											>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						@endforeach
+						<div id="checklistdeta_pagination"></div>
+						<!--
 						<table class="table" id="checklist">
 							<thead>
 								<tr>
@@ -200,9 +264,9 @@
 														<label for="copcion_{{ $opcion->copcion }}">
 															<input
 																type="radio"
-																name="copcion"
+																name="copcion_{{ $opcion->copcion }}_cpregunta_{{ $pregunta->cpregunta }}"
 																data-text="{{ $opcion->detalle }}"
-																id="copcion_{{ $opcion->copcion }}"
+																id="copcion_{{ $opcion->copcion }}_cpregunta_{{ $pregunta->cpregunta }}"
 																value="{{ $opcion->copcion }}"
 																@if($pregunta->respuesta)
 																	@if($pregunta->respuesta->copcion == $opcion->copcion )
@@ -215,31 +279,31 @@
 														</label>
 													</div>
 												@endforeach
-												<!--
-												<select class="form-control" name="copcion">
-													@foreach($pregunta->opciones as $opcion)
-														<option value="{{ $opcion->id }}"> {{ $opcion->detalle }} </option>
-													@endforeach
-												</select>
-												-->
 											@endif
 										</td>
 										<td>
 											<textarea style="resize:none" class="form-control" name="anotaciones" id="anotaciones">@if($pregunta->respuesta){{$pregunta->respuesta->anotaciones}}@endif</textarea>
 										</td>
 										<td>
-											<input type="file" name="evidencia_{{ $pregunta->cpregunta }}" multiple>
+											<input
+												data-cactividad="{{$actividad->cactividad}}"
+												data-cpregunta="{{$pregunta->cpregunta}}"
+												type="file"
+												name="evidencia_{{ $pregunta->cpregunta }}"
+												multiple
+												class="files_checklist"
+											>
 										</td>
 									</tr>
 								@endforeach
 							</tbody>
 						</table>
+						-->
 					@endif
-
 				</div>
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-primary" id="btn_guardar_checklist">
-						<i class="glyphicon glyphicon-plus"></i> Guardar
+						<i class="glyphicon glyphicon-plus"></i> Guardar Todo
 					</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">
 						<i class="glyphicon glyphicon-remove"></i> Cancelar
@@ -625,34 +689,66 @@
 
 	<script type="text/javascript">
 
-		function getChecklist(){
-			var data = $("#checklist tbody tr").toArray().map( tr => {
+		function storeEvidenciaChecklist(event,input){
+			var data = new FormData();
+			$.each(input.files, function(i, file) {
+				data.append('files[]', file);
+			});
+
+			var url = "{{ URL::route('POST_store_evidence_answer',['cactividad' => 'cactividad', 'cpregunta' => 'cpregunta']) }}"
+
+			$.ajax({
+				url: url.set("cactividad",input.dataset.cactividad).set("cpregunta",input.dataset.cpregunta),
+				data: data,
+				cache: false,
+				contentType: false,
+				processData: false,
+				type: 'POST',
+				success: function(data){
+					alertify.success("El archivo se subi exitosamente.");
+				},
+				error: function(data){
+					alertify.success("Error al subir el archivo.");
+				}
+			});
+
+		}
+
+		function getChecklist(page){
+			if ( typeof page == "undefined"){
+				selector = "#checklist .checklistdeta_page"
+			}else{
+				selector = "#checklist .checklistdeta_page[data-page=" + page + "]"
+			}
+			var data = []
+			$(selector).toArray().forEach( div => {
 				var obj = {}
-				obj.cpregunta = $(tr).find("[name=cpregunta]").val()
-				obj.cpregunta_text = $(tr).find("[name=cpregunta]").data("text")
+				obj.cpregunta = $(div).find("[name=cpregunta]").val()
+				obj.cpregunta_text = $(div).find("[name=cpregunta]").data("text")
 
-				obj.isOpenQuestion = eval($(tr).find("[name=isOpenQuestion]").val())
+				obj.isOpenQuestion = eval($(div).find("[name=isOpenQuestion]").val())
 
-				obj.anotaciones = $(tr).find("[name=anotaciones]").val()
-				obj.files = $(tr).find("input[type=file]")[0].files
+				obj.anotaciones = $(div).find("[name=anotaciones]").val()
+				obj.files = $(div).find("input[type=file]")[0].files
 
 				if ( obj.isOpenQuestion ){
-					element = $(tr).find("[name=copcion]")
+					element = $(div).find("input[type=radio]")
 					obj.respuesta = element.val()
 					obj.respuesta_text = element.data("text")
+					if ( typeof obj.respuesta != 'undefined' ) data.push(obj)
 				}else{
-					element = $(tr).find("[name=copcion]:checked")
+					element = $(div).find("input[type=radio]:checked")
 					obj.copcion = element.val()
 					obj.copcion_text = element.data("text")
+					if ( typeof obj.copcion != 'undefined' ) data.push(obj)
 				}
-				return obj
 			})
+			console.log(data)
 			return data
 		}
 
 		@if($actividad->checklist)
-			$("#btn_guardar_checklist").click(function(event){
-
+			function guardarChecklist(page){
 				$.ajax({
 					// cache: false,
 					// contentType: 'multipart/form-data',
@@ -660,9 +756,9 @@
 
 
 					type: "POST",
-					url : "{{ URL::route('answer_checklist', ['cchecklist' => $actividad->checklist->cchecklist]) }}",
+					url : "{{ URL::route('answer_checklist', ['cactividad' => $actividad->cactividad]) }}",
 					data: JSON.stringify({
-						answers : getChecklist(),
+						answers : getChecklist(page),
 						cchecklist : $("#cchecklist").val(),
 					}),
 					contentType: "application/json",
@@ -674,6 +770,9 @@
 						alertify.error("Error al guardar el Checklist")
 					},
 				})
+			}
+			$("#btn_guardar_checklist").click(function(event){
+				guardarChecklist()
 			})
 		@endif
 
@@ -696,22 +795,6 @@
 				format: 'YYYY-MM-DD HH:mm:ss',
 				defaultDate: moment().format("YYYY-MM-DD HH:mm:ss")
 			});
-
-			$('.pregunta_evidencia').fileupload({
-				dataType: 'json',
-				add: function (e, data) {
-					data.context = $('<button/>').text('Upload')
-					.appendTo(document.body)
-					.click(function () {
-					data.context = $('<p/>').text('Uploading...').replaceAll($(this));
-					data.submit();
-					});
-				},
-				done: function (e, data) {
-					data.context.text('Upload finished.');
-				}
-			});
-
 		});
 
 		$('#modalCrearActa').on('shown.bs.modal', function() {
@@ -981,4 +1064,43 @@
 	<!--[if (gte IE 8)&(lt IE 10)]>
 	<script src="js/cors/jquery.xdr-transport.js"></script>
 	<![endif]-->
+
+	<script src="{{ URL::asset('simplePagination.js/jquery.simplePagination.js') }} "></script>
+
+	<script src="{{ URL::asset('bower_components/bootstrap-fileinput/js/fileinput.min.js') }} "></script>
+	<script src="{{ URL::asset('bower_components/bootstrap-fileinput/js/locales/es.js') }} "></script>
+	<script src="{{ URL::asset('bower_components/bootstrap-fileinput/themes/fa/theme.min.js') }} "></script>
+	<script>
+		$(".files_checklist").fileinput({
+			'language': 'es',
+			'showUpload':false,
+			'previewFileType':'any',
+			'showPreview' : false,
+			'showUpload' : true,
+		}).on("filebatchselected", function(event, files) {
+			storeEvidenciaChecklist(event,event.target)
+		});
+	</script>
+	<script>
+		$(function() {
+			$("#checklistdeta_pagination").pagination({
+				items: {{$cantidad_preguntas}},
+				itemsOnPage: 1,
+				cssStyle: 'light-theme',
+				prevText: "Anterior",
+				nextText: "Siguiente",
+				onPageClick: function(pageNumber, event){
+					console.log(pageNumber)
+					$(".checklistdeta_page").addClass("hide")
+					$("#checklistdeta_page_"+pageNumber).removeClass("hide")
+					guardarChecklist(pageNumber)
+				},
+				onInit: function(){
+					var pageNumber = $("#checklistdeta_pagination").pagination('getCurrentPage');
+					$("#checklistdeta_page_"+pageNumber).removeClass("hide")
+				}
+			});
+		});
+	</script>
+
 @endsection

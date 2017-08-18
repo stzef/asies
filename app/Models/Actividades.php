@@ -214,11 +214,6 @@ class Actividades extends Model
 		$tareas_no_hecha = AsignacionTareas::where("ifhecha",0)->where("cactividad",$this->cactividad)->first();
 		$ifhecha = null;
 
-		// dump($tareas_no_hecha);
-		// dump( $tareas_no_hecha );
-		// dump($this->cactividad);
-		// dump(count($tareas_no_hecha));
-
 		$ifhecha = 0;
 		if ( ! $tareas_no_hecha ){
 			if ( $this->ifacta ){
@@ -364,16 +359,36 @@ class Actividades extends Model
 
 		$checklist = Checklists::where("cactividad",$cactividad)->first();
 		if ( $checklist ){
-			$cpreguntas = ChecklistPreguntas::select('cpregunta')->where("cchecklist",$checklist->cchecklist)->get();
-			$checklist->preguntas = Preguntas::whereIn('cpregunta', $cpreguntas)->get();
+			$cpreguntas = ChecklistPreguntas::select('cpregunta')->where("cchecklist",$checklist->cchecklist)->orderBy("orden")->get();
+			$checklist->preguntas = Preguntas::whereIn('cpregunta', $cpreguntas)->orderBy("ctipregunta")->get();
 			foreach ($checklist->preguntas as $pregunta) {
 				$copciones = OpcionesPregunta::select("copcion")->where("cpregunta",$pregunta->cpregunta)->get();
 				$pregunta->opciones = Opciones::whereIn("copcion",$copciones)->get();
 				$pregunta->respuesta = ChecklistDeta::where("cchecklist",$checklist->cchecklist)->where("cpregunta",$pregunta->cpregunta)->first();
-			}
 
+				$pregunta->evidencias = [];
+				$pregunta->numEvidencias = 0;
+				if ( $pregunta->respuesta ){
+					$pregunta->evidencias = ChecklistEvidencias::where("cchecklistdeta",$pregunta->respuesta->id)->get();
+					$pregunta->numEvidencias = count($pregunta->evidencias);
+				}
+			}
 			$checklist = $checklist;
+
+			$tipreguntas = TiPreguntas::all();
+			$estadisticas = [];
+			foreach ($tipreguntas as $tipregunta) {
+				$cpreguntas = ChecklistPreguntas::select('cpregunta')->where("cchecklist",$checklist->cchecklist)->orderBy("orden")->get();
+				$total_preguntas = Preguntas::whereIn('cpregunta', $cpreguntas)->where("ctipregunta",$tipregunta->ctipregunta)->count();
+				$data = [];
+
+				$data["total"] = $total_preguntas;
+				$data["tipregunta"] = $tipregunta;
+				array_push($estadisticas, $data);
+			}
+			$checklist->estadisticas = $estadisticas;
 		}
+		dump($checklist);exit();
 	return $checklist;
 	}
 }

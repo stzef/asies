@@ -58,10 +58,7 @@ Route::group(['prefix' => 'api'], function(){
 		Route::get('/{ctarea}', "APIController@tarea");
 	});
 
-	Route::group(['prefix' => 'checklist'], function(){
-		// Route::get('/', "APIController@");
-		Route::post('/{cchecklist}/answer', "APIController@answer_checklist")->name("answer_checklist");
-	});
+	Route::group(['prefix' => 'checklist'], function(){});
 
 	Route::group(['prefix' => 'planes'], function(){
 		Route::get('/', "APIController@planes");
@@ -129,6 +126,18 @@ Route::group(['prefix' => 'actividades'], function(){
 	Route::post('evidence/{cactividad}', "ActividadesController@store");
 
 	Route::get('archivos/{cactividad?}', "EvidenciaController@index")->name("GET_lista_evidencias")/*->middleware("permission:activities.crud")*/;
+
+	Route::group(['prefix' => '{cactividad}'], function(){
+
+		Route::group(['prefix' => 'checklist'], function(){
+
+			Route::get('export/{format}', "ChecklistsController@excel")->name("GET_export_checklist_excel");
+			Route::post('answer', "APIController@answer_checklist")->name("answer_checklist");
+
+			Route::post('evidencias/{cpregunta}', "ChecklistsController@store")->name("POST_store_evidence_answer");
+
+		});
+	});
 });
 
 Route::group(['prefix' => 'archivos'], function(){});

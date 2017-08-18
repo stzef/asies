@@ -6,6 +6,85 @@
 @section('content')
 	<div class="row">
 
+		<div class="modal fade" id="modalChecklist" tabindex="-1" role="dialog" aria-labelledby="modalChecklistLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h2 class="modal-title" id="modalChecklistLabel">Checklist</h2>
+					</div>
+
+					<div class="modal-body">
+						@if( $actividad->checklist )
+							<div class="btn-gruop">
+								<a class="btn btn-primary" href="{{ URL::route('GET_export_checklist_excel',[ 'cactividad' => $actividad->cactividad, 'format' => 'xlsx' ]) }}"> Excel </a>
+							</div>
+							<input type="hidden" value="{{ $actividad->checklist->cchecklist }}" id="cchecklist" name="cchecklist">
+							<table class="table" id="checklist">
+								<thead>
+									<tr>
+										<th>Pregunta</th>
+										<th>Respuesta</th>
+										<th>Anotaciones</th>
+										<th>Evidencia</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach( $actividad->checklist->preguntas as $pregunta )
+										<tr>
+											<td>
+												<input type="hidden" name="cpregunta" value="{{ $pregunta->cpregunta }}" data-text="{{ $pregunta->enunciado }}">
+												{{ $pregunta->enunciado }}
+											</td>
+											<td>
+												@if ( $pregunta->isOpenQuestion() )
+													<input type="hidden" name="isOpenQuestion" value="true">
+													<p>
+														@if($pregunta->respuesta){{$pregunta->respuesta->respuesta}}@endif
+													</p>
+												@else
+													<input type="hidden" name="isOpenQuestion" value="false">
+													<p>
+														@if ($pregunta->respuesta)
+															{{ $pregunta->respuesta->opcion->detalle }}
+														@endif
+													</p>
+												@endif
+											</td>
+											<td>
+												<p>@if($pregunta->respuesta){{$pregunta->respuesta->anotaciones}}@endif</p>
+											</td>
+											<td>
+												<ul>
+													@foreach( $pregunta->evidencias as $evidencia)
+														<li>
+															<a href="{{ URL::asset( $evidencia->path ) }}" download="" > {{ $evidencia->nombre }} </a>
+														</li>
+													@endforeach
+												</ul>
+
+											</td>
+										</tr>
+									@endforeach
+								</tbody>
+							</table>
+						@endif
+
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary" id="btn_guardar_checklist">
+							<i class="glyphicon glyphicon-plus"></i> Guardar
+						</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">
+							<i class="glyphicon glyphicon-remove"></i> Cancelar
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="modal fade" id="modalActa" tabindex="-1" role="dialog" aria-labelledby="modalActaLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
@@ -158,7 +237,19 @@
 											<i class="glyphicon glyphicon-plus"></i>
 											Ver Acta
 										</button>
+
+
 									@endpermission
+								</td>
+							</tr>
+							<tr>
+								<td>
+									@if ( $actividad->checklist )
+										<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modalChecklist">
+											<i class="glyphicon glyphicon-plus"></i>
+											Checklist
+										</button>
+									@endif
 								</td>
 							</tr>
 							@foreach ($evidencias as $evidencia)
