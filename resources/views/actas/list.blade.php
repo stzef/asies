@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('styles')
-	<link rel="stylesheet" href="{{ URL::asset('vendor/jstree/css/themes/default/style.min.css') }}" >
 @endsection
 @section('content')
 

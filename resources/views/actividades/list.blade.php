@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('styles')
-	<link rel="stylesheet" href="{{ URL::asset('vendor/jstree/css/themes/default/style.min.css') }}" >
 @endsection
 @section('content')
 	<div class="row">
@@ -65,8 +64,8 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>
+    <!-- <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script> -->
+    <!-- <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script> -->
     <script>
         var table = $(".table").DataTable({
             "paging":   true,

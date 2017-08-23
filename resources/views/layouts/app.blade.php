@@ -14,37 +14,39 @@
 
         <title>{{$SHORT_NAME_APP}}</title>
 
+        <link rel="stylesheet" href="{{ URL::asset('dist/css/bundle.min.css') }}" >
         <!-- Bootstrap Core CSS -->
-        <link rel="stylesheet" href="{{ URL::asset('layout/css/bootstrap.css') }}" >
+        <!-- OK <link rel="stylesheet" href="{{ URL::asset('layout/css/bootstrap.css') }}" > -->
         <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
 
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="{{ URL::asset('layout/css/sb-admin.css') }}" >
+        <!-- OK <link rel="stylesheet" href="{{ URL::asset('layout/css/sb-admin.css') }}" > -->
         <!--<link href="css/sb-admin.css" rel="stylesheet">-->
 
         <!-- Custom Fonts -->
-        <link rel="stylesheet" href="{{ URL::asset('layout/font-awesome/css/font-awesome.min.css') }}" >
+        <!-- OK <link rel="stylesheet" href="{{ URL::asset('layout/font-awesome/css/font-awesome.min.css') }}" > -->
 
         <!--<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
 
         <!-- AlertifyJS -->
-        <link rel="stylesheet" href="{{ URL::asset('vendor/alertifyjs/css/alertify.css') }}" >
+        <!-- OK <link rel="stylesheet" href="{{ URL::asset('vendor/alertifyjs/css/alertify.css') }}" > -->
 
         <!-- JQuery UI -->
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" >
+        <!-- OK <link rel="stylesheet" href="{{ URL::asset('css/jquery-ui.css') }}" > -->
+        <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" > -->
 
         <!-- Select2 -->
-        <link rel="stylesheet" href="{{ URL::asset('vendor/select2-4.0.3/dist/css/select2.min.css') }}" >
+        <!-- OK <link rel="stylesheet" href="{{ URL::asset('vendor/select2-4.0.3/dist/css/select2.min.css') }}" > -->
 
         <!-- JTable -->
         <!--<link rel="stylesheet" href="{{ URL::asset('vendor/jtable.2.4.0/themes/jqueryui/jtable_jqueryui.css') }}" >-->
-        <link rel="stylesheet" href="{{ URL::asset('vendor/jtable.2.4.0/themes/metro/darkgray/jtable.css') }}" >
+        <!-- OK <link rel="stylesheet" href="{{ URL::asset('vendor/jtable.2.4.0/themes/metro/darkgray/jtable.css') }}" > -->
 
         <!-- Datetimepicker JS -->
-        <link rel="stylesheet" href="{{ URL::asset('vendor/datetimepicker/css/bootstrap-datetimepicker-standalone.css') }}" >
+        <!-- OK <link rel="stylesheet" href="{{ URL::asset('vendor/datetimepicker/css/bootstrap-datetimepicker-standalone.css') }}" > -->
 
-        <link href="{{ URL::asset('bootstrap-toggle/bootstrap-toggle.min.css') }}" rel="stylesheet">
-        <link rel="stylesheet" href="{{ URL::asset('bower_components/bootstrap-offcanvas/dist/css/bootstrap.offcanvas.min.css') }}"/>
+        <!-- OK <link href="{{ URL::asset('bootstrap-toggle/bootstrap-toggle.min.css') }}" rel="stylesheet"> -->
+        <!-- OK <link rel="stylesheet" href="{{ URL::asset('bower_components/bootstrap-offcanvas/dist/css/bootstrap.offcanvas.min.css') }}"/> -->
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -53,9 +55,9 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <link href="{{ URL::asset('css/utilities.css') }}" rel="stylesheet">
-        <link href="{{ URL::asset('css/custom.css') }}" rel="stylesheet">
-        <link href="{{ URL::asset('jquery-loadingModal/css/jquery.loadingModal.css') }}" rel="stylesheet">
+        <!-- OK <link href="{{ URL::asset('css/utilities.css') }}" rel="stylesheet"> -->
+        <!-- OK <link href="{{ URL::asset('css/custom.css') }}" rel="stylesheet"> -->
+        <!-- OK <link href="{{ URL::asset('jquery-loadingModal/css/jquery.loadingModal.css') }}" rel="stylesheet"> -->
 
         @yield('styles')
 
@@ -179,10 +181,12 @@
             @endif
         </script>
 
+        <script src="{{ URL::asset('dist/js/bundle.min.js') }}"></script>
+        <script src="{{ URL::asset('dist/js/app.min.js') }}"></script>
         <!-- jQuery -->
-        <script src="{{ URL::asset('layout/js/jquery.js') }}"></script>
+        <!-- OK <script src="{{ URL::asset('layout/js/jquery.js') }}"></script> -->
 
-        <script src="{{ URL::asset('jquery-loadingModal/js/jquery.loadingModal.min.js') }}"></script>
+        <!-- OK <script src="{{ URL::asset('jquery-loadingModal/js/jquery.loadingModal.min.js') }}"></script> -->
 
         <script>
             var waitingDialog = {
@@ -217,7 +221,7 @@
         </script>
 
         <!-- JQuery UI -->
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+        <!-- OK <script src="{{ URL::asset('js/jquery-ui.min.js') }}"></script> -->
 
         <script>
             // handle jQuery plugin naming conflict between jQuery UI and Bootstrap
@@ -226,30 +230,29 @@
         </script>
 
         <!-- AlertifyJS -->
-        <script src="{{ URL::asset('vendor/alertifyjs/alertify.min.js') }}"></script>
+        <!-- OK <script src="{{ URL::asset('vendor/alertifyjs/alertify.min.js') }}"></script> -->
 
         <!-- Select2 -->
-        <script src="{{ URL::asset('vendor/select2-4.0.3/dist/js/select2.full.min.js') }}"></script>
+        <!-- OK <script src="{{ URL::asset('vendor/select2-4.0.3/dist/js/select2.full.min.js') }}"></script> -->
 
-        <script src="{{ URL::asset('layout/js/bootstrap.min.js') }}"></script>
-        <!-- <script src="{{ URL::asset('bower_components/vue/dist/vue.js') }}"></script> -->
-        <script src="{{ URL::asset('layout/js/app.js') }}"></script>
+        <!-- OK <script src="{{ URL::asset('layout/js/bootstrap.min.js') }}"></script> -->
+        <!-- OK <script src="{{ URL::asset('layout/js/app.js') }}"></script> -->
 
         <!-- Bootstrap JavaScript -->
         <!-- Bootstrap Core JavaScript -->
 
         <!-- Moment JS -->
-        <script src="{{ URL::asset('vendor/momentjs/moment-with-locales.js') }}"></script>
-        <!-- <script src="{{ URL::asset('vendor/momentjs/locale/es.js') }}"></script> -->
+        <!-- OK <script src="{{ URL::asset('vendor/momentjs/moment-with-locales.js') }}"></script> -->
+        <!-- OK <script src="{{ URL::asset('vendor/momentjs/locale/es.js') }}"></script> -->
 
-        <script src="{{ URL::asset('vendor/datetimepicker/bootstrap/js/transition.js') }}"></script>
-        <script src="{{ URL::asset('vendor/datetimepicker/bootstrap/js/collapse.js') }}"></script>
+        <!-- OK <script src="{{ URL::asset('vendor/datetimepicker/bootstrap/js/transition.js') }}"></script> -->
+        <!-- OK <script src="{{ URL::asset('vendor/datetimepicker/bootstrap/js/collapse.js') }}"></script> -->
         <!-- Datetimepicker JS -->
-        <script src="{{ URL::asset('vendor/datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
+        <!-- OK <script src="{{ URL::asset('vendor/datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script> -->
         <!-- JTable -->
-        <script src="{{ URL::asset('vendor/jtable.2.4.0/jquery.jtable.min.js') }}"></script>
-        <script src="{{ URL::asset('bootstrap-toggle/bootstrap-toggle.min.js') }}"></script>
-        <script src="{{ URL::asset('bower_components/bootstrap-offcanvas/dist/js/bootstrap.offcanvas.min.js') }}"></script>
+        <!-- OK <script src="{{ URL::asset('vendor/jtable.2.4.0/jquery.jtable.min.js') }}"></script> -->
+        <!-- OK <script src="{{ URL::asset('bootstrap-toggle/bootstrap-toggle.min.js') }}"></script> -->
+        <!-- OK <script src="{{ URL::asset('bower_components/bootstrap-offcanvas/dist/js/bootstrap.offcanvas.min.js') }}"></script> -->
         <script>
 
           $(function() {

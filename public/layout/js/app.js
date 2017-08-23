@@ -276,12 +276,12 @@ Models = {
 				success : function (response) {
 					waitingDialog.hide()
 					console.info(response)
-					var status = response.status.map(state => { return {emails:state.emails,failures:state.failures} })
+					var status = response.status.map(function(state) { return {emails:state.emails,failures:state.failures} })
 					console.info(status)
 					var msg = "Se han enviado recordatorios a : "
 
 					if ( response.emails instanceof Array ){
-						response.emails.forEach( email => { msg += email + ",<br>" } )
+						response.emails.forEach( function(email) { msg += email + ",<br>" } )
 					}else{
 						for (k in response.emails ) {
 							msg += response.emails[k] + ",<br>"

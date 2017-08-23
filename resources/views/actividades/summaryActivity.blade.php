@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('styles')
-	<link rel="stylesheet" href="{{ URL::asset('simplePagination.js/simplePagination.css') }}">
 @endsection
 
 @section('content')
@@ -30,7 +29,7 @@
 											<div class="panel-heading">
 												<div>
 													<input type="hidden" name="cpregunta" value="{{ $pregunta->cpregunta }}" data-text="{{ $pregunta->enunciado }}">
-													{{ $pregunta->enunciado }}
+													#{{$i}} - {{ $pregunta->enunciado }}
 												</div>
 											</div>
 
@@ -378,34 +377,33 @@
 @endsection
 
 @section('scripts')
-<script src="{{ URL::asset('simplePagination.js/jquery.simplePagination.js') }} "></script>
 <script>
-		function setdataEvidencia(key,name,value){
-			Models.Evidencias.set(key,JSON.stringify([[name,value]]),function(response){
-				console.log(response)
-				alertify.success("Evidencia Editada")
-			})
-		}
-		@if ( $actividad->checklist )
-			$(function() {
-				$("#checklistdeta_pagination").pagination({
-					items: {{$actividad->checklist->cantidad_preguntas}},
-					itemsOnPage: 1,
-					displayedPages: 3,
-					cssStyle: 'light-theme',
-					prevText: "<",
-					nextText: ">",
-					selectOnClick: true,
-					onPageClick: function(lastPageIndex,pageNumber, event){
-						$(".checklistdeta_page").addClass("hide")
-						$("#checklistdeta_page_"+pageNumber).removeClass("hide")
-					},
-					onInit: function(){
-						var pageNumber = $("#checklistdeta_pagination").pagination('getCurrentPage');
-						$("#checklistdeta_page_"+pageNumber).removeClass("hide")
-					}
-				});
+	function setdataEvidencia(key,name,value){
+		Models.Evidencias.set(key,JSON.stringify([[name,value]]),function(response){
+			console.log(response)
+			alertify.success("Evidencia Editada")
+		})
+	}
+	@if ( $actividad->checklist )
+		$(function() {
+			$("#checklistdeta_pagination").pagination({
+				items: {{$actividad->checklist->cantidad_preguntas}},
+				itemsOnPage: 1,
+				displayedPages: 3,
+				cssStyle: 'light-theme',
+				prevText: "<",
+				nextText: ">",
+				selectOnClick: true,
+				onPageClick: function(lastPageIndex,pageNumber, event){
+					$(".checklistdeta_page").addClass("hide")
+					$("#checklistdeta_page_"+pageNumber).removeClass("hide")
+				},
+				onInit: function(){
+					var pageNumber = $("#checklistdeta_pagination").pagination('getCurrentPage');
+					$("#checklistdeta_page_"+pageNumber).removeClass("hide")
+				}
 			});
-		@endif
+		});
+	@endif
 </script>
 @endsection

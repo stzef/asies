@@ -5,15 +5,16 @@
 	<!-- Generic page styles -->
 	<!-- <link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/style.css') }}">-->
 	<!-- blueimp Gallery styles -->
-	<link rel="stylesheet" href="https://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+	<!-- <link rel="stylesheet" href="https://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">-->
+	<link rel="stylesheet" href="{{ URL::asset('css/jqupload/blueimp-gallery.min.css') }}">
 	<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
 	<link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/jquery.fileupload.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/jquery.fileupload-ui.css') }}">
-	<link rel="stylesheet" href="{{ URL::asset('bower_components/bootstrap-fileinput/css/fileinput.min.css') }}">
+	<!--<link rel="stylesheet" href="{{ URL::asset('bower_components/bootstrap-fileinput/css/fileinput.min.css') }}">-->
 	<!-- CSS adjustments for browsers with JavaScript disabled -->
 	<noscript><link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/jquery.fileupload-noscript.css') }}"></noscript>
 	<noscript><link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/jquery.fileupload-ui-noscript.css') }}"></noscript>
-	<link rel="stylesheet" href="{{ URL::asset('simplePagination.js/simplePagination.css') }}">
+	<!-- <link rel="stylesheet" href="{{ URL::asset('simplePagination.js/simplePagination.css') }}"> -->
 @endsection
 
 @section('content')
@@ -184,7 +185,7 @@
 											<div class="panel-heading">
 												<div>
 													<input type="hidden" name="cpregunta" value="{{ $pregunta->cpregunta }}" data-text="{{ $pregunta->enunciado }}">
-													{{ $pregunta->enunciado }}
+													#{{$i}} - {{ $pregunta->enunciado }}
 												</div>
 											</div>
 
@@ -638,9 +639,9 @@
 @endsection
 
 @section('scripts')
-	<script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script>
-	<script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>
-	<script src="{{ URL::asset('simplePagination.js/jquery.simplePagination.js') }} "></script>
+	<!-- <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script>-->
+	<!-- <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>-->
+	<!-- <script src="{{ URL::asset('simplePagination.js/jquery.simplePagination.js') }} "></script> -->
 
 	<script type="text/javascript">
 
@@ -1016,26 +1017,32 @@
 			})
 		})
 	</script>
-	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/vendor/jquery.ui.widget.js') }}"></script>
-	<script src="https://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
-	<script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
-	<script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
-	<script src="https://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
-	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.iframe-transport.js') }}"></script>
-	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload.js') }}"></script>
-	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-process.js') }}"></script>
-	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-image.js') }}"></script>
-	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-audio.js') }}"></script>
-	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-video.js') }}"></script>
-	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-validate.js') }}"></script>
-	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-ui.js') }}"></script>
-	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/main.js') }}"></script>
+	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/vendor/jquery.ui.widget.js') }}"></script> -->
+
+	<!-- <script src="https://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script> -->
+	<!-- OK <script src="{{ URL::asset('js/jqupload/tmpl.min.js') }}" ></script> -->
+	<!-- <script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script> -->
+	<!-- OK <script src="{{ URL::asset('js/jqupload/load-image.all.min.js') }}" ></script> -->
+	<!-- <script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script> -->
+	<!-- OK <script src="{{ URL::asset('js/jqupload/canvas-to-blob.min.js') }}" ></script> -->
+	<!-- <script src="https://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script> -->
+	<!-- OK <script src="{{ URL::asset('js/jqupload/jquery.blueimp-gallery.min.js') }}" ></script> -->
+
+	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.iframe-transport.js') }}"></script> -->
+	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload.js') }}"></script> -->
+	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-process.js') }}"></script> -->
+	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-image.js') }}"></script> -->
+	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-audio.js') }}"></script> -->
+	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-video.js') }}"></script> -->
+	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-validate.js') }}"></script> -->
+	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-ui.js') }}"></script> -->
+	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/main.js') }}"></script> -->
 	<!--[if (gte IE 8)&(lt IE 10)]>
 	<script src="js/cors/jquery.xdr-transport.js"></script>
 	<![endif]-->
-	<script src="{{ URL::asset('bower_components/bootstrap-fileinput/js/fileinput.min.js') }} "></script>
-	<script src="{{ URL::asset('bower_components/bootstrap-fileinput/js/locales/es.js') }} "></script>
-	<script src="{{ URL::asset('bower_components/bootstrap-fileinput/themes/fa/theme.min.js') }} "></script>
+	<!-- <script src="{{ URL::asset('bower_components/bootstrap-fileinput/js/fileinput.min.js') }} "></script> -->
+	<!-- <script src="{{ URL::asset('bower_components/bootstrap-fileinput/js/locales/es.js') }} "></script> -->
+	<!-- <script src="{{ URL::asset('bower_components/bootstrap-fileinput/themes/fa/theme.min.js') }} "></script> -->
 	<script>
 		$(".files_checklist").fileinput({
 			'language': 'es',

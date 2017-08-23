@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('styles')
-	<link rel="stylesheet" href="{{ URL::asset('vendor/jstree/css/themes/default/style.min.css') }}" >
 
 @endsection
 
@@ -220,8 +219,8 @@
 @endsection
 
 @section('scripts')
-	<script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script>
-	<script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>
+	<!-- <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script> -->
+	<!-- <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script> -->
 	<script type="text/javascript">
 		$(function () {
 			$('.date').datetimepicker({
@@ -230,7 +229,6 @@
 			});
 		});
 	</script>
-	<script src="{{ URL::asset('vendor/jstree/js/jstree.min.js') }}"></script>
 
 	<script>
 		$.jstree.defaults.plugins = [ "wholerow", "checkbox" ]
