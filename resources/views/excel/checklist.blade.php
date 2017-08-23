@@ -3,17 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title> Checklist </title>
-	<style>
-		td.bordered{
-			border: 1px solid #000000;
-		}
-	</style>
+	<link href="{{ URL::asset('css/excel.css') }}" rel="stylesheet">
 </head>
 <body>
 
 	<table class="table">
 		<tr>
-			<th class="bordered"> Pregunta </th>
+			<th class="bordered" width="100"> Pregunta </th>
 			<th class="bordered"> Respuesta </th>
 			<th class="bordered"> Anotaciones </th>
 			<th class="bordered"> Evidencia </th>
@@ -21,7 +17,7 @@
 		@foreach( $actividad->checklist->preguntas as $pregunta )
 
 			<tr>
-				<td class="bordered">
+				<td class="bordered" width="100">
 					{{ $pregunta->enunciado }}
 				</td>
 				<td class="bordered">
@@ -41,13 +37,7 @@
 					<p>@if($pregunta->respuesta){{$pregunta->respuesta->anotaciones}}@endif</p>
 				</td>
 				<td class="bordered">
-					<ul>
-						@foreach( $pregunta->evidencias as $evidencia)
-							<li>
-								<a href="{{ URL::asset( $evidencia->path ) }}" download="" > {{ $evidencia->nombre }} </a>
-							</li>
-						@endforeach
-					</ul>
+					{{ $pregunta->cantidad_evidencias }}
 				</td>
 			</tr>
 		@endforeach

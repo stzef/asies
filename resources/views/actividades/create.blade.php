@@ -13,214 +13,206 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					Actividades
+					<h4>Actividades</h4>
 				</div>
 
-				<div class="panel-body">
-					<form id="form_crear_actividad" class="form-horizontal">
+			</div>
+			<div>
+				<form id="form_crear_actividad" class="form-horizontal">
 
-						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-						<input type="hidden" name="actividad[cactividad]" value="@if( $actividad){{ $actividad->cactividad }}@endif" id="actividad_cactividad">
+					<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+					<input type="hidden" name="actividad[cactividad]" value="@if( $actividad){{ $actividad->cactividad }}@endif" id="actividad_cactividad">
 
-						<div class="col-md-6">
-							<div class="form-group row">
-								<label for="plan_nombre" class="col-sm-2 col-form-label">Nombre</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="plan_nombre" name="actividad[nactividad]" value="@if( $actividad){{ $actividad->nactividad }}@endif" required placeholder="Nombre">
-								</div>
-							</div>
-
-							<div class="form-group row">
-								<label for="" class="col-sm-2 col-form-label">Objetivos</label>
-								<div class="col-sm-10">
-									<textarea class="form-control" id="" name="actividad[descripcion]" required>@if( $actividad){{ $actividad->descripcion }}@endif</textarea>
-								</div>
+					<div class="col-md-6">
+						<div class="form-group row">
+							<label for="plan_nombre" class="col-sm-2 col-form-label">Nombre</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="plan_nombre" name="actividad[nactividad]" value="@if( $actividad){{ $actividad->nactividad }}@endif" required placeholder="Nombre">
 							</div>
 						</div>
-						<div class="col-md-6">
-							<div class="form-group row">
-								<label for="" class="col-sm-4 col-form-label">Tipo Actividad</label>
-								<div class="col-sm-8">
-									<select name="actividad[ctiactividad]" id="" required class="form-control">
-										<option value="">Seleccione el tipo de actividad</option>
-										@foreach ($tiactividades as $tiactividad)
-											<option value="{{$tiactividad->ctiactividad}}" @if( $actividad) @if($actividad->ctiactividad == $tiactividad->ctiactividad) selected @endif @endif >{{$tiactividad->ntiactividad}}</option>
-										@endforeach
-									</select>
+
+						<div class="form-group row">
+							<label for="" class="col-sm-2 col-form-label">Objetivos</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" id="" name="actividad[descripcion]" required>@if( $actividad){{ $actividad->descripcion }}@endif</textarea>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group row">
+							<label for="" class="col-sm-4 col-form-label">Tipo Actividad</label>
+							<div class="col-sm-8">
+								<select name="actividad[ctiactividad]" id="" required class="form-control">
+									<option value="">Seleccione el tipo de actividad</option>
+									@foreach ($tiactividades as $tiactividad)
+										<option value="{{$tiactividad->ctiactividad}}" @if( $actividad) @if($actividad->ctiactividad == $tiactividad->ctiactividad) selected @endif @endif >{{$tiactividad->ntiactividad}}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+
+						<div>
+							<div class="col-md-8">
+
+								<div class="form-group row">
+									<label for="" class="col-sm-4 col-form-label" >Fecha Inicial</label>
+									<div class='col-sm-8 input-group date'>
+										<input type='text' class="form-control" name="actividad[fini]" value="@if( $actividad){{ $actividad->fini }}@endif" required />
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
 								</div>
+
+								<div class="form-group row">
+									<label for="" class="col-sm-4 col-form-label">Fecha Final</label>
+									<div class='col-sm-8 input-group date'>
+										<input type='text' class="form-control" name="actividad[ffin]" value="@if( $actividad){{ $actividad->ffin }}@endif" required />
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
+								</div>
+
 							</div>
 
-							<div>
-								<div class="col-md-8">
-
-									<div class="form-group row">
-										<label for="" class="col-sm-4 col-form-label" >Fecha Inicial</label>
-										<div class='col-sm-8 input-group date'>
-											<input type='text' class="form-control" name="actividad[fini]" value="@if( $actividad){{ $actividad->fini }}@endif" required />
-											<span class="input-group-addon">
-												<span class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<label for="" class="col-sm-4 col-form-label">Fecha Final</label>
-										<div class='col-sm-8 input-group date'>
-											<input type='text' class="form-control" name="actividad[ffin]" value="@if( $actividad){{ $actividad->ffin }}@endif" required />
-											<span class="input-group-addon">
-												<span class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>
-									</div>
-
-								</div>
-
-								<div class="col-md-4">
-									<div class="form-group row">
-										<label class="col-sm-2"></label>
-										<div class="col-sm-10">
-											<div class="form-check">
-												<label class="form-check-label">
-													<input class="form-check-input" type="checkbox" name="actividad[ifarchivos]" id="actividad_ifarchivos" @if( $actividad) @if( $actividad->ifarchivos ) checked @endif @endif> Archivos
-												</label>
-											</div>
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<label class="col-sm-2"></label>
-										<div class="col-sm-10">
-											<div class="form-check">
+							<div class="col-md-4">
+								<div class="form-group row">
+									<label class="col-sm-2"></label>
+									<div class="col-sm-10">
+										<div class="form-check">
 											<label class="form-check-label">
-												<input class="form-check-input" type="checkbox" name="actividad[ifacta]" id="actividad_ifacta" @if( $actividad) @if( $actividad->ifacta ) checked @endif @endif> Acta
+												<input class="form-check-input" type="checkbox" name="actividad[ifarchivos]" id="actividad_ifarchivos" @if( $actividad) @if( $actividad->ifarchivos ) checked @endif @endif> Archivos
 											</label>
-											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label class="col-sm-2"></label>
+									<div class="col-sm-10">
+										<div class="form-check">
+										<label class="form-check-label">
+											<input class="form-check-input" type="checkbox" name="actividad[ifacta]" id="actividad_ifacta" @if( $actividad) @if( $actividad->ifacta ) checked @endif @endif> Acta
+										</label>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</form>
-					<div class="row section_asignacion_tareas ">
-						<div class="col-md-12">
-							<div class="table-responsive col-md-12">
-								<form id="usuario_planes">
-									<table class="table text-center">
-										<tbody>
-											<tr>
-												<td >
-													<div class="input-group">
-														<div>
-															<select-task required="required" name="tareasusuarios[ctarea]" id="tarea" :productos_minimos="productos_minimos" @mounted="getTask" />
-														</div>
-														<!--
-														<select  name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
-															<option value="">Tareas</option>}
-															@foreach ($tareas as $tarea)
-																<option value="{{$tarea->ctarea}}" title="{{$tarea->ntarea}}">{{ str_limit($tarea->ntarea, $limit = 45, $end = '...') }}</option>
-															@endforeach
-														</select>
-														-->
-														<span class="input-group-addon" data-find-task="true" data-find-treetask data-input-reference="#tarea"><i class="fa fa-search"></i></span>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td >
+					</div>
+				</form>
+				<div class="section_asignacion_tareas ">
+					<div class="col-md-12">
+						<div class="table-responsive col-md-12">
+							<form id="usuario_planes">
+								<table class="table text-center">
+									<tbody>
+										<tr>
+											<td >
+												<div class="input-group">
 													<div>
-														<select  name="tareasusuarios[user]" id="respo" required class="form-control selectFind">
-															<option value="">Responsable</option>
-															@foreach ($usuarios as $usuario)
-																<option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}}</option>
-															@endforeach
-														</select>
+														<select-task required="required" name="tareasusuarios[ctarea]" id="tarea" :productos_minimos="productos_minimos" @mounted="getTask" />
 													</div>
-												</td>
-											</tr>
-											<tr>
-												<td >
-													<select  name="tareasusuarios[ctirelacion]" id="tirespo" required class="form-control" >
-														<option value="">Tipo de responsabilidad</option>
-														@foreach ($relaciones as $relacion)
-															<option value = "{{$relacion->ctirelacion}}">{{$relacion->ntirelacion}}</option>
+													<span class="input-group-addon" data-find-task="true" data-find-treetask data-input-reference="#tarea"><i class="fa fa-search"></i></span>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td >
+												<div>
+													<select  name="tareasusuarios[user]" id="respo" required class="form-control selectFind">
+														<option value="">Responsable</option>
+														@foreach ($usuarios as $usuario)
+															<option value = "{{$usuario->id}}">{{$usuario->persona->nombres}} {{$usuario->persona->apellidos}}</option>
 														@endforeach
 													</select>
-												</td>
-											</tr>
-											<tr>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td >
+												<select  name="tareasusuarios[ctirelacion]" id="tirespo" required class="form-control" >
+													<option value="">Tipo de responsabilidad</option>
+													@foreach ($relaciones as $relacion)
+														<option value = "{{$relacion->ctirelacion}}">{{$relacion->ntirelacion}}</option>
+													@endforeach
+												</select>
+											</td>
+										</tr>
+										<tr>
 
-												<td>
-													<button  id="agregar" type="submit" class="btn btn-info">
-														<i class="glyphicon glyphicon-plus"></i>
-													</button>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</form>
-							</div>
+											<td>
+												<button  id="agregar" type="submit" class="btn btn-info">
+													<i class="glyphicon glyphicon-plus"></i>
+												</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</form>
 						</div>
-						<div class="col-md-12">
-							<table id="usuarios" class="table table-bordered tabla-hover table-responsive" cellspacing="0" width="100%">
-								<thead>
-									<tr>
-										<th>ctarea</th>
-										<th>Tarea</th>
-										<th>cusu</th>
-										<th>Responsable</th>
-										<th>ctirelacion</th>
-										<th>Responsabilidad</th>
-										<th> </th>
-										<th> </th>
-									</tr>
-								</thead>
-								<tbody>
-									@if ( $actividad )
-										@foreach ( $actividad->getAsignacion() as $asignacion )
-											<tr>
-												<td> {{ $asignacion->tarea->ctarea }} </td>
-												<td> {{ $asignacion->tarea->ntarea }} </td>
-												<td> {{ $asignacion->usuario->id }} </td>
-												<td> {{ $asignacion->usuario->persona->nombreCompleto() }} </td>
-												<td> {{ $asignacion->relacion->ctirelacion }} </td>
-												<td> {{ $asignacion->relacion->ntirelacion }} </td>
-												<td>
-													<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>
-														<i class='fa fa-pencil-square-o'></i>
-													</button>
-												</td>
-												<td>
-													<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)'>
-														<i class='fa fa-trash-o'></i>
-													</button>
-												</td>
-											</tr>
-										@endforeach
-									@endif
-								</tbody>
-							</table>
-						</div>
-
+					</div>
+					<div class="col-md-12">
+						<table id="usuarios" class="table table-bordered tabla-hover table-responsive" cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th>ctarea</th>
+									<th>Tarea</th>
+									<th>cusu</th>
+									<th>Responsable</th>
+									<th>ctirelacion</th>
+									<th>Responsabilidad</th>
+									<th> </th>
+									<th> </th>
+								</tr>
+							</thead>
+							<tbody>
+								@if ( $actividad )
+									@foreach ( $actividad->getAsignacion() as $asignacion )
+										<tr>
+											<td> {{ $asignacion->tarea->ctarea }} </td>
+											<td> {{ $asignacion->tarea->ntarea }} </td>
+											<td> {{ $asignacion->usuario->id }} </td>
+											<td> {{ $asignacion->usuario->persona->nombreCompleto() }} </td>
+											<td> {{ $asignacion->relacion->ctirelacion }} </td>
+											<td> {{ $asignacion->relacion->ntirelacion }} </td>
+											<td>
+												<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>
+													<i class='fa fa-pencil-square-o'></i>
+												</button>
+											</td>
+											<td>
+												<button type='button' class='eliminar btn btn-danger' onclick='borrar(event,this)'>
+													<i class='fa fa-trash-o'></i>
+												</button>
+											</td>
+										</tr>
+									@endforeach
+								@endif
+							</tbody>
+						</table>
 					</div>
 
+				</div>
 
-					<div class="text-center">
 
-						<a type="button" class="btn btn-danger" href="{{ URL::route('app_dashboard') }}" data-dismiss="modal">
-							<i class="glyphicon glyphicon-remove"></i> Cancelar
-						</a>
-						@if ( $action == "create" )
-							<button type="submit" class="btn btn-success" form="form_crear_actividad">
-								<i class="glyphicon glyphicon-plus"></i>
-								Crear
-							</button>
-						@else
-							<button type="submit" class="btn btn-success" form="form_crear_actividad">
-								<i class="glyphicon glyphicon-pencil"></i>
-								Editar
-							</button>
-						@endif
-					</div>
+				<div class="text-center">
+
+					<a type="button" class="btn btn-danger" href="{{ URL::route('app_dashboard') }}" data-dismiss="modal">
+						<i class="glyphicon glyphicon-remove"></i> Cancelar
+					</a>
+					@if ( $action == "create" )
+						<button type="submit" class="btn btn-success" form="form_crear_actividad">
+							<i class="glyphicon glyphicon-plus"></i>
+							Crear
+						</button>
+					@else
+						<button type="submit" class="btn btn-success" form="form_crear_actividad">
+							<i class="glyphicon glyphicon-pencil"></i>
+							Editar
+						</button>
+					@endif
 				</div>
 			</div>
 		</div>

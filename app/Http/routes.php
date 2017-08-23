@@ -132,7 +132,7 @@ Route::group(['prefix' => 'actividades'], function(){
 		Route::group(['prefix' => 'checklist'], function(){
 
 			Route::get('export/{format}', "ChecklistsController@excel")->name("GET_export_checklist_excel");
-			Route::post('answer', "APIController@answer_checklist")->name("answer_checklist");
+			Route::post('answer', "ChecklistsController@answer_checklist")->name("answer_checklist");
 
 			Route::post('evidencias/{cpregunta}', "ChecklistsController@store")->name("POST_store_evidence_answer");
 

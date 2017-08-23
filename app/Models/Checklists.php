@@ -21,14 +21,14 @@ class Checklists extends Model
     /**
      * @var array
      */
-    protected $fillable = ['cactividad', 'fecha', 'nombre'];
+    protected $fillable = ['cactividad', 'fecha', 'nombre', 'ifhecha'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function actividades()
     {
-        return $this->belongsTo('asies\Models\Actividades', 'cactividad', 'cactividad', 'ifhecha');
+        return $this->belongsTo('asies\Models\Actividades', 'cactividad', 'cactividad');
     }
 
     /**
@@ -44,6 +44,26 @@ class Checklists extends Model
      */
     public function checklistpregunta()
     {
-        return $this->hasMany('asies\Models\ChecklistPregunta', 'cchecklist', 'cchecklist');
+        return $this->hasMany('asies\Models\ChecklistPreguntas', 'cchecklist', 'cchecklist');
+    }
+    public function updateState(){
+        $response = array( "message" => "", "ifhecha" => null );
+
+        $total_preguntas = ChecklistPreguntas::where("cchecklist",$this->cchecklist)->count();
+        $preguntas_respondidas = ChecklistDeta::where("cchecklist",$this->cchecklist)->count();
+
+        if ( $total_preguntas == $preguntas_respondidas ){
+            $ifhecha = 1;
+            $response["message"] = "El checklist se Completo";
+        }else{
+            $ifhecha = 0;
+            $response["message"] = "Aun falta pregntas de checklist";
+        }
+
+        Checklists::where('cchecklist', $this->cchecklist)->update(['ifhecha' => $ifhecha]);
+        $response["ifhecha"] = $ifhecha;
+
+
+        return $response;
     }
 }

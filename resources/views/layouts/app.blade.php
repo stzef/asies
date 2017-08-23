@@ -1,366 +1,257 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
-<head>
+    <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <link rel="icon" href="{{ URL::asset('img/logo.png') }}" type="image/png" sizes="16x16">
+        <link rel="icon" href="{{ URL::asset('img/logo.png') }}" type="image/png" sizes="16x16">
 
+        <title>{{$SHORT_NAME_APP}}</title>
 
-    <title>{{$SHORT_NAME_APP}}</title>
+        <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" href="{{ URL::asset('layout/css/bootstrap.css') }}" >
+        <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="{{ URL::asset('layout/css/bootstrap.css') }}" >
-    <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{{ URL::asset('layout/css/sb-admin.css') }}" >
+        <!--<link href="css/sb-admin.css" rel="stylesheet">-->
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ URL::asset('layout/css/sb-admin.css') }}" >
-    <!--<link href="css/sb-admin.css" rel="stylesheet">-->
+        <!-- Custom Fonts -->
+        <link rel="stylesheet" href="{{ URL::asset('layout/font-awesome/css/font-awesome.min.css') }}" >
 
-    <!-- Custom Fonts -->
-    <link rel="stylesheet" href="{{ URL::asset('layout/font-awesome/css/font-awesome.min.css') }}" >
+        <!--<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
 
-    <!--<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
+        <!-- AlertifyJS -->
+        <link rel="stylesheet" href="{{ URL::asset('vendor/alertifyjs/css/alertify.css') }}" >
 
-    <!-- AlertifyJS -->
-    <link rel="stylesheet" href="{{ URL::asset('vendor/alertifyjs/css/alertify.css') }}" >
+        <!-- JQuery UI -->
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" >
 
-    <!-- JQuery UI -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" >
+        <!-- Select2 -->
+        <link rel="stylesheet" href="{{ URL::asset('vendor/select2-4.0.3/dist/css/select2.min.css') }}" >
 
-    <!-- Select2 -->
-    <link rel="stylesheet" href="{{ URL::asset('vendor/select2-4.0.3/dist/css/select2.min.css') }}" >
+        <!-- JTable -->
+        <!--<link rel="stylesheet" href="{{ URL::asset('vendor/jtable.2.4.0/themes/jqueryui/jtable_jqueryui.css') }}" >-->
+        <link rel="stylesheet" href="{{ URL::asset('vendor/jtable.2.4.0/themes/metro/darkgray/jtable.css') }}" >
 
-    <!-- JTable -->
-    <!--<link rel="stylesheet" href="{{ URL::asset('vendor/jtable.2.4.0/themes/jqueryui/jtable_jqueryui.css') }}" >-->
-    <link rel="stylesheet" href="{{ URL::asset('vendor/jtable.2.4.0/themes/metro/darkgray/jtable.css') }}" >
+        <!-- Datetimepicker JS -->
+        <link rel="stylesheet" href="{{ URL::asset('vendor/datetimepicker/css/bootstrap-datetimepicker-standalone.css') }}" >
 
-    <!-- Datetimepicker JS -->
-    <link rel="stylesheet" href="{{ URL::asset('vendor/datetimepicker/css/bootstrap-datetimepicker-standalone.css') }}" >
+        <link href="{{ URL::asset('bootstrap-toggle/bootstrap-toggle.min.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ URL::asset('bower_components/bootstrap-offcanvas/dist/css/bootstrap.offcanvas.min.css') }}"/>
 
-    <link href="{{ URL::asset('bootstrap-toggle/bootstrap-toggle.min.css') }}" rel="stylesheet">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <link href="{{ URL::asset('css/utilities.css') }}" rel="stylesheet">
+        <link href="{{ URL::asset('css/custom.css') }}" rel="stylesheet">
 
-    <style>
-        #chart_div table{
-            margin: 0 auto !important;
-        }
-        .nav.navbar-nav{
-            font-size : 18px;
-            font-weight: bold;
-            /*
-            height: 200px;
-            overflow: overlay;
-            */
-        }
-        .navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse{
-            max-height: 200px !important;
-            overflow: overlay
-        }
-        .label {
-          font-size: 100% !important;
-          margin:  1px !important;
-        }
-        #page-wrapper {
-            padding: 10px !important;
-        }
+        @yield('styles')
 
-        /* Small devices (tablets, 768px and up) */
-        @media (max-width : 768px) {
-            .container-fluid{
-                padding: 1px !important;
-            }
-            .panel-body{
-                padding: 10px !important;
-            }
-            .well{
-                padding: 10px !important;
-            }
-            .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
-                padding-right: 10px;
-                padding-left: 10px;
-            }
-        }
+    </head>
 
-        /* Medium devices (desktops, 992px and up) */
-        @media (min-width: @screen-md-min) {}
+    <body>
 
-        /* Large devices (large desktops, 1200px and up) */
-        @media (min-width: @screen-lg-min) {}
-    </style>
-    @yield('styles')
-
-</head>
-
-<body>
-
-    <div id="wrapper">
-
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{ URL::route('app_dashboard') }}">{{$SHORT_NAME_APP}}</a>
-            </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                <!--<li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu message-dropdown">
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>{{ Auth::user()->name }}</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
+        <div id="wrapper">
+            <!-- Navigation -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle offcanvas-toggle" data-toggle="offcanvas" data-target="#js-bootstrap-offcanvas">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                        </span>
+                    </button>
+                    <a class="navbar-brand" href="{{ URL::route('app_dashboard') }}">{{$SHORT_NAME_APP}}</a>
+                </div>
+                <ul class="nav navbar-right top-nav hidden-sm hidden-xs">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ Auth::user()->name }} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="divider"></li>
+                            <li class="btn-logout">
+                                <a href="{{ url('/logout') }}"><i class="fa fa-fw fa-power-off"></i> Salir </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="collapse navbar-collapse navbar-ex1-collapse navbar-offcanvas navbar-offcanvas-touch" id="js-bootstrap-offcanvas">
+                    <ul class="nav navbar-nav side-nav">
+                        <li >
+                            <a href="#" class="hidden-sm hidden-md hidden-lg">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                         <div class="pull-right">
+                                                <i
+                                                    class="fa fa-chevron-left"
+                                                    onclick="$('#js-bootstrap-offcanvas').trigger('offcanvas.close');"
+                                                ></i>
+                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </li>
-                        <li class="message-footer">
-                            <a href="#">Read All New Messages</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu alert-dropdown">
-                        <li>
-                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">View All</a>
-                        </li>
-                    </ul>
-                </li>-->
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ Auth::user()->name }} <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <!--<li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>-->
-                        <li class="divider"></li>
-                        <li class="btn-logout">
-                            <a href="{{ url('/logout') }}"><i class="fa fa-fw fa-power-off"></i> Salir </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <!--<li class="active">-->
-                    <li >
-                        <a href="{{ URL::action('AppController@dashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}"><i class="fa fa-fw fa-file-text-o"></i> Mis Actividades</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#actividades"><i class="fa fa-fw fa-cubes"></i> Actividades <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="actividades" class="collapse">
-                            <li>
-                                @permission('activities.crud')
-                                    <a href="{{ URL::route('GET_actividades_create') }}"><i class="fa fa-fw fa-plus"></i>Crear</a>
-                                @endpermission
-                                @permission('activities.all')
-                                    <a href="{{ URL::route('GET_actividades_list') }}"><i class="fa fa-fw fa-list"></i>Listar</a>
-                                @endpermission
-                                @permission('activities.check_dates')
-                                    <a href="{{ URL::route('GET_verificar_fechas_actividades') }}"><i class="fa fa-fw fa-calendar"></i>Ver Todas</a>
-                                @endpermission
-                            </li>
-                        </ul>
-                    </li>
-                    <!--
-                    @permission('tasktree.see')
-                        <li>
-                            <a href="{{ URL::route('GET_treetask') }}"><i class="fa fa-fw fa-tree"></i>Arbol de Tareas</a>
-                        </li>
-                    @endpermission
-                    -->
-
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#actas"><i class="fa fa-fw fa-file-pdf-o"></i> Actas <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="actas" class="collapse">
-                            @permission('actas.crud.list')
+                        <li class="hidden-md hidden-lg">
+                            <a href="javascript:;" data-toggle="collapse" data-target="#menu-perfil" title="{{ Auth::user()->name }}">
+                                <i class="fa fa-user"></i>
+                                    {{ str_limit(Auth::user()->name, $limit = 10, $end = '...') }}
+                                <b class="caret"></b>
+                            </a>
+                            <ul id="menu-perfil" class="collapse">
                                 <li>
-                                    <a href="{{ URL::route('GET_list_actas',['user'=>Auth::user()->name]) }}"><i class="fa fa-list"></i> Listar</a>
+                                    <a href="{{ url('/logout') }}"><i class="fa fa-fw fa-power-off"></i> Salir </a>
                                 </li>
-                            @endpermission
-                        </ul>
-                    </li>
-                    <li >
-                        <a href="{{ URL::route('GET_tareas_create') }}"><i class="fa fa-fw fa-tasks"></i> Tareas</a>
-                    </li>
-                    <li >
-                        <a href="{{ URL::route('GET_lista_evidencias') }}"><i class="fa fa-fw fa-tasks"></i> Evidencias</a>
-                    </li>
-                    <!-- <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#tareas"><i class="fa fa-fw fa-tasks"></i> Tareas <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="tareas" class="collapse">
-                            <li>
-                                @permission('task.crud')
-                                    <a href="{{ URL::route('GET_tareas_create') }}"><i class="fa fa-fw fa-plus"></i>Crear</a>
+                            </ul>
+                        </li>
+                        <li >
+                            <a href="{{ URL::action('AppController@dashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}"><i class="fa fa-fw fa-file-text-o"></i> Mis Actividades</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#actividades"><i class="fa fa-fw fa-cubes"></i> Actividades <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="actividades" class="collapse">
+                                <li>
+                                    @permission('activities.crud')
+                                        <a href="{{ URL::route('GET_actividades_create') }}"><i class="fa fa-fw fa-plus"></i>Crear</a>
+                                    @endpermission
+                                    @permission('activities.all')
+                                        <a href="{{ URL::route('GET_actividades_list') }}"><i class="fa fa-fw fa-list"></i>Listar</a>
+                                    @endpermission
+                                    @permission('activities.check_dates')
+                                        <a href="{{ URL::route('GET_verificar_fechas_actividades') }}"><i class="fa fa-fw fa-calendar"></i>Ver Todas</a>
+                                    @endpermission
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#actas">
+                                <i class="fa fa-fw fa-file-pdf-o"></i>
+                                Actas
+                                <i class="fa fa-fw fa-caret-down"></i>
+                            </a>
+                            <ul id="actas" class="collapse">
+                                @permission('actas.crud.list')
+                                    <li>
+                                        <a href="{{ URL::route('GET_list_actas',['user'=>Auth::user()->name]) }}"><i class="fa fa-list"></i> Listar</a>
+                                    </li>
                                 @endpermission
-                            </li>
-                        </ul>
-                    </li>-->
-                </ul>
+                            </ul>
+                        </li>
+                        <li >
+                            <a href="{{ URL::route('GET_tareas_create') }}"><i class="fa fa-fw fa-tasks"></i> Tareas</a>
+                        </li>
+                        <li >
+                            <a href="{{ URL::route('GET_lista_evidencias') }}"><i class="fa fa-fw fa-tasks"></i> Evidencias</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div id="page-wrapper">
+                @if(Session::has('message'))
+                    <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+                @endif
+                <div class="container-fluid" id="vue-app">
+                    @yield('content')
+                </div>
             </div>
-            <!-- /.navbar-collapse -->
-        </nav>
-
-        <div id="page-wrapper">
-            @if(Session::has('message'))
-                <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
-            @endif
-            <div class="container-fluid" id="vue-app">
-
-
-                <!--<div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Dashboard <small>Statistics Overview</small>
-                        </h1>
-                        <ol class="breadcrumb">
-                            <li class="active">
-                                <i class="fa fa-dashboard"></i> Dashboard
-                            </li>
-                        </ol>
-                    </div>
-                </div>-->
-                @yield('content')
-
-            </div>
-            <!-- /.container-fluid -->
-
         </div>
-        <!-- /#page-wrapper -->
+        <script>
+            @if( isset($crud_action) )
+                var CRUD_ACTION = "{{ $crud_action }}"
+            @else
+                var CRUD_ACTION = null
+            @endif
+        </script>
 
-    </div>
-    <!-- /#wrapper -->
-    <script>
-        @if( isset($crud_action) )
-            var CRUD_ACTION = "{{ $crud_action }}"
-        @else
-            var CRUD_ACTION = null
-        @endif
-    </script>
+        <!-- jQuery -->
+        <script src="{{ URL::asset('layout/js/jquery.js') }}"></script>
 
-    <script src="{{ URL::asset('layout/js/jquery.js') }}"></script>
+        <!-- JQuery UI -->
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
+        <script>
+            // handle jQuery plugin naming conflict between jQuery UI and Bootstrap
+            $.widget.bridge('uibutton', $.ui.button);
+            $.widget.bridge('uitooltip', $.ui.tooltip);
+        </script>
 
+        <!-- AlertifyJS -->
+        <script src="{{ URL::asset('vendor/alertifyjs/alertify.min.js') }}"></script>
 
-    <!-- jQuery -->
+        <!-- Select2 -->
+        <script src="{{ URL::asset('vendor/select2-4.0.3/dist/js/select2.full.min.js') }}"></script>
 
-    <!-- JQuery UI -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+        <script src="{{ URL::asset('layout/js/bootstrap.min.js') }}"></script>
+        <!-- <script src="{{ URL::asset('bower_components/vue/dist/vue.js') }}"></script> -->
+        <script src="{{ URL::asset('layout/js/app.js') }}"></script>
 
-    <script>
-        // handle jQuery plugin naming conflict between jQuery UI and Bootstrap
-        $.widget.bridge('uibutton', $.ui.button);
-        $.widget.bridge('uitooltip', $.ui.tooltip);
-    </script>
+        <!-- Bootstrap JavaScript -->
+        <!-- Bootstrap Core JavaScript -->
 
-    <!-- Bootstrap JavaScript -->
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{ URL::asset('layout/js/bootstrap.min.js') }}"></script>
+        <!-- Moment JS -->
+        <script src="{{ URL::asset('vendor/momentjs/moment-with-locales.js') }}"></script>
+        <!-- <script src="{{ URL::asset('vendor/momentjs/locale/es.js') }}"></script> -->
 
-    <!-- Moment JS -->
-    <script src="{{ URL::asset('vendor/momentjs/moment-with-locales.js') }}"></script>
-    <!-- <script src="{{ URL::asset('vendor/momentjs/locale/es.js') }}"></script> -->
+        <script src="{{ URL::asset('vendor/datetimepicker/bootstrap/js/transition.js') }}"></script>
+        <script src="{{ URL::asset('vendor/datetimepicker/bootstrap/js/collapse.js') }}"></script>
+        <!-- Datetimepicker JS -->
+        <script src="{{ URL::asset('vendor/datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
+        <!-- JTable -->
+        <script src="{{ URL::asset('vendor/jtable.2.4.0/jquery.jtable.min.js') }}"></script>
+        <script src="{{ URL::asset('bootstrap-toggle/bootstrap-toggle.min.js') }}"></script>
+        <script src="{{ URL::asset('bower_components/bootstrap-offcanvas/dist/js/bootstrap.offcanvas.min.js') }}"></script>
+        <script>
 
-    <script src="{{ URL::asset('vendor/datetimepicker/bootstrap/js/transition.js') }}"></script>
-    <script src="{{ URL::asset('vendor/datetimepicker/bootstrap/js/collapse.js') }}"></script>
+          $(function() {
 
+                $('.toggle-do').bootstrapToggle({
+                    on: 'Si',
+                    off: 'No',
+                    onstyle: 'success',
+                    offstyle: 'danger',
+                });
 
+            })
 
-    <!-- Datetimepicker JS -->
-    <script src="{{ URL::asset('vendor/datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
-
-    <!-- AlertifyJS -->
-    <script src="{{ URL::asset('vendor/alertifyjs/alertify.min.js') }}"></script>
-
-
-
-
-    <!-- JTable -->
-    <script src="{{ URL::asset('vendor/jtable.2.4.0/jquery.jtable.min.js') }}"></script>
-
-    <!-- Select2 -->
-    <script src="{{ URL::asset('vendor/select2-4.0.3/dist/js/select2.full.min.js') }}"></script>
-
-    <!-- <script src="{{ URL::asset('bower_components/vue/dist/vue.js') }}"></script> -->
-    <script src="{{ URL::asset('layout/js/app.js') }}"></script>
-    <script src="{{ URL::asset('bootstrap-toggle/bootstrap-toggle.min.js') }}"></script>
-    <script>
-      $(function() {
-
-            $('.toggle-do').bootstrapToggle({
-                on: 'Si',
-                off: 'No',
-                onstyle: 'success',
-                offstyle: 'danger',
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
             });
 
-        })
+            $( document ).ajaxError(function( event, jqxhr, settings, thrownError ) {
+              console.log(thrownError)
+            });
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+            $( "#dialog" ).dialog({
+                width : "70%",
+                autoOpen: false,
+                modal: true,
+                resizable: false
+            });
+            $( "#dialog" ).dialog("open");
 
+        </script>
 
-        $( document ).ajaxError(function( event, jqxhr, settings, thrownError ) {
-          console.log(thrownError)
-        });
+        <script src="{{ URL::asset('components/dist/build.js') }}"></script>
 
-        $( "#dialog" ).dialog({
-            width : "70%",
-            autoOpen: false,
-            modal: true,
-            resizable: false
-        });
-        $( "#dialog" ).dialog("open");
+        @yield('scripts')
 
-
-    </script>
-    <script src="{{ URL::asset('components/dist/build.js') }}"></script>
-
-    @yield('scripts')
-
-</body>
+    </body>
 
 </html>

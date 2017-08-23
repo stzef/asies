@@ -153,64 +153,6 @@ class APIController extends Controller
 	}
 	*/
 
-	public function answer_checklist( Request $request, $cactividad ){
-
-		$actividad = Actividades::where("cactividad",$cactividad)->first();
-		if ( !$actividad ) return view('errors/generic',array('title' => 'Error Codigo.', 'message' => "La actividad $cactividad no existe" ));
-
-		$actividad->checklist = $actividad->getChecklist();
-		if ( !$actividad->checklist ) return view('errors/generic',array('title' => 'Error Codigo.', 'message' => "La actividad $cactividad tiene un checklist Asociado" ));
-
-
-		$dataBody = $request->all();
-
-		$response = [
-			"message" => "Se contesto el Checklist",
-			"answers" => [],
-		];
-
-		$dataBody["cchecklist"] = $actividad->checklist->cchecklist;
-
-		$validator = Validator::make($dataBody,
-			[
-				'cchecklist' => 'required|numeric|exists:checklist,cchecklist',
-				'answers.*.cpregunta' => 'numeric|exists:preguntas,cpregunta',
-				'answers.*.cpregunta' => 'nullable|numeric|exists:opciones,copcion',
-			]
-		);
-
-		foreach ($dataBody["answers"] as $answer) {
-
-
-			$queryRespuesta = ChecklistDeta::where("cchecklist",$dataBody["cchecklist"])->where("cpregunta",$answer["cpregunta"]);
-
-			$arr = [
-				"cpregunta" => $answer["cpregunta"],
-				"anotaciones" => $answer["anotaciones"]
-			];
-
-			$status = $arr;
-
-			if ( $answer["isOpenQuestion"] )
-				{ $arr["respuesta"] = $answer["respuesta"]; }
-			else
-				{ $arr["copcion"] = $answer["copcion"]; }
-
-			if ( $queryRespuesta->first() ){
-				$queryRespuesta->update($arr);
-				$status["message"] = "La respuesta se edito.";
-			}else{
-				$arr["cchecklist"] = $dataBody["cchecklist"];
-				ChecklistDeta::create($arr);
-				$status["message"] = "La respuesta se creo.";
-			}
-
-			array_push($response["answers"], $status);
-		}
-
-		return response()->json($response);
-	}
-
 	public function remove_tarea_asignada( Request $request, $cactividad ){
 
 

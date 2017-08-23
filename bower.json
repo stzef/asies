@@ -24,6 +24,7 @@
     "blueimp-file-upload": "9.18.0",
     "vue": "^2.3.4",
     "bootstrap": "3.2.0",
-    "bootstrap-fileinput": "^4.4.2"
+    "bootstrap-fileinput": "^4.4.2",
+    "bootstrap-offcanvas": "^2.4.0"
   }
 }

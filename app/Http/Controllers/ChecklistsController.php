@@ -9,6 +9,7 @@ use asies\Http\Requests;
 use asies\Models\Actividades;
 use asies\Models\ChecklistEvidencias;
 use asies\Models\ChecklistDeta;
+use Illuminate\Support\Facades\Validator;
 
 
 use View;
@@ -41,13 +42,13 @@ class ChecklistsController extends Controller
 
 		return \Excel::create("Checklist Actividad {$actividad->cactividad} - {$actividad->nactividad}", function($excel) use($data) {
 			$excel->sheet('Checklist', function($sheet) use($data) {
-				$sheet->setTitle("Checklist");
 				$sheet->loadView('excel/checklist',[
 					"actividad" => $data["actividad"]
 				]);
 			});
+
+
 			$excel->sheet('Estadisticas', function($sheet) use($data) {
-				$sheet->setTitle("Estadisticas");
 				$sheet->loadView('excel/estadisticas',[
 					"actividad" => $data["actividad"]
 				]);
@@ -135,6 +136,67 @@ class ChecklistsController extends Controller
 			}
 			return  $filesa;
 		}
+	}
+
+	public function answer_checklist( Request $request, $cactividad ){
+
+		$actividad = Actividades::where("cactividad",$cactividad)->first();
+		if ( !$actividad ) return view('errors/generic',array('title' => 'Error Codigo.', 'message' => "La actividad $cactividad no existe" ));
+
+		$actividad->checklist = $actividad->getChecklist();
+		if ( !$actividad->checklist ) return view('errors/generic',array('title' => 'Error Codigo.', 'message' => "La actividad $cactividad tiene un checklist Asociado" ));
+
+
+		$dataBody = $request->all();
+
+		$response = [
+			"message" => "Se contesto la pregunta.",
+			"answers" => [],
+		];
+
+		$dataBody["cchecklist"] = $actividad->checklist->cchecklist;
+
+		$validator = Validator::make($dataBody,
+			[
+				'cchecklist' => 'required|numeric|exists:checklist,cchecklist',
+				'answers.*.cpregunta' => 'numeric|exists:preguntas,cpregunta',
+				'answers.*.cpregunta' => 'nullable|numeric|exists:opciones,copcion',
+			]
+		);
+
+		foreach ($dataBody["answers"] as $answer) {
+
+			$queryRespuesta = ChecklistDeta::where("cchecklist",$dataBody["cchecklist"])->where("cpregunta",$answer["cpregunta"]);
+
+			$arr = [
+				"cpregunta" => $answer["cpregunta"],
+				"anotaciones" => $answer["anotaciones"]
+			];
+
+			$status = $arr;
+
+			if ( $answer["isOpenQuestion"] )
+				{ $arr["respuesta"] = $answer["respuesta"]; }
+			else
+				{ $arr["copcion"] = $answer["copcion"]; }
+
+			if ( $queryRespuesta->first() ){
+				$queryRespuesta->update($arr);
+				$status["message"] = "La respuesta se edito.";
+			}else{
+				$arr["cchecklist"] = $dataBody["cchecklist"];
+				ChecklistDeta::create($arr);
+				$status["message"] = "La respuesta se creo.";
+			}
+
+			array_push($response["answers"], $status);
+		}
+
+		$state = $actividad->checklist->updateState();
+
+		$response["message"] .= " {$state["message"]}";
+
+		return response()->json($response);
 	}
 
 }

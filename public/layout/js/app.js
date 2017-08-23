@@ -530,3 +530,8 @@ var waitingDialog = waitingDialog || (function ($) {
 	};
 
 })(jQuery);
+
+        waitingDialog.show("Cargando la Pagina...")
+        $( document ).ready(function(event) {
+            waitingDialog.hide()
+        })

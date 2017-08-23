@@ -34,7 +34,7 @@
 				invertPageOrder: false,
 				useStartEdge : true,
 				useEndEdge : true,
-				onPageClick: function(pageNumber, event) {
+				onPageClick: function(lastPageIndex, pageNumber, event) {
 					// Callback triggered when a page is clicked
 					// Page number is given as an optional parameter
 				},
@@ -331,11 +331,13 @@
 
 		_selectPage: function(pageIndex, event) {
 			var o = this.data('pagination');
+			var lastPageIndex = o.currentPage + 1;
+			console.log(lastPageIndex)
 			o.currentPage = pageIndex;
 			if (o.selectOnClick) {
 				methods._draw.call(this);
 			}
-			return o.onPageClick(pageIndex + 1, event);
+			return o.onPageClick(lastPageIndex, pageIndex + 1, event);
 		},
 
 

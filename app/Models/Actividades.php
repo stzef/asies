@@ -228,6 +228,19 @@ class Actividades extends Model
 				$ifhecha = 1;
 				$response["message"] = "La Actividad se completo";
 			}
+			$checklist = $this->checklist();
+			if ( $checklist ){
+				if ( $checklist->ifhecha ){
+					$ifhecha = 1;
+					$response["message"] = "La Actividad se completo";
+				}else{
+					$response["message"] = "Las Tareas se completaron pero no se ha completado el checklist";
+					$ifhecha = 0;
+				}
+			}else{
+				$ifhecha = 1;
+				$response["message"] = "La Actividad se completo";
+			}
 			if ( count($this->evidencias) > 0 ){
 				$ifhecha = 1;
 				$response["message"] = "La Actividad se completo";
@@ -361,16 +374,17 @@ class Actividades extends Model
 		if ( $checklist ){
 			$cpreguntas = ChecklistPreguntas::select('cpregunta')->where("cchecklist",$checklist->cchecklist)->orderBy("orden")->get();
 			$checklist->preguntas = Preguntas::whereIn('cpregunta', $cpreguntas)->orderBy("ctipregunta")->get();
+			$checklist->cantidad_preguntas = count($checklist->preguntas);
 			foreach ($checklist->preguntas as $pregunta) {
 				$copciones = OpcionesPregunta::select("copcion")->where("ctipregunta",$pregunta->ctipregunta)->get();
 				$pregunta->opciones = Opciones::whereIn("copcion",$copciones)->get();
 				$pregunta->respuesta = ChecklistDeta::where("cchecklist",$checklist->cchecklist)->where("cpregunta",$pregunta->cpregunta)->first();
 
 				$pregunta->evidencias = [];
-				$pregunta->numEvidencias = 0;
+				$pregunta->cantidad_evidencias = 0;
 				if ( $pregunta->respuesta ){
 					$pregunta->evidencias = ChecklistEvidencias::where("cchecklistdeta",$pregunta->respuesta->id)->get();
-					$pregunta->numEvidencias = count($pregunta->evidencias);
+					$pregunta->cantidad_evidencias = count($pregunta->evidencias);
 				}
 			}
 			$checklist = $checklist;
@@ -403,6 +417,11 @@ class Actividades extends Model
 			$checklist->estadisticas = $estadisticas;
 		}
 //		dump($checklist);exit();
-	return $checklist;
+		return $checklist;
+	}
+	public function checklist(){
+		$cactividad = $this->cactividad;
+		$checklist = Checklists::where("cactividad",$cactividad)->first();
+		return $checklist;
 	}
 }

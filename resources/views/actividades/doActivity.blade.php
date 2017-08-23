@@ -29,8 +29,10 @@
 							</h4>
 						</div>
 						<div class="col-md-5 text-center">
-							<a class="btn btn-primary" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a>
-							<a class="btn btn-danger" href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}">Salir</a>
+							<div class="btn-group">
+								<a class="btn btn-primary" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a>
+								<a class="btn btn-danger" href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}">Salir</a>
+							</div>
 						</div>
 					</div>
 					<div class="label label-info">
@@ -38,207 +40,227 @@
 					</div>
 				</div>
 
-				<div class="panel-body">
+			</div>
 
-					<div class="row">
-						<ul class="nav nav-tabs">
-							<li class="active"><a data-toggle="tab" href="#tab_tareas">Tareas</a></li>
-							<li><a data-toggle="tab" href="#tab_evidencias">Evidencias</a></li>
-							@if ( $actividad->checklist )
-								<li><a data-toggle="tab" href="#tab_checklist">Checklist</a></li>
-							@endif
-						</ul>
-					</div>
-					<div class="tab-content panel">
-						<!-- Tareas -->
-						<div id="tab_tareas" class="tab-pane fade in active">
-							<div class="panel panel-default">
-								<div class="panel panel-body">
-									<table class="table">
-										<thead>
+			<div>
+				<div>
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="tab" href="#tab_tareas">Tareas</a></li>
+						<li><a data-toggle="tab" href="#tab_evidencias">Evidencias</a></li>
+						@if ( $actividad->checklist )
+							<li><a data-toggle="tab" href="#tab_checklist">Checklist</a></li>
+						@endif
+					</ul>
+				</div>
+
+				<div class="tab-content panel">
+					<!-- Tareas -->
+					<div id="tab_tareas" class="tab-pane fade in active">
+						<div class="panel panel-default">
+							<div class="panel panel-body p-0">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Tarea</th>
+											<th>Realizada</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach ($tareas as $tarea)
 											<tr>
-												<th>Tarea</th>
-												<th>Realizada</th>
+												<td>
+													{{ $tarea->ntarea }}
+												</td>
+												<td>
+													<input
+														type="checkbox"
+														name="ctarea_{{ $tarea->ctarea }}"
+														class="form-check-input toggle-do"
+														onchange="Models.Tareas.cambiarEstado(this.dataset.cactividad,this.dataset.ctarea, validar)"
+														data-ctarea="{{ $tarea->ctarea }}"
+														data-cactividad="{{ $actividad->cactividad }}"
+														@if ($tarea->ifhecha) checked @endif
+													>
+												</td>
 											</tr>
-										</thead>
-										<tbody>
-											@foreach ($tareas as $tarea)
-												<tr>
-													<td>
-														{{ $tarea->ntarea }}
-													</td>
-													<td>
-														<input
-															type="checkbox"
-															name="ctarea_{{ $tarea->ctarea }}"
-															class="form-check-input toggle-do"
-															onchange="Models.Tareas.cambiarEstado(this.dataset.cactividad,this.dataset.ctarea, validar)"
-															data-ctarea="{{ $tarea->ctarea }}"
-															data-cactividad="{{ $actividad->cactividad }}"
-															@if ($tarea->ifhecha) checked @endif
-														>
-													</td>
-												</tr>
-											@endforeach
-										</tbody>
-									</table>
-								</div>
+										@endforeach
+									</tbody>
+								</table>
 							</div>
 						</div>
-						<!-- Tareas -->
+					</div>
+					<!-- Tareas -->
 
-						<!-- Evidencias -->
-						<div id="tab_evidencias" class="tab-pane fade in">
-							<div class="panel panel-default">
-								<div class="panel panel-body">
-									<form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
-										<input type="hidden" name="cactividad" id="cactividad" value="{{ $actividad->cactividad }}">
-										<!-- Redirect browsers with JavaScript disabled to the origin page -->
-										<noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
-										<!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-										<div class="row fileupload-buttonbar">
-											<div class="col-md-12">
-												<!-- The fileinput-button span is used to style the file input field as button -->
-												<span class="btn btn-success fileinput-button">
-													<i class="glyphicon glyphicon-plus"></i>
-													<span>Agregar Archivos...</span>
-													<input type="file" name="files[]" multiple>
-												</span>
-												<button type="submit" class="btn btn-primary start">
-													<i class="glyphicon glyphicon-upload"></i>
-													<span>Subir Todos</span>
-												</button>
-												<button type="reset" class="btn btn-warning cancel">
-													<i class="glyphicon glyphicon-ban-circle"></i>
-													<span>Carcelar Subida</span>
-												</button>
-												<!--
-												<button type="button" class="btn btn-danger delete">
-													<i class="glyphicon glyphicon-trash"></i>
-													<span>Delete</span>
-												</button>
-												<input type="checkbox" class="toggle">
-												-->
+					<!-- Evidencias -->
+					<div id="tab_evidencias" class="tab-pane fade in">
+						<div class="panel panel-default">
+							<div class="panel panel-heading">
+								@if ( $actividad->acta )
+									<div class="alert alert-warning">
+										El acta de esta actividad ya se ha creado. Para ver el acta ir a Resumen.
+									</div>
+								@else
+									@permission('actas.crud')
+										<button type="button" class="btn btn-primary " id="btn_crear_acta" data-toggle="modal" data-target="#modalCrearActa">
+											<i class="glyphicon glyphicon-plus"></i>
+											Crear Acta
+										</button>
+									@endpermission
+								@endif
+							</div>
+							<div class="panel panel-body p-0">
+								<form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
+									<input type="hidden" name="cactividad" id="cactividad" value="{{ $actividad->cactividad }}">
+									<!-- Redirect browsers with JavaScript disabled to the origin page -->
+									<noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
+									<!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+									<div class="row fileupload-buttonbar">
+										<div class="col-md-12">
+											<!-- The fileinput-button span is used to style the file input field as button -->
+											<div class="text-center">
 
-												<!-- The global file processing state -->
-												<span class="fileupload-process"></span>
-											</div>
-											<!-- The global progress state -->
-											<div class="col-lg-12 fileupload-progress fade">
-												<!-- The global progress bar -->
-												<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-													<div class="progress-bar progress-bar-success" style="width:0%;"></div>
+												<div class="btn-group">
+													<span class="btn btn-success fileinput-button">
+														<i class="glyphicon glyphicon-plus"></i>
+														<span>Agregar</span>
+														<input type="file" name="files[]" multiple>
+													</span>
+													<button type="submit" class="btn btn-primary start">
+														<i class="glyphicon glyphicon-upload"></i>
+														<span>Subir</span>
+													</button>
+													<button type="reset" class="btn btn-warning cancel">
+														<i class="glyphicon glyphicon-ban-circle"></i>
+														<span>Carcelar</span>
+													</button>
 												</div>
-												<!-- The extended global progress state -->
-												<div class="progress-extended">&nbsp;</div>
 											</div>
-										</div>
-										<!-- The table listing the files available for upload/download -->
-										<table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
-									</form>
-								</div>
-								<div class="panel panel-footer">
-									@if ( $actividad->acta )
-										<div class="alert alert-warning">
-											El acta de esta actividad ya se ha creado. Para ver el acta ir a Resumen.
-										</div>
-									@else
-										@permission('actas.crud')
-											<button type="button" class="btn btn-primary " id="btn_crear_acta" data-toggle="modal" data-target="#modalCrearActa">
-												<i class="glyphicon glyphicon-plus"></i>
-												Crear Acta
+											<!--
+											<button type="button" class="btn btn-danger delete">
+												<i class="glyphicon glyphicon-trash"></i>
+												<span>Delete</span>
 											</button>
-										@endpermission
-									@endif
+											<input type="checkbox" class="toggle">
+											-->
+
+											<!-- The global file processing state -->
+											<span class="fileupload-process"></span>
+										</div>
+										<!-- The global progress state -->
+										<div class="col-lg-12 fileupload-progress fade">
+											<!-- The global progress bar -->
+											<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+												<div class="progress-bar progress-bar-success" style="width:0%;"></div>
+											</div>
+											<!-- The extended global progress state -->
+											<div class="progress-extended">&nbsp;</div>
+										</div>
+									</div>
+									<!-- The table listing the files available for upload/download -->
+									<table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+								</form>
+							</div>
+							<div class="panel panel-footer">
+								<h4>
 									<p class="label label-info">
 										{{ $actividad->getEvidencias(true) }} Evidencias
 									</p>
-								</div>
+								</h4>
 							</div>
-
 						</div>
-						<!-- Evidencias -->
 
-						<!-- Checklist -->
-						@if( $actividad->checklist )
-							<div id="tab_checklist" class="tab-pane fade in ">
-								<div class="panel panel-default">
-									<div class="panel-body" id="checklist">
-										<input type="hidden" value="{{ $actividad->checklist->cchecklist }}" id="cchecklist" name="cchecklist">
-										@php $cantidad_preguntas = count($actividad->checklist->preguntas) @endphp
-										@foreach( $actividad->checklist->preguntas as $i => $pregunta )
-											@php $i++ @endphp
-											<div class="panel panel-default hide checklistdeta_page" id="checklistdeta_page_{{$i}}" data-page="{{$i}}">
-												<div class="panel-heading">
-													<div>
-														<input type="hidden" name="cpregunta" value="{{ $pregunta->cpregunta }}" data-text="{{ $pregunta->enunciado }}">
-														{{ $pregunta->enunciado }}
-													</div>
+					</div>
+					<!-- Evidencias -->
+
+					<!-- Checklist -->
+					@if( $actividad->checklist )
+						<div id="tab_checklist" class="tab-pane fade in ">
+							<div class="panel panel-default">
+								<div class="panel-body p-0" id="checklist">
+									<input type="hidden" value="{{ $actividad->checklist->cchecklist }}" id="cchecklist" name="cchecklist">
+									@foreach( $actividad->checklist->preguntas as $i => $pregunta )
+										@php $i++ @endphp
+										<div class="panel panel-default hide checklistdeta_page" id="checklistdeta_page_{{$i}}" data-page="{{$i}}">
+											<div class="panel-heading">
+												<div>
+													<input type="hidden" name="cpregunta" value="{{ $pregunta->cpregunta }}" data-text="{{ $pregunta->enunciado }}">
+													{{ $pregunta->enunciado }}
 												</div>
-
-												<div class="panel-body">
-													<div>
-														@if ( $pregunta->isOpenQuestion() )
-															<input type="hidden" name="isOpenQuestion" value="true">
-															<textarea style="resize:none" class="form-control" name="copcion" data-text="Respuesta Abierta">@if($pregunta->respuesta){{$pregunta->respuesta->respuesta}}@endif</textarea>
-														@else
-															<input type="hidden" name="isOpenQuestion" value="false">
-															@foreach($pregunta->opciones as $opcion)
-																<div>
-																	<label for="copcion_{{ $opcion->copcion }}">
-																		<input
-																			type="radio"
-																			name="copcion_{{ $opcion->copcion }}_cpregunta_{{ $pregunta->cpregunta }}"
-																			data-text="{{ $opcion->detalle }}"
-																			id="copcion_{{ $opcion->copcion }}_cpregunta_{{ $pregunta->cpregunta }}"
-																			value="{{ $opcion->copcion }}"
-																			@if($pregunta->respuesta)
-																				@if($pregunta->respuesta->copcion == $opcion->copcion )
-																					checked
-																				@endif
-																			@endif
-																		>
-																		</input>
-																		<span>{{ $opcion->detalle }}</span>
-																	</label>
-																</div>
-															@endforeach
-														@endif
-													</div>
-													<div class="row">
-
-														<div class="col-xs-12 col-sm-12 col-md-6 col-md-6">
-															<textarea style="resize:none" class="form-control" name="anotaciones" id="anotaciones">@if($pregunta->respuesta){{$pregunta->respuesta->anotaciones}}@endif</textarea>
-														</div>
-														<div class="col-xs-12 col-sm-12 col-md-6 col-md-6">
-															<input
-																data-cactividad="{{$actividad->cactividad}}"
-																data-cpregunta="{{$pregunta->cpregunta}}"
-																type="file"
-																name="evidencia_{{ $pregunta->cpregunta }}"
-																multiple
-																class="files_checklist"
-															>
-														</div>
-													</div>
-												</div>
-
 											</div>
-										@endforeach
-										<div id="checklistdeta_pagination"></div>
-									</div>
-									<div class="panel-footer">
-										<button type="submit" class="btn btn-primary" id="btn_guardar_checklist">
-											<i class="glyphicon glyphicon-plus"></i> Guardar Todo
-										</button>
-									</div>
+
+											<div class="panel-body">
+												<div>
+													@if ( $pregunta->isOpenQuestion() )
+														<input type="hidden" name="isOpenQuestion" value="true">
+														<textarea style="resize:none" class="form-control" name="copcion" data-text="Respuesta Abierta">@if($pregunta->respuesta){{$pregunta->respuesta->respuesta}}@endif</textarea>
+													@else
+														<input type="hidden" name="isOpenQuestion" value="false">
+														@foreach($pregunta->opciones as $opcion)
+															<div>
+																<label for="copcion_{{ $opcion->copcion }}_cpregunta_{{ $pregunta->cpregunta }}">
+																	<input
+																		type="radio"
+																		name="copcion_cpregunta_{{ $pregunta->cpregunta }}"
+																		id="copcion_{{ $opcion->copcion }}_cpregunta_{{ $pregunta->cpregunta }}"
+																		data-text="{{ $opcion->detalle }}"
+																		value="{{ $opcion->copcion }}"
+																		@if($pregunta->respuesta)
+																			@if($pregunta->respuesta->copcion == $opcion->copcion )
+																				checked
+																			@endif
+																		@endif
+																	/>
+																	<span>{{ $opcion->detalle }}</span>
+																</label>
+															</div>
+														@endforeach
+													@endif
+												</div>
+												<div class="row">
+
+													<div class="mb-3 col-xs-12 col-sm-12 col-md-12 col-md-12">
+														<textarea style="resize:none" class="form-control" name="anotaciones" id="anotaciones">@if($pregunta->respuesta){{$pregunta->respuesta->anotaciones}}@endif</textarea>
+													</div>
+													<div class="col-xs-12 col-sm-12 col-md-12 col-md-12">
+														<div class="mb-3 col-xs-12 col-sm-12 col-md-9 col-lg-9">
+															<label class="col-md-4" for="evidencia_{{ $pregunta->cpregunta }}">
+																Seleccionar
+															</label>
+															<div class="col-md-8">
+																<input
+																	data-cactividad="{{$actividad->cactividad}}"
+																	data-cpregunta="{{$pregunta->cpregunta}}"
+																	type="file"
+																	name="evidencia_{{ $pregunta->cpregunta }}"
+																	id="evidencia_{{ $pregunta->cpregunta }}"
+																	multiple
+																	class="files_checklist"
+																>
+															</div>
+														</div>
+														<div class="mb-3 col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center">
+															<button type="button" class="btn btn-success" onclick="submitFiles(event,this)" data-input="#evidencia_{{ $pregunta->cpregunta }}" > Subir Archivos </button>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									@endforeach
+									<div id="checklistdeta_pagination"></div>
+								</div>
+								<div class="panel-footer">
+									<button type="submit" class="btn btn-primary" id="btn_guardar_checklist">
+										<i class="glyphicon glyphicon-plus"></i> Guardar Todo
+									</button>
 								</div>
 							</div>
-						@endif
-						<!-- Checklist -->
-
+						</div>
+					@endif
+					<!-- Checklist -->
 				</div>
 			</div>
+
 		</div>
 	</div>
 
@@ -589,10 +611,12 @@
 						<div><span class="label label-danger">Error</span> {%=file.error%}</div>
 					{% } %}
 				</td>
+				<!--
 				<td>
 					<span class="size">{%=o.formatFileSize(file.size)%}</span>
 				</td>
-				<td>
+				-->
+				<!--<td>
 					{% if (file.deleteUrl) { %}
 						<button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
 							<i class="glyphicon glyphicon-trash"></i>
@@ -606,6 +630,7 @@
 						</button>
 					{% } %}
 				</td>
+				-->
 			</tr>
 		{% } %}
 	</script>
@@ -615,31 +640,41 @@
 @section('scripts')
 	<script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>
+	<script src="{{ URL::asset('simplePagination.js/jquery.simplePagination.js') }} "></script>
 
 	<script type="text/javascript">
 
-		function storeEvidenciaChecklist(event,input){
-			var data = new FormData();
-			$.each(input.files, function(i, file) {
-				data.append('files[]', file);
-			});
+		function submitFiles(event,button){
+			var input = $(button.dataset.input)[0]
+			storeEvidenciaChecklist(input)
+		}
 
-			var url = "{{ URL::route('POST_store_evidence_answer',['cactividad' => 'cactividad', 'cpregunta' => 'cpregunta']) }}"
+		function storeEvidenciaChecklist(input){
+			if ( input.files.length != 0 ){
+				var data = new FormData();
+				$.each(input.files, function(i, file) {
+					data.append('files[]', file);
+				});
 
-			$.ajax({
-				url: url.set("cactividad",input.dataset.cactividad).set("cpregunta",input.dataset.cpregunta),
-				data: data,
-				cache: false,
-				contentType: false,
-				processData: false,
-				type: 'POST',
-				success: function(data){
-					alertify.success("El archivo se subi exitosamente.");
-				},
-				error: function(data){
-					alertify.success("Error al subir el archivo.");
-				}
-			});
+				var url = "{{ URL::route('POST_store_evidence_answer',['cactividad' => 'cactividad', 'cpregunta' => 'cpregunta']) }}"
+
+				$.ajax({
+					url: url.set("cactividad",input.dataset.cactividad).set("cpregunta",input.dataset.cpregunta),
+					data: data,
+					cache: false,
+					contentType: false,
+					processData: false,
+					type: 'POST',
+					success: function(data){
+						alertify.success("El archivo se subi exitosamente.");
+					},
+					error: function(data){
+						alertify.success("Error al subir el archivo.");
+					}
+				});
+			}else{
+				alertify.error("No ha seleccionado ningun archivo.");
+			}
 
 		}
 
@@ -678,12 +713,8 @@
 
 		@if($actividad->checklist)
 			function guardarChecklist(page){
+				waitingDialog.show("Guardando...")
 				$.ajax({
-					// cache: false,
-					// contentType: 'multipart/form-data',
-					// processData: false,
-
-
 					type: "POST",
 					url : "{{ URL::route('answer_checklist', ['cactividad' => $actividad->cactividad]) }}",
 					data: JSON.stringify({
@@ -693,10 +724,12 @@
 					contentType: "application/json",
 					dataType: "json",
 					success: function(response){
-						var msg = page ? `El la Pregunta #${page} del Checklist`  : "El Checklist se guardo."
+						waitingDialog.hide()
+						var msg = response.message
 						alertify.success(msg)
 					},
 					error: function(response){
+						waitingDialog.hide()
 						alertify.error("Error al guardar el Checklist")
 					},
 				})
@@ -704,6 +737,28 @@
 			$("#btn_guardar_checklist").click(function(event){
 				guardarChecklist()
 			})
+			@if ( $actividad->checklist )
+				$(function() {
+					$("#checklistdeta_pagination").pagination({
+						items: {{$actividad->checklist->cantidad_preguntas}},
+						itemsOnPage: 1,
+						displayedPages: 3,
+						cssStyle: 'light-theme',
+						prevText: "<",
+						nextText: ">",
+						selectOnClick: true,
+						onPageClick: function(lastPageIndex,pageNumber, event){
+							$(".checklistdeta_page").addClass("hide")
+							$("#checklistdeta_page_"+pageNumber).removeClass("hide")
+							guardarChecklist(lastPageIndex)
+						},
+						onInit: function(){
+							var pageNumber = $("#checklistdeta_pagination").pagination('getCurrentPage');
+							$("#checklistdeta_page_"+pageNumber).removeClass("hide")
+						}
+					});
+				});
+			@endif
 		@endif
 
 		function validar(response){
@@ -959,78 +1014,33 @@
 			})
 		})
 	</script>
-	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
-	<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/vendor/jquery.ui.widget.js') }}"></script>
-	<!-- The Templates plugin is included to render the upload/download listings -->
 	<script src="https://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
-	<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
 	<script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
-	<!-- The Canvas to Blob plugin is included for image resizing functionality -->
 	<script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
-	<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-	<!--<script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
-	<!-- blueimp Gallery script -->
 	<script src="https://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
-	<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
 	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.iframe-transport.js') }}"></script>
-	<!-- The basic File Upload plugin -->
 	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload.js') }}"></script>
-	<!-- The File Upload processing plugin -->
 	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-process.js') }}"></script>
-	<!-- The File Upload image preview & resize plugin -->
 	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-image.js') }}"></script>
-	<!-- The File Upload audio preview plugin -->
 	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-audio.js') }}"></script>
-	<!-- The File Upload video preview plugin -->
 	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-video.js') }}"></script>
-	<!-- The File Upload validation plugin -->
 	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-validate.js') }}"></script>
-	<!-- The File Upload user interface plugin -->
 	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-ui.js') }}"></script>
-	<!-- The main application script -->
 	<script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/main.js') }}"></script>
-	<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
 	<!--[if (gte IE 8)&(lt IE 10)]>
 	<script src="js/cors/jquery.xdr-transport.js"></script>
 	<![endif]-->
-
-	<script src="{{ URL::asset('simplePagination.js/jquery.simplePagination.js') }} "></script>
-
 	<script src="{{ URL::asset('bower_components/bootstrap-fileinput/js/fileinput.min.js') }} "></script>
 	<script src="{{ URL::asset('bower_components/bootstrap-fileinput/js/locales/es.js') }} "></script>
 	<script src="{{ URL::asset('bower_components/bootstrap-fileinput/themes/fa/theme.min.js') }} "></script>
 	<script>
 		$(".files_checklist").fileinput({
 			'language': 'es',
-			'showUpload':false,
 			'previewFileType':'any',
 			'showPreview' : false,
-			'showUpload' : true,
-		}).on("filebatchselected", function(event, files) {
-			storeEvidenciaChecklist(event,event.target)
-		});
-	</script>
-	<script>
-		$(function() {
-			$("#checklistdeta_pagination").pagination({
-				items: {{$cantidad_preguntas}},
-				itemsOnPage: 1,
-				cssStyle: 'light-theme',
-				prevText: "Anterior",
-				nextText: "Siguiente",
-				onPageClick: function(pageNumber, event){
-					console.log(pageNumber)
-					$(".checklistdeta_page").addClass("hide")
-					$("#checklistdeta_page_"+pageNumber).removeClass("hide")
-					guardarChecklist(pageNumber)
-				},
-				onInit: function(){
-					var pageNumber = $("#checklistdeta_pagination").pagination('getCurrentPage');
-					$("#checklistdeta_page_"+pageNumber).removeClass("hide")
-				}
-			});
-		});
+			'showUpload' : false,
+		})
 	</script>
 
 @endsection
