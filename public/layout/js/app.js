@@ -25,17 +25,13 @@ String.prototype.truncate = function(len,end){
 	}
 	return this.replace(reg,value)
 }
-
-function callbackSuccessAjax(response){
-		alertify.success("Listo.")
-}
+function callbackSuccessAjax(response){alertify.success("Listo.")}
 function callbackErrorAjax(response){
 	responseJSON = response.responseJSON
 	if ( responseJSON.errors_form ){
 		alertify.error("Ha Ocurrido un Error")
 	}
 }
-
 var DTspanish = {
 	"sProcessing":     "Procesando...",
 	"sLengthMenu":     "Mostrar _MENU_ registros",
@@ -155,8 +151,6 @@ function openNewWindow(href,input_reference,data){
 	win.TYPE_PLAN = data.type_plan || null
 	win.INPUT_REFERENCE = input_reference
 }
-
-
 
 Models = {
 	"Utils" : {
@@ -469,6 +463,7 @@ Models = {
  * Usage
 	waitingDialog.show('Dialog with callback on hidden',{onHide: function () {alert('Callback!');}});
 */
+/*
 var waitingDialog = waitingDialog || (function ($) {
     'use strict';
 
@@ -490,7 +485,7 @@ var waitingDialog = waitingDialog || (function ($) {
 		 * @param options Custom options:
 		 * 				  options.dialogSize - bootstrap postfix for dialog size, e.g. "sm", "m";
 		 * 				  options.progressType - bootstrap postfix for progress bar type, e.g. "success", "warning".
-		 */
+		 *
 		show: function (message, options) {
 			// Assigning defaults
 			if (typeof options === 'undefined') {
@@ -523,15 +518,11 @@ var waitingDialog = waitingDialog || (function ($) {
 		},
 		/**
 		 * Closes dialog
-		 */
+		 *
 		hide: function () {
 			$dialog.modal('hide');
 		}
 	};
 
 })(jQuery);
-
-        waitingDialog.show("Cargando la Pagina...")
-        $( document ).ready(function(event) {
-            waitingDialog.hide()
-        })
+*/

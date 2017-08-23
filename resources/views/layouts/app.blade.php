@@ -55,6 +55,7 @@
 
         <link href="{{ URL::asset('css/utilities.css') }}" rel="stylesheet">
         <link href="{{ URL::asset('css/custom.css') }}" rel="stylesheet">
+        <link href="{{ URL::asset('jquery-loadingModal/css/jquery.loadingModal.css') }}" rel="stylesheet">
 
         @yield('styles')
 
@@ -180,6 +181,40 @@
 
         <!-- jQuery -->
         <script src="{{ URL::asset('layout/js/jquery.js') }}"></script>
+
+        <script src="{{ URL::asset('jquery-loadingModal/js/jquery.loadingModal.min.js') }}"></script>
+
+        <script>
+            var waitingDialog = {
+                /*$('body').loadingModal('text', 'My changed text');
+                $('body').loadingModal('animation', 'rotatingPlane');
+                $('body').loadingModal('color', '#000');
+                $('body').loadingModal('backgroundColor', 'yellow');
+                $('body').loadingModal('opacity', '0.9');
+                $('body').loadingModal('hide');
+                $('body').loadingModal('show');
+                $('body').loadingModal('destroy');*/
+                show: function(message, options){
+                options = options || {}
+                $('body').loadingModal({
+                    text: message,
+                    animation: options.animation || 'wanderingCubes',
+                    position: options.position || 'auto',
+                    color: options.color || '#fff',
+                    opacity: options.opacity || '0.5',
+                    backgroundColor: options.backgroundColor || 'rgba(0, 0, 0, 0.5)',
+                });
+
+                },
+                hide: function(){
+                    $('body').loadingModal('destroy');
+                },
+            }
+            waitingDialog.show("Cargando la Pagina...")
+            $(document).ready(function(){
+                waitingDialog.hide()
+            })
+        </script>
 
         <!-- JQuery UI -->
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>

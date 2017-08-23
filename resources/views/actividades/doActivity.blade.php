@@ -740,7 +740,7 @@
 			@if ( $actividad->checklist )
 				$(function() {
 					$("#checklistdeta_pagination").pagination({
-						items: {{$actividad->checklist->cantidad_preguntas}},
+						items: {{ $actividad->checklist->cantidad_preguntas }},
 						itemsOnPage: 1,
 						displayedPages: 3,
 						cssStyle: 'light-theme',
@@ -748,13 +748,15 @@
 						nextText: ">",
 						selectOnClick: true,
 						onPageClick: function(lastPageIndex,pageNumber, event){
+							var selectorPageSelect = "#checklistdeta_page_" + pageNumber
 							$(".checklistdeta_page").addClass("hide")
-							$("#checklistdeta_page_"+pageNumber).removeClass("hide")
+							$(selectorPageSelect).removeClass("hide")
 							guardarChecklist(lastPageIndex)
 						},
 						onInit: function(){
 							var pageNumber = $("#checklistdeta_pagination").pagination('getCurrentPage');
-							$("#checklistdeta_page_"+pageNumber).removeClass("hide")
+							var selectorPageSelect = "#checklistdeta_page_" + pageNumber
+							$(selectorPageSelect).removeClass("hide")
 						}
 					});
 				});
