@@ -29,7 +29,6 @@
                     <tr>
                         <td>{{ $actividad->cactividad }}</td>
                         <td>{{ $actividad->nactividad }}</td>
-                        <!-- <td> {{-- date('Y-m-d',strtotime($actividad->ffin)) --}} </td> -->
                         <td> {{ $actividad->fini }} </td>
                         <td>{{ $actividad->dias_retraso }}</td>
                         <td>

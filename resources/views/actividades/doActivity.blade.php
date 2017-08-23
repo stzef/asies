@@ -1,20 +1,10 @@
 @extends('layouts.app')
 @section('styles')
-	<!-- Bootstrap styles -->
-	<!--<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">-->
-	<!-- Generic page styles -->
-	<!-- <link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/style.css') }}">-->
-	<!-- blueimp Gallery styles -->
-	<!-- <link rel="stylesheet" href="https://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">-->
 	<link rel="stylesheet" href="{{ URL::asset('css/jqupload/blueimp-gallery.min.css') }}">
-	<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
 	<link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/jquery.fileupload.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/jquery.fileupload-ui.css') }}">
-	<!--<link rel="stylesheet" href="{{ URL::asset('bower_components/bootstrap-fileinput/css/fileinput.min.css') }}">-->
-	<!-- CSS adjustments for browsers with JavaScript disabled -->
 	<noscript><link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/jquery.fileupload-noscript.css') }}"></noscript>
 	<noscript><link rel="stylesheet" href="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/css/jquery.fileupload-ui-noscript.css') }}"></noscript>
-	<!-- <link rel="stylesheet" href="{{ URL::asset('simplePagination.js/simplePagination.css') }}"> -->
 @endsection
 
 @section('content')
@@ -136,13 +126,6 @@
 													</button>
 												</div>
 											</div>
-											<!--
-											<button type="button" class="btn btn-danger delete">
-												<i class="glyphicon glyphicon-trash"></i>
-												<span>Delete</span>
-											</button>
-											<input type="checkbox" class="toggle">
-											-->
 
 											<!-- The global file processing state -->
 											<span class="fileupload-process"></span>
@@ -380,13 +363,6 @@
 																<div>
 																	<select-task required="required" name="tareasusuarios[ctarea]" id="tarea" :productos_minimos="productos_minimos" @mounted="getTask" />
 																</div>
-
-																<!--<select name="tareasusuarios[ctarea]" id="tarea" required class="form-control">
-																	<option value="">Tareas</option>}
-																	@foreach ($tareas as $tarea)
-																		<option value="{{$tarea->ctarea}}" title="{{$tarea->ntarea}}">{{ str_limit($tarea->ntarea, $limit = 45, $end = '...') }}</option>
-																	@endforeach
-																</select>-->
 																<span class="input-group-addon" data-find-task="true" data-find-treetask data-input-reference="#tarea"><i class="fa fa-search"></i></span>
 															</div>
 														</td>
@@ -526,12 +502,6 @@
 					</div>
 				</div>
 			<div class="modal-footer">
-						<!--<button type="button" class="btn btn-primary">
-							<i class="glyphicon glyphicon-print"></i> Imprimir
-						</button>-->
-						<!--<button type="button" class="btn btn-primary">
-							<i class="glyphicon glyphicon-send"></i> Enviar
-						</button>-->
 						<button type="submit" class="btn btn-primary" form="form_crear_acta" form="nuevas_tareas">
 							<i class="glyphicon glyphicon-plus"></i> Guardar
 						</button>
@@ -547,12 +517,6 @@
 	<script id="template-upload" type="text/x-tmpl">
 		{% for (var i=0, file; file=o.files[i]; i++) { %}
 			<tr class="template-upload fade">
-				<!--<td>
-					<input class="form-control" placeholder="Nombre" type="text" name="nombres[]">
-				</td>
-				<td>
-					<input class="form-control" placeholder="Descripcion" type="text" name="descripciones[]">
-				</td>-->
 				<td>
 					<span class="preview" width="100px"></span>
 				</td>
@@ -612,26 +576,7 @@
 						<div><span class="label label-danger">Error</span> {%=file.error%}</div>
 					{% } %}
 				</td>
-				<!--
-				<td>
-					<span class="size">{%=o.formatFileSize(file.size)%}</span>
-				</td>
-				-->
-				<!--<td>
-					{% if (file.deleteUrl) { %}
-						<button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
-							<i class="glyphicon glyphicon-trash"></i>
-							<span>Delete</span>
-						</button>
-						<input type="checkbox" name="delete" value="1" class="toggle">
-					{% } else { %}
-						<button class="btn btn-warning cancel">
-							<i class="glyphicon glyphicon-ban-circle"></i>
-							<span>Cancel</span>
-						</button>
-					{% } %}
-				</td>
-				-->
+
 			</tr>
 		{% } %}
 	</script>
@@ -639,11 +584,15 @@
 @endsection
 
 @section('scripts')
-	<!-- <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script>-->
-	<!-- <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script>-->
-	<!-- <script src="{{ URL::asset('simplePagination.js/jquery.simplePagination.js') }} "></script> -->
 
 	<script type="text/javascript">
+
+		$(".files_checklist").fileinput({
+			'language': 'es',
+			'previewFileType':'any',
+			'showPreview' : false,
+			'showUpload' : false,
+		})
 
 		function submitFiles(event,button){
 			var input = $(button.dataset.input)[0]
@@ -867,26 +816,6 @@
 			console.log(data)
 			Models.Actividades.asignarTarea(cactividad,data,listar)
 
-			/*
-			var data = serializeForm(that)
-			data.append("tareasusuarios[cactividad]",cactividad)
-			{{-- var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}" --}}
-			$.ajax({
-				"url":base_url_add_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
-				"type":"POST",
-				data: data,
-				cache:false,
-				contentType: false,
-				processData: false,
-				success: function(response){
-					alertify.success(response.data.message)
-					listar();
-				},
-				error: function(response){
-					alertify.error("Algo ha salido mal.")
-				}
-			})
-			*/
 		});
 		function editar(event,button){
 			var data = table.row( $(button).parents("tr")).data();
@@ -913,32 +842,6 @@
 			Models.Actividades.removerTarea(cactividad,ctarea,function(){
 				table.row( $(button).parents("tr")).remove().draw(false);
 			})
-
-			/*
-			var data = new FormData()
-			data.append("tareasusuarios[cactividad]",cactividad)
-			data.append("tareasusuarios[ctarea]",ctarea)
-			data.append("tareasusuarios[ctirelacion]",ctirelacion)
-			data.append("tareasusuarios[user]",cresponsable)
-
-			{{-- var base_url_remove_user_tarea = "{{ URL::route('DELETE_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}" --}}
-			$.ajax({
-				"url":base_url_remove_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
-				"type":"POST",
-				data: data,
-				cache:false,
-				contentType: false,
-				processData: false,
-				success: function(response){
-					table.row( $(button).parents("tr")).remove().draw(false);
-					alertify.success(response.data.message)
-					//listar();
-				},
-				error: function(response){
-					alertify.error("Algo ha salido mal.")
-				}
-			})
-			*/
 		}
 		var listar = function(){
 			var ctarea = $( "#tarea option:selected" ).val();
@@ -947,7 +850,6 @@
 			var ntarea = $( "#tarea option:selected" ).text();
 			var nresponsable = $( "#respo option:selected" ).text();
 			var ntirespo = $( "#tirespo option:selected" ).text();
-			//$("#tarea").val()
 			table
 				.row.add([ctarea,ntarea,cresponsable,nresponsable,ctirespo,ntirespo,"No",
 					"<button type='button' class='editar btn btn-primary' onclick='editar(event,this)'>"+
@@ -1017,39 +919,7 @@
 			})
 		})
 	</script>
-	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/vendor/jquery.ui.widget.js') }}"></script> -->
-
-	<!-- <script src="https://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script> -->
-	<!-- OK <script src="{{ URL::asset('js/jqupload/tmpl.min.js') }}" ></script> -->
-	<!-- <script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script> -->
-	<!-- OK <script src="{{ URL::asset('js/jqupload/load-image.all.min.js') }}" ></script> -->
-	<!-- <script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script> -->
-	<!-- OK <script src="{{ URL::asset('js/jqupload/canvas-to-blob.min.js') }}" ></script> -->
-	<!-- <script src="https://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script> -->
-	<!-- OK <script src="{{ URL::asset('js/jqupload/jquery.blueimp-gallery.min.js') }}" ></script> -->
-
-	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.iframe-transport.js') }}"></script> -->
-	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload.js') }}"></script> -->
-	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-process.js') }}"></script> -->
-	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-image.js') }}"></script> -->
-	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-audio.js') }}"></script> -->
-	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-video.js') }}"></script> -->
-	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-validate.js') }}"></script> -->
-	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/jquery.fileupload-ui.js') }}"></script> -->
-	<!-- OK <script src="{{ URL::asset('vendor/jQuery-File-Upload-9.18.0/js/main.js') }}"></script> -->
 	<!--[if (gte IE 8)&(lt IE 10)]>
 	<script src="js/cors/jquery.xdr-transport.js"></script>
 	<![endif]-->
-	<!-- <script src="{{ URL::asset('bower_components/bootstrap-fileinput/js/fileinput.min.js') }} "></script> -->
-	<!-- <script src="{{ URL::asset('bower_components/bootstrap-fileinput/js/locales/es.js') }} "></script> -->
-	<!-- <script src="{{ URL::asset('bower_components/bootstrap-fileinput/themes/fa/theme.min.js') }} "></script> -->
-	<script>
-		$(".files_checklist").fileinput({
-			'language': 'es',
-			'previewFileType':'any',
-			'showPreview' : false,
-			'showUpload' : false,
-		})
-	</script>
-
 @endsection

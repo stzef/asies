@@ -59,8 +59,6 @@
 @endsection
 
 @section('scripts')
-	<!-- <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script> -->
-	<!-- <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script> -->
 	<script>
 		var table= $(".evidencias").DataTable({
 			"paging":   true,

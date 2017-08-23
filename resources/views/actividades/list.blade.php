@@ -2,6 +2,7 @@
 
 @section('styles')
 @endsection
+
 @section('content')
 	<div class="row">
 		<div class="col-lg-12">
@@ -64,8 +65,6 @@
 @endsection
 
 @section('scripts')
-    <!-- <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script> -->
-    <!-- <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script> -->
     <script>
         var table = $(".table").DataTable({
             "paging":   true,

@@ -113,37 +113,6 @@
 		$(".asig_tareas").addClass("hide")
 	}
 
-
-
-	/*$("#asignacion").submit(function(event){
-		event.preventDefault()
-		var that = this
-		var ctarea = $("#tarea_ctarea").val();
-		var cactividad = $("#cactividad").val();
-
-
-		var data = serializeForm(that)
-		data.append("tareasusuarios[ctarea]",ctarea)
-		{{-- var base_url_add_user_tarea = "{{ URL::route('POST_users_task' , ['cactivida' => '__cactividad__','ctarea' => '__ctarea__'])}}" --}}
-		$.ajax({
-			"url":base_url_add_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
-			"type":"POST",
-			data: data,
-			cache:false,
-			contentType: false,
-			processData: false,
-			success: function(response){
-				alertify.success(response.data.message)
-				listar();
-			},
-			error: function(response){
-				alertify.error("Algo ha salido mal.")
-			}
-		})
-	});*/
-
-
-
 	$("#crear_tarea").submit(function(event){
 		var that = this
 		event.preventDefault()

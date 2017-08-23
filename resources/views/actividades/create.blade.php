@@ -219,8 +219,6 @@
 @endsection
 
 @section('scripts')
-	<!-- <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js') }}"></script> -->
-	<!-- <script src="{{ URL::asset('vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js') }}"></script> -->
 	<script type="text/javascript">
 		$(function () {
 			$('.date').datetimepicker({
@@ -263,8 +261,6 @@
 					"visible": false,
 				},
 			]
-
-			//editar("#usuarios tbody");
 		})
 		function getPlanSelect(){
 			var plan = $('#treeview').jstree('get_selected',true)
@@ -291,19 +287,13 @@
 						$("[type=submit]").attr("disabled",true)
 					}
 
-					//$("#modalCrearActividad").modal("hide")
 					$("#usuario_planes").find("[disabled]").prop("disabled",false)
 					$(".section_asignacion_tareas").removeClass("hide")
 
 					alertify.success(Models.Planes.messages.create.success)
-					/*$('#treeview').jstree("destroy")
 
-					Models.Planes.treeview(function(response){
-						$('#treeview').jstree({ 'core' : {'data' : response } })
-					})*/
 				},
 				error : function(){
-					//$("#modalCrearActividad").modal("hide")
 					alertify.error(Models.Planes.messages.create.error)
 				},
 			})
@@ -345,33 +335,6 @@
 		Models.Actividades.removerTarea(cactividad,{ ctarea: ctarea },function(){
 			table.row( $(button).parents("tr")).remove().draw(false);
 		})
-
-		/*
-		var ctirelacion = table.row($(button).closest("tr")).data()[cols.ctirela]
-		var cresponsable = table.row($(button).closest("tr")).data()[cols.crespo]
-		var data = new FormData()
-		data.append("tareasusuarios[cactividad]",cactividad)
-		data.append("tareasusuarios[ctarea]",ctarea)
-		data.append("tareasusuarios[ctirelacion]",ctirelacion)
-		data.append("tareasusuarios[user]",cresponsable)
-
-		$.ajax({
-			"url":base_url_remove_user_tarea.set("__ctarea__",ctarea).set("__cactividad__",cactividad),
-			"type":"POST",
-			data: data,
-			cache:false,
-			contentType: false,
-			processData: false,
-			success: function(response){
-				table.row( $(button).parents("tr")).remove().draw(false);
-				alertify.success(response.data.message)
-				//listar();
-			},
-			error: function(response){
-				alertify.error("Algo ha salido mal.")
-			}
-		})
-		*/
 	}
 	var listar = function(){
 		var ctarea = $( "#tarea option:selected" ).val();

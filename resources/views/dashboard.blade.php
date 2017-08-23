@@ -102,14 +102,6 @@
 				})
 				waitingDialog.hide()
 
-				/*planes.forEach(function(plan){
-					$("table.buttons").find("tr").append(
-						$("<td>").append(
-							$("<a>",{html:plan.nplan,href:"/planes/status/"+plan.cplan,class:"btn btn-success"})
-						)
-					)
-				})*/
-
 			})
 		}
 	</script>
