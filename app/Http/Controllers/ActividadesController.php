@@ -40,6 +40,22 @@ class ActividadesController extends Controller
 		$this->middleware('auth');
 	}
 
+	public function actualizarEstado(Request $request){
+		$response = [];
+		$actividades = Actividades::all();
+
+		foreach ($actividades as $actividad) {
+			$status = $actividad->updateState();
+			$data = [
+				"actividad" => $actividad->toArray(),
+				"status" => $status,
+			];
+			array_push($response, $data);
+		}
+
+		return response()->json($response);
+	}
+
 	public function create(Request $request){
 
 		if ($request->isMethod('get')){
@@ -350,7 +366,5 @@ class ActividadesController extends Controller
 		}
 		return $size;
 	}
-
-
 
 }

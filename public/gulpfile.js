@@ -8,6 +8,8 @@ var rename = require("gulp-rename");
 var uglify = require("gulp-uglify");
 var gutil = require('gulp-util');
 
+var babel = require('gulp-babel');
+
 var concat = require('gulp-concat');
 
 //*** CSS & JS minify task
@@ -94,6 +96,9 @@ gulp.task('minify', function () {
 
         // './layout/js/app.js',
     ])
+        /*.pipe(babel({
+            presets: ['env','es2015']
+        }))*/
         .pipe(uglify())
             .on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
         .pipe(rename({suffix: '.min'}))

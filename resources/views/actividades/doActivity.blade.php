@@ -12,7 +12,6 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-
 					<div class="row">
 						<div class="col-md-7">
 							<h4>
@@ -30,7 +29,6 @@
 						{{ $actividad->fini }}
 					</div>
 				</div>
-
 			</div>
 
 			<div>
@@ -616,6 +614,7 @@
 					processData: false,
 					type: 'POST',
 					success: function(data){
+						$(input).fileinput('clear');
 						alertify.success("El archivo se subi exitosamente.");
 					},
 					error: function(data){
@@ -657,7 +656,6 @@
 					if ( typeof obj.copcion != 'undefined' ) data.push(obj)
 				}
 			})
-			console.log(data)
 			return data
 		}
 
@@ -697,6 +695,18 @@
 						prevText: "<",
 						nextText: ">",
 						selectOnClick: true,
+						preChangePage: function(currentPageNumber,nextPageNumber, event){
+							var selectorPageSelect = "#checklistdeta_page_" + currentPageNumber
+							var numberFiles = $(selectorPageSelect).find(".files_checklist")[0].files.length
+
+							if ( numberFiles == 0){
+								return Promise.resolve(true)
+							}else{
+								return new Promise(function(resolve,reject){
+									alertify.confirm("Hay archivos sin Guardar. Desea continuar sin Guardar.",() => resolve(true),() => resolve(false))
+								})
+							}
+						},
 						onPageClick: function(lastPageIndex,pageNumber, event){
 							var selectorPageSelect = "#checklistdeta_page_" + pageNumber
 							$(".checklistdeta_page").addClass("hide")
@@ -714,7 +724,6 @@
 		@endif
 
 		function validar(response){
-			console.info(response)
 			if ( ! response.ok ){
 				$("[data-ctarea=" + response.ctarea + "]").prop("checked",false)
 			}
@@ -722,7 +731,6 @@
 
 		function setdataEvidencia(key,name,value){
 			Models.Evidencias.set(key,JSON.stringify([[name,value]]),function(response){
-				console.log(response)
 				alertify.success("Evidencia Editada")
 			})
 		}
@@ -813,7 +821,6 @@
 			var user = that.find("#respo").val();
 			var ctirelacion = that.find("#tirespo").val();
 			var data = {ctarea:ctarea,user:user,ctirelacion:ctirelacion};
-			console.log(data)
 			Models.Actividades.asignarTarea(cactividad,data,listar)
 
 		});
@@ -880,7 +887,6 @@
 				contentType: false,
 				processData: false,
 				success : function(response){
-					console.log(response)
 					alertify.success("El Acta se ha creado.")
 					var data = tabletask.data().toArray();
 					window.open(base_url_print_acta.set("__numeroacta__",response.obj.numeroacta))

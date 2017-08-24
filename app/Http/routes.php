@@ -111,6 +111,8 @@ Route::group(['prefix' => 'actividades'], function(){
 	Route::post('create', "ActividadesController@create")->middleware("permission:activities.crud");
 	Route::get('create', "ActividadesController@create")->name("GET_actividades_create")->middleware("permission:activities.crud");
 
+	Route::post('actualizarEstado', "ActividadesController@actualizarEstado")->name("POST_actividades_actualizar_estado")->middleware("permission:activities.crud");
+
 	Route::post('edit/{cactividad}', "ActividadesController@edit")->middleware("permission:activities.crud");
 	Route::get('edit/{cactividad}', "ActividadesController@edit")->name("GET_actividades_edit")->middleware("permission:activities.crud");
 
