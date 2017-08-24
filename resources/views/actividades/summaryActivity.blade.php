@@ -42,7 +42,9 @@
 													</p>
 												@else
 													<p>
-														{{ $pregunta->respuesta->opcion->detalle }}
+														@if ( $pregunta->respuesta->opcion )
+															{{ $pregunta->respuesta->opcion->detalle }}
+														@endif
 													</p>
 												@endif
 											@endif
