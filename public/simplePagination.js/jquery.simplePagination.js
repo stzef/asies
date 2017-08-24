@@ -36,7 +36,7 @@
 				useEndEdge : true,
 				preChangePage: function(currentPageNumber,nextPageNumber, event) {
 					// return true
-					Promise.resolve(true)
+					return Promise.resolve(true)
 				},
 				onPageClick: function(lastPageIndex, pageNumber, event) {
 					// Callback triggered when a page is clicked

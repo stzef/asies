@@ -219,8 +219,10 @@
                 waitingDialog.hide()
             })
           $(window).on('beforeunload', function(){
-                waitingDialog.show("Abandonando la Pagina..")
-                //return 'Are you sure you want to leave?';
+                waitingDialog.show("Por favor espere un momento.")
+                window.setTimeout(function(){
+                    waitingDialog.hide()
+                }, 3000)
            });
         </script>
 

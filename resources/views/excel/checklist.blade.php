@@ -21,16 +21,18 @@
 					{{ $pregunta->enunciado }}
 				</td>
 				<td class="bordered">
-					@if ( $pregunta->isOpenQuestion() )
-						<p>
-							@if($pregunta->respuesta){{$pregunta->respuesta->respuesta}}@endif
-						</p>
-					@else
-						<p>
-							@if($pregunta->respuesta)
-								{{ $pregunta->respuesta->opcion->detalle }}
-							@endif
-						</p>
+					@if($pregunta->respuesta)
+						@if ( $pregunta->isOpenQuestion() )
+							<p>
+								{{$pregunta->respuesta->respuesta}}
+							</p>
+						@else
+							<p>
+								@if( $pregunta->respuesta->opcion )
+									{{ $pregunta->respuesta->opcion->detalle }}
+								@endif
+							</p>
+						@endif
 					@endif
 				</td>
 				<td class="bordered">
