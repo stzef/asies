@@ -59,11 +59,11 @@
 										@endif
 									@endif
 
-									@if ( $actividad->ifcacta )
+									@if ( $actividad->ifacta )
 										@if ( $actividad->cacta )
 											<p class="label label-success"> Acta Generada </p>
 										@else
-											<p class="label label-danger"> Acta Generada </p>
+											<p class="label label-danger"> Sin Acta </p>
 										@endif
 									@endif
 

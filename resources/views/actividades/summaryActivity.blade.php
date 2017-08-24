@@ -224,7 +224,7 @@
 										<p class="label label-danger"> Checklist </p>
 									@endif
 								@endif
-								@if ( $actividad->ifcacta )
+								@if ( $actividad->ifacta )
 									@if ( $actividad->cacta )
 										<p class="label label-success"> Acta Generada </p>
 									@else
@@ -246,9 +246,6 @@
 								<a class="btn btn-danger" href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}">Salir</a>
 							</div>
 						</div>
-					</div>
-					<div class="label label-info">
-						{{ $actividad->fini }}
 					</div>
 				</div>
 
