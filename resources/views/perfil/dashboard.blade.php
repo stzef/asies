@@ -45,11 +45,9 @@
 											Actividad Completada
 										</div>
 									@endif
-									@if( $local_state["ok"] != $local_state["total"] )
-										<div class="label label-info">
-											{{ $local_state["ok"] }} de {{ $local_state["total"] }} Tareas
-										</div>
-									@endif
+									<div class="label label-info">
+										{{ $local_state["ok"] }} de {{ $local_state["total"] }} Tareas
+									</div>
 									<div class="label label-info">
 										{{ $actividad->fini }}
 									</div>
