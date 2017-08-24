@@ -17,6 +17,41 @@
 							<h4>
 								Realizando Actividad {{ $actividad->cactividad }} : {{ $actividad->nactividad }}
 							</h4>
+							<h4 class="text-center">
+								@if ( $actividad->ifhecha )
+									<div class="label label-info">
+										Actividad Completada
+									</div>
+								@endif
+								@php
+									$local_state = $actividad->getStateTareas()
+								@endphp
+								<div class="label label-info">
+									{{ $local_state["ok"] }} de {{ $local_state["total"] }} Tareas
+								</div>
+								<p class="label label-info">
+									{{ $actividad->fini }}
+								</p>
+								@if ( $actividad->checklist() )
+									@if ( $actividad->checklist()->ifhecha )
+										<p class="label label-success"> Checklist </p>
+									@else
+										<p class="label label-danger"> Checklist </p>
+									@endif
+								@endif
+								@if ( $actividad->ifcacta )
+									@if ( $actividad->cacta )
+										<p class="label label-success"> Acta Generada </p>
+									@else
+										<p class="label label-danger"> Acta Generada </p>
+									@endif
+								@endif
+								@if ( $actividad->getEvidencias(true) > 0 )
+									<p class="label label-success"> {{ $actividad->getEvidencias(true) }} Evidencia(s) </p>
+								@else
+									<p class="label label-danger"> Sin Evidencias </p>
+								@endif
+							</h4>
 						</div>
 						<div class="col-md-5 text-center">
 							<div class="btn-group">
@@ -24,9 +59,6 @@
 								<a class="btn btn-danger" href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}">Salir</a>
 							</div>
 						</div>
-					</div>
-					<div class="label label-info">
-						{{ $actividad->fini }}
 					</div>
 				</div>
 			</div>
@@ -141,13 +173,6 @@
 									<!-- The table listing the files available for upload/download -->
 									<table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
 								</form>
-							</div>
-							<div class="panel panel-footer">
-								<h4>
-									<p class="label label-info">
-										{{ $actividad->getEvidencias(true) }} Evidencias
-									</p>
-								</h4>
 							</div>
 						</div>
 

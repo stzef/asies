@@ -26,11 +26,8 @@
 					<div class="
 						@if($actividad->ifhecha)
 							bg-success
-						@elseif( $local_state['ok'] > $local_state['not_ok'] )
-							bg-warning
 						@endif
-						well
-						container-actividad
+						well container-actividad
 					"
 					>
 						<div class="row">
@@ -39,27 +36,41 @@
 								<h4>
 									Actividad {{ $actividad->cactividad }} : {{ $actividad->nactividad }}
 								</h4>
-								<h4>
+								<h4 class="text-center">
 									@if ( $actividad->ifhecha )
 										<div class="label label-primary">
 											Actividad Completada
 										</div>
 									@endif
+
 									<div class="label label-info">
 										{{ $local_state["ok"] }} de {{ $local_state["total"] }} Tareas
 									</div>
+
 									<div class="label label-info">
 										{{ $actividad->fini }}
 									</div>
-									@if ( $actividad->cacta )
-										<p class="label label-success">
-											Acta Generada
-										</p>
+
+									@if ( $actividad->checklist() )
+										@if ( $actividad->checklist()->ifhecha )
+											<p class="label label-success"> Checklist </p>
+										@else
+											<p class="label label-danger"> Checklist </p>
+										@endif
 									@endif
+
+									@if ( $actividad->ifcacta )
+										@if ( $actividad->cacta )
+											<p class="label label-success"> Acta Generada </p>
+										@else
+											<p class="label label-danger"> Acta Generada </p>
+										@endif
+									@endif
+
 									@if ( $actividad->getEvidencias(true) > 0 )
-										<p class="label label-success">
-											{{ $actividad->getEvidencias(true) }} Evidencia(s)
-										</p>
+										<p class="label label-success"> {{ $actividad->getEvidencias(true) }} Evidencia(s) </p>
+									@else
+										<p class="label label-danger"> Sin Evidencias </p>
 									@endif
 								</h4>
 							</div>

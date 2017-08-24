@@ -15,6 +15,7 @@
 .label {
   font-size: 75% !important;
   margin: 1px;
+  display: inline-block;
 }
 .alert {
   margin: 5px 0px;

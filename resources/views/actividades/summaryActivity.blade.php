@@ -201,10 +201,40 @@
 						<div class="col-md-7">
 							<h4>
 								Resumen Actividad : {{ $actividad->nactividad }}
+							</h4>
+							<h4 class="text-center">
 								@if ( $actividad->ifhecha )
 									<div class="label label-info">
 										Actividad Completada
 									</div>
+								@endif
+								@php
+									$local_state = $actividad->getStateTareas()
+								@endphp
+								<div class="label label-info">
+									{{ $local_state["ok"] }} de {{ $local_state["total"] }} Tareas
+								</div>
+								<p class="label label-info">
+									{{ $actividad->fini }}
+								</p>
+								@if ( $actividad->checklist() )
+									@if ( $actividad->checklist()->ifhecha )
+										<p class="label label-success"> Checklist </p>
+									@else
+										<p class="label label-danger"> Checklist </p>
+									@endif
+								@endif
+								@if ( $actividad->ifcacta )
+									@if ( $actividad->cacta )
+										<p class="label label-success"> Acta Generada </p>
+									@else
+										<p class="label label-danger"> Acta Generada </p>
+									@endif
+								@endif
+								@if ( $actividad->getEvidencias(true) > 0 )
+									<p class="label label-success"> {{ $actividad->getEvidencias(true) }} Evidencia(s) </p>
+								@else
+									<p class="label label-danger"> Sin Evidencias </p>
 								@endif
 							</h4>
 						</div>
