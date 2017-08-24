@@ -24,11 +24,42 @@
         <![endif]-->
 
         @yield('styles')
+        <style>
+.KW_progressContainer {
+  left:0;
+  width: 100%;
+  height: 0.4em;
+  margin-bottom: 0px;
+  position: fixed;
+  bottom: 0px;
+  overflow: hidden;
+  background-color: white;
+  content: "";
+    display: table;
+    table-layout: fixed;
+  z-index:99;
+}
 
+.KW_progressBar {
+  width: 0%;
+  float: left;
+  height: 100%;
+  z-index:99;
+  max-width: 100%;
+  background-color:orange;
+  -webkit-transition: width .6s ease;
+  -o-transition: width .6s ease;
+  transition: width .6s ease;
+}
+        </style>
     </head>
 
     <body>
+<div class="KW_progressContainer">
+        <div class="KW_progressBar">
 
+        </div>
+    </div>
         <div id="wrapper">
             <!-- Navigation -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -146,9 +177,19 @@
         </script>
 
         <script src="{{ URL::asset('dist/js/bundle.min.js') }}"></script>
-        <script src="{{ URL::asset('dist/js/app.min.js') }}"></script>
 
         <script>
+            $(window).load(function(){
+              $(window).scroll(function() {
+                var wintop = $(window).scrollTop(), docheight = $('article').height(), winheight = $(window).height();
+                console.log(wintop);
+                var totalScroll = (wintop/(docheight-winheight))*100;
+                console.log("total scroll" + totalScroll);
+                $(".KW_progressBar").css("width",totalScroll+"%");
+              });
+
+            });
+
             var waitingDialog = {
                 /*$('body').loadingModal('text', 'My changed text');
                 $('body').loadingModal('animation', 'rotatingPlane');
@@ -178,7 +219,13 @@
             $(document).ready(function(){
                 waitingDialog.hide()
             })
+          $(window).on('beforeunload', function(){
+                waitingDialog.show("Abandonando la Pagina..")
+                //return 'Are you sure you want to leave?';
+           });
         </script>
+
+        <script src="{{ URL::asset('dist/js/app.min.js') }}"></script>
 
         <script>
             // handle jQuery plugin naming conflict between jQuery UI and Bootstrap
