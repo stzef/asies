@@ -25,32 +25,32 @@
 
         @yield('styles')
         <style>
-.KW_progressContainer {
-  left:0;
-  width: 100%;
-  height: 0.4em;
-  margin-bottom: 0px;
-  position: fixed;
-  bottom: 0px;
-  overflow: hidden;
-  background-color: white;
-  content: "";
-    display: table;
-    table-layout: fixed;
-  z-index:99;
-}
+            .KW_progressContainer {
+                left:0;
+                width: 100%;
+                height: 0.4em;
+                margin-bottom: 0px;
+                position: fixed;
+                bottom: 0px;
+                overflow: hidden;
+                background-color: white;
+                content: "";
+                display: table;
+                table-layout: fixed;
+                z-index:99999;
+            }
 
-.KW_progressBar {
-  width: 0%;
-  float: left;
-  height: 100%;
-  z-index:99;
-  max-width: 100%;
-  background-color:orange;
-  -webkit-transition: width .6s ease;
-  -o-transition: width .6s ease;
-  transition: width .6s ease;
-}
+            .KW_progressBar {
+                width: 0%;
+                float: left;
+                height: 100%;
+                z-index:9999;
+                max-width: 100%;
+                background-color:orange;
+                -webkit-transition: width .6s ease;
+                -o-transition: width .6s ease;
+                transition: width .6s ease;
+            }
         </style>
     </head>
 
@@ -181,8 +181,7 @@
         <script>
             $(window).load(function(){
               $(window).scroll(function() {
-                var wintop = $(window).scrollTop(), docheight = $('article').height(), winheight = $(window).height();
-                console.log(wintop);
+                var wintop = $(window).scrollTop(), docheight = $('body').height(), winheight = $(window).height();
                 var totalScroll = (wintop/(docheight-winheight))*100;
                 console.log("total scroll" + totalScroll);
                 $(".KW_progressBar").css("width",totalScroll+"%");

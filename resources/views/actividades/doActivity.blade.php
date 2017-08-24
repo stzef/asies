@@ -201,12 +201,17 @@
 												<div class="row">
 
 													<div class="mb-3 col-xs-12 col-sm-12 col-md-12 col-md-12">
-														<textarea style="resize:none" class="form-control" name="anotaciones" id="anotaciones">@if($pregunta->respuesta){{$pregunta->respuesta->anotaciones}}@endif</textarea>
+														<label class="col-md-3 control-label">
+															Aclaraciones o Anotaciones
+														</label>
+														<div class="col-md-9">
+															<textarea style="resize:none" class="form-control" name="anotaciones" id="anotaciones">@if($pregunta->respuesta){{$pregunta->respuesta->anotaciones}}@endif</textarea>
+														</div>
 													</div>
 													<div class="col-xs-12 col-sm-12 col-md-12 col-md-12">
 														<div class="mb-3 col-xs-12 col-sm-12 col-md-9 col-lg-9">
 															<label class="col-md-4" for="evidencia_{{ $pregunta->cpregunta }}">
-																Seleccionar
+																Adjuntar Evidencia
 															</label>
 															<div class="col-md-8">
 																<input
