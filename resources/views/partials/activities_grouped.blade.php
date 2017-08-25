@@ -1,14 +1,14 @@
-<div class="row">
+<div >
     <ul class="nav nav-tabs">
-      <li><a data-toggle="tab" href="#retrasadas">Retrasadas</a></li>
-      <li><a data-toggle="tab" href="#pendientes">Pendientes</a></li>
-      <li><a data-toggle="tab" href="#realizadas">Realizadas</a></li>
+      <li class="active"><a class="px-2" data-toggle="tab" href="#retrasadas">Retrasadas</a></li>
+      <li><a class="px-2" data-toggle="tab" href="#pendientes">Pendientes</a></li>
+      <li><a class="px-2" data-toggle="tab" href="#realizadas">Realizadas</a></li>
     </ul>
 
     <div class="tab-content">
       <div id="retrasadas" class="tab-pane fade in active">
         @permission('activities.send_reminders')
-            <div class="panel">
+            <div class="panel text-center">
                 <button class="btn btn-success" onclick="Models.Actividades.sendReminders()">Enviar Recordatorios</button>
             </div>
         @endpermission

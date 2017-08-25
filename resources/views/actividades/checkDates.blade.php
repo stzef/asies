@@ -9,16 +9,15 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Verificar Fechas de Actividades
+                    <h4>
+                        Verificar Fechas
+                    </h4>
                 </div>
+            </div>
 
-                <div class="panel-body">
-                    <div class="col-md-12">
-
-                        @include('partials.activities_grouped',['actividades',$actividades])
-
-                    </div>
-
+            <div>
+                <div class="col-md-12">
+                    @include('partials.activities_grouped',['actividades',$actividades])
                 </div>
             </div>
         </div>
@@ -29,19 +28,26 @@
 @section('scripts')
 
     <script type="text/javascript">
-        $(".actividades_retrasadas").DataTable({
+        // $.fn.DataTable.isDataTable( '.table' )
+
+        $("table.table").DataTable({
+            multiple:true,
             "paging":   true,
             "ordering": true,
             "searching": true,
             "info":     true,
             "language": DTspanish,
+            "bLengthChange": false,
+            "responsive": true,
         })
-        $(".actividades_pendientes").DataTable({
+        /*$(".actividades_pendientes").DataTable({
             "paging":   true,
             "ordering": true,
             "searching": true,
             "info":     true,
             "language": DTspanish,
-        })
+            "bLengthChange": false,
+            "responsive": true,
+        })*/
     </script>
 @endsection

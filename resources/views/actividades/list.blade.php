@@ -4,21 +4,14 @@
 @endsection
 
 @section('content')
-	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header">
-				Actividades <small>Lista de Actividades</small>
-			</h1>
-			<ol class="breadcrumb">
-				<li class="active">
-					<i class="fa fa-dashboard"></i> Actividades
-				</li>
 
-			</ol>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Lista de Actividades</h4>
+                </div>
+            </div>
+
             <table class="table table-bordered tabla-hover table-responsive" cellspacing="0">
                 <thead>
                     <tr>
@@ -60,8 +53,8 @@
                     @endforeach
                 </tbody>
             </table>
-		</div>
-	</div>
+        </div>
+
 @endsection
 
 @section('scripts')
@@ -72,6 +65,8 @@
             "info":     true,
             "searching":true,
             "language": DTspanish,
+            "bLengthChange": false,
+            "responsive": true,
         })
     </script>
 @endsection

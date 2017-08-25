@@ -1,21 +1,21 @@
 <template>
   <div class="">
-    <table class="table">
-      <tr >
-          <td v-for="tiplan in tiplanes">
-            <img :src="'/'+tiplan.icono" alt="">
-            <label>{{ tiplan.ntiplan }}</label>
-          </td>
-      </tr>
-    </table>
-    <div class="col-md-12">
+  <div class="row text-center">
+    <div class="col-xs-6 col-sm-4 col-md-2 col-md-2 text-center" v-for="tiplan in tiplanes">
+      <img :src="'/'+tiplan.icono" alt="">
+      <br>
+      <label>{{ tiplan.ntiplan }}</label>
+    </div>
+  </div>
+
+    <div class="">
       <div class="panel panel-default">
 
         <div class="panel-body">
 
           <ul class="nav nav-tabs" >
-              <li v-for="plan in planes" :data-treeview="'#treeview_cplan_' + plan.li_attr.cplan">
-                <a data-toggle="tab" @click="changeSelectTaskTree(plan.li_attr.cplan)" :href="'#cplan_'+plan.li_attr.cplan">{{ plan.text }}</a>
+              <li v-for="plan in planes" :data-treeview="'#treeview_cplan_' + plan.li_attr.cplan" class="px-0">
+                <a data-toggle="tab" class="px-0" @click="changeSelectTaskTree(plan.li_attr.cplan)" :href="'#cplan_'+plan.li_attr.cplan">{{ plan.text }}</a>
               </li>
           </ul>
 

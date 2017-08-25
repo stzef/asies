@@ -12,10 +12,10 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h4>Actividades</h4>
+					<h4>Actividad</h4>
 				</div>
-
 			</div>
+
 			<div>
 				<form id="form_crear_actividad" class="form-horizontal">
 

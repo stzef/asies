@@ -10,43 +10,41 @@
 @endsection('styles')
 
 @section('content')
-	<div class="row">
-			<div class="col-md-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							Dashboard <b>{{ Auth::user()->persona->nombreCompleto() }}</b>
-							@permission('planes.calculate_points')
-								<button class="btn btn-primary" onclick="local_recalcular_puntos()">Recalcular Puntos</button>
-							@endpermission
-						</div>
-						<div class="panel-body" style="overflow: overlay">
-							<div class="row">
-								<div class="col-md-12">
-									<h2>Actividades Proximas</h2>
-									<div class="list-group text-center">
-										@forelse( $actividades_proximas as $actividad )
-											<div class="list-group-item col-md-4">
-												<a class="btn btn-success btn-block" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">
-													{{$actividad->nactividad}}
-													<br>
-													<span class="badge badge-default badge-pill">{{$actividad->fini}}</span>
-												</a>
-											</div>
-										@empty
-											<div class="list-group-item">
-												<h3>No tiene</h3>
-											</div>
-										@endforelse
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div id="charts_div" class="row text-center" ></div>
-								</div>
-							</div>
-						</div>
-					</div>
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>
+					Dashboard <b>{{ Auth::user()->persona->nombreCompleto() }}</b>
+				</h4>
+				@permission('planes.calculate_points')
+					<button class="btn btn-primary" onclick="local_recalcular_puntos()">Recalcular Puntos</button>
+				@endpermission
 			</div>
+		</div>
+
+		<div class="">
+			<h4 class="text-center">Actividades Proximas</h4>
+			<div class="list-group text-center">
+				@forelse( $actividades_proximas as $actividad )
+					<div class="list-group-item col-md-4">
+						<a class="btn btn-success btn-block" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">
+							{{$actividad->nactividad}}
+							<br>
+							<span class="badge badge-default badge-pill">{{$actividad->fini}}</span>
+						</a>
+					</div>
+				@empty
+					<div class="list-group-item">
+						<h3>No tiene</h3>
+					</div>
+				@endforelse
+			</div>
+		</div>
+		<div class="">
+			<div id="charts_div" class="row text-center" ></div>
+		</div>
 	</div>
+
 @endsection
 
 @section('scripts')
@@ -82,7 +80,6 @@
 
 					data.push(["",plan.porcentaje])
 
-					console.log(data)
 					var data = google.visualization.arrayToDataTable(data);
 					var options = {
 						width: 800, height: 240,

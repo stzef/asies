@@ -3,58 +3,50 @@
 @section('styles')
 @endsection
 @section('content')
-	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header">
-				Evidencias
-				@if ( $actividad )
-					de la Actividad {{ $actividad->nactividad }}
-				@endif
-				<small>Lista de Evidencias</small>
-			</h1>
-			<ol class="breadcrumb">
-				<li class="active">
-					<i class="fa fa-dashboard"></i> Evidencias
-				</li>
 
-			</ol>
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>
+					Evidencias
+					@if ( $actividad )
+						de la Actividad {{ $actividad->nactividad }}
+					@endif
+				</h4>
+			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-            <table class="evidencias table table-bordered tabla-hover table-responsive" cellspacing="0">
-                <thead>
+        <table class="evidencias table table-bordered tabla-hover table-responsive" cellspacing="0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    @if ( !$actividad )
+                    	<th>Actividad</th>
+                    @endif
+                    <th>Fecha</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($evidencias as $evidencia)
                     <tr>
-                        <th></th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        @if ( !$actividad )
-                        	<th>Actividad</th>
-                        @endif
-                        <th>Fecha</th>
-                        <th></th>
+                        <td><img width="30px" src="{{ $evidencia->previewimg }}" alt=""></td>
+                        <td>{{$evidencia->nombre}}</td>
+                        <td>{{$evidencia->descripcion}}</td>
+                		@if ( !$actividad )
+                            <td>
+	                            <a href="{{ route('GET_lista_evidencias',['cactividad'=>$evidencia->actividad->cactividad]) }}">
+	                                {{ $evidencia->actividad->cactividad }} - {{ $evidencia->actividad->nactividad }}
+	                            </a>
+                            </td>
+                		@endif
+                        <td>{{$evidencia->fregistro}}</td>
+                        <td><a class="btn btn-primary" href="{{$evidencia->path}}" download="">Descargar</a></td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach ($evidencias as $evidencia)
-                        <tr>
-                            <td><img width="30px" src="{{ $evidencia->previewimg }}" alt=""></td>
-                            <td>{{$evidencia->nombre}}</td>
-                            <td>{{$evidencia->descripcion}}</td>
-                    		@if ( !$actividad )
-	                            <td>
-		                            <a href="{{ route('GET_lista_evidencias',['cactividad'=>$evidencia->actividad->cactividad]) }}">
-		                                {{ $evidencia->actividad->cactividad }} - {{ $evidencia->actividad->nactividad }}
-		                            </a>
-	                            </td>
-                    		@endif
-                            <td>{{$evidencia->fregistro}}</td>
-                            <td><a class="btn btn-primary" href="{{$evidencia->path}}" download="">Descargar</a></td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-		</div>
+                @endforeach
+            </tbody>
+        </table>
 	</div>
 @endsection
 
@@ -65,7 +57,9 @@
 			"ordering": true,
 			"info":     true,
 			"searching":true,
-			"language": DTspanish
+			"language": DTspanish,
+			"bLengthChange":false,
+            "responsive": true,
 		})
 	</script>
 @endsection

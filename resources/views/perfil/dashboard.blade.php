@@ -7,14 +7,84 @@
 
 @section('content')
 
-	<div class="row">
+	<div class="row page-actividades">
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h4>Actividades</h4>
+					<h4>
+						<span> Actividades </span>
+
+						<div class="jplist-panel pull pull-right mb-1">
+							<div
+								class="dropdown"
+								data-control-type="boot-sort-drop-down"
+								data-control-name="bootstrap-sort-dropdown-demo"
+								data-control-action="sort"
+								data-datetime-format="{year}-{month}-{day} {hour}:{min}:{sec}"> <!-- {year}, {month}, {day}, {hour}, {min}, {sec} -->
+
+								<button
+									class="btn btn-primary dropdown-toggle m-0"
+									type="button"
+									id="dropdown-menu-1"
+									data-toggle="dropdown"
+									aria-expanded="true"
+								>
+									<span data-type="selected-text">Ordernar por</span>
+									<span class="caret"></span>
+								</button>
+
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-menu-1">
+
+									<li role="presentation">
+										<a role="menuitem" tabindex="-1" href="#" data-path=".jplist-name-cactividad" data-order="asc" data-type="number" data-default="true">Normal</a>
+									</li>
+
+									<li role="presentation" class="divider"></li>
+
+									<li role="presentation">
+										<a role="menuitem" tabindex="-1" href="#" data-path=".jplist-name-activity" data-order="asc" data-type="text" >Nombre A-Z</a>
+									</li>
+									<li role="presentation">
+										<a role="menuitem" tabindex="-1" href="#" data-path=".jplist-name-activity" data-order="desc" data-type="text" >Nombre Z-A</a>
+									</li>
+
+									<li role="presentation" class="divider"></li>
+
+									<li role="presentation">
+										<a role="menuitem" tabindex="-1" href="#" data-path=".jplist-fini-activity" data-order="asc" data-type="datetime">Fecha Asc</a>
+									</li>
+									<li role="presentation">
+										<a role="menuitem" tabindex="-1" href="#" data-path=".jplist-fini-activity" data-order="desc" data-type="datetime">Fecha Desc</a>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+
+					</h4>
+
 				</div>
 			</div>
-			<div>
+			<div class="container-actividades">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 				@if ( count($actividades) == 0)
 					<h2>No tiene actividades asignadas</h2>
 				@endif
@@ -33,7 +103,10 @@
 						<div class="row">
 
 							<div class="col-md-7">
-								<h4>
+								<span class="hidden jplist-name-activity"> {{ $actividad->nactividad }} </span>
+								<span class="hidden jplist-name-activity"> {{ $actividad->fini }} </span>
+								<span class="hidden jplist-name-cactividad"> {{ $actividad->cactividad }} </span>
+								<h4 class="jplist-name-activity">
 									Actividad {{ $actividad->cactividad }} : {{ $actividad->nactividad }}
 								</h4>
 								<h4 class="text-center">
@@ -47,7 +120,7 @@
 										{{ $local_state["ok"] }} de {{ $local_state["total"] }} Tareas
 									</div>
 
-									<div class="label label-info">
+									<div class="label label-info jplist-fini-activity">
 										{{ $actividad->fini }}
 									</div>
 
@@ -115,11 +188,17 @@
 
 @section('scripts')
 	<script>
+		$('.page-actividades').jplist({
+			itemsBox: '.container-actividades',
+			itemPath: '.container-actividad',
+			panelPath: '.jplist-panel'
+		});
 		$(".tareas-actividad").DataTable({
 			"paging":   true,
 			"ordering": true,
 			"info":     false,
 			"searching":false,
+			"bLengthChange": false,
 			"language": DTspanish,
 		})
 		$(".show-hide-tareas").click(function(){

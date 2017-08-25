@@ -37,6 +37,13 @@ gulp.task('minify', function () {
 
         './vendor/jstree/css/themes/default/style.css',
 
+        './vendor/jplist/jplist.core.min.css',
+
+        './vendor/DataTables-1.10.14/extensions/Responsive/css/responsive.bootstrap.min.css',
+        './vendor/DataTables-1.10.14/extensions/Responsive/css/responsive.dataTables.css',
+        './vendor/DataTables-1.10.14/extensions/RowReorder/css/rowReorder.bootstrap.css',
+        './vendor/DataTables-1.10.14/extensions/RowReorder/css/rowReorder.bootstrap.min.css',
+
         // './css/jqupload/blueimp-gallery.min.css',
         // './vendor/jQuery-File-Upload-9.18.0/css/jquery.fileupload.css',
         // './vendor/jQuery-File-Upload-9.18.0/css/jquery.fileupload-ui.css',
@@ -92,8 +99,15 @@ gulp.task('minify', function () {
         './vendor/DataTables-1.10.14/media/js/jquery.dataTables.min.js',
         './vendor/DataTables-1.10.14/media/js/dataTables.bootstrap.min.js',
 
+        './vendor/DataTables-1.10.14/extensions/Responsive/js/dataTables.responsive.min.js',
+        './vendor/DataTables-1.10.14/extensions/RowReorder/js/dataTables.rowReorder.min.js',
+        './vendor/DataTables-1.10.14/extensions/Responsive/js/responsive.bootstrap.js',
+
         './vendor/jstree/js/jstree.min.js',
 
+        './vendor/jplist/jplist.core.min.js',
+        //'./vendor/jplist/jplist.sort-bundle.min.js',
+        './vendor/jplist/jplist.bootstrap-sort-dropdown.min.js',
         // './layout/js/app.js',
     ])
         /*.pipe(babel({
