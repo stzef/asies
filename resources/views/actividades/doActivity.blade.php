@@ -43,7 +43,7 @@
 									@if ( $actividad->cacta )
 										<p class="label label-success"> Acta Generada </p>
 									@else
-										<p class="label label-danger"> Acta Generada </p>
+										<p class="label label-danger"> Sin Acta </p>
 									@endif
 								@endif
 								@if ( $actividad->getEvidencias(true) > 0 )
@@ -182,113 +182,120 @@
 					<!-- Checklist -->
 					@if( $actividad->checklist )
 						<div id="tab_checklist" class="tab-pane fade in ">
-							<div class="panel panel-default">
-								<div class="panel-body p-0" id="checklist">
-									<input type="hidden" value="{{ $actividad->checklist->cchecklist }}" id="cchecklist" name="cchecklist">
-									@foreach( $actividad->checklist->preguntas as $i => $pregunta )
-										@php $i++ @endphp
-										<div class="panel panel-default hide checklistdeta_page" id="checklistdeta_page_{{$i}}" data-page="{{$i}}">
+							@if ( $actividad->checklist()->ifhecha )
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4>Checklist Completado</h4>
+									</div>
+								</div>
+							@else
+								<div class="panel panel-default">
+									<div class="panel-body p-0" id="checklist">
+										<input type="hidden" value="{{ $actividad->checklist->cchecklist }}" id="cchecklist" name="cchecklist">
+										@foreach( $actividad->checklist->preguntas as $i => $pregunta )
+											@php $i++ @endphp
+											<div class="panel panel-default hide checklistdeta_page" id="checklistdeta_page_{{$i}}" data-page="{{$i}}">
+												<div class="panel-heading">
+													<div>
+														<input type="hidden" name="cpregunta" value="{{ $pregunta->cpregunta }}" data-text="{{ $pregunta->enunciado }}">
+														#{{$i}} - {{ $pregunta->enunciado }}
+													</div>
+												</div>
+
+												<div class="panel-body">
+													<div>
+														@if ( $pregunta->isOpenQuestion() )
+															<input type="hidden" name="isOpenQuestion" value="true">
+															<textarea
+																style="resize:none"
+																class="form-control respuesta"
+																name="copcion"
+																data-text="Respuesta Abierta"
+																required
+															>@if($pregunta->respuesta){{$pregunta->respuesta->respuesta}}@endif</textarea>
+														@else
+															<input type="hidden" name="isOpenQuestion" value="false">
+															@foreach($pregunta->opciones as $opcion)
+																<div>
+																	<label for="copcion_{{ $opcion->copcion }}_cpregunta_{{ $pregunta->cpregunta }}">
+																		<input
+																			type="radio"
+																			name="copcion_cpregunta_{{ $pregunta->cpregunta }}"
+																			id="copcion_{{ $opcion->copcion }}_cpregunta_{{ $pregunta->cpregunta }}"
+																			data-text="{{ $opcion->detalle }}"
+																			value="{{ $opcion->copcion }}"
+																			class="respuesta"
+																			required
+																			@if($pregunta->respuesta)
+																				@if($pregunta->respuesta->copcion == $opcion->copcion )
+																					checked
+																				@endif
+																			@endif
+																		/>
+																		<span>{{ $opcion->detalle }}</span>
+																	</label>
+																</div>
+															@endforeach
+														@endif
+													</div>
+													<div class="row">
+
+														<div class="mb-3 col-xs-12 col-sm-12 col-md-12 col-md-12">
+															<label class="col-md-3 control-label">
+																Aclaraciones o Anotaciones
+															</label>
+															<div class="col-md-9">
+																<textarea style="resize:none" class="form-control" name="anotaciones" id="anotaciones">@if($pregunta->respuesta){{$pregunta->respuesta->anotaciones}}@endif</textarea>
+															</div>
+														</div>
+														<div class="col-xs-12 col-sm-12 col-md-12 col-md-12">
+															<div class="mb-3 col-xs-12 col-sm-12 col-md-9 col-lg-9">
+																<label class="col-md-4" for="evidencia_{{ $pregunta->cpregunta }}">
+																	Adjuntar Evidencia
+																</label>
+																<div class="col-md-8">
+																	<input
+																		data-cactividad="{{$actividad->cactividad}}"
+																		data-cpregunta="{{$pregunta->cpregunta}}"
+																		type="file"
+																		name="evidencia_{{ $pregunta->cpregunta }}"
+																		id="evidencia_{{ $pregunta->cpregunta }}"
+																		multiple
+																		class="files_checklist"
+																	>
+																</div>
+															</div>
+															<div class="mb-3 col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center">
+																<button type="button" class="btn btn-success" onclick="submitFiles(event,this)" data-input="#evidencia_{{ $pregunta->cpregunta }}" > Subir Archivos </button>
+															</div>
+														</div>
+													</div>
+												</div>
+
+											</div>
+										@endforeach
+										<div
+											class="panel panel-default hide checklistdeta_page"
+											id="checklistdeta_page_{{ $actividad->checklist->cantidad_preguntas + 1 }}"
+											data-page="{{ $actividad->checklist->cantidad_preguntas + 1 }}"
+										>
 											<div class="panel-heading">
 												<div>
-													<input type="hidden" name="cpregunta" value="{{ $pregunta->cpregunta }}" data-text="{{ $pregunta->enunciado }}">
-													#{{$i}} - {{ $pregunta->enunciado }}
+													<h4> Terminado </h4>
 												</div>
 											</div>
-
 											<div class="panel-body">
-												<div>
-													@if ( $pregunta->isOpenQuestion() )
-														<input type="hidden" name="isOpenQuestion" value="true">
-														<textarea
-															style="resize:none"
-															class="form-control respuesta"
-															name="copcion"
-															data-text="Respuesta Abierta"
-															required
-														>@if($pregunta->respuesta){{$pregunta->respuesta->respuesta}}@endif</textarea>
-													@else
-														<input type="hidden" name="isOpenQuestion" value="false">
-														@foreach($pregunta->opciones as $opcion)
-															<div>
-																<label for="copcion_{{ $opcion->copcion }}_cpregunta_{{ $pregunta->cpregunta }}">
-																	<input
-																		type="radio"
-																		name="copcion_cpregunta_{{ $pregunta->cpregunta }}"
-																		id="copcion_{{ $opcion->copcion }}_cpregunta_{{ $pregunta->cpregunta }}"
-																		data-text="{{ $opcion->detalle }}"
-																		value="{{ $opcion->copcion }}"
-																		class="respuesta"
-																		required
-																		@if($pregunta->respuesta)
-																			@if($pregunta->respuesta->copcion == $opcion->copcion )
-																				checked
-																			@endif
-																		@endif
-																	/>
-																	<span>{{ $opcion->detalle }}</span>
-																</label>
-															</div>
-														@endforeach
-													@endif
-												</div>
-												<div class="row">
-
-													<div class="mb-3 col-xs-12 col-sm-12 col-md-12 col-md-12">
-														<label class="col-md-3 control-label">
-															Aclaraciones o Anotaciones
-														</label>
-														<div class="col-md-9">
-															<textarea style="resize:none" class="form-control" name="anotaciones" id="anotaciones">@if($pregunta->respuesta){{$pregunta->respuesta->anotaciones}}@endif</textarea>
-														</div>
+												<div class="row text-center">
+														<button type="submit" class="btn btn-primary" id="btn_guardar_checklist">
+															<i class="glyphicon glyphicon-plus"></i> Guardar y salir
+														</button>
 													</div>
-													<div class="col-xs-12 col-sm-12 col-md-12 col-md-12">
-														<div class="mb-3 col-xs-12 col-sm-12 col-md-9 col-lg-9">
-															<label class="col-md-4" for="evidencia_{{ $pregunta->cpregunta }}">
-																Adjuntar Evidencia
-															</label>
-															<div class="col-md-8">
-																<input
-																	data-cactividad="{{$actividad->cactividad}}"
-																	data-cpregunta="{{$pregunta->cpregunta}}"
-																	type="file"
-																	name="evidencia_{{ $pregunta->cpregunta }}"
-																	id="evidencia_{{ $pregunta->cpregunta }}"
-																	multiple
-																	class="files_checklist"
-																>
-															</div>
-														</div>
-														<div class="mb-3 col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center">
-															<button type="button" class="btn btn-success" onclick="submitFiles(event,this)" data-input="#evidencia_{{ $pregunta->cpregunta }}" > Subir Archivos </button>
-														</div>
-													</div>
-												</div>
-											</div>
-
-										</div>
-									@endforeach
-									<div
-										class="panel panel-default hide checklistdeta_page"
-										id="checklistdeta_page_{{ $actividad->checklist->cantidad_preguntas + 1 }}"
-										data-page="{{ $actividad->checklist->cantidad_preguntas + 1 }}"
-									>
-										<div class="panel-heading">
-											<div>
-												<h4> Terminado </h4>
 											</div>
 										</div>
-										<div class="panel-body">
-											<div class="row text-center">
-													<button type="submit" class="btn btn-primary" id="btn_guardar_checklist">
-														<i class="glyphicon glyphicon-plus"></i> Guardar y salir
-													</button>
-												</div>
-										</div>
+										<div id="checklistdeta_pagination"></div>
 									</div>
-									<div id="checklistdeta_pagination"></div>
 								</div>
-
-							</div>
+							@endif
 						</div>
 					@endif
 					<!-- Checklist -->
@@ -737,7 +744,7 @@
 				guardarChecklist()
 				$("a[href='#tab_tareas']").tab("show")
 			})
-			@if ( $actividad->checklist )
+			@if( ! $actividad->checklist->ifhecha )
 				$(function() {
 					$("#checklistdeta_pagination").pagination({
 						items: {{ $actividad->checklist->cantidad_preguntas + 1 }},
