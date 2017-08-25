@@ -63,7 +63,7 @@
 				</div>
 			</div>
 
-			<div>
+			<div class="main-tabs">
 				<div>
 					<ul class="nav nav-tabs">
 						<li class="active"><a data-toggle="tab" href="#tab_tareas">Tareas</a></li>
@@ -199,7 +199,13 @@
 												<div>
 													@if ( $pregunta->isOpenQuestion() )
 														<input type="hidden" name="isOpenQuestion" value="true">
-														<textarea style="resize:none" class="form-control" name="copcion" data-text="Respuesta Abierta">@if($pregunta->respuesta){{$pregunta->respuesta->respuesta}}@endif</textarea>
+														<textarea
+															style="resize:none"
+															class="form-control respuesta"
+															name="copcion"
+															data-text="Respuesta Abierta"
+															required
+														>@if($pregunta->respuesta){{$pregunta->respuesta->respuesta}}@endif</textarea>
 													@else
 														<input type="hidden" name="isOpenQuestion" value="false">
 														@foreach($pregunta->opciones as $opcion)
@@ -211,6 +217,8 @@
 																		id="copcion_{{ $opcion->copcion }}_cpregunta_{{ $pregunta->cpregunta }}"
 																		data-text="{{ $opcion->detalle }}"
 																		value="{{ $opcion->copcion }}"
+																		class="respuesta"
+																		required
 																		@if($pregunta->respuesta)
 																			@if($pregunta->respuesta->copcion == $opcion->copcion )
 																				checked
@@ -259,13 +267,27 @@
 
 										</div>
 									@endforeach
+									<div
+										class="panel panel-default hide checklistdeta_page"
+										id="checklistdeta_page_{{ $actividad->checklist->cantidad_preguntas + 1 }}"
+										data-page="{{ $actividad->checklist->cantidad_preguntas + 1 }}"
+									>
+										<div class="panel-heading">
+											<div>
+												<h4> Terminado </h4>
+											</div>
+										</div>
+										<div class="panel-body">
+											<div class="row text-center">
+													<button type="submit" class="btn btn-primary" id="btn_guardar_checklist">
+														<i class="glyphicon glyphicon-plus"></i> Guardar y salir
+													</button>
+												</div>
+										</div>
+									</div>
 									<div id="checklistdeta_pagination"></div>
 								</div>
-								<div class="panel-footer">
-									<button type="submit" class="btn btn-primary" id="btn_guardar_checklist">
-										<i class="glyphicon glyphicon-plus"></i> Guardar Todo
-									</button>
-								</div>
+
 							</div>
 						</div>
 					@endif
@@ -672,7 +694,6 @@
 				obj.isOpenQuestion = eval($(div).find("[name=isOpenQuestion]").val())
 
 				obj.anotaciones = $(div).find("[name=anotaciones]").val()
-				obj.files = $(div).find("input[type=file]")[0].files
 
 				if ( obj.isOpenQuestion ){
 					element = $(div).find("input[type=radio]")
@@ -714,27 +735,38 @@
 			}
 			$("#btn_guardar_checklist").click(function(event){
 				guardarChecklist()
+				$("a[href='#tab_tareas']").tab("show")
 			})
 			@if ( $actividad->checklist )
 				$(function() {
 					$("#checklistdeta_pagination").pagination({
-						items: {{ $actividad->checklist->cantidad_preguntas }},
+						items: {{ $actividad->checklist->cantidad_preguntas + 1 }},
 						itemsOnPage: 1,
 						displayedPages: 3,
 						cssStyle: 'light-theme',
 						prevText: "<",
 						nextText: ">",
 						selectOnClick: true,
-						preChangePage: function(currentPageNumber,nextPageNumber, event){
+						beforeChange: function(currentPageNumber,nextPageNumber, event){
 							var selectorPageSelect = "#checklistdeta_page_" + currentPageNumber
-							var numberFiles = $(selectorPageSelect).find(".files_checklist")[0].files.length
+							var inputFile = $(selectorPageSelect).find(".files_checklist")[0]
+							var evidencias = inputFile ? inputFile.files : []
 
-							if ( numberFiles == 0){
-								return Promise.resolve(true)
+							var input = $(selectorPageSelect).find(".respuesta")[0]
+							var respuestaContestada = input ? input.validity.valid : true
+
+
+							if ( respuestaContestada ){
+								if ( evidencias.length == 0){
+									return Promise.resolve(true)
+								}else{
+									return new Promise(function(resolve,reject){
+										alertify.confirm("Hay archivos sin Guardar. Desea continuar sin Guardar.",() => resolve(true),() => resolve(false))
+									})
+								}
 							}else{
-								return new Promise(function(resolve,reject){
-									alertify.confirm("Hay archivos sin Guardar. Desea continuar sin Guardar.",() => resolve(true),() => resolve(false))
-								})
+								alertify.error("No ha respondido la pregunta.")
+								return Promise.resolve(false)
 							}
 						},
 						onPageClick: function(lastPageIndex,pageNumber, event){

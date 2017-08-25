@@ -34,7 +34,7 @@
 				invertPageOrder: false,
 				useStartEdge : true,
 				useEndEdge : true,
-				preChangePage: function(currentPageNumber,nextPageNumber, event) {
+				beforeChange: function(currentPageNumber,nextPageNumber, event) {
 					// return true
 					return Promise.resolve(true)
 				},
@@ -337,17 +337,29 @@
 			var that = this
 			var o = this.data('pagination');
 			var lastPageIndex = o.currentPage + 1;
-			var ifChangePage = o.preChangePage(lastPageIndex, pageIndex + 1, event);
 
-			ifChangePage.then(function(pass){
-				if ( pass ){
-					o.currentPage = pageIndex;
-					if (o.selectOnClick) {
-						methods._draw.call(that);
+			var valid_continue = true
+
+			if ( ( pageIndex + 1 ) < lastPageIndex ){
+				// console.log("moviendose para atras")
+				var valid_continue = false
+			}
+			if ( Math.abs(( pageIndex + 1 ) - lastPageIndex) != 1 ){
+				// console.log('paso a mas de a uno')
+				var valid_continue = false
+			}
+			if ( valid_continue ){
+				var ifChangePage = o.beforeChange(lastPageIndex, pageIndex + 1, event);
+				ifChangePage.then(function(pass){
+					if ( pass ){
+						o.currentPage = pageIndex;
+						if (o.selectOnClick) {
+							methods._draw.call(that);
+						}
+						return o.onPageClick(lastPageIndex, pageIndex + 1, event);
 					}
-					return o.onPageClick(lastPageIndex, pageIndex + 1, event);
-				}
-			})
+				})
+			}
 		},
 
 
