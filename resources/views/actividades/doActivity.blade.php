@@ -183,7 +183,7 @@
 					@if( $actividad->checklist )
 						<div id="tab_checklist" class="tab-pane fade in ">
 							@if ( $actividad->checklist()->ifhecha )
-								<div class="panel panel-default">
+								<div class="panel panel-default bg-success">
 									<div class="panel-heading">
 										<h4>Checklist Completado</h4>
 									</div>
