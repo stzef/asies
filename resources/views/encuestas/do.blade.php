@@ -232,7 +232,7 @@
 			waitingDialog.show("Guardando...")
 			$.ajax({
 				type: "POST",
-				url : "{{ URL::route('POST_answer_encuesta', ['cencuesta' => $encuesta->cencuesta]) }}",
+				url : "{{ URL::route('POST_answer_encuesta', ['chencuesta' => $encuesta->his->chencuesta]) }}",
 				data: JSON.stringify({
 					answers : getEncuesta(page),
 					cencuesta : $("#cencuesta").val(),
