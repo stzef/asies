@@ -416,7 +416,6 @@ class Actividades extends Model
 			}
 			$checklist->estadisticas = $estadisticas;
 		}
-//		dump($checklist);exit();
 		return $checklist;
 	}
 	public function checklist(){

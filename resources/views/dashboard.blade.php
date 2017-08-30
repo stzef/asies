@@ -22,11 +22,11 @@
 			</div>
 		</div>
 
-		<div class="">
+		<div class="col-md-6">
 			<h4 class="text-center">Actividades Proximas</h4>
-			<div class="list-group text-center">
+			<div class="list-group text-center row">
 				@forelse( $actividades_proximas as $actividad )
-					<div class="list-group-item col-md-4">
+					<div class="list-group-item col-md-6">
 						<a class="btn btn-success btn-block" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">
 							{{$actividad->nactividad}}
 							<br>
@@ -40,7 +40,7 @@
 				@endforelse
 			</div>
 		</div>
-		<div class="">
+		<div class="col-md-6">
 			<div id="charts_div" class="row text-center" ></div>
 		</div>
 	</div>
@@ -90,7 +90,7 @@
 						legend:{textStyle:{fontSize:'9'}},
 						tooltip: {textStyle:  {fontSize: 9,bold: false}},
 					};
-					var div = $("<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'></div>")[0]
+					var div = $("<div class='col-md-12'></div>")[0]
 					var chart = new google.visualization.Gauge(div);
 					chart.draw(data, options);
 

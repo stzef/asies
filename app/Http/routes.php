@@ -11,18 +11,11 @@
 |
 */
 
-# Route::auth();
 Route::get('login', 'Auth\AuthController@showLoginForm');
-//Route::post('login', 'Auth\AuthController@login');
 Route::post('login', 'Auth\LoginController@authenticate');
-//Route::get('logout', 'Auth\AuthController@logout');
 Route::get('logout', 'Auth\LoginController@logout');
-
-// Registration Routes...
 Route::get('register', 'Auth\AuthController@showRegistrationForm')->middleware('auth');
 Route::post('register', 'Auth\AuthController@register')->middleware('auth');
-
-// Password Reset Routes...
 Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
 Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
 Route::post('password/reset', 'Auth\PasswordController@reset');
@@ -39,9 +32,6 @@ Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->m
 Route::get('/dashboard', 'AppController@dashboard')->name('app_dashboard')->middleware('auth');
 
 Route::group(['prefix' => 'api'], function(){
-
-	// Route::post('/testerror', "APIController@testerror");
-	// Route::post('/testsuccess', "APIController@testsuccess");
 
 	Route::group(['prefix' => '{model}'], function(){
 		Route::group(['prefix' => '{id}'], function(){
@@ -151,11 +141,6 @@ Route::group(['prefix' =>'actas'], function(){
 	Route::get('/send/{numeroacta}', "ActasController@send")->name("GET_send_acta");
 });
 
-Route::group(['prefix' => 'asignacion'], function(){
-		// Route::post('/{cactividad}/{ctarea}/usuarios', "AsignacionController@users")->name("POST_users_task");
-		// Route::post('/{cactividad}/{ctarea}/usuarios/delete', "AsignacionController@users_delete")->name("DELETE_users_task");
-});
-
 Route::group(['prefix' => 'tareas'], function(){
 	Route::get('create', "TareasController@create")->name("GET_tareas_create")->middleware("permission:task.crud");
 	Route::post('create', "TareasController@create")->middleware("permission:task.crud");
@@ -166,12 +151,19 @@ Route::group(['prefix' => 'tareas'], function(){
 	Route::post('/{ctarea}/change_state', "TareasController@change_state")->name("POST_cambiar_estado_tarea");
 });
 
-/*Route::group(['prefix' => 'utilities'], function(){
-	Route::get('tasktree', "UtilitiesController@tasktree");
-});*/
-
 Route::group(['prefix' => 'users'], function(){
+
+	Route::group(['prefix' => 'encuestas'], function(){
+		Route::get('/', "PerfilController@encuestas")->name('GET_list_encuestas');
+		Route::group(['prefix' => '{chencuesta}'], function(){
+			Route::get('do', "PerfilController@doEncuesta")->name('GET_realizar_encuesta');
+			Route::post('do', "PerfilController@answer_encuesta")->name('POST_answer_encuesta');
+
+			Route::get('show', "PerfilController@showEncuesta")->name('GET_mostrar_encuesta');
+		});
+	});
 	Route::group(['prefix' => '{user}'], function(){
 		Route::get('actividades', "PerfilController@actividades")->name('mis_actividades');
+
 	});
 });

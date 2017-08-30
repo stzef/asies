@@ -703,7 +703,7 @@
 				obj.anotaciones = $(div).find("[name=anotaciones]").val()
 
 				if ( obj.isOpenQuestion ){
-					element = $(div).find("input[type=radio]")
+					element = $(div).find("textarea")
 					obj.respuesta = element.val()
 					obj.respuesta_text = element.data("text")
 					if ( typeof obj.respuesta != 'undefined' ) data.push(obj)

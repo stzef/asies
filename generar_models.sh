@@ -29,3 +29,8 @@ php artisan krlove:generate:model ChecklistDeta --table-name=checklistdeta
 php artisan krlove:generate:model OpcionesPregunta --table-name=opcionespregunta
 php artisan krlove:generate:model ChecklistPreguntas --table-name=checklistpreguntas
 php artisan krlove:generate:model ChecklistEvidencias --table-name=checklistevidencias
+
+php artisan krlove:generate:model EncuestaDeta --table-name=encuestadeta
+php artisan krlove:generate:model EncuestaPreguntas --table-name=encuestapreguntas
+php artisan krlove:generate:model Encuestas --table-name=encuestas
+php artisan krlove:generate:model HistorialEncuestas --table-name=historialencuestas
