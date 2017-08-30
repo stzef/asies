@@ -152,18 +152,21 @@ Route::group(['prefix' => 'tareas'], function(){
 });
 
 Route::group(['prefix' => 'users'], function(){
-
-	Route::group(['prefix' => 'encuestas'], function(){
-		Route::get('/', "PerfilController@encuestas")->name('GET_list_encuestas');
-		Route::group(['prefix' => '{chencuesta}'], function(){
-			Route::get('do', "PerfilController@doEncuesta")->name('GET_realizar_encuesta');
-			Route::post('do', "PerfilController@answer_encuesta")->name('POST_answer_encuesta');
-
-			Route::get('show', "PerfilController@showEncuesta")->name('GET_mostrar_encuesta');
-		});
-	});
 	Route::group(['prefix' => '{user}'], function(){
 		Route::get('actividades', "PerfilController@actividades")->name('mis_actividades');
 
 	});
+
+	Route::group(['prefix' => 'encuestas'], function(){
+		Route::get('/', "PerfilController@encuestas")->name('GET_list_encuestas');
+
+		Route::group(['prefix' => '{chencuesta}'], function(){
+
+			Route::get('do', "PerfilController@doEncuesta")->name('GET_realizar_encuesta');
+			Route::post('do', "PerfilController@answer_encuesta")->name('POST_answer_encuesta');
+			Route::get('show', "PerfilController@showEncuesta")->name('GET_mostrar_encuesta');
+
+		});
+	});
+
 });

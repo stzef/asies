@@ -29,11 +29,11 @@
                         <td>{{$hisencuesta->encuesta->date}}</td>
                         <td>
                             @if( $hisencuesta->ifhecha )
-                                <a class="btn btn-success" href="{{ URL::route('GET_mostrar_encuesta',['id' => $hisencuesta->encuesta->cencuesta ]) }}">
+                                <a class="btn btn-success" href="{{ URL::route('GET_mostrar_encuesta',['id' => $hisencuesta->chencuesta ]) }}">
                                     Ver Respuestas
                                 </a>
                             @else
-                                <a class="btn btn-primary" href="{{ URL::route('GET_realizar_encuesta',['id' => $hisencuesta->encuesta->cencuesta ]) }}">
+                                <a class="btn btn-primary" href="{{ URL::route('GET_realizar_encuesta',['id' => $hisencuesta->chencuesta ]) }}">
                                     Contestar
                                 </a>
                             @endif
