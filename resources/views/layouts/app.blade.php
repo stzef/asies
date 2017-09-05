@@ -120,7 +120,9 @@
                             <a href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}"><i class="fa fa-fw fa-file-text-o"></i> Mis Actividades</a>
                         </li>
                         <li>
-                            <a href="{{ URL::route('GET_list_encuestas') }}"><i class="fa fa-file-text-o"></i> Encuestas </a>
+                            <a href="{{ URL::route('GET_list_encuestas_user') }}"><i class="fa fa-file-text-o"></i>
+                                Mis Encuestas
+                            </a>
                         </li>
                         <li>
                             <a href="javascript:;" data-toggle="collapse" data-target="#actividades"><i class="fa fa-fw fa-cubes"></i> Actividades <i class="fa fa-fw fa-caret-down"></i></a>
@@ -134,6 +136,16 @@
                                     @endpermission
                                     @permission('activities.check_dates')
                                         <a href="{{ URL::route('GET_verificar_fechas_actividades') }}"><i class="fa fa-fw fa-calendar"></i>Ver Todas</a>
+                                    @endpermission
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#encuestas"><i class="fa fa-file-text-o"></i> Encuestas <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="encuestas" class="collapse">
+                                <li>
+                                    @permission('activities.all')
+                                        <a href="{{ URL::route('GET_list_encuestas') }}"><i class="fa fa-list"></i>Listado</a>
                                     @endpermission
                                 </li>
                             </ul>

@@ -7,12 +7,13 @@ use \Auth;
 
 /**
  * @property Encuestas $encuesta
- * @property User $user
+ * @property User $usercontesto
  * @property EncuestaDeta[] $encuestadetas
  * @property int $chencuesta
  * @property int $cencuesta
  * @property int $user
  * @property string $fecha
+ * @property boolean $ifhecha
  * @property string $created_at
  * @property string $updated_at
  */
@@ -35,7 +36,7 @@ class HistorialEncuestas extends Model
     /**
      * @var array
      */
-    protected $fillable = ['cencuesta', 'user', 'fecha', 'created_at', 'updated_at'];
+    protected $fillable = ['cencuesta', 'user', 'fecha','ifhecha', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -48,9 +49,9 @@ class HistorialEncuestas extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function usercontesto()
     {
-        return $this->belongsTo('asies\Models\User', 'user');
+        return $this->belongsTo('asies\User', 'user');
     }
 
     /**

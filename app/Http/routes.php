@@ -151,6 +151,12 @@ Route::group(['prefix' => 'tareas'], function(){
 	Route::post('/{ctarea}/change_state', "TareasController@change_state")->name("POST_cambiar_estado_tarea");
 });
 
+Route::group(['prefix' => 'encuestas'], function(){
+	Route::get('/', "EncuestasController@encuestas")->name('GET_list_encuestas');
+	Route::get('/{cencuesta}', "EncuestasController@encuesta")->name('GET_encuesta');
+	Route::get('/{cencuesta}/export/{format}', "EncuestasController@excel")->name('GET_export_encuesta_excel');
+});
+
 Route::group(['prefix' => 'users'], function(){
 	Route::group(['prefix' => '{user}'], function(){
 		Route::get('actividades', "PerfilController@actividades")->name('mis_actividades');
@@ -158,7 +164,7 @@ Route::group(['prefix' => 'users'], function(){
 	});
 
 	Route::group(['prefix' => 'encuestas'], function(){
-		Route::get('/', "PerfilController@encuestas")->name('GET_list_encuestas');
+		Route::get('/', "PerfilController@encuestas")->name('GET_list_encuestas_user');
 
 		Route::group(['prefix' => '{chencuesta}'], function(){
 

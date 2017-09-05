@@ -8,19 +8,13 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<div class="row">
-						<div class="col-md-7">
-							<h4 class="text-center">
-								Encuesta: {{ $encuesta->nombre }}
-							</h4>
-							<h5>
-								{{ $encuesta->descripcion }}
-							</h5>
-						</div>
-						<div class="col-md-5 text-center">
-							<div class="btn-group">
-							</div>
-						</div>
+					<div>
+						<h4 class="text-center">
+							Encuesta: {{ $encuesta->nombre }}
+						</h4>
+						<h5>
+							{{ $encuesta->descripcion }}
+						</h5>
 					</div>
 				</div>
 			</div>
@@ -43,7 +37,7 @@
 									<div class="panel-heading">
 										<div>
 											<input type="hidden" name="cpregunta" value="{{ $pregunta->cpregunta }}" data-text="{{ $pregunta->enunciado }}">
-											#{{$i}} - {{ $pregunta->enunciado }}
+											{{$i}} - {{ $pregunta->enunciado }}
 										</div>
 									</div>
 

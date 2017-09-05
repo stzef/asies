@@ -22,16 +22,21 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach ($encuestas as $encuesta)
+				@foreach ($hisencuestas as $hisencuesta)
 					<tr>
+						<td>{{$hisencuesta->encuesta->nombre}}</td>
+						<td>{{$hisencuesta->encuesta->descripcion}}</td>
+						<td>{{$hisencuesta->encuesta->fecha}}</td>
 						<td>
-							<a href="{{ URL::route('GET_encuesta',['cencuesta'=>$encuesta->cencuesta]) }}">
-								{{$encuesta->nombre}}
-							</a>
-						</td>
-						<td>{{$encuesta->descripcion}}</td>
-						<td>{{$encuesta->fecha}}</td>
-						<td>
+							@if( $hisencuesta->ifhecha )
+								<a class="btn btn-success" href="{{ URL::route('GET_mostrar_encuesta',['id' => $hisencuesta->chencuesta ]) }}">
+									Ver Respuestas
+								</a>
+							@else
+								<a class="btn btn-primary" href="{{ URL::route('GET_realizar_encuesta',['id' => $hisencuesta->chencuesta ]) }}">
+									Contestar
+								</a>
+							@endif
 						</td>
 					</tr>
 				@endforeach

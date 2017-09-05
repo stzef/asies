@@ -39,7 +39,7 @@ class PerfilController extends Controller
 	public function encuestas(Request $request){
 		$user = Auth::user();
 		$hisencuestas = HistorialEncuestas::where("user",$user->id)->get();
-		return view('encuestas/list', array( "hisencuestas" => $hisencuestas ) );
+		return view('users/encuestas/list', array( "hisencuestas" => $hisencuestas ) );
 	}
 
 	public function doEncuesta(Request $request, $chencuesta){
@@ -61,7 +61,7 @@ class PerfilController extends Controller
 		if ( !$hisencuesta ) return view('errors/generic',array('title' => 'Error Codigo.', 'message' => "La encuesta Historica $hisencuesta no existe" ));
 
 		$encuesta = $hisencuesta->getEncuesta();
-		return view('encuestas/do', array( "encuesta" => $encuesta, "hisencuesta" => $hisencuesta ) );
+		return view('users/encuestas/do', array( "encuesta" => $encuesta, "hisencuesta" => $hisencuesta ) );
 	}
 
 	public function showEncuesta(Request $request, $chencuesta){
@@ -70,7 +70,7 @@ class PerfilController extends Controller
 		if ( !$hisencuesta ) return view('errors/generic',array('title' => 'Error Codigo.', 'message' => "La encuesta $chencuesta no existe" ));
 
 		$encuesta = $hisencuesta->getEncuesta();
-		return view('encuestas/show', array( "encuesta" => $encuesta, "hisencuesta" => $hisencuesta ) );
+		return view('users/encuestas/show', array( "encuesta" => $encuesta, "hisencuesta" => $hisencuesta ) );
 	}
 
 	public function answer_encuesta( Request $request, $chencuesta ){

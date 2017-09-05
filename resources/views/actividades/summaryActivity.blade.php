@@ -28,7 +28,7 @@
 									<div class="panel-heading">
 										<div>
 											<input type="hidden" name="cpregunta" value="{{ $pregunta->cpregunta }}" data-text="{{ $pregunta->enunciado }}">
-											#{{$i}} - {{ $pregunta->enunciado }}
+											{{$i}} - {{ $pregunta->enunciado }}
 										</div>
 									</div>
 
