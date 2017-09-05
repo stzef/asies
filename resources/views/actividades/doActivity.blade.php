@@ -754,6 +754,9 @@
 						prevText: "<",
 						nextText: ">",
 						selectOnClick: true,
+
+						canGoBack: @if( MangerParametros::canGoBackQuestion() ) true @else false @endif,
+						maxChangeStep: 1,
 						beforeChange: function(currentPageNumber,nextPageNumber, event){
 							var selectorPageSelect = "#checklistdeta_page_" + currentPageNumber
 							var inputFile = $(selectorPageSelect).find(".files_checklist")[0]

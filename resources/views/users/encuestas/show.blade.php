@@ -189,6 +189,8 @@
 				nextText: ">",
 				selectOnClick: true,
 				//beforeChange: function(currentPageNumber,nextPageNumber, event){},
+				canGoBack: @if( MangerParametros::canGoBackQuestion() ) true @else false @endif,
+				maxChangeStep: 1,
 				onPageClick: function(lastPageIndex,pageNumber, event){
 					var selectorPageSelect = "#encuestadeta_page_" + pageNumber
 					$(".encuestadeta_page").addClass("hide")

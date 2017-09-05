@@ -186,6 +186,8 @@ return [
         #Excel
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
+        //asies\Helpers\Parametros::class,
+        //asies\Helpers\Helper::class,
 
     ],
 
@@ -237,6 +239,9 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
 
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+        'MangerParametros' => asies\Helpers\MangerParametros::class,
+        'Helper' => asies\Helpers\Helper::class,
 
 
         #'Image' => Intervention\Image\Facades\Image::class,

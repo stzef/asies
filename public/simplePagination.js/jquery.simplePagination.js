@@ -34,6 +34,10 @@
 				invertPageOrder: false,
 				useStartEdge : true,
 				useEndEdge : true,
+
+				canGoBack: true,
+				maxChangeStep: 0,
+
 				beforeChange: function(currentPageNumber,nextPageNumber, event) {
 					// return true
 					return Promise.resolve(true)
@@ -340,13 +344,24 @@
 
 			var valid_continue = true
 
-			if ( ( pageIndex + 1 ) < lastPageIndex ){
-				// console.log("moviendose para atras")
-				var valid_continue = false
+
+
+			console.log('o.canGoBack',o.canGoBack)
+			console.log('o.maxChangeStep',o.maxChangeStep)
+
+			if ( !o.canGoBack ){
+				if ( ( pageIndex + 1 ) < lastPageIndex ) {
+					// console.log("moviendose para atras")
+					var valid_continue = false
+				}
 			}
-			if ( Math.abs(( pageIndex + 1 ) - lastPageIndex) != 1 ){
-				// console.log('paso a mas de a uno')
-				var valid_continue = false
+			if ( o.maxChangeStep > 0 ){
+				if (
+					Math.abs(( pageIndex + 1 ) - lastPageIndex) > o.maxChangeStep
+				){
+					// console.log('paso a mas de a x numero de pagina')
+					var valid_continue = false
+				}
 			}
 			if ( valid_continue ){
 				var ifChangePage = o.beforeChange(lastPageIndex, pageIndex + 1, event);

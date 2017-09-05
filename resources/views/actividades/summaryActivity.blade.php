@@ -372,6 +372,9 @@
 				prevText: "<",
 				nextText: ">",
 				selectOnClick: true,
+
+				canGoBack: @if( MangerParametros::canGoBackQuestion() ) true @else false @endif,
+				maxChangeStep: 1,
 				onPageClick: function(lastPageIndex,pageNumber, event){
 					$(".checklistdeta_page").addClass("hide")
 					$("#checklistdeta_page_"+pageNumber).removeClass("hide")
