@@ -102,15 +102,6 @@ class HistorialEncuestas extends Model
                 $copciones = OpcionesPregunta::select("copcion")->where("ctipregunta",$pregunta->ctipregunta)->get();
                 $pregunta->opciones = Opciones::whereIn("copcion",$copciones)->get();
                 $pregunta->respuesta = EncuestaDeta::where("chencuesta",$encuestaUser->chencuesta)->where("cpregunta",$pregunta->cpregunta)->first();
-
-                /*
-                $pregunta->evidencias = [];
-                $pregunta->cantidad_evidencias = 0;
-                if ( $pregunta->respuesta ){
-                    $pregunta->evidencias = EncuestaEvidencias::where("cencuestadeta",$pregunta->respuesta->id)->get();
-                    $pregunta->cantidad_evidencias = count($pregunta->evidencias);
-                }
-                */
             }
             $encuesta = $encuesta;
 

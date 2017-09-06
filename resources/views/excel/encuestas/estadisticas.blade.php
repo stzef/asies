@@ -6,8 +6,8 @@
 	<link href="{{ URL::asset('css/excel.css') }}" rel="stylesheet">
 </head>
 <body>
-		{{--
-		@foreach( $actividad->checklist->estadisticas as $item )
+
+		@foreach( $encuesta->history->estadisticas as $item )
 			<table class="table">
 				<tr>
 					<th colspan="2" class="bordered">{{ $item["tipregunta"]->detalle }}</th>
@@ -28,6 +28,6 @@
 				</tr>
 			</table>
 		@endforeach
-		--}}
+
 </body>
 </html>

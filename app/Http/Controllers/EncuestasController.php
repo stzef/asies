@@ -29,15 +29,26 @@ class EncuestasController extends Controller
 	public function encuesta(Request $request, $cencuesta){
 		$encuesta = Encuestas::where("cencuesta",$cencuesta)->first();
 		$encuesta->history = HistorialEncuestas::where("cencuesta",$encuesta->cencuesta)->get();
+		$encuesta->fechas = HistorialEncuestas::where("cencuesta",$encuesta->cencuesta)->groupBy("fecha")->select("fecha")->get()->toArray()[0];
+		// dump($encuesta->fechas);exit();
+
 		return view('encuestas/encuesta', array( "encuesta" => $encuesta ) );
 	}
 
 	public function excel(Request $request, $cencuesta,$format){
+		$fecha = $request->get("fecha");
+
 		$encuesta = Encuestas::where("cencuesta",$cencuesta)->first();
 		if ( !$encuesta ) return view('errors/generic',array('title' => 'Error Codigo.', 'message' => "La encuesta $cactividad no existe" ));
 
+		if ( !$fecha ) return view('errors/generic',array('title' => 'Error Codigo.', 'message' => "No se especifico la fecha de la encuesta" ));
+
 		$formats = [ 'xlsx', 'xlsm', 'xltx', 'xltm', 'xls', 'xlt', 'ods', 'ots', 'slk', 'xml', 'gnumeric', 'htm', 'html', 'csv', 'txt', 'pdf'];
 		if ( !in_array($format, $formats) ) return view('errors/generic',array('title' => 'Error Codigo.', 'message' => "Formato de Documento Invalido" ));
+
+		$encuesta->history = $encuesta->getHistory($fecha);
+		// dump($encuesta->history);exit();
+
 
 		$data = [
 			"encuesta" => $encuesta,
@@ -52,6 +63,7 @@ class EncuestasController extends Controller
 
 
 			$excel->sheet('Estadisticas', function($sheet) use($data) {
+				//dump($data["encuesta"]->history->estadisticas);exit();
 				$sheet->loadView('excel/encuestas/estadisticas',[
 					"encuesta" => $data["encuesta"]
 				]);
