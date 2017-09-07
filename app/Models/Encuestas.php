@@ -53,8 +53,8 @@ class Encuestas extends Model
         # Estadisticas
         $tipreguntas = TiPreguntas::all();
         $estadisticas = [];
-        foreach ($history->items as $item_history) {
-            foreach ($tipreguntas as $tipregunta) {
+        foreach ($tipreguntas as $tipregunta) {
+            foreach ($history->items as $item_history) {
                 $cpreguntas = EncuestaPreguntas::select('cpregunta')->where("cencuesta",$this->cencuesta)->orderBy("orden")->get();
                 $total_preguntas = Preguntas::whereIn('cpregunta', $cpreguntas)->where("ctipregunta",$tipregunta->ctipregunta)->count();
 
