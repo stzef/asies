@@ -148,6 +148,8 @@ Route::group(['prefix' => 'tareas'], function(){
 	Route::get('edit/{ctarea}', "TareasController@edit")->middleware("permission:task.crud");
 	Route::post('edit/{ctarea}', "TareasController@edit")->middleware("permission:task.crud");
 
+	Route::get('activities/{ctarea}', "TareasController@activities")->middleware("permission:task.crud");
+
 	Route::post('/{ctarea}/change_state', "TareasController@change_state")->name("POST_cambiar_estado_tarea");
 });
 

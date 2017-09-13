@@ -119,11 +119,13 @@
                         <li>
                             <a href="{{ URL::route('mis_actividades',['user'=>Auth::user()->name]) }}"><i class="fa fa-fw fa-file-text-o"></i> Mis Actividades</a>
                         </li>
+                        <!--
                         <li>
                             <a href="{{ URL::route('GET_list_encuestas_user') }}"><i class="fa fa-file-text-o"></i>
                                 Mis Encuestas
                             </a>
                         </li>
+                        -->
                         <li>
                             <a href="javascript:;" data-toggle="collapse" data-target="#actividades"><i class="fa fa-fw fa-cubes"></i> Actividades <i class="fa fa-fw fa-caret-down"></i></a>
                             <ul id="actividades" class="collapse">
@@ -140,6 +142,7 @@
                                 </li>
                             </ul>
                         </li>
+                        <!--
                         <li>
                             <a href="javascript:;" data-toggle="collapse" data-target="#encuestas"><i class="fa fa-file-text-o"></i> Encuestas <i class="fa fa-fw fa-caret-down"></i></a>
                             <ul id="encuestas" class="collapse">
@@ -150,6 +153,7 @@
                                 </li>
                             </ul>
                         </li>
+                        -->
                         <li>
                             <a href="javascript:;" data-toggle="collapse" data-target="#actas">
                                 <i class="fa fa-fw fa-file-pdf-o"></i>

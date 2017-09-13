@@ -16,6 +16,7 @@ use asies\Models\Actividades;
 use asies\Models\Tareas;
 use asies\Models\Planes;
 use asies\Models\TiRelaciones;
+use asies\Models\AsignacionTareas;
 
 class TareasController extends Controller
 {
@@ -139,6 +140,23 @@ class TareasController extends Controller
 				return response()->json(array("errors_form"=>array("cplan"=>"El plan no es un Producto Minimo")),400);
 			}
 		}
+	}
+
+	public function activities(Request $request, $ctarea){
+		$tarea = Tareas::where("ctarea",$ctarea)->first();
+
+		if ( !$tarea ) return view('errors/generic',array('title' => 'Error Codigo.', 'message' => "La Tarea $ctarea no existe" ));
+
+
+		$asignaciones = AsignacionTareas::where("ctarea",$ctarea)->groupBy('cactividad')->get();
+
+
+		$context = [
+			"tarea" => $tarea,
+			"asignaciones" => $asignaciones,
+		];
+
+		return view('tareas/activities',$context);
 	}
 
 }

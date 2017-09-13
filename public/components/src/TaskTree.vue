@@ -1,7 +1,10 @@
 <template>
-  <div class="">
-  <div class="row text-center">
-    <div class="col-xs-6 col-sm-4 col-md-2 col-md-2 text-center" v-for="tiplan in tiplanes">
+  <div>
+  <div class="text-right">
+    <button class="btn btn-info" @click="showLegends = !showLegends"> Ayuda </button>
+  </div>
+  <div class="row text-center" >
+    <div class="col-xs-6 col-sm-4 col-md-2 col-md-2 text-center" v-for="tiplan in tiplanes" v-if="showLegends">
       <img :src="'/'+tiplan.icono" alt="">
       <br>
       <label>{{ tiplan.ntiplan }}</label>
@@ -19,7 +22,9 @@
               </li>
           </ul>
 
+          <!--
           <input type="text" id="treeview_find" value="" placeholder="Buscar..." class="input" style="margin:0em auto 1em auto; display:block; padding:4px; border-radius:4px; border:1px solid silver;">
+          -->
 
           <div class="tab-content" >
               <div v-for="plan in planes" :id="'cplan_' + plan.li_attr.cplan" class="tab-pane fade" :data-treeview="'#treeview_cplan_' + plan.li_attr.cplan">
@@ -40,6 +45,11 @@ export default {
   props: {
     tiplanes: {type: Array,},
     planes: {type: Array,},
+  },
+  data(){
+    return {
+      showLegends: false,
+    }
   },
   methods : {
     changeSelectTaskTree : function(id){
@@ -102,7 +112,7 @@ export default {
           },
           label : "Ver en Detalle"
         },
-        reprogramTask : {
+        /*reprogramTask : {
           action : function(){
             var item = $(vm.treetask_select).jstree('get_selected',true)[0]
             if ( item.li_attr.ctarea ){
@@ -113,6 +123,17 @@ export default {
             }
           },
           label : "Reprogramar Tarea"
+        },*/
+        showActivities : {
+          action : function(){
+            var item = $(vm.treetask_select).jstree('get_selected',true)[0]
+            if ( item.li_attr.ctarea ){
+              window.open("/tareas/activities/"+item.li_attr.ctarea)
+            }else{
+              alertify.warning("Este item no es Una Tarea")
+            }
+          },
+          label : "Ver Actividades"
         },
         edit : {
           action : function(){
@@ -154,6 +175,7 @@ export default {
         $(select_treeview).on('ready.jstree', component.recolored)
 
       }
+      /*
       var to = false;
       $('#treeview_find').keyup(() => {
         if(to) { clearTimeout(to); }
@@ -162,6 +184,7 @@ export default {
           $(this.$root.treetask_select).jstree(true).search(v);
         }, 250);
       });
+      */
 
   }
 }
