@@ -1,15 +1,23 @@
 <template>
   <div>
-  <div class="text-right">
-    <button class="btn btn-info" @click="showLegends = !showLegends"> Ayuda </button>
-  </div>
-  <div class="row text-center" >
-    <div class="col-xs-6 col-sm-4 col-md-2 col-md-2 text-center" v-for="tiplan in tiplanes" v-if="showLegends">
-      <img :src="'/'+tiplan.icono" alt="">
-      <br>
-      <label>{{ tiplan.ntiplan }}</label>
+    <div class="panel panel-default">
+      <div class="panel-heading row">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+          <h4 v-if="planSelected"> {{ planSelected.text }} </h4>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+          <input type="text" id="treeview_find" value="" placeholder="Buscar..." class="input" style="margin:0em auto 1em auto; padding:4px; border-radius:4px; border:1px solid silver;">
+          <button class="btn btn-info" @click="showLegends = !showLegends"> Ayuda </button>
+        </div>
+        <div class="row text-center" >
+          <div class="col-xs-6 col-sm-4 col-md-2 col-md-2 text-center" v-for="tiplan in tiplanes" v-if="showLegends">
+            <img :src="'/'+tiplan.icono" alt="">
+            <br>
+            <label>{{ tiplan.ntiplan }}</label>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
 
     <div class="">
       <div class="panel panel-default">
@@ -49,11 +57,11 @@ export default {
   data(){
     return {
       showLegends: false,
+      planSelected: null
     }
   },
   methods : {
     changeSelectTaskTree : function(id){
-      console.warn(id)
       this.$emit("ctt",id)
     },
     recolored: function (evt, data){
@@ -95,8 +103,12 @@ export default {
   },
   mounted :function(){
     this.$emit("tt_mounted")
+
   },
   updated :function(){
+      this.planSelected = this.planes[0]
+      console.log(this.planSelected)
+
       var component = this
       var vm = this.$root
       $.jstree.defaults.contextmenu.items = {
@@ -175,7 +187,7 @@ export default {
         $(select_treeview).on('ready.jstree', component.recolored)
 
       }
-      /*
+
       var to = false;
       $('#treeview_find').keyup(() => {
         if(to) { clearTimeout(to); }
@@ -184,7 +196,7 @@ export default {
           $(this.$root.treetask_select).jstree(true).search(v);
         }, 250);
       });
-      */
+
 
   }
 }

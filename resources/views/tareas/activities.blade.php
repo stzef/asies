@@ -14,13 +14,13 @@
 
 			<div class="">
 				<h2> Actividades </h2>
-				<table class="table">
+				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
 							<th> Actividad </th>
-							<th></th>
-							<th></th>
-							<th></th>
+							<th width="100px"></th>
+							<th width="100px"></th>
+							<th width="100px"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -31,15 +31,15 @@
 								</td>
 								<td>
 									@if ( ! $asignacion->actividad->ifhecha )
-										<a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$asignacion->actividad->cactividad]) }}">Realizar</a>
+										<a class="btn btn-success btn-block" href="{{ URL::route('realizar_actividad',['cactividad'=>$asignacion->actividad->cactividad]) }}">Realizar</a>
 									@endif
 								</td>
 								<td>
-									<a class="btn btn-info" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$asignacion->actividad->cactividad]) }}">Resumen</a>
+									<a class="btn btn-info btn-block" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$asignacion->actividad->cactividad]) }}">Resumen</a>
 								</td>
 								<td>
 									@permission('activities.crud')
-										<a class="btn btn-primary" href="{{ URL::route('GET_actividades_edit',['cactividad'=>$asignacion->actividad->cactividad]) }}">Editar</a>
+										<a class="btn btn-primary btn-block" href="{{ URL::route('GET_actividades_edit',['cactividad'=>$asignacion->actividad->cactividad]) }}">Editar</a>
 									@endpermission
 								</td>
 							</tr>

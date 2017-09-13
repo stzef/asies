@@ -20,8 +20,8 @@
                     <th>Actividad</th>
                     <th>Fecha</th>
                     <th>Dias Retraso</th>
-                    <th></th>
-                    <th></th>
+                    <th width="100px"></th>
+                    <th width="100px"></th>
                 </tr>
             </thead>
             <tbody>
@@ -32,10 +32,10 @@
                         <td> {{ $actividad->fini }} </td>
                         <td>{{ $actividad->dias_retraso }}</td>
                         <td>
-                            <a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a>
+                            <a class="btn btn-success btn-block" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a>
                         </td>
                         <td>
-                            <a class="btn btn-primary" target="_blank" href="{{ URL::route('GET_detalle_actividad',['cactividad'=>$actividad->cactividad]) }}">Detalle</a>
+                            <a class="btn btn-primary btn-block" target="_blank" href="{{ URL::route('GET_detalle_actividad',['cactividad'=>$actividad->cactividad]) }}">Detalle</a>
                         </td>
                     </tr>
                 @endforeach
@@ -51,8 +51,8 @@
                     <th>Actividad</th>
                     <th>Fecha</th>
                     <th>Dias Faltantes</th>
-                    <th></th>
-                    <th></th>
+                    <th width="100px"></th>
+                    <th width="100px"></th>
                 </tr>
             </thead>
             <tbody>
@@ -63,10 +63,10 @@
                         <td>{{ $actividad->fini }}</td>
                         <td>{{ $actividad->dias_faltantas }}</td>
                         <td>
-                            <a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a>
+                            <a class="btn btn-success btn-block" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a>
                         </td>
                         <td>
-                            <a class="btn btn-primary" target="_blank" href="{{ URL::route('GET_detalle_actividad',['cactividad'=>$actividad->cactividad]) }}">Detalle</a>
+                            <a class="btn btn-primary btn-block" target="_blank" href="{{ URL::route('GET_detalle_actividad',['cactividad'=>$actividad->cactividad]) }}">Detalle</a>
                         </td>
                     </tr>
                 @endforeach
@@ -81,8 +81,8 @@
                     <th>It</th>
                     <th>Actividad</th>
                     <th>Fecha</th>
-                    <th></th>
-                    <th></th>
+                    <th width="100px"></th>
+                    <th width="100px"></th>
                 </tr>
             </thead>
             <tbody>
@@ -92,10 +92,10 @@
                         <td>{{ $actividad->nactividad }}</td>
                         <td>{{ $actividad->ffin }}</td>
                         <td>
-                            <a class="btn btn-primary" target="_blank" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a>
+                            <a class="btn btn-primary btn-block" target="_blank" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a>
                         </td>
                         <td>
-                            <a class="btn btn-primary" target="_blank" href="{{ URL::route('GET_detalle_actividad',['cactividad'=>$actividad->cactividad]) }}">Detalle</a>
+                            <a class="btn btn-primary btn-block" target="_blank" href="{{ URL::route('GET_detalle_actividad',['cactividad'=>$actividad->cactividad]) }}">Detalle</a>
                         </td>
                     </tr>
                 @endforeach

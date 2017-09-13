@@ -8,6 +8,7 @@
 	<input type="hidden" name="treetask_cplan" id="treetask_cplan" value="{{ $plan->cplan }}">
 	<input type="hidden" :value="treetask_select" id="treetask_select">
 	<div class="col-md-12">
+		<!--
 		<div class="panel panel-default">
 			<div class="panel-heading row">
 				<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
@@ -18,6 +19,7 @@
 				</div>
 			</div>
 		</div>
+		-->
 
 		<div class="">
 			<div>
@@ -34,6 +36,7 @@
 
 @section('scripts')
 <script>
+      /*
       var to = false;
       $('#treeview_find').keyup(() => {
         if(to) { clearTimeout(to); }
@@ -42,5 +45,6 @@
           $( $("#treetask_select").val() ).jstree(true).search(v);
         }, 250);
       });
+      */
 </script>
 @endsection

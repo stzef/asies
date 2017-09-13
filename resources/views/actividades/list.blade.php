@@ -18,9 +18,10 @@
                         <th>It</th>
                         <th>Nombre</th>
                         <th>Fecha</th>
-                        <th>Editar</th>
-                        <th>Realizar</th>
-                        <th>Resumen</th>
+                        <th width="100px">Editar</th>
+                        <th width="100px">Realizar</th>
+                        <th width="100px">Resumen</th>
+                        <th width="100px">Detalle</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,14 +41,17 @@
                             <td>{{$actividad->fini}}</td>
                             <td>
                                 @permission('activities.crud')
-                                    <a class="btn btn-primary" href="{{ URL::route('GET_actividades_edit',['cactividad'=>$actividad->cactividad]) }}">Editar</a>
+                                    <a class="btn btn-primary btn-block" href="{{ URL::route('GET_actividades_edit',['cactividad'=>$actividad->cactividad]) }}">Editar</a>
                                 @endpermission
                             </td>
                             <td>
-                                <a class="btn btn-success" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a>
+                                <a class="btn btn-success btn-block" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">Realizar</a>
                             </td>
                             <td>
-                                <a class="btn btn-primary" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a>
+                                <a class="btn btn-primary btn-block" href="{{ URL::route('GET_resumen_actividad',['cactividad'=>$actividad->cactividad]) }}">Resumen</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-block" target="_blank" href="{{ URL::route('GET_detalle_actividad',['cactividad'=>$actividad->cactividad]) }}">Detalle</a>
                             </td>
                         </tr>
                     @endforeach
