@@ -118,6 +118,7 @@ Route::group(['prefix' => 'actividades'], function(){
 	Route::post('evidence/{cactividad}', "ActividadesController@store");
 
 	Route::get('archivos/{cactividad?}', "EvidenciaController@index")->name("GET_lista_evidencias")/*->middleware("permission:activities.crud")*/;
+	Route::post('archivos/send', "EvidenciaController@send")->name("POST_send_files")/*->middleware("permission:activities.crud")*/;
 
 	Route::group(['prefix' => '{cactividad}'], function(){
 

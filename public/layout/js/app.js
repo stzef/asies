@@ -300,6 +300,25 @@ Models = {
 				},
 			})
 		},
+		"sendMails" : function(mails,files){
+			waitingDialog.show("Enviando Correos")
+			$.ajax({
+				url : "/actividades/archivos/send",
+				type : "POST",
+				data: {
+					mails: mails,
+					files: files,
+				},
+				success : function (response) {
+					waitingDialog.hide()
+					alertify.success("Correos Enviados.")
+				},
+				error : function (response) {
+					waitingDialog.hide()
+					alertify.error("Ha ocurrido un error al enviar los Correos.")
+				},
+			})
+		},
 		"changeState" : function(id,newcstate){
 			var url = "/api/Actividades/__id__/property?property=cestado",
 			url = url.replace("__id__",id)
@@ -319,7 +338,6 @@ Models = {
 				}
 			})
 		},
-
 		"asignarTarea" : function(cactividad,data,cb){
 			if ( typeof data != 'object') return false
 			var base_url_asignar_tarea = "/api/actividades/"+cactividad+"/assign"

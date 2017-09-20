@@ -220,11 +220,11 @@
                 options = options || {}
                 $('body').loadingModal({
                     text: message,
-                    animation: options.animation || 'wanderingCubes',
+                    animation: options.animation || 'threeBounce',//'fadingCircle',
                     position: options.position || 'auto',
                     color: options.color || '#fff',
-                    opacity: options.opacity || '0.5',
-                    backgroundColor: options.backgroundColor || 'rgba(0, 0, 0, 0.5)',
+                    opacity: options.opacity || '1',
+                    backgroundColor: options.backgroundColor || 'rgba(0, 0, 0, 0.7)',
                 });
 
                 },
@@ -245,6 +245,7 @@
         </script>
 
         <script src="{{ URL::asset('dist/js/app.min.js') }}"></script>
+        <script src="{{ URL::asset('layout/js/app.js') }}"></script>
 
         <script>
             // handle jQuery plugin naming conflict between jQuery UI and Bootstrap

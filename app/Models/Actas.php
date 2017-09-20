@@ -24,7 +24,7 @@ use asies\User;
  * @property User $reviso
  * @property User $aprobo
  * @property Actasasistentes[] $actasasistentes
- * @property Actividades[] $actividades
+ * @property Actividades $actividad
  */
 class Actas extends Model
 {
@@ -66,8 +66,8 @@ class Actas extends Model
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function actividades(){
-		return $this->hasMany('asies\Models\Actividades', 'cacta', 'idacta');
+	public function actividad(){
+		return $this->belongsTo('asies\Models\Actividades', 'idacta', 'cacta');
 	}
 
 	static function genCode(){

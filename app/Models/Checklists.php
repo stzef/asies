@@ -26,7 +26,7 @@ class Checklists extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function actividades()
+    public function actividad()
     {
         return $this->belongsTo('asies\Models\Actividades', 'cactividad', 'cactividad');
     }
