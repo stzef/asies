@@ -40,7 +40,8 @@ class ChecklistsController extends Controller
 			"actividad" => $actividad,
 		];
 
-		return \Excel::create("Checklist Actividad {$actividad->cactividad} - {$actividad->nactividad}", function($excel) use($data) {
+
+		$excel = \Excel::create("checklist_{$actividad->cactividad}_{$actividad->checklist->cchecklist}", function($excel) use($data) {
 			$excel->sheet('Checklist', function($sheet) use($data) {
 				$sheet->loadView('excel/checklist',[
 					"actividad" => $data["actividad"]
@@ -53,7 +54,13 @@ class ChecklistsController extends Controller
 					"actividad" => $data["actividad"]
 				]);
 			});
-		})->download($format);
+		});
+		$slug = env("SLUG_APP","shared");
+		$dir_path = base_path()."/public/evidencias/{$slug}/actividades/actividad_{$actividad->cactividad}";
+		$path = "$dir_path/";
+		$data = $excel->store('xlsx', $path, true);
+
+		return $excel->download($format);
 
 	}
 

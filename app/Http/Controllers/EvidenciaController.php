@@ -20,11 +20,68 @@ class EvidenciaController extends Controller
 	}
 	public function send(Request $request){
 		$data = $request->all();
-		$mails = $data["mails"];
-		$files = $data["files"];
 
-		$status = \Mail::send('emails.sendFiles', $data, function ($message) use ($data){
-			$message->to($data["mails"])->subject('Correo de Evidencias');
+		$if_send_all = array_search("__ALL__",$data["mails"]);
+		if ( $if_send_all != false ){
+			unset($data["mails"][$if_send_all]);
+		}
+		$data["errors"] = [];
+		$data["if_send_all"] = $if_send_all;
+
+		$status = \Mail::send('emails.sendFiles', $data, function ($message) use (&$data){
+			$mails = $data["mails"];
+			$files = $data["files"];
+
+
+			$slug = env("SLUG_APP","shared");
+			foreach ($files as $file) {
+				$path = "";
+				$emailsActividad = [];
+				if ( $file["type"] == "EVIDENCIA" ){
+					$evidencia = Evidencias::where("cevidencia",$file["id"])->first();
+					$actividad = $evidencia->actividad()->first();
+					$emailsActividad = $actividad->getEmails();
+					if ( $evidencia ) {
+						$path = base_path()."/public".$evidencia->path;
+					}
+				}
+				if ( $file["type"] == "ACTA" ){
+					$acta = Actas::where("idacta",$file["id"])->first();
+					if($acta){
+						$actividad = $acta->actividad()->first();
+
+						$emailsActividad = $actividad->getEmails();
+
+						$namefile = "acta_{$acta->numeroacta}.pdf";
+						$dir_path = base_path()."/public/evidencias/{$slug}/actividades/actividad_{$actividad->cactividad}";
+						$path = "$dir_path/$namefile";
+					}
+				}
+				if ( $file["type"] == "CHECKLIST" ){
+					$checklist = Checklists::where("cchecklist",$file["id"])->first();
+					$actividad = $checklist->actividad()->first();
+					$emailsActividad = $actividad->getEmails();
+					$namefile = "checklist_{$actividad->cactividad}_{$checklist->cchecklist}.xlsx";
+					$dir_path = base_path()."/public/evidencias/{$slug}/actividades/actividad_{$actividad->cactividad}";
+					$path = "$dir_path/$namefile";
+				}
+
+				if(\File::exists($path)){
+					$message->attach($path);
+				}else{
+					$filename = basename($path);
+					array_push($data["errors"], "No se envió el archivo $filename. Revise si ya fue generado.");
+				}
+				if ( $data["if_send_all"]){
+
+
+					array_merge($data["mails"],$emailsActividad );
+				}
+
+
+			}
+
+			$message->to($data["mails"])->subject($data["asunto"]);
 		});
 
 		return response()->json($data,200);

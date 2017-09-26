@@ -300,7 +300,7 @@ Models = {
 				},
 			})
 		},
-		"sendMails" : function(mails,files){
+		"sendMails" : function(asunto,mensaje, mails,files){
 			waitingDialog.show("Enviando Correos")
 			$.ajax({
 				url : "/actividades/archivos/send",
@@ -308,10 +308,15 @@ Models = {
 				data: {
 					mails: mails,
 					files: files,
+					asunto: asunto,
+					mensaje: mensaje,
 				},
 				success : function (response) {
 					waitingDialog.hide()
 					alertify.success("Correos Enviados.")
+					alertify.success("Los Recordatorios se han enviado.")
+					var msg = response.errors.join(",<br>")
+					alertify.alert(msg)
 				},
 				error : function (response) {
 					waitingDialog.hide()

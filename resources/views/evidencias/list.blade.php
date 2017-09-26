@@ -2,6 +2,14 @@
 
 @section('styles')
 <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.3/css/select.dataTables.min.css">
+<style>
+	.item-email-list{
+		display: block;
+		text-align: left;
+		padding: 5px;
+		font-size: 14px !important;
+	}
+</style>
 @endsection
 @section('content')
 	<div id="modalEnviar" class="modal fade" role="dialog">
@@ -15,14 +23,41 @@
 		  </div>
 		  <div class="modal-body">
 			<div>
-				<ul id="email-list"></ul>
+				<div class="well">
+					<div class="row">
+						<div class="col-md-10">
+							<input type="email" id="candidate" class="form-control" />
+						</div>
+						<div class="col-md-2">
+							<button onclick="addItem()">Agregar</button>
+						</div>
+					</div>
+					<h4>Para : </h4>
+					<ul id="email-list"></ul>
+				</div>
 
-				<input type="email" id="candidate"/>
-				<button onclick="addItem()">Agregar</button>
+				<div class="well">
+					<h4>Asunto : </h4>
+					<div class="row">
+						<div class="col-md-10">
+							<input type="text" id="asunto" required class="form-control" placeholder="Asunto" />
+						</div>
+					</div>
+				</div>
+
+				<div class="well">
+					<h4>Archivos : </h4>
+					<ul id="files-list"></ul>
+					<input type="text" id="mensaje" class="form-control" placeholder="Mensaje" />
+				</div>
+
+
+				<!--
 				<div>
 					<input type="checkbox" id="all">
 					<label for="all"> Enviar a todos los relacionados</label>
 				</div>
+				-->
 				<!-- <button onclick="removeItem()">Remover</button> -->
 			</div>
 		  </div>
@@ -175,6 +210,23 @@
 			},
 		})
 
+		$("#modalEnviar").on('show.bs.modal',function(){
+			var files = getFiles()
+			if ( files ){
+				var ul = $("#files-list")
+				ul.empty()
+
+				files.forEach(function(file){
+					console.log(ul)
+					console.log(file)
+					ul.append(
+						$("<li>").html(file.name)
+					)
+				})
+			}
+		})
+
+
 		function removeItem(){
 			var button = this
 			var item = $(button).closest("li")[0]
@@ -186,10 +238,17 @@
 			var emails = getEmails()
 			var files = getFiles()
 
-			if ( emails && files )
-				Models.Actividades.sendMails(emails, files)
+			var asunto = $("#asunto").val() || "Archivos ASIES"
+			var mensaje = $("#mensaje").val() || "..."
 
-			alertify.error("Revise los Emails y Archivos.")
+			if ( emails && files ){
+				Models.Actividades.sendMails(asunto,mensaje, emails, files)
+			}else{
+				alertify.error("Revise los Emails y Archivos.")
+			}
+			table.rows().deselect()
+			$("#email-list").empty()
+
 
 		}
 		function getFiles(){
@@ -201,7 +260,10 @@
 			var evidencias = table.rows( { selected: true } ).data().toArray().map(item => ({
 				type: item[0],
 				id: item[1],
+				name: item[4],
 			}));
+
+			// console.log(table.rows( { selected: true } ).data().toArray())
 
 			return evidencias.length ? evidencias : null
 		}
@@ -214,20 +276,21 @@
 		}
 
 		function addItem(){
-			var ul = document.getElementById("email-list");
+			var ul = $("#email-list");
 		  var candidate = document.getElementById("candidate");
-		  var li = document.createElement("li");
+		  var li = $("<li>");
 		  var email = candidate.value
-		  // if ( candidate.validity.valid && email != '' ){
-		  if ( true ){
-			var text = $("<span class='email'></span>").html(email)[0]
-			li.setAttribute('id',email);
-			li.appendChild(text);
+		if ( candidate.validity.valid && email != '' ){
+			var text = $("<span class='email'></span>").html(email)
+			li.attr("id",email).addClass("item-email-list label label-primary").append(text)
+			// li.setAttribute('id',email);
+			// li.classList.add("label");
+			// li.appendChild(text);
 
 			var button = $("<label></label>").addClass("label label-danger pull-right").html("x").on("click",removeItem)[0];
 
-			li.appendChild(button);
-			ul.appendChild(li);
+			li.append(button);
+			ul.append(li);
 		  }
 		}
 
