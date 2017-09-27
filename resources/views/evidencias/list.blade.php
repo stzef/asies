@@ -29,7 +29,7 @@
 							<input type="email" id="candidate" class="form-control" />
 						</div>
 						<div class="col-md-2">
-							<button onclick="addItem()">Agregar</button>
+							<button class="btn btn-success" onclick="addItem()">Agregar</button>
 						</div>
 					</div>
 					<h4>Para : </h4>
@@ -39,16 +39,16 @@
 				<div class="well">
 					<h4>Asunto : </h4>
 					<div class="row">
-						<div class="col-md-10">
+						<div class="col-md-12">
 							<input type="text" id="asunto" required class="form-control" placeholder="Asunto" />
 						</div>
 					</div>
 				</div>
 
 				<div class="well">
+					<textarea id="mensaje" class="form-control" placeholder="Mensaje" /></textarea>
 					<h4>Archivos : </h4>
 					<ul id="files-list"></ul>
-					<input type="text" id="mensaje" class="form-control" placeholder="Mensaje" />
 				</div>
 
 
@@ -272,7 +272,7 @@
 			if ( $("#all").prop("checked") ) emails.push("__ALL__")
 			emails = $.unique(emails)
 
-			return emails.length ? emails : null
+			return emails.length != 0 ? emails : null
 		}
 
 		function addItem(){
