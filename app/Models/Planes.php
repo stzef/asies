@@ -65,7 +65,7 @@ class Planes extends Model
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
 	public function tareas(){
-		return $this->hasMany('App\Tarea', 'cplan', 'cplan');
+		return $this->hasMany('asies\Models\Tareas', 'cplan', 'cplan');
 	}
 
 	public function getTareas($iduser=null){

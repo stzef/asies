@@ -168,6 +168,24 @@
                                 @endpermission
                             </ul>
                         </li>
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#reportes">
+                                <i class="fa fa-fw fa-file-pdf-o"></i>
+                                Reportes
+                                <i class="fa fa-fw fa-caret-down"></i>
+                            </a>
+                            <ul id="reportes" class="collapse">
+                                <li>
+                                    <a href="{{ URL::route('reportes_tareas_general') }}"><i class="fa fa-list"></i> Tareas </a>
+                                </li>
+                                <li>
+                                    <a href="{{ URL::route('GET_list_actas',['user'=>Auth::user()->name]) }}"><i class="fa fa-list"></i> Tareas po Usuario </a>
+                                </li>
+                                <li>
+                                    <a href="{{ URL::route('GET_list_actas',['user'=>Auth::user()->name]) }}"><i class="fa fa-list"></i> Tareas Rango de Fecha </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li >
                             <a href="{{ URL::route('GET_tareas_create') }}"><i class="fa fa-fw fa-tasks"></i> Tareas</a>
                         </li>

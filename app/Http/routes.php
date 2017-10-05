@@ -160,6 +160,12 @@ Route::group(['prefix' => 'encuestas'], function(){
 	Route::get('/{cencuesta}/export/{format}', "EncuestasController@excel")->name('GET_export_encuesta_excel');
 });
 
+Route::group(['prefix' => 'reportes'], function(){
+	Route::group(['prefix' => 'tareas'], function(){
+		Route::get('general', "ReportesController@tareas_general")->name('reportes_tareas_general');
+	});
+});
+
 Route::group(['prefix' => 'users'], function(){
 	Route::group(['prefix' => '{user}'], function(){
 		Route::get('actividades', "PerfilController@actividades")->name('mis_actividades');
