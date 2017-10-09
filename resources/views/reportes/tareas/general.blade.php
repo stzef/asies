@@ -13,6 +13,6 @@
 	</style>
 </head>
 <body>
-	{!!  Helper::output($type, [$planes[0]], $info) !!}
+	{!!  Helper::output($type, [$plan], $info) !!}
 </body>
 </html>

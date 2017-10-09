@@ -8,33 +8,68 @@ use asies\Http\Requests;
 use PDF;
 use Illuminate\Support\Facades\Log;
 use asies\Models\Planes;
+use asies\User;
+use \View;
 
 class ReportesController extends Controller
 {
+	public function __construct(){
+		View::share('SHORT_NAME_APP', env("SHORT_NAME_APP"," - "));
+		View::share('LONG_NAME_APP', env("LONG_NAME_APP"," - "));
+		$this->middleware('auth');
+	}
+
+	public function view_tareas_by_user(Request $request){
+		$context = [
+			"planes" => Planes::where("cplanmayor", "=", null)->get(),
+			"users" => User::all(),
+		];
+		return view('reportes/tareas/views/by_user', $context);
+	}
+
+	public function view_tareas_between(Request $request){
+		$context = [
+			"planes" => Planes::where("cplanmayor", "=", null)->get(),			
+		];
+		return view('reportes/tareas/views/between', $context);
+	}
+
+	public function view_tareas_general(Request $request){
+		$context = [
+			"planes" => Planes::where("cplanmayor", "=", null)->get(),			
+		];
+		return view('reportes/tareas/views/general', $context);
+	}
+
 	public function tareas_general(Request $request){
 		$slug = env("SLUG_APP","shared");
 		$planes = Planes::getArbolPlanes();
 		
+		$type = $request->get("type","general");
+
+		$cplan = $request->get("cplan", false);
+
 		$fini = $request->get("fini", false);
 		$ffin = $request->get("ffin", false);
 		$user = $request->get("user", false);
+		
+		if ( $cplan == false ){ dump("Ha Ocurrido un Error");exit(); }
 
-		$type = $request->get("type","general");
-		// dump($type);exit();
+		$plan = Planes::where("cplan", $cplan)->first();
+		$plan->subplanes = Planes::getSubPlanes($cplan);
 
-		// dump("hola");exit();
 		if ( $type == "general" ){
 
 		}else if ( $type == "date" ){
-			if ( $fini == false || $ffin == false ){ dump("Ha Ocurrido un Error");exit(); }
+			if ( $fini == false || $ffin == false ){ dump("Ha Ocurrido un Error Date");exit(); }
 		}else if ( $type == "user" ){
-			if ( $user == false ) {dump("Ha Ocurrido un Error");exit();}
+			if ( $user == false ) {dump("Ha Ocurrido un Error User");exit();}
 		}else{
-			dump("Ha Ocurrido un Error");exit();
+			dump("Ha Ocurrido un Error No");exit();
 		}
 		$data = [
 			"type" => $type,
-			"planes" => $planes,
+			"plan" => $plan,
 			"info" => [
 				"fini" => $fini,
 				"ffin" => $ffin,

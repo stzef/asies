@@ -163,6 +163,10 @@ Route::group(['prefix' => 'encuestas'], function(){
 Route::group(['prefix' => 'reportes'], function(){
 	Route::group(['prefix' => 'tareas'], function(){
 		Route::get('general', "ReportesController@tareas_general")->name('reportes_tareas_general');
+		
+		Route::get('view/by_user', "ReportesController@view_tareas_by_user")->name('reportes_view_tareas_by_user');
+		Route::get('view/between', "ReportesController@view_tareas_between")->name('reportes_view_tareas_between');
+		Route::get('view/general', "ReportesController@view_tareas_general")->name('reportes_view_tareas_general');
 	});
 });
 
