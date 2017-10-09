@@ -176,13 +176,13 @@
                             </a>
                             <ul id="reportes" class="collapse">
                                 <li>
-                                    <a href="{{ URL::route('reportes_tareas_general') }}"><i class="fa fa-list"></i> Tareas </a>
+                                    <a target="__blank" href="{{ URL::route('reportes_tareas_general') }}"><i class="fa fa-list"></i> Tareas </a>
                                 </li>
                                 <li>
-                                    <a href="{{ URL::route('GET_list_actas',['user'=>Auth::user()->name]) }}"><i class="fa fa-list"></i> Tareas po Usuario </a>
+                                    <a target="__blank" href="{{ URL::route('GET_list_actas',['user'=>Auth::user()->name]) }}"><i class="fa fa-list"></i> Tareas po Usuario </a>
                                 </li>
                                 <li>
-                                    <a href="{{ URL::route('GET_list_actas',['user'=>Auth::user()->name]) }}"><i class="fa fa-list"></i> Tareas Rango de Fecha </a>
+                                    <a target="__blank" href="{{ URL::route('GET_list_actas',['user'=>Auth::user()->name]) }}"><i class="fa fa-list"></i> Tareas Rango de Fecha </a>
                                 </li>
                             </ul>
                         </li>

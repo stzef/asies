@@ -40,7 +40,7 @@ class Tareas extends Model
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
 	public function asignacion(){
-		return $this->hasMany('asies\Models\AsignacionTareas', 'ctarea', 'ctarea');
+		return $this->hasMany('asies\Models\AsignacionTareas', 'ctarea', 'ctarea')->groupBy("cactividad");
 	}
 
 }
