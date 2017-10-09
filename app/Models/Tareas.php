@@ -39,8 +39,8 @@ class Tareas extends Model
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function asignaciontareas(){
-		return $this->hasMany('App\Asignaciontarea', 'ctarea', 'ctarea');
+	public function asignacion(){
+		return $this->hasMany('asies\Models\AsignacionTareas', 'ctarea', 'ctarea');
 	}
 
 }

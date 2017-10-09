@@ -19,7 +19,7 @@ class ReportesController extends Controller
 			"planes" => $planes,
 		);
 		PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
-		$pdf = PDF::loadView('reportes/tareas/general', $data);
+		$pdf = PDF::loadView('reportes/tareas/general', $data)->setPaper('a4', 'landscape');
 
 		$namefile = "rpeorte_tareas_general_.pdf";
 		$dir_path = base_path()."/public/evidencias/$slug/reportes";
