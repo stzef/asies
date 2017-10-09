@@ -14,10 +14,34 @@ class ReportesController extends Controller
 	public function tareas_general(Request $request){
 		$slug = env("SLUG_APP","shared");
 		$planes = Planes::getArbolPlanes();
-		// dump($planes);exit();
-		$data = array(
+		
+		$fini = $request->get("fini", false);
+		$ffin = $request->get("ffin", false);
+		$user = $request->get("user", false);
+
+		$type = $request->get("type","general");
+		// dump($type);exit();
+
+		// dump("hola");exit();
+		if ( $type == "general" ){
+
+		}else if ( $type == "date" ){
+			if ( $fini == false || $ffin == false ){ dump("Ha Ocurrido un Error");exit(); }
+		}else if ( $type == "user" ){
+			if ( $user == false ) {dump("Ha Ocurrido un Error");exit();}
+		}else{
+			dump("Ha Ocurrido un Error");exit();
+		}
+		$data = [
+			"type" => $type,
 			"planes" => $planes,
-		);
+			"info" => [
+				"fini" => $fini,
+				"ffin" => $ffin,
+				"user" =>  $user,
+			],
+		];
+		// dump($data);exit();
 		PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
 		$pdf = PDF::loadView('reportes/tareas/general', $data)->setPaper('a4', 'landscape');
 

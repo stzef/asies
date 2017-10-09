@@ -40,7 +40,28 @@ class Tareas extends Model
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
 	public function asignacion(){
-		return $this->hasMany('asies\Models\AsignacionTareas', 'ctarea', 'ctarea')->groupBy("cactividad");
+		return $this->hasMany('asies\Models\AsignacionTareas', 'ctarea', 'ctarea')
+			->groupBy("cactividad");
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function asignacionBetween($fini, $ffin){
+		return $this->hasMany('asies\Models\AsignacionTareas', 'ctarea', 'ctarea')
+			->where("updated_at",">=",$fini)
+			->where("updated_at","<=",$ffin)
+
+			->groupBy("cactividad");
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function asignacionByUser($user_id){
+		return $this->hasMany('asies\Models\AsignacionTareas', 'ctarea', 'ctarea')
+			->where("user_id","=",$user_id)
+			->groupBy("cactividad");
 	}
 
 }
