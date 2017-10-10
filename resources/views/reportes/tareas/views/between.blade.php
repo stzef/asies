@@ -22,20 +22,19 @@
 					<!--<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">-->
 					<input type="hidden" name="type" value="date">
 					
-					<div class="form-group row">
-						<label for="" class="col-sm-4 col-form-label" >Plan</label>
-						<div class='col-sm-8'>
-							<select name="cplan" id="cplan">
-								@foreach($planes as $plan)
-									<option value="{{ $plan->cplan }}"> {{ $plan->nplan }} </option>
-								@endforeach
-							</select>
+					<div class="form-group">
+						<label for="cplan" class="col-sm-4 col-form-label">Plan</label>
+						<div class="col-sm-8">
+							<div class="input-group">
+								<input type="text" class="form-control" id="cplan" name="cplan" placeholder="Producto Minimo">
+								<span class="input-group-addon" data-find-plan data-find-treetask data-input-reference="#cplan"><i class="fa fa-search"></i></span>
+							</div>
 						</div>
 					</div>
 
 					<div class="form-group row">
 						<label for="" class="col-sm-4 col-form-label" >Fecha Inicial</label>
-						<div class='col-sm-8 input-group date'>
+						<div class='col-sm-7 input-group date'>
 							<input type='text' class="form-control" name="fini" required />
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
@@ -45,7 +44,7 @@
 
 					<div class="form-group row">
 						<label for="" class="col-sm-4 col-form-label">Fecha Final</label>
-						<div class='col-sm-8 input-group date'>
+						<div class='col-sm-7 input-group date'>
 							<input type='text' class="form-control" name="ffin" required />
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>

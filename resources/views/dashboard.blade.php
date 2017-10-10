@@ -23,6 +23,8 @@
 		</div>
 
 		<div class="col-md-6">
+			<div id="char_estado_tareas" class="row text-center" ></div>
+		
 			<h4 class="text-center">Actividades Proximas</h4>
 			<div class="list-group text-center row">
 				@forelse( $actividades_proximas as $actividad )
@@ -50,6 +52,7 @@
 @section('scripts')
 
 	<script type="text/javascript">
+		var asignaciones = {!! json_encode($asignaciones) !!}
 		waitingDialog.show("Cargando Estadisticas...")
 	</script>
 
@@ -64,13 +67,31 @@
 			})
 		}
 
-		google.charts.load('current', {'packages':['gauge']});
+		google.charts.load('current', {'packages':['gauge','corechart']});
 		google.charts.setOnLoadCallback(drawChart);
 		/*
 		* Reducir Funete G Chart
 		$("svg [text-anchor='middle']").css({fontSize:"20px"})
 		*/
 		function drawChart() {
+
+
+			var data = google.visualization.arrayToDataTable([
+				['Estado', 'Cantidad'],
+				['Realizadas',     asignaciones.ok],
+				['No Realizadas', asignaciones.no_ok]
+			]);
+
+			var options = {
+			title: `Tareas Asignadas ( totales ${asignaciones.totales} )`
+			};
+
+			var chart = new google.visualization.PieChart(document.getElementById('char_estado_tareas'));
+
+			chart.draw(data, options);
+			
+
+
 			Models.Planes.all(function(planes){
 				planes.forEach(function(plan){
 					var data = [['Label', 'Porcentaje'],]

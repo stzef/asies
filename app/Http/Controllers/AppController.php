@@ -19,6 +19,10 @@ class AppController extends Controller
 	}
 
 	public function dashboard(){
+
+		$user = \Auth::user();
+		$asignaciones = $user->getAsignacion();
+
 		$now = Carbon::now();
 		$now->hour   = 0;
 		$now->minute = 0;
@@ -29,6 +33,9 @@ class AppController extends Controller
 			$tommorrow = $now->addDay();
 			$actividades_proximas = Actividades::whereDate('fini', '=', $tommorrow )->get();
 		}
-		return view('dashboard',['actividades_proximas' => $actividades_proximas]);
+		return view('dashboard',[
+			'actividades_proximas' => $actividades_proximas,
+			'asignaciones' => $asignaciones,
+		]);
 	}
 }

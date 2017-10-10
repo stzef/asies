@@ -4,6 +4,7 @@ namespace asies;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use asies\Models\TareasUsuarios;
+use asies\Models\AsignacionTareas;
 use asies\Models\Tareas;
 use asies\Models\Actividades;
 
@@ -47,6 +48,36 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
 			//->groupBy('actividadestareas.cactividad')
 			->get();
 		return $tareas;
+	}
+
+	public function getAsignacion(){
+		$response = [
+			"asignaciones" => [],
+			"totales" => 0,
+			"ok" => 0,
+			"no_ok" => 0,
+			"estado" => [
+				"completadas" => 0,
+				"pendientes" => 0,
+				"por_hacer" => 0,
+			]
+		];
+
+		$asignacion = AsignacionTareas
+			::where('user', $this->id)
+			->groupBy('cactividad');
+
+		$response["asignaciones"] = $asignacion->get();
+		$response["totales"] = count($asignacion->get());
+		$response["ok"] = $asignacion->where("ifhecha",1)->count();
+		$response["no_ok"] = $asignacion->where("ifhecha",0)->count();
+
+		
+		$response["estado"]["completadas"] = 0;
+		$response["estado"]["pendientes"] = 0;
+		$response["estado"]["por_hacer"] = 0;
+
+		return $response;
 	}
 
 	public function callback($n) {return $n->cactividad;}

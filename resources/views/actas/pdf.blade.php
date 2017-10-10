@@ -9,7 +9,6 @@
 @section('header')
 	<div class="text-center" style="min-height:100px; ">
 		<img  src="{{ URL::asset('img/alcaldias/guataqui/banner.png') }}" alt="" width="450px">
-		<!--<img  src="{{ URL::asset('img/alcaldias/'.env('SLUG_APP').'/banner.png') }}" alt="" width="450px">-->
 	</div>
 @endsection
 

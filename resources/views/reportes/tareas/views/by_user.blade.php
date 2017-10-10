@@ -12,24 +12,22 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h4>Reporte de tareas por Fecha</h4>
+					<h4>Reporte de tareas por Usuario</h4>
 				</div>
 			</div>
 
 			<div>
 				<form id="form_report" class="form-horizontal" target="_blank" method="GET" action="{{ URL::route('reportes_tareas_general') }}">
 
-					<!--<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">-->
 					<input type="hidden" name="type" value="user">
 					
-					<div class="form-group row">
-						<label for="" class="col-sm-4 col-form-label" >Plan</label>
-						<div class='col-sm-8'>
-							<select name="cplan" id="cplan">
-								@foreach($planes as $plan)
-									<option value="{{ $plan->cplan }}"> {{ $plan->nplan }} </option>
-								@endforeach
-							</select>
+					<div class="form-group">
+						<label for="cplan" class="col-sm-4 col-form-label">Plan</label>
+						<div class="col-sm-8">
+							<div class="input-group">
+								<input type="text" class="form-control" id="cplan" name="cplan" placeholder="Producto Minimo">
+								<span class="input-group-addon" data-find-plan data-find-treetask data-input-reference="#cplan"><i class="fa fa-search"></i></span>
+							</div>
 						</div>
 					</div>
 

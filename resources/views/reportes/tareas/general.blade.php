@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Reporte de Tareas General</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
 	<style>
 		.tarea.no_ok{
 			background-color: red;
@@ -10,9 +12,14 @@
 		.tarea.ok{
 			background-color: green;
 		}
+		ul{
+			padding-left: 15px;
+		}
 	</style>
 </head>
 <body>
 	{!!  Helper::output($type, [$plan], $info) !!}
 </body>
 </html>
+
+
