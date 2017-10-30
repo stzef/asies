@@ -27,11 +27,11 @@ class Helper
                     
                     $asignaciones = [];
                     if ( $type == "general" ){
-                        $asignaciones = $tarea->asignaciones(true);
+                        $asignaciones = $tarea->asignaciones();
                     }else if ( $type == "date" ){
-                        $asignaciones = $tarea->asignacionBetween($info["fini"],$info["ffin"],true);
+                        $asignaciones = $tarea->asignacionBetween($info["fini"],$info["ffin"]);
                     }else if ( $type == "user" ){
-                        $asignaciones = $tarea->asignacionByUser($info["user"],true);
+                        $asignaciones = $tarea->asignacionByUser($info["user"]);
                     }
 
                     if ( count($asignaciones) == 0 ){
