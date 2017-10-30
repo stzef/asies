@@ -60,7 +60,7 @@ class Helper
     
                             $string .= "<li data-ctiplan='asignacion'>";
                             $string .= "<span class='$class' >( $text )</span>";
-                            $string .= "<span>{$asignacion->actividad->nactividad}</span>";
+                            $string .= "<span class='$class' >{$asignacion->actividad->nactividad}</span>";
                             $string .= "</li>";
                         }
                         $string .= "</ul>";

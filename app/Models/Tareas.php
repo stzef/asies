@@ -49,7 +49,7 @@ class Tareas extends Model
 	 */
 	public function asignaciones($ifhecha=true){
 		return AsignacionTareas::where('ctarea', $this->ctarea)
-			->where("ifhecha","=",$ifhecha)
+			// ->where("ifhecha","=",$ifhecha)
 			->groupBy("cactividad")
 			->get();
 	}
@@ -61,7 +61,7 @@ class Tareas extends Model
 		return AsignacionTareas::where('ctarea', $this->ctarea)
 			->whereDate("updated_at",">=",$fini)
 			->whereDate("updated_at","<=",$ffin)
-			->where("ifhecha","=",$ifhecha)
+			// ->where("ifhecha","=",$ifhecha)
 			->groupBy("cactividad")
 			->get();
 		}
@@ -72,7 +72,7 @@ class Tareas extends Model
 	public function asignacionByUser($user_id,$ifhecha=true){
 		return AsignacionTareas::where('ctarea', $this->ctarea)
 		->where("user_id","=",$user_id)
-		->where("ifhecha","=",$ifhecha)
+		// ->where("ifhecha","=",$ifhecha)
 		->groupBy("cactividad")
 		->get();
 	}

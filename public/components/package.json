@@ -24,9 +24,6 @@
     "vue-template-compiler": "^2.3.3",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5",
-
-
-
     "gulp": "^3.9.0",
     "gulp-connect": "^4.1.0",
     "gulp-ignore": "^2.0.1",

@@ -24,8 +24,9 @@
 					<div class="form-group">
 						<label for="cplan" class="col-sm-4 col-form-label">Plan</label>
 						<div class="col-sm-8">
-							<div class="input-group">
-								<input type="text" class="form-control" id="cplan" name="cplan" placeholder="Producto Minimo">
+							<div class="input-group input-group-find-treetask">
+								<input type="text" class="form-control" id="cplan" name="cplan" placeholder="Código">
+								<input type="text" readonly class="form-control" id="cplan_mask" name="cplan_mask" placeholder="Plan">
 								<span class="input-group-addon" data-find-plan data-find-treetask data-input-reference="#cplan"><i class="fa fa-search"></i></span>
 							</div>
 						</div>

@@ -87,15 +87,15 @@ export default {
           if ( tarea.li_attr.ctiplan != window.TYPE_PLAN ) return alertify.warning("El Plan no es del tipo Correspondiente ")
         }
         var rvalue = tarea.li_attr.cplan
+        var tvalue = tarea.text
         mensaje = "Desea Escoger este Plan"
       }
 
       //tarea.li_attr.ctarea
       alertify.confirm(mensaje,function(){
-        window.opener.$(window.INPUT_REFERENCE)
-          .val(rvalue)
-          .focus()
-          .trigger("change")
+        window.opener.$(window.INPUT_REFERENCE).val(rvalue).focus().trigger("change")
+        var otherSelector = window.INPUT_REFERENCE + "_mask"
+        window.opener.$(otherSelector).val(tvalue)
 
         window.close()
       })
