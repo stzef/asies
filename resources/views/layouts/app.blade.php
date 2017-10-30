@@ -174,24 +174,26 @@
                                 @endpermission
                             </ul>
                         </li>
-                        <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#reportes">
-                                <i class="fa fa-fw fa-file-pdf-o"></i>
-                                Reportes
-                                <i class="fa fa-fw fa-caret-down"></i>
-                            </a>
-                            <ul id="reportes" class="collapse">
-                                <li>
-                                    <a href="{{ URL::route('reportes_view_tareas_general') }}"><i class="fa fa-list"></i> Tareas </a>
-                                </li>
-                                <li>
-                                    <a href="{{ URL::route('reportes_view_tareas_by_user') }}"><i class="fa fa-list"></i> Tareas po Usuario </a>
-                                </li>
-                                <li>
-                                    <a href="{{ URL::route('reportes_view_tareas_between') }}"><i class="fa fa-list"></i> Tareas Rango de Fecha </a>
-                                </li>
-                            </ul>
-                        </li>
+                        @permission('activities.check_dates')
+                            <li>
+                                <a href="javascript:;" data-toggle="collapse" data-target="#reportes">
+                                    <i class="fa fa-fw fa-file-pdf-o"></i>
+                                    Reportes
+                                    <i class="fa fa-fw fa-caret-down"></i>
+                                </a>
+                                <ul id="reportes" class="collapse">
+                                    <li>
+                                        <a href="{{ URL::route('reportes_view_tareas_general') }}"><i class="fa fa-list"></i> Tareas </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ URL::route('reportes_view_tareas_by_user') }}"><i class="fa fa-list"></i> Tareas po Usuario </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ URL::route('reportes_view_tareas_between') }}"><i class="fa fa-list"></i> Tareas Rango de Fecha </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endpermission
                         <li >
                             <a href="{{ URL::route('GET_tareas_create') }}"><i class="fa fa-fw fa-tasks"></i> Tareas</a>
                         </li>
