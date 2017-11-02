@@ -7,6 +7,7 @@ class Helper
 
     public static function output($type, $planes, $info)
     {
+
         $string = "<ul>";
         foreach ($planes as $i => $plan) {
             $string .= "<li>";

@@ -58,18 +58,25 @@ class ReportesController extends Controller
 		$plan = Planes::where("cplan", $cplan)->first();
 		$plan->subplanes = Planes::getSubPlanes($cplan);
 
+		$title = "Reporte de Tareas";
 		if ( $type == "general" ){
+
+		
 
 		}else if ( $type == "date" ){
 			if ( $fini == false || $ffin == false ){ dump("Ha Ocurrido un Error Date");exit(); }
+			$title .= " Desde $fini Hasta $ffin";
 		}else if ( $type == "user" ){
+			
 			if ( $user == false ) {dump("Ha Ocurrido un Error User");exit();}
+			$title .= " Del Usuario $user";
 		}else{
 			dump("Ha Ocurrido un Error No");exit();
 		}
 		$data = [
 			"type" => $type,
 			"plan" => $plan,
+			"title" => $title,
 			"info" => [
 				"fini" => $fini,
 				"ffin" => $ffin,

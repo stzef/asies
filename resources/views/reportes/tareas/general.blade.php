@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title> {{$title}} </title>
 	<style>
 		@page { margin: 130px 50px; }
 		#header { position: fixed; left: 0px; top: -130px; right: 0px; height: 10;  text-align: center; }
 		#footer { position: fixed; left: 0px; bottom: -130px; right: 0px; height: 70px;  }
 		#footer .page:after { content: counter(page, upper-roman); }
-
 		.text-center{
 			text-align: center;
 		}
+
 	</style>
 	<style>
 		.tarea.no_ok{
@@ -31,8 +29,8 @@
 
 	<header id="header">
 	<div class="text-center" style="min-height:100px; ">
-		@if( file_exists( URL::asset('img/alcaldias/guataqui/banner.png') ) )
-			<img  src="{{ URL::asset('img/alcaldias/guataqui/banner.png') }}" alt="" width="450px">
+		@if( file_exists( public_path().'/img/alcaldias/guataqui/banner.png' ) )
+			<img class="banner" src="{{ public_path().'/img/alcaldias/guataqui/banner.png' }}" alt="" width="450px">
 		@endif
 	</div>
     </header>
@@ -45,6 +43,7 @@
 	</div>
     </footer>
 
+	<h2>{{ $title }}</h2>
 	{!!  Helper::output($type, [$plan], $info) !!}
 </body>
 </html>

@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
     <title> Title </title>
-
   <style>
     @page { margin: 130px 50px; }
     #header { position: fixed; left: 0px; top: -130px; right: 0px; height: 10;  text-align: center; }
