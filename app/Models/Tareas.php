@@ -47,34 +47,39 @@ class Tareas extends Model
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function asignaciones($ifhecha=true){
-		return AsignacionTareas::where('ctarea', $this->ctarea)
-			->where("ifhecha","=",$ifhecha)
-			->groupBy("cactividad")
-			->get();
+	public function asignaciones($ifhecha=null){
+		$query = AsignacionTareas::where('ctarea', $this->ctarea);
+		if ($ifhecha != null){ $query->where("ifhecha","=",$ifhecha); }
+		$query->groupBy("cactividad");
+		
+		return $query->get();;
 	}
-
+	
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function asignacionBetween($fini, $ffin,$ifhecha=true){
-		return AsignacionTareas::where('ctarea', $this->ctarea)
+	public function asignacionBetween($fini, $ffin,$ifhecha=null){
+		$query =  AsignacionTareas::where('ctarea', $this->ctarea)
 			->whereDate("updated_at",">=",$fini)
-			->whereDate("updated_at","<=",$ffin)
-			->where("ifhecha","=",$ifhecha)
-			->groupBy("cactividad")
-			->get();
-		}
+			->whereDate("updated_at","<=",$ffin);
+		if ($ifhecha != null){ $query->where("ifhecha","=",$ifhecha); }
+		// ->where("ifhecha","=",$ifhecha)
+		$query->groupBy("cactividad");
 		
+		return $query->get();
+	}
+	
 	/**
-	* @return \Illuminate\Database\Eloquent\Relations\HasMany
-	*/
-	public function asignacionByUser($user_id,$ifhecha=true){
-		return AsignacionTareas::where('ctarea', $this->ctarea)
-		->where("user_id","=",$user_id)
-		->where("ifhecha","=",$ifhecha)
-		->groupBy("cactividad")
-		->get();
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function asignacionByUser($user_id,$ifhecha=null){
+		$query = AsignacionTareas::where('ctarea', $this->ctarea)
+			->where("user","=",$user_id);
+		// ->where("ifhecha","=",$ifhecha)
+		if ($ifhecha != null){ $query->where("ifhecha","=",$ifhecha); }
+		$query->groupBy("cactividad");
+
+		return $query->get();
 	}
 
 }

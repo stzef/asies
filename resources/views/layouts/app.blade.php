@@ -25,6 +25,12 @@
 
         @yield('styles')
         <style>
+            .input-group-find-treetask #cplan, #tarea_cplan{
+                width: 20%;
+            }
+            .input-group-find-treetask #cplan_mask, #tarea_cplan_mask{
+                width: 80%;
+            }
             .KW_progressContainer {
                 left:0;
                 width: 100%;

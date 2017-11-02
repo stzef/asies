@@ -24,12 +24,12 @@
 					</div>
 				</div>
 
-
 				<div class="form-group">
 					<label for="tarea_cplan" class="col-sm-2 control-label">Prod. Min</label>
 					<div class="col-sm-10">
-						<div class="input-group">
-							<input type="text" class="form-control" id="tarea_cplan" name="tarea[cplan]" placeholder="Producto Minimo" value="@if( $tarea){{ $tarea->cplan }}@endif">
+						<div class="input-group input-group-find-treetask">
+							<input type="text" class="form-control" id="tarea_cplan" name="tarea[cplan]" placeholder="Código" value="@if( $tarea){{ $tarea->cplan }}@endif">
+							<input type="text" readonly class="form-control" id="tarea_cplan_mask" name="tarea_cplan_mask" placeholder="Producto Minimo">
 							<span class="input-group-addon" data-find-plan data-type-plan="4" data-find-treetask data-input-reference="#tarea_cplan"><i class="fa fa-search"></i></span>
 						</div>
 					</div>
