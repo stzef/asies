@@ -43,7 +43,7 @@
         </table>
       </div>
       <div id="pendientes" class="tab-pane fade">
-        00@permission('activities.send_reminders')
+        @permission('activities.send_reminders')
             <div class="panel text-center">
                 <button class="btn btn-success" onclick="Models.Actividades.sendReminders()">Enviar Recordatorios</button>
             </div>
