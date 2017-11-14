@@ -1,5 +1,8 @@
 <template>
   <div>
+        <div class="alert alert-info" v-if="loading">
+          <h2>Cargando Arbol...</h2>
+        </div>
     <div class="panel panel-default">
       <div class="panel-heading row">
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
@@ -21,6 +24,7 @@
 
     <div class="">
       <div class="panel panel-default">
+
 
         <div class="panel-body">
 
@@ -57,7 +61,8 @@ export default {
   data(){
     return {
       showLegends: false,
-      planSelected: null
+      planSelected: null,
+      loading: true,
     }
   },
   methods : {
@@ -105,97 +110,112 @@ export default {
     this.$emit("tt_mounted")
 
   },
-  updated :function(){
-      this.planSelected = this.planes[0]
-      console.log(this.planSelected)
+  watch:{
+    planes:{
 
-      var component = this
-      var vm = this.$root
-      $.jstree.defaults.contextmenu.items = {
-        showDetail : {
-          action : function(){
-            var item = $(vm.treetask_select).jstree('get_selected',true)[0]
-            if ( item.li_attr.cplan ){
-              window.open("/planes/status/__cplan__".set("__cplan__",item.li_attr.cplan))
-            }else{
-              alertify.warning("Este item no es un Plan")
-            }
+    handler(){
+      console.log(this.planes)
+      this.loading = true
+      window.setTimeout(()=>{
+        this.planSelected = this.planes[0]
+        console.log(this.planSelected)
 
-          },
-          label : "Ver en Detalle"
-        },
-        /*reprogramTask : {
-          action : function(){
-            var item = $(vm.treetask_select).jstree('get_selected',true)[0]
-            if ( item.li_attr.ctarea ){
-              alertify.warning("Opcion en Desarrollo")
+        var component = this
+        var vm = this.$root
+        $.jstree.defaults.contextmenu.items = {
+          showDetail : {
+            action : function(){
+              var item = $(vm.treetask_select).jstree('get_selected',true)[0]
+              if ( item.li_attr.cplan ){
+                window.open("/planes/status/__cplan__".set("__cplan__",item.li_attr.cplan))
+              }else{
+                alertify.warning("Este item no es un Plan")
+              }
 
-            }else{
-              alertify.warning("Este item no es Una Tarea")
-            }
+            },
+            label : "Ver en Detalle"
           },
-          label : "Reprogramar Tarea"
-        },*/
-        showActivities : {
-          action : function(){
-            var item = $(vm.treetask_select).jstree('get_selected',true)[0]
-            if ( item.li_attr.ctarea ){
-              window.open("/tareas/activities/"+item.li_attr.ctarea)
-            }else{
-              alertify.warning("Este item no es Una Tarea")
-            }
+          /*reprogramTask : {
+            action : function(){
+              var item = $(vm.treetask_select).jstree('get_selected',true)[0]
+              if ( item.li_attr.ctarea ){
+                alertify.warning("Opcion en Desarrollo")
+
+              }else{
+                alertify.warning("Este item no es Una Tarea")
+              }
+            },
+            label : "Reprogramar Tarea"
+          },*/
+          showActivities : {
+            action : function(){
+              var item = $(vm.treetask_select).jstree('get_selected',true)[0]
+              if ( item.li_attr.ctarea ){
+                window.open("/tareas/activities/"+item.li_attr.ctarea)
+              }else{
+                alertify.warning("Este item no es Una Tarea")
+              }
+            },
+            label : "Ver Actividades"
           },
-          label : "Ver Actividades"
-        },
-        edit : {
-          action : function(){
-            var item = $(vm.treetask_select).jstree('get_selected',true)[0]
-            if ( item.li_attr.ctarea ){
-              window.open("/tareas/edit/"+item.li_attr.ctarea)
-            }else{
-              alertify.warning("La opcion de Edición de Planes aun no se encuentra habilitada.")
-            }
-          },
-          label : "Editar"
+          edit : {
+            action : function(){
+              var item = $(vm.treetask_select).jstree('get_selected',true)[0]
+              if ( item.li_attr.ctarea ){
+                window.open("/tareas/edit/"+item.li_attr.ctarea)
+              }else{
+                alertify.warning("La opcion de Edición de Planes aun no se encuentra habilitada.")
+              }
+            },
+            label : "Editar"
+          }
         }
-      }
-      for ( var plan of this.planes ){
-        var select_treeview = "#treeview_cplan_"+plan.li_attr.cplan
-        $(select_treeview).jstree({
-          "plugins" : [ "search" , "contextmenu", "types"],
-          "types" : {
-            "modulo" : {
-              "icon" : "/vendor/jstree/img/module.png"
+        for ( var plan of this.planes ){
+          var select_treeview = "#treeview_cplan_"+plan.li_attr.cplan
+          $(select_treeview).jstree({
+            "plugins" : [ "search" , "contextmenu", "types"],
+            "types" : {
+              "modulo" : {
+                "icon" : "/vendor/jstree/img/module.png"
+              },
+              "tareas" : {
+                "icon" : "/vendor/jstree/img/task.png"
+              },
+              "componente" : {
+                "icon" : "/vendor/jstree/img/component.png"
+              },
+              "elemento" : {
+                "icon" : "/vendor/jstree/img/element.png"
+              },
+              "prod_minimo" : {
+                "icon" : "/vendor/jstree/img/product.png"
+              },
             },
-            "tareas" : {
-              "icon" : "/vendor/jstree/img/task.png"
-            },
-            "componente" : {
-              "icon" : "/vendor/jstree/img/component.png"
-            },
-            "elemento" : {
-              "icon" : "/vendor/jstree/img/element.png"
-            },
-            "prod_minimo" : {
-              "icon" : "/vendor/jstree/img/product.png"
-            },
-          },
-          'core' : { 'data' : plan },
-        })
-        if ( window.ASIES_IS_WIN_POPUOT ) $(select_treeview).on('changed.jstree', component.returnTask)
-        $(select_treeview).on('open_node.jstree', component.recolored)
-        $(select_treeview).on('ready.jstree', component.recolored)
+            'core' : { 'data' : plan },
+          })
+          if ( window.ASIES_IS_WIN_POPUOT ) $(select_treeview).on('changed.jstree', component.returnTask)
+          $(select_treeview).on('open_node.jstree', component.recolored)
+          $(select_treeview).on('ready.jstree', component.recolored)
 
-      }
+        }
 
-      var to = false;
-      $('#treeview_find').keyup(() => {
-        if(to) { clearTimeout(to); }
-        to = setTimeout(() => {
-          var v = $('#treeview_find').val();
-          $(this.$root.treetask_select).jstree(true).search(v);
-        }, 250);
-      });
+        var to = false;
+        $('#treeview_find').keyup(() => {
+          if(to) { clearTimeout(to); }
+          to = setTimeout(() => {
+            var v = $('#treeview_find').val();
+            $(this.$root.treetask_select).jstree(true).search(v);
+          }, 250);
+        });
+        this.loading = false;
+        
+
+      }, 2000)
+    },
+    deep: true
+    }
+  },
+  updated :function(){
 
 
   }
