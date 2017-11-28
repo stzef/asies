@@ -68,6 +68,7 @@ class Planes extends Model
 		return $this->hasMany('asies\Models\Tareas', 'cplan', 'cplan');
 	}
 
+
 	public function getTareas($iduser=null){
 		if ( $iduser ){
 			$tareas = \DB::table('asignaciontareas')
@@ -76,14 +77,14 @@ class Planes extends Model
 				->select('tareas.*','asignaciontareas.ifhecha','asignaciontareas.valor_tarea')
 				->where('tareas.cplan', $this->cplan)
 				->where('users.id', $iduser)
-				->groupBy('tareas.ctarea')
+				->groupBy('asignaciontareas.cactividad','tareas.ctarea')
 				->get();
 		}else{
 			$tareas = \DB::table('asignaciontareas')
 				->join('tareas', 'asignaciontareas.ctarea', '=', 'tareas.ctarea')
 				->select('tareas.*','asignaciontareas.ifhecha','asignaciontareas.valor_tarea')
 				->where('tareas.cplan', $this->cplan)
-				->groupBy('tareas.ctarea')
+				->groupBy('asignaciontareas.cactividad','tareas.ctarea')
 				->get();
 		}
 		$arr = collect();

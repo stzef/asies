@@ -11,6 +11,13 @@
 		.text-center{
 			text-align: center;
 		}
+		table{
+			width: 100%;
+		}
+		table tr td{
+			border : 1px solid black;
+
+		}
 
 	</style>
 	<style>

@@ -77,20 +77,22 @@
 		*/
 		function drawChart() {
 
-			if ( asignaciones.totales == 0 ) return false
-			var data = google.visualization.arrayToDataTable([
-				['Estado', 'Cantidad'],
-				['Realizadas',     asignaciones.ok],
-				['No Realizadas', asignaciones.no_ok]
-			]);
+			if ( asignaciones.totales != 0 ) {
+				
+				var data = google.visualization.arrayToDataTable([
+					['Estado', 'Cantidad'],
+					['Realizadas',     asignaciones.ok],
+					['No Realizadas', asignaciones.no_ok]
+				]);
 
-			var options = {
-			title: `Tareas Asignadas ( totales ${asignaciones.totales} )`
-			};
+				var options = {
+				title: `Tareas Asignadas ( totales ${asignaciones.totales} )`
+				};
 
-			var chart = new google.visualization.PieChart(document.getElementById('char_estado_tareas'));
+				var chart = new google.visualization.PieChart(document.getElementById('char_estado_tareas'));
 
-			chart.draw(data, options);
+				chart.draw(data, options);
+			}
 			
 
 

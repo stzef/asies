@@ -35,7 +35,7 @@
 
 					<div class="form-group row">
 						<label for="" class="col-sm-4 col-form-label" >Fecha Inicial</label>
-						<div class='col-sm-7 input-group date'>
+						<div class='col-sm-7 input-group date fini'>
 							<input type='text' class="form-control" name="fini" required />
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
@@ -45,7 +45,7 @@
 
 					<div class="form-group row">
 						<label for="" class="col-sm-4 col-form-label">Fecha Final</label>
-						<div class='col-sm-7 input-group date'>
+						<div class='col-sm-7 input-group date ffin'>
 							<input type='text' class="form-control" name="ffin" required />
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
@@ -69,7 +69,14 @@
 @section('scripts')
 	<script type="text/javascript">
 		$(function () {
-			$('.date').datetimepicker({
+			var thisYear = (new Date()).getFullYear();
+			var start = new Date("1/1/" + thisYear);
+			var defaultStart = moment(start.valueOf());
+			$('.fini').datetimepicker({
+				format: 'YYYY-MM-DD',
+				defaultDate: defaultStart.format("YYYY-MM-DD")
+			});
+			$('.ffin').datetimepicker({
 				format: 'YYYY-MM-DD',
 				defaultDate: moment().format("YYYY-MM-DD")
 			});

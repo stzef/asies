@@ -186,7 +186,7 @@
                                         <a href="{{ URL::route('reportes_view_tareas_general') }}"><i class="fa fa-list"></i> Tareas </a>
                                     </li>
                                     <li>
-                                        <a href="{{ URL::route('reportes_view_tareas_by_user') }}"><i class="fa fa-list"></i> Tareas po Usuario </a>
+                                        <a href="{{ URL::route('reportes_view_tareas_by_user') }}"><i class="fa fa-list"></i> Tareas por Usuario </a>
                                     </li>
                                     <li>
                                         <a href="{{ URL::route('reportes_view_tareas_between') }}"><i class="fa fa-list"></i> Tareas Rango de Fecha </a>

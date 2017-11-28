@@ -46,6 +46,7 @@ class ReportesController extends Controller
 		$planes = Planes::getArbolPlanes();
 		
 		$type = $request->get("type","general");
+		$format = $request->get("format","pdf");
 
 		$cplan = $request->get("cplan", false);
 
@@ -84,22 +85,27 @@ class ReportesController extends Controller
 			],
 		];
 		// dump($data);exit();
-		PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
-		$pdf = PDF::loadView('reportes/tareas/general', $data)->setPaper('a4', 'landscape');
-
-		$namefile = "rpeorte_tareas_general_.pdf";
-		$dir_path = base_path()."/public/evidencias/$slug/reportes";
-		$file_path = "$dir_path/$namefile";
-
-		if ( ! is_dir( $dir_path ) ) {
-			Log::warning('La carpeta no existe en la direccion: ',['path' => $dir_path ]);
-			if ( mkdir( $dir_path, 0777 ) ){
-				return $pdf->save( $file_path )->stream();
+		if ( $format == "pdf" ){
+			PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+			$pdf = PDF::loadView('reportes/tareas/general', $data)->setPaper('a4', 'landscape');
+			
+			$namefile = "rpeorte_tareas_general_.pdf";
+			$dir_path = base_path()."/public/evidencias/$slug/reportes";
+			$file_path = "$dir_path/$namefile";
+			
+			if ( ! is_dir( $dir_path ) ) {
+				Log::warning('La carpeta no existe en la direccion: ',['path' => $dir_path ]);
+				if ( mkdir( $dir_path, 0777 ) ){
+					return $pdf->save( $file_path )->stream();
+				}else{
+					return view('errors/generic',array('title' => 'Error Interno.', 'message' => "Hay Ocurrido un error Interno, Por favor Intente de Nuevo" ));
+				}
 			}else{
-				return view('errors/generic',array('title' => 'Error Interno.', 'message' => "Hay Ocurrido un error Interno, Por favor Intente de Nuevo" ));
+				return $pdf->save( $file_path )->stream();
 			}
 		}else{
-			return $pdf->save( $file_path )->stream();
+			
+			return view('reportes/tareas/general', $data);
 		}
 	}
 }
