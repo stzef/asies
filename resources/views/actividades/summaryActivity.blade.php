@@ -22,41 +22,42 @@
 							</div>
 							<input type="hidden" value="{{ $actividad->checklist->cchecklist }}" id="cchecklist" name="cchecklist">
 
-							@foreach( $actividad->checklist->preguntas as $i => $pregunta )
-								@php $i++ @endphp
-								<div class="panel panel-default hide checklistdeta_page" id="checklistdeta_page_{{$i}}" data-page="{{$i}}">
-									<div class="panel-heading">
-										<div>
-											<input type="hidden" name="cpregunta" value="{{ $pregunta->cpregunta }}" data-text="{{ $pregunta->enunciado }}">
-											{{$i}} - {{ $pregunta->enunciado }}
-										</div>
-									</div>
-
-									<div class="panel-body">
-										<div>
-											<label> Respuesta: </label>
-											@if($pregunta->respuesta)
-												@if ( $pregunta->isOpenQuestion() )
-													<p>
-														{{$pregunta->respuesta->respuesta}}
-													</p>
-												@else
-													<p>
-														@if ( $pregunta->respuesta->opcion )
-															{{ $pregunta->respuesta->opcion->detalle }}
-														@endif
-													</p>
+							<table class="table" id="preguntas-checklist">
+								<thead>
+									<tr>
+										<th>Pregunta</th>
+										<th>Respuesta</th>
+										<th>Anotaciones</th>
+										<th>Evidencias</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach( $actividad->checklist->preguntas as $i => $pregunta )
+										@php $i++ @endphp
+										<tr>
+											<td>
+												<input type="hidden" name="cpregunta" value="{{ $pregunta->cpregunta }}" data-text="{{ $pregunta->enunciado }}">
+												{{$i}} - {{ $pregunta->enunciado }}
+											</td>
+											<td>
+												@if($pregunta->respuesta)
+													@if ( $pregunta->isOpenQuestion() )
+														<p>
+															{{$pregunta->respuesta->respuesta}}
+														</p>
+													@else
+														<p>
+															@if ( $pregunta->respuesta->opcion )
+																{{ $pregunta->respuesta->opcion->detalle }}
+															@endif
+														</p>
+													@endif
 												@endif
-											@endif
-										</div>
-										<div class="row">
-
-											<div class="mb-3 col-xs-12 col-sm-12 col-md-12 col-md-12">
-												<label> Anotaciones: </label>
+											</td>
+											<td>
 												<p>@if($pregunta->respuesta){{$pregunta->respuesta->anotaciones}}@endif</p>
-											</div>
-											<div class="col-xs-12 col-sm-12 col-md-12 col-md-12">
-												<label> Evidencias: </label>
+											</td>
+											<td>
 												<ul>
 													@foreach( $pregunta->evidencias as $evidencia)
 														<li>
@@ -64,14 +65,12 @@
 														</li>
 													@endforeach
 												</ul>
-											</div>
-										</div>
-									</div>
-
-								</div>
-							@endforeach
+											</td>
+										</tr>
+									@endforeach
+								</tbody>
+							</table>
 						@endif
-						<div id="checklistdeta_pagination"></div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">
@@ -363,7 +362,7 @@
 		})
 	}
 	@if ( $actividad->checklist )
-		$(function() {
+		/*$(function() {
 			$("#checklistdeta_pagination").pagination({
 				items: {{$actividad->checklist->cantidad_preguntas}},
 				itemsOnPage: 1,
@@ -384,7 +383,7 @@
 					$("#checklistdeta_page_"+pageNumber).removeClass("hide")
 				}
 			});
-		});
+		});*/
 	@endif
 </script>
 @endsection

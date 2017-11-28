@@ -190,109 +190,82 @@
 								</div>
 							@else
 								<div class="panel panel-default">
+									<button type="submit" class="btn btn-primary" id="btn_guardar_checklist">
+										<i class="glyphicon glyphicon-plus"></i> Guardar
+									</button>
 									<div class="panel-body p-0" id="checklist">
 										<input type="hidden" value="{{ $actividad->checklist->cchecklist }}" id="cchecklist" name="cchecklist">
-										@foreach( $actividad->checklist->preguntas as $i => $pregunta )
-											@php $i++ @endphp
-											<div class="panel panel-default hide checklistdeta_page" id="checklistdeta_page_{{$i}}" data-page="{{$i}}">
-												<div class="panel-heading">
-													<div>
-														<input type="hidden" name="cpregunta" value="{{ $pregunta->cpregunta }}" data-text="{{ $pregunta->enunciado }}">
-														{{$i}} - {{ $pregunta->enunciado }}
-													</div>
-												</div>
-
-												<div class="panel-body">
-													<div>
-														@if ( $pregunta->isOpenQuestion() )
-															<input type="hidden" name="isOpenQuestion" value="true">
-															<textarea
-																style="resize:none"
-																class="form-control respuesta"
-																name="copcion"
-																data-text="Respuesta Abierta"
-																required
-															>@if($pregunta->respuesta){{$pregunta->respuesta->respuesta}}@endif</textarea>
-														@else
-															<input type="hidden" name="isOpenQuestion" value="false">
-															@foreach($pregunta->opciones as $opcion)
-																<div>
-																	<label for="copcion_{{ $opcion->copcion }}_cpregunta_{{ $pregunta->cpregunta }}">
-																		<input
-																			type="radio"
-																			name="copcion_cpregunta_{{ $pregunta->cpregunta }}"
-																			id="copcion_{{ $opcion->copcion }}_cpregunta_{{ $pregunta->cpregunta }}"
-																			data-text="{{ $opcion->detalle }}"
-																			value="{{ $opcion->copcion }}"
-																			class="respuesta"
-																			required
-																			@if($pregunta->respuesta)
-																				@if($pregunta->respuesta->copcion == $opcion->copcion )
-																					checked
+										<table class="table" id="preguntas-checklist">
+											<thead>
+												<tr>
+													<th>Pregunta</th>
+													<th>Respuesta</th>
+													<th>Anotaciones</th>
+													<th>Evidencias</th>
+												</tr>
+											</thead>
+											<tbody>
+												@foreach( $actividad->checklist->preguntas as $i => $pregunta )
+													@php $i++ @endphp
+													<tr id="pregunta-checklist">
+														<td>
+															<input type="hidden" name="cpregunta" value="{{ $pregunta->cpregunta }}" data-text="{{ $pregunta->enunciado }}">
+															{{$i}} - {{ $pregunta->enunciado }}
+														</td>
+														<td>
+															@if ( $pregunta->isOpenQuestion() )
+																<input type="hidden" name="isOpenQuestion" value="true">
+																<textarea
+																	style="resize:none"
+																	class="form-control respuesta"
+																	name="copcion"
+																	data-text="Respuesta Abierta"
+																	required
+																>@if($pregunta->respuesta){{$pregunta->respuesta->respuesta}}@endif</textarea>
+															@else
+																<input type="hidden" name="isOpenQuestion" value="false">
+																@foreach($pregunta->opciones as $opcion)
+																	<div>
+																		<label for="copcion_{{ $opcion->copcion }}_cpregunta_{{ $pregunta->cpregunta }}">
+																			<input
+																				type="radio"
+																				name="copcion_cpregunta_{{ $pregunta->cpregunta }}"
+																				id="copcion_{{ $opcion->copcion }}_cpregunta_{{ $pregunta->cpregunta }}"
+																				data-text="{{ $opcion->detalle }}"
+																				value="{{ $opcion->copcion }}"
+																				class="respuesta"
+																				required
+																				@if($pregunta->respuesta)
+																					@if($pregunta->respuesta->copcion == $opcion->copcion )
+																						checked
+																					@endif
 																				@endif
-																			@endif
-																		/>
-																		<span>{{ $opcion->detalle }}</span>
-																	</label>
-																</div>
-															@endforeach
-														@endif
-													</div>
-													<div class="row">
-
-														<div class="mb-3 col-xs-12 col-sm-12 col-md-12 col-md-12">
-															<label class="col-md-3 control-label">
-																Aclaraciones o Anotaciones
-															</label>
-															<div class="col-md-9">
-																<textarea style="resize:none" class="form-control" name="anotaciones" id="anotaciones">@if($pregunta->respuesta){{$pregunta->respuesta->anotaciones}}@endif</textarea>
-															</div>
-														</div>
-														<div class="col-xs-12 col-sm-12 col-md-12 col-md-12">
-															<div class="mb-3 col-xs-12 col-sm-12 col-md-9 col-lg-9">
-																<label class="col-md-4" for="evidencia_{{ $pregunta->cpregunta }}">
-																	Adjuntar Evidencia
-																</label>
-																<div class="col-md-8">
-																	<input
-																		data-cactividad="{{$actividad->cactividad}}"
-																		data-cpregunta="{{$pregunta->cpregunta}}"
-																		type="file"
-																		name="evidencia_{{ $pregunta->cpregunta }}"
-																		id="evidencia_{{ $pregunta->cpregunta }}"
-																		multiple
-																		class="files_checklist"
-																	>
-																</div>
-															</div>
-															<div class="mb-3 col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center">
-																<button type="button" class="btn btn-success" onclick="submitFiles(event,this)" data-input="#evidencia_{{ $pregunta->cpregunta }}" > Subir Archivos </button>
-															</div>
-														</div>
-													</div>
-												</div>
-
-											</div>
-										@endforeach
-										<div
-											class="panel panel-default hide checklistdeta_page"
-											id="checklistdeta_page_{{ $actividad->checklist->cantidad_preguntas + 1 }}"
-											data-page="{{ $actividad->checklist->cantidad_preguntas + 1 }}"
-										>
-											<div class="panel-heading">
-												<div>
-													<h4> Terminado </h4>
-												</div>
-											</div>
-											<div class="panel-body">
-												<div class="row text-center">
-														<button type="submit" class="btn btn-primary" id="btn_guardar_checklist">
-															<i class="glyphicon glyphicon-plus"></i> Guardar y salir
-														</button>
-													</div>
-											</div>
-										</div>
-										<div id="checklistdeta_pagination"></div>
+																			/>
+																			<span>{{ $opcion->detalle }}</span>
+																		</label>
+																	</div>
+																@endforeach
+															@endif
+														</td>
+														<td>
+															<textarea style="resize:none" class="form-control" name="anotaciones" id="anotaciones">@if($pregunta->respuesta){{$pregunta->respuesta->anotaciones}}@endif</textarea>
+														</td>
+														<td>
+															<input
+																data-cactividad="{{$actividad->cactividad}}"
+																data-cpregunta="{{$pregunta->cpregunta}}"
+																type="file"
+																name="evidencia_{{ $pregunta->cpregunta }}"
+																id="evidencia_{{ $pregunta->cpregunta }}"
+																multiple
+																onchange="storeEvidenciaChecklist(event.target)"
+																class="files_checklist"
+															>
+														</td>
+													</tr>
+												@endforeach
+											</tbody>
+										</table>
 									</div>
 								</div>
 							@endif
@@ -651,11 +624,6 @@
 			'showUpload' : false,
 		})
 
-		function submitFiles(event,button){
-			var input = $(button.dataset.input)[0]
-			storeEvidenciaChecklist(input)
-		}
-
 		function storeEvidenciaChecklist(input){
 			if ( input.files.length != 0 ){
 				var data = new FormData();
@@ -686,12 +654,9 @@
 
 		}
 
-		function getChecklist(page){
-			if ( typeof page == "undefined"){
-				selector = "#checklist .checklistdeta_page"
-			}else{
-				selector = "#checklist .checklistdeta_page[data-page=" + page + "]"
-			}
+		function getChecklist(){
+			selector = "#preguntas-checklist #pregunta-checklist"
+			
 			var data = []
 			$(selector).toArray().forEach( div => {
 				var obj = {}
@@ -742,57 +707,8 @@
 			}
 			$("#btn_guardar_checklist").click(function(event){
 				guardarChecklist()
-				$("a[href='#tab_tareas']").tab("show")
+				// $("a[href='#tab_tareas']").tab("show")
 			})
-			@if( ! $actividad->checklist->ifhecha )
-				$(function() {
-					$("#checklistdeta_pagination").pagination({
-						items: {{ $actividad->checklist->cantidad_preguntas + 1 }},
-						itemsOnPage: 1,
-						displayedPages: 3,
-						cssStyle: 'light-theme',
-						prevText: "<",
-						nextText: ">",
-						selectOnClick: true,
-
-						canGoBack: @if( MangerParametros::canGoBackQuestion() ) true @else false @endif,
-						maxChangeStep: 1,
-						beforeChange: function(currentPageNumber,nextPageNumber, event){
-							var selectorPageSelect = "#checklistdeta_page_" + currentPageNumber
-							var inputFile = $(selectorPageSelect).find(".files_checklist")[0]
-							var evidencias = inputFile ? inputFile.files : []
-
-							var input = $(selectorPageSelect).find(".respuesta")[0]
-							var respuestaContestada = input ? input.validity.valid : true
-
-
-							if ( respuestaContestada ){
-								if ( evidencias.length == 0){
-									return Promise.resolve(true)
-								}else{
-									return new Promise(function(resolve,reject){
-										alertify.confirm("Hay archivos sin Guardar. Desea continuar sin Guardar.",() => resolve(true),() => resolve(false))
-									})
-								}
-							}else{
-								alertify.error("No ha respondido la pregunta.")
-								return Promise.resolve(false)
-							}
-						},
-						onPageClick: function(lastPageIndex,pageNumber, event){
-							var selectorPageSelect = "#checklistdeta_page_" + pageNumber
-							$(".checklistdeta_page").addClass("hide")
-							$(selectorPageSelect).removeClass("hide")
-							guardarChecklist(lastPageIndex)
-						},
-						onInit: function(){
-							var pageNumber = $("#checklistdeta_pagination").pagination('getCurrentPage');
-							var selectorPageSelect = "#checklistdeta_page_" + pageNumber
-							$(selectorPageSelect).removeClass("hide")
-						}
-					});
-				});
-			@endif
 		@endif
 
 		function validar(response){

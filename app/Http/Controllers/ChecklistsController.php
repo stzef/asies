@@ -81,7 +81,7 @@ class ChecklistsController extends Controller
 
 			$arr = [
 				"cpregunta" => $cpregunta,
-				"anotaciones" => ""
+				// "anotaciones" => ""
 			];
 
 			$status = $arr;

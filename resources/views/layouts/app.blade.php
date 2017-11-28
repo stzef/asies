@@ -270,7 +270,7 @@
            });
         </script>
 
-        <script src="{{ URL::asset('dist/js/app.min.js') }}"></script>
+        <!--<script src="{{ URL::asset('dist/js/app.min.js') }}"></script>-->
         <script src="{{ URL::asset('layout/js/app.js') }}"></script>
 
         <script>

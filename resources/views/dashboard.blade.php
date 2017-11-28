@@ -25,22 +25,24 @@
 		<div class="col-md-6">
 			<div id="char_estado_tareas" class="row text-center" ></div>
 		
-			<h4 class="text-center">Actividades Proximas</h4>
-			<div class="list-group text-center row">
-				@forelse( $actividades_proximas as $actividad )
-					<div class="list-group-item col-md-6">
-						<a class="btn btn-success btn-block" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">
-							{{$actividad->nactividad}}
-							<br>
-							<span class="badge badge-default badge-pill">{{$actividad->fini}}</span>
-						</a>
-					</div>
-				@empty
-					<div class="list-group-item">
-						<h3>No tiene</h3>
-					</div>
-				@endforelse
-			</div>
+			@if ( count($actividades_proximas) != 0 )
+				<h4 class="text-center">Actividades Proximas</h4>
+				<div class="list-group text-center row">
+					@forelse( $actividades_proximas as $actividad )
+						<div class="list-group-item col-md-6">
+							<a class="btn btn-success btn-block" href="{{ URL::route('realizar_actividad',['cactividad'=>$actividad->cactividad]) }}">
+								{{$actividad->nactividad}}
+								<br>
+								<span class="badge badge-default badge-pill">{{$actividad->fini}}</span>
+							</a>
+						</div>
+					@empty
+						<div class="list-group-item">
+							<h3>No tiene</h3>
+						</div>
+					@endforelse
+				</div>
+			@endif
 		</div>
 		<div class="col-md-6">
 			<div id="charts_div" class="row text-center" ></div>
@@ -75,7 +77,7 @@
 		*/
 		function drawChart() {
 
-
+			if ( asignaciones.totales == 0 ) return false
 			var data = google.visualization.arrayToDataTable([
 				['Estado', 'Cantidad'],
 				['Realizadas',     asignaciones.ok],
