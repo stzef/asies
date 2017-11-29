@@ -114,7 +114,7 @@ class Helper
     ];
     */
 
-    public static function output($type, $planes, $info)
+    public static function output($type, $show, $planes, $info)
     {
 
         $string = "<ul>";
@@ -132,7 +132,7 @@ class Helper
                 $string .= "<span style='background-color:{$plan->puntuacion->color}; height: 15px;width:10px;display: inline-block;' ></span>";
                 $string .= "</span>";
                 if (count($plan->subplanes)) {
-                    $string .= self::output($type, $plan->subplanes, $info);
+                    $string .= self::output($type,$show, $plan->subplanes, $info);
                 }
                 $tareas = $plan->tareas;
                 if ( $tareas ){
@@ -142,12 +142,17 @@ class Helper
                         $show_tarea = true;
                         
                         $asignaciones = [];
+
+                        $ifhecha = null;
+                        if ( $show == "1") $ifhecha = true;
+                        if ( $show == "0") $ifhecha = false;
+
                         if ( $type == "general" ){
-                            $asignaciones = $tarea->asignaciones();
+                            $asignaciones = $tarea->asignaciones($ifhecha);
                         }else if ( $type == "date" ){
-                            $asignaciones = $tarea->asignacionBetween($info["fini"],$info["ffin"]);
+                            $asignaciones = $tarea->asignacionBetween($info["fini"],$info["ffin"],$ifhecha);
                         }else if ( $type == "user" ){
-                            $asignaciones = $tarea->asignacionByUser($info["user"]);
+                            $asignaciones = $tarea->asignacionByUser($info["user"],$ifhecha);
                         }
 
                         if ( count($asignaciones) == 0 ){

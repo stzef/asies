@@ -54,6 +54,8 @@ class ReportesController extends Controller
 		$ffin = $request->get("ffin", false);
 		$user = $request->get("user", false);
 		
+		$show = $request->get("show", "all");
+		
 		if ( $cplan == false ){ dump("Ha Ocurrido un Error");exit(); }
 
 		$plan = Planes::where("cplan", $cplan)->first();
@@ -75,6 +77,7 @@ class ReportesController extends Controller
 			dump("Ha Ocurrido un Error No");exit();
 		}
 		$data = [
+			"show" => $show,
 			"type" => $type,
 			"plan" => $plan,
 			"title" => $title,

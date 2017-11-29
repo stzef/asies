@@ -51,7 +51,7 @@
     </footer>
 
 	<h2>{{ $title }}</h2>
-	{!!  Helper::output($type, [$plan], $info) !!}
+	{!!  Helper::output($type, $show,[$plan], $info) !!}
 </body>
 </html>
 
