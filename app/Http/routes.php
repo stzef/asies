@@ -136,10 +136,10 @@ Route::group(['prefix' => 'actividades'], function(){
 Route::group(['prefix' => 'archivos'], function(){});
 
 Route::group(['prefix' =>'actas'], function(){
-	Route::post('create','ActasController@create');
-	Route::get('/','ActasController@list_actas')->name("GET_list_actas");
-	Route::get('/pdf/{numeroacta}', "ActasController@pdf")->name("GET_pdf_acta");
-	Route::get('/send/{numeroacta}', "ActasController@send")->name("GET_send_acta");
+	Route::post('create','ActasController@create')->middleware("permission:actas.crud");;
+	Route::get('/','ActasController@list_actas')->name("GET_list_actas")->middleware("permission:actas.crud");;
+	Route::get('/pdf/{numeroacta}', "ActasController@pdf")->name("GET_pdf_acta")->middleware("permission:actas.crud");;
+	Route::get('/send/{numeroacta}', "ActasController@send")->name("GET_send_acta")->middleware("permission:actas.crud");;
 });
 
 Route::group(['prefix' => 'tareas'], function(){
@@ -154,11 +154,13 @@ Route::group(['prefix' => 'tareas'], function(){
 	Route::post('/{ctarea}/change_state', "TareasController@change_state")->name("POST_cambiar_estado_tarea");
 });
 
+/*
 Route::group(['prefix' => 'encuestas'], function(){
 	Route::get('/', "EncuestasController@encuestas")->name('GET_list_encuestas');
 	Route::get('/{cencuesta}', "EncuestasController@encuesta")->name('GET_encuesta');
 	Route::get('/{cencuesta}/export/{format}', "EncuestasController@excel")->name('GET_export_encuesta_excel');
 });
+*/
 
 Route::group(['prefix' => 'reportes'], function(){
 	Route::group(['prefix' => 'tareas'], function(){
@@ -173,9 +175,9 @@ Route::group(['prefix' => 'reportes'], function(){
 Route::group(['prefix' => 'users'], function(){
 	Route::group(['prefix' => '{user}'], function(){
 		Route::get('actividades', "PerfilController@actividades")->name('mis_actividades');
-
 	});
 
+	/*
 	Route::group(['prefix' => 'encuestas'], function(){
 		Route::get('/', "PerfilController@encuestas")->name('GET_list_encuestas_user');
 
@@ -187,5 +189,6 @@ Route::group(['prefix' => 'users'], function(){
 
 		});
 	});
+	*/
 
 });

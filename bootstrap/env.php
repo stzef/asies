@@ -19,7 +19,7 @@ $app->detectEnvironment(function () use ($app) {
 		$file = '.env';
 	}
 
-	 $file = '.guataqui.env';
+	// $file = '.guataqui.env';
 
 	$dotenv = new Dotenv\Dotenv($app['path.base'], $file);
 	$dotenv->overload(); //this is important
