@@ -22,7 +22,7 @@
 							</div>
 							<input type="hidden" value="{{ $actividad->checklist->cchecklist }}" id="cchecklist" name="cchecklist">
 
-							<table class="table" id="preguntas-checklist">
+							<table class="table table-responsive" id="preguntas-checklist">
 								<thead>
 									<tr>
 										<th>Pregunta</th>

@@ -5,7 +5,8 @@ namespace asies\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-use asies\Models\Actividades;
+use asies\Models\Actividades; 
+use asies\Models\AsignacionTareas; 
 use asies\Http\Requests;
 
 use View;
@@ -28,10 +29,22 @@ class AppController extends Controller
 		$now->minute = 0;
 		$now->second = 0;
 
-		$actividades_proximas = Actividades::whereDate('fini', '=', $now )->get();
+		$actividades_proximas = AsignacionTareas::
+			join("actividades","asignaciontareas.cactividad","=","actividades.cactividad")
+			->select("actividades.*")
+			->whereDate('actividades.fini', '=', $now )
+			->where("user","=",$user->id)
+			->groupBy("actividades.cactividad")
+			->get();
 		if ( count($actividades_proximas) == 0 ) {
 			$tommorrow = $now->addDay();
-			$actividades_proximas = Actividades::whereDate('fini', '=', $tommorrow )->get();
+			$actividades_proximas = AsignacionTareas::
+				join("actividades","asignaciontareas.cactividad","=","actividades.cactividad")
+				->select("actividades.*")
+				->whereDate('actividades.fini', '=', $tommorrow )
+				->where("user","=",$user->id)
+				->groupBy("actividades.cactividad")
+				->get();
 		}
 		return view('dashboard',[
 			'actividades_proximas' => $actividades_proximas,

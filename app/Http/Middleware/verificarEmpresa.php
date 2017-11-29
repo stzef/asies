@@ -25,8 +25,9 @@ class verificarEmpresa
 	if ($pos) {
 		$subdomain = mb_substr($http_host, 0, $pos);
 	}
-
-	// $subdomain = "guataqui";
+	if ( $_SERVER['HTTP_HOST'] == "127.0.0.1:8000" ){
+		$subdomain = "guataqui";
+	}
 
 	if( $subdomain ){
 		if ( in_array( $subdomain, \Config::get("app.empresas") ) ){

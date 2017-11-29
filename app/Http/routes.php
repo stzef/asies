@@ -108,7 +108,7 @@ Route::group(['prefix' => 'actividades'], function(){
 
 	Route::get('list', "ActividadesController@list_activities")->name("GET_actividades_list")->middleware("permission:activities.crud");
 
-	Route::get('do/{cactividad}', "ActividadesController@doActivity")->name('realizar_actividad');
+	Route::get('do/{cactividad}', "ActividadesController@doActivity")->name('realizar_actividad')->middleware("permission:activities.do");;
 	Route::get('detail/{cactividad}', "ActividadesController@detailActivity")->name('GET_detalle_actividad');
 
 	Route::get('checkDates/{cplan?}',"ActividadesController@checkDates")->name('GET_verificar_fechas_actividades')->middleware("permission:activities.check_dates");

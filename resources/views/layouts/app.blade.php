@@ -25,6 +25,12 @@
 
         @yield('styles')
         <style>
+            .table-responsive {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                -ms-overflow-style: -ms-autohiding-scrollbar;
+            }
             .input-group-find-treetask #cplan, #tarea_cplan{
                 width: 20%;
             }
