@@ -17,7 +17,7 @@
 			</div>
 
 			<div>
-				<form id="form_report" class="form-horizontal" target="_blank" method="GET" action="{{ URL::route('reportes_tareas_general') }}">
+				<form id="form_report" class="form-horizontal" target="_blank" method="GET" action="{{ URL::route('reportes_tareas_general',[ 'task' => 'all', 'percentages' => '1']) }}">
 
 					<input type="hidden" name="type" value="user">
 					

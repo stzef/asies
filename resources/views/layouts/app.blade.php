@@ -84,7 +84,12 @@
                           <span class="icon-bar"></span>
                         </span>
                     </button>
-                    <a class="navbar-brand" href="{{ URL::route('app_dashboard') }}">{{$SHORT_NAME_APP}}</a>
+                    <a class="navbar-brand" href="{{ URL::route('app_dashboard') }}">
+                        <img style="display: inline-block; width:30px;" src="{{ URL::asset('img/logo.png') }}" alt="">
+                        <span>
+                            {{$SHORT_NAME_APP}}
+                        </span>
+                    </a>
                 </div>
                 <ul class="nav navbar-right top-nav hidden-sm hidden-xs">
                     <li class="dropdown">
@@ -200,6 +205,51 @@
                                 </li>
                                 <li>
                                     <a href="{{ URL::route('reportes_view_tareas_between') }}"><i class="fa fa-list"></i> Tareas Rango de Fecha </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#reportes_pormenorizados">
+                                <i class="fa fa-fw fa-file-pdf-o"></i>
+                                Reportes Pormenorizado
+                                <i class="fa fa-fw fa-caret-down"></i>
+                            </a>
+                            <ul id="reportes_pormenorizados" class="collapse">
+                                @php
+                                    $ano = (int) date("Y");
+                                    $sAno = $ano+1;
+                                @endphp
+                                <li>
+                                    <a target="_blank" href="{{ URL::route('reportes_tareas_general',[
+                                        'type' => 'date', 'fini' => "$ano-03-01", 'ffin' => "$ano-06-30" ,
+                                        'task' => '1', 'percentages' => '0'
+                                    ]) }}">
+                                        <i class="fa fa-list"></i> Pormenorizado 1 Marzo-Junio 
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="{{ URL::route('reportes_tareas_general',[
+                                        'type' => 'date', 'fini' => "$ano-07-01", 'ffin' => "$ano-09-31" ,
+                                        'task' => '1', 'percentages' => '0'
+                                    ]) }}">
+                                        <i class="fa fa-list"></i> Pormenorizado 2 Julio-Octubre 
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="{{ URL::route('reportes_tareas_general',[
+                                        'type' => 'date', 'fini' => "$ano-10-01", 'ffin' => "$sAno-02-28" ,
+                                        'task' => '1', 'percentages' => '0'
+                                    ]) }}">
+                                        <i class="fa fa-list"></i> Pormenorizado 3 Noviembre-Febrero 
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="{{ URL::route('reportes_tareas_general',[
+                                        'type' => 'date', 'fini' => "$ano-01-01", 'ffin' => "$ano-12-31" ,
+                                        'task' => '1', 'percentages' => '0'
+                                    ]) }}">
+                                        <i class="fa fa-list"></i> Ejecutivo final 
+                                    </a>
                                 </li>
                             </ul>
                         </li>

@@ -46,7 +46,7 @@ class ReportesController extends Controller
 		$planes = Planes::getArbolPlanes();
 		
 		$type = $request->get("type","general");
-		$format = $request->get("format","pdf");
+		$format = $request->get("format","html");
 
 		$cplan = $request->get("cplan", false);
 
@@ -54,40 +54,53 @@ class ReportesController extends Controller
 		$ffin = $request->get("ffin", false);
 		$user = $request->get("user", false);
 		
-		$show = $request->get("show", "all");
+		$task = $request->get("task", "all");
+		$percentages = $request->get("percentages", "1");
 		
-		if ( $cplan == false ){ dump("Ha Ocurrido un Error");exit(); }
-
-		$plan = Planes::where("cplan", $cplan)->first();
-		$plan->subplanes = Planes::getSubPlanes($cplan);
+		
+		// if ( $cplan == false ){ dump("Ha Ocurrido un Error");exit(); }
+		
+		if ( $cplan ){
+			$plan = Planes::where("cplan", $cplan)->first();
+			$plan->subplanes = Planes::getSubPlanes($cplan);
+			$plan = [$plan];
+		}else{
+			$plan = Planes::where("cplanmayor", null)->get();
+			foreach ($plan as $p) {
+				$p->subplanes = Planes::getSubPlanes($p->cplan);
+			}
+			// dump($plan);exit();
+		}
 
 		$title = "Reporte de Tareas";
 		if ( $type == "general" ){
-
-		
-
 		}else if ( $type == "date" ){
 			if ( $fini == false || $ffin == false ){ dump("Ha Ocurrido un Error Date");exit(); }
 			$title .= " Desde $fini Hasta $ffin";
 		}else if ( $type == "user" ){
 			
 			if ( $user == false ) {dump("Ha Ocurrido un Error User");exit();}
-			$title .= " Del Usuario $user";
+			$objuser = User::where("id",$user)->first();
+			$title .= " Del Usuario " . $objuser->persona->nombreCompleto();
 		}else{
 			dump("Ha Ocurrido un Error No");exit();
 		}
 		$data = [
-			"show" => $show,
+			// "show" => $show,
 			"type" => $type,
 			"plan" => $plan,
 			"title" => $title,
+			"show" => [
+				"task" => $task,
+				"percentages" => $percentages,
+			],
 			"info" => [
 				"fini" => $fini,
 				"ffin" => $ffin,
 				"user" =>  $user,
 			],
 		];
-		// dump($data);exit();
+
 		if ( $format == "pdf" ){
 			PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
 			$pdf = PDF::loadView('reportes/tareas/general', $data)->setPaper('a4', 'landscape');

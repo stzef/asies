@@ -116,6 +116,8 @@ class Helper
 
     public static function output($type, $show, $planes, $info)
     {
+        $show_task = $show["task"];
+        $show_percentages = $show["percentages"] == "1";
 
         $string = "<ul>";
         foreach ($planes as $i => $plan) {
@@ -127,10 +129,12 @@ class Helper
                 
                 $procentaje = ( $plan->valor_plan * 100 ) / $plan->valor_total;
                 
-                $string .= "<span style='float:right'>";
-                $string .= "$procentaje % ( $plan->valor_plan / $plan->valor_total )";
-                $string .= "<span style='background-color:{$plan->puntuacion->color}; height: 15px;width:10px;display: inline-block;' ></span>";
-                $string .= "</span>";
+                if ( $show_percentages ){
+                    $string .= "<span style='float:right'>";
+                    $string .= round($procentaje) ."% ( $plan->valor_plan / $plan->valor_total )";
+                    $string .= "<span style='background-color:{$plan->puntuacion->color}; height: 15px;width:10px;display: inline-block;' ></span>";
+                    $string .= "</span>";
+                }
                 if (count($plan->subplanes)) {
                     $string .= self::output($type,$show, $plan->subplanes, $info);
                 }
@@ -144,8 +148,8 @@ class Helper
                         $asignaciones = [];
 
                         $ifhecha = null;
-                        if ( $show == "1") $ifhecha = true;
-                        if ( $show == "0") $ifhecha = false;
+                        if ( $show_task == "1") $ifhecha = "1";
+                        if ( $show_task == "0") $ifhecha = "0";
 
                         if ( $type == "general" ){
                             $asignaciones = $tarea->asignaciones($ifhecha);
@@ -172,11 +176,9 @@ class Helper
                                 $ok = false;
                                 $class = "tarea no_ok";
                                 $text = $asignacion->updated_at;
-                                // $text = "&#10008;";
                                 if ( $asignacion->ifhecha == "1" ) {
                                     $ok = true;
                                     $class = "tarea ok";
-                                    // $text = "&#10003;";
                                 }
         
                                 $string .= "<tr data-ctiplan='asignacion'>";
