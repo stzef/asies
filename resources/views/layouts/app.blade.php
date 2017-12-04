@@ -222,7 +222,7 @@
                                 <li>
                                     <a target="_blank" href="{{ URL::route('reportes_tareas_general',[
                                         'type' => 'date', 'fini' => "$ano-03-01", 'ffin' => "$ano-06-30" ,
-                                        'task' => '1', 'percentages' => '0'
+                                        'task' => '1', 'percentages' => '0', 'responsable' => '0',
                                     ]) }}">
                                         <i class="fa fa-list"></i> Pormenorizado 1 Marzo-Junio 
                                     </a>
@@ -230,7 +230,7 @@
                                 <li>
                                     <a target="_blank" href="{{ URL::route('reportes_tareas_general',[
                                         'type' => 'date', 'fini' => "$ano-07-01", 'ffin' => "$ano-09-31" ,
-                                        'task' => '1', 'percentages' => '0'
+                                        'task' => '1', 'percentages' => '0', 'responsable' => '0',
                                     ]) }}">
                                         <i class="fa fa-list"></i> Pormenorizado 2 Julio-Octubre 
                                     </a>
@@ -238,7 +238,7 @@
                                 <li>
                                     <a target="_blank" href="{{ URL::route('reportes_tareas_general',[
                                         'type' => 'date', 'fini' => "$ano-10-01", 'ffin' => "$sAno-02-28" ,
-                                        'task' => '1', 'percentages' => '0'
+                                        'task' => '1', 'percentages' => '0', 'responsable' => '0',
                                     ]) }}">
                                         <i class="fa fa-list"></i> Pormenorizado 3 Noviembre-Febrero 
                                     </a>

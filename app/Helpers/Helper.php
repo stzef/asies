@@ -118,6 +118,7 @@ class Helper
     {
         $show_task = $show["task"];
         $show_percentages = $show["percentages"] == "1";
+        $show_responsable = $show["responsable"] == "1";
 
         $string = "<ul>";
         foreach ($planes as $i => $plan) {
@@ -180,9 +181,15 @@ class Helper
                                     $ok = true;
                                     $class = "tarea ok";
                                 }
+
+                                $responsable = $asignacion->usuario->persona->nombreCompleto();
         
                                 $string .= "<tr data-ctiplan='asignacion'>";
-                                $string .= "<td width='75%' class='$class' >{$asignacion->actividad->cactividad} - {$asignacion->actividad->nactividad}</td>";
+                                $string .= "<td width='60%' class='$class' >{$asignacion->actividad->cactividad} - {$asignacion->actividad->nactividad}</td>";
+                                if ( $show_responsable ){
+                                    $string .= "<td class='$class'>$responsable</td>";
+                                }
+
                                 $string .= "<td class='$class' >$text</td>";
                                 $string .= "</tr>";
                             }

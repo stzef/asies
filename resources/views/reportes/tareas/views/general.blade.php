@@ -17,9 +17,12 @@
 			</div>
 
 			<div>
-				<form id="form_report" class="form-horizontal" target="_blank" method="GET" action="{{ URL::route('reportes_tareas_general',[ 'task' => 'all', 'percentages' => '1']) }}">
+				<form id="form_report" class="form-horizontal" target="_blank" method="GET" action="{{ URL::route('reportes_tareas_general') }}">
 
 					<input type="hidden" name="type" value="general">
+					<input type="hidden" name="task" value="all">
+					<input type="hidden" name="percentages" value="1">
+					<input type="hidden" name="responsable" value="1">
 
 					<div class="form-group">
 						<label for="cplan" class="col-sm-4 col-form-label">Plan</label>

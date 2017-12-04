@@ -56,6 +56,7 @@ class ReportesController extends Controller
 		
 		$task = $request->get("task", "all");
 		$percentages = $request->get("percentages", "1");
+		$responsable = $request->get("responsable", "0");
 		
 		
 		// if ( $cplan == false ){ dump("Ha Ocurrido un Error");exit(); }
@@ -93,6 +94,7 @@ class ReportesController extends Controller
 			"show" => [
 				"task" => $task,
 				"percentages" => $percentages,
+				"responsable" => $responsable,
 			],
 			"info" => [
 				"fini" => $fini,

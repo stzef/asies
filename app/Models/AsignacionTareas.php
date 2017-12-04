@@ -51,7 +51,7 @@ class AsignacionTareas extends Model
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function usuario(){
-		return $this->belongsTo('App\User', 'user', 'id');
+		return $this->belongsTo('asies\User', 'user', 'id');
 	}
 
 	/**
