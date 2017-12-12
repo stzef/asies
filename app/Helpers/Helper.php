@@ -128,11 +128,11 @@ class Helper
                 $string .= "<img src='/{$tiplan->icono}' alt='' style='margin 0 5px;' width='15px' heigth='15px' />";
                 $string .= "<span>$plan->nplan</span>";
                 
-                $procentaje = ( $plan->valor_plan * 100 ) / $plan->valor_total;
+                $poocentaje = round(( $plan->valor_plan * 100 ) / $plan->valor_total);
                 
                 if ( $show_percentages ){
                     $string .= "<span style='float:right'>";
-                    $string .= round($procentaje) ."% ( $plan->valor_plan / $plan->valor_total )";
+                    $string .= $poocentaje ."% ( $plan->valor_plan / $plan->valor_total )";
                     $string .= "<span style='background-color:{$plan->puntuacion->color}; height: 15px;width:10px;display: inline-block;' ></span>";
                     $string .= "</span>";
                 }
