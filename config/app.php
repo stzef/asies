@@ -189,6 +189,8 @@ return [
         //asies\Helpers\Parametros::class,
         //asies\Helpers\Helper::class,
 
+        Chumper\Zipper\ZipperServiceProvider::class,
+
     ],
 
     /*
@@ -248,6 +250,8 @@ return [
 
         #'Form'      => 'Illuminate\Html\FormFacade',
         #'Html'      => 'Illuminate\Html\HtmlFacade',
+
+        'Zipper' => 'Chumper\Zipper\Zipper'
     ],
 
 

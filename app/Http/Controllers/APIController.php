@@ -19,6 +19,8 @@ use asies\Models\AsignacionTareas;
 
 use asies\Models\ChecklistDeta;
 
+use Illuminate\Support\Facades\File;
+
 use \View;
 use Auth;
 
@@ -345,6 +347,26 @@ class APIController extends Controller
 			Evidencias::where("cevidencia",$cevidencia)->update([$data["0"]=>$data["1"]]);
 		}
 		return response()->json(array("message"=>"ok"));
+	}
+
+	public function destroy_evidencia(Request $request,$cevidencia){
+
+		$evidencia = Evidencias::where("cevidencia", $cevidencia)->first();
+		$actividad = Actividades::where("cactividad",$evidencia->cactividad)->first();
+
+		$response = array(
+			"ok" => true,
+			"message" => "Se elimino la Evidencia.",
+			"evidencia" => $evidencia->toArray(),
+			"actividad" => $actividad->toArray(),
+		);
+
+		// File::delete($evidencia->path);
+		// $evidencia->delete();
+
+		$actividad->updateState();
+		
+		return response()->json($response);
 	}
 
 	public function usuarios_plan($ctarea){

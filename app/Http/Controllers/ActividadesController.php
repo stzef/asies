@@ -14,6 +14,7 @@ use asies\Models\Actas;
 use asies\Models\TiActividades;
 use asies\Models\Parametros;
 use asies\Models\TiRelaciones;
+use Illuminate\Support\Facades\File;
 
 // use asies\Models\ChecklistPreguntas;
 // use asies\Models\Checklists;

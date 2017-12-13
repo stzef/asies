@@ -1,6 +1,7 @@
 <?php
 
 namespace asies\Helpers;
+use Chumper\Zipper\Zipper;
 
 class Helper
 {
@@ -207,5 +208,19 @@ class Helper
         $string .= "</ul>";
         return $string;
 
+    }
+
+    public static function createZip($name, $folders){
+        $zipper = new Zipper;
+
+        $base = public_path() . "/";
+        $path = $base.$name;
+
+        foreach ($folders as $folder) {
+            $files = glob($folder);
+            $zipper->make($name)->add($files);
+        }
+        $zipper->close();
+        return response()->download($path);
     }
 }

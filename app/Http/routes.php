@@ -78,6 +78,7 @@ Route::group(['prefix' => 'api'], function(){
 
 	Route::group(['prefix' => 'evidencias'], function(){
 		Route::put('/{cevidencia}/set', "APIController@update_evidencia");
+		Route::delete('/{cevidencia}/delete', "APIController@destroy_evidencia");
 	});
 
 	Route::group(['prefix' => 'usuarios'], function(){
@@ -116,7 +117,8 @@ Route::group(['prefix' => 'actividades'], function(){
 
 	Route::get('summary/{cactividad}', "ActividadesController@summaryActivity")->name('GET_resumen_actividad');
 	Route::post('evidence/{cactividad}', "ActividadesController@store");
-
+	
+	Route::get('archivos/download/{cactividad?}', "EvidenciaController@download")->name("GET_downlaod_evidencias")/*->middleware("permission:activities.crud")*/;
 	Route::get('archivos/{cactividad?}', "EvidenciaController@index")->name("GET_lista_evidencias")/*->middleware("permission:activities.crud")*/;
 	Route::post('archivos/send', "EvidenciaController@send")->name("POST_send_files")/*->middleware("permission:activities.crud")*/;
 

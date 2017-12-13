@@ -337,6 +337,9 @@
 														<label class="hidden-xs" for="">Descripción</label>
 														<textarea class="form-control" type="text" name="descripcion" placeholder="Descripción" data-evidencia="{{$evidencia->cevidencia}}" onchange="setdataEvidencia(this.dataset.evidencia,this.name,this.value)">{{ $evidencia->descripcion }}</textarea>
 													</div>
+													<div>
+														<button class="btn btn-danger" data-evidencia="{{$evidencia->cevidencia}}" onclick="destroyEvidencia(this.dataset.evidencia)">Borrar</button> 
+													</div>
 												</div>
 											</td>
 										</tr>
@@ -359,6 +362,16 @@
 		Models.Evidencias.set(key,JSON.stringify([[name,value]]),function(response){
 			console.log(response)
 			alertify.success("Evidencia Editada")
+		})
+	}
+	function destroyEvidencia(key){
+		Models.Evidencias.delete(key,function(response){
+			console.log(response)
+			if ( response.ok ){
+				alertify.success(response.message)
+			}else{
+				alertify.error(response.message)
+			}
 		})
 	}
 	@if ( $actividad->checklist )

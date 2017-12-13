@@ -228,7 +228,18 @@ Models = {
 				data : data,
 				error : function(){}
 			})
-		}
+		},
+		"delete" : function(key,cb){
+			$.ajax({
+				type : "DELETE",
+				url : "/api/evidencias/"+key+"/delete",
+				contentType:"application/json",
+				success : cb,
+				error : function(){
+					alertify.warning("No se puedo elimiar la evidencia, intente mas tarde")
+				}
+			})
+		},
 	},
 	"Tareas" : {
 		"findOne" : function(key,cb){
