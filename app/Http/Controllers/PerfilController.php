@@ -38,7 +38,7 @@ class PerfilController extends Controller
 
 	public function encuestas(Request $request){
 		$user = Auth::user();
-		$hisencuestas = HistorialEncuestas::where("user",$user->id)->get();
+		$hisencuestas = $user->getEncuestas();
 		return view('users/encuestas/list', array( "hisencuestas" => $hisencuestas ) );
 	}
 

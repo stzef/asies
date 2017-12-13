@@ -19,7 +19,7 @@ $app->detectEnvironment(function () use ($app) {
 		$file = '.env';
 	}
 
-	if ( $_SERVER['HTTP_HOST'] == "127.0.0.1:8000" ){
+	if ( $_SERVER['HTTP_HOST'] == "127.0.0.1:8000" or $_SERVER['HTTP_HOST'] == "localhost:9000" ){
 		$file = '.guataqui.env';
 	}
 

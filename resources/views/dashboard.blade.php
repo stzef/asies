@@ -15,16 +15,47 @@
 			<div class="panel-heading">
 				<h4>
 					Dashboard <b>{{ Auth::user()->persona->nombreCompleto() }}</b>
+					<div class="pull-right">
+						@permission('planes.calculate_points')
+							<button class="btn btn-primary" onclick="local_recalcular_puntos()">Recalcular Puntos</button>
+						@endpermission
+					</div>
 				</h4>
-				@permission('planes.calculate_points')
-					<button class="btn btn-primary" onclick="local_recalcular_puntos()">Recalcular Puntos</button>
-				@endpermission
 			</div>
 		</div>
-
+ 
 		<div class="col-md-6">
 			<div id="char_estado_tareas" class="row text-center" ></div>
 		
+			@if ( count($encuestas) != 0 )
+
+				<h4 class="text-center">Actividades Proximas</h4>
+				<div class="list-group text-center row">
+					@forelse( $encuestas as $encuesta )
+						<div class="list-group-item col-md-6">
+							@if( $encuesta->ifhecha )
+								<a class="btn btn-success" href="{{ URL::route('GET_mostrar_encuesta',['id' => $encuesta->chencuesta ]) }}">
+									Ver Respuestas : {{$encuesta->encuesta->nombre}}
+									<br>
+									<span class="badge badge-default badge-pill">{{$encuesta->encuesta->fecha}}</span>
+								</a>
+							@else
+								<a class="btn btn-primary" href="{{ URL::route('GET_realizar_encuesta',['id' => $encuesta->chencuesta ]) }}">
+									Contestar : {{$encuesta->encuesta->nombre}}
+									<br>
+									<span class="badge badge-default badge-pill">{{$encuesta->encuesta->fecha}}</span>
+								</a>
+							@endif
+						</div>
+					@empty
+						<div class="list-group-item">
+							<h3>Sin Encuestas</h3>
+						</div>
+					@endforelse
+				</div>
+
+			@endif
+
 			@if ( count($actividades_proximas) != 0 )
 				<h4 class="text-center">Actividades Proximas</h4>
 				<div class="list-group text-center row">
@@ -81,8 +112,8 @@
 				
 				var data = google.visualization.arrayToDataTable([
 					['Estado', 'Cantidad'],
-					['Realizadas',     asignaciones.ok],
-					['No Realizadas', asignaciones.no_ok]
+					[`Realizadas ( ${asignaciones.ok} )`,     asignaciones.ok],
+					[`No Realizadas ( ${asignaciones.no_ok} )`, asignaciones.no_ok]
 				]);
 
 				var options = {

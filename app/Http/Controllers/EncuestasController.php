@@ -29,8 +29,8 @@ class EncuestasController extends Controller
 	public function encuesta(Request $request, $cencuesta){
 		$encuesta = Encuestas::where("cencuesta",$cencuesta)->first();
 		$encuesta->history = HistorialEncuestas::where("cencuesta",$encuesta->cencuesta)->get();
-		$encuesta->fechas = HistorialEncuestas::where("cencuesta",$encuesta->cencuesta)->groupBy("fecha")->select("fecha")->get()->toArray()[0];
-		// dump($encuesta->fechas);exit();
+		$encuesta->fechas = HistorialEncuestas::where("cencuesta",$encuesta->cencuesta)->groupBy("fecha")->get()->pluck("fecha")->toArray();
+		//dump($encuesta->fechas);exit();
 
 		return view('encuestas/encuesta', array( "encuesta" => $encuesta ) );
 	}
@@ -47,28 +47,33 @@ class EncuestasController extends Controller
 		if ( !in_array($format, $formats) ) return view('errors/generic',array('title' => 'Error Codigo.', 'message' => "Formato de Documento Invalido" ));
 
 		$encuesta->history = $encuesta->getHistory($fecha);
-		// dump($encuesta->history);exit();
-
 
 		$data = [
 			"encuesta" => $encuesta,
 		];
 
-		return \Excel::create("Encuesta {$encuesta->cencuesta} - {$encuesta->nombre}", function($excel) use($data) {
-			$excel->sheet('Encuesta', function($sheet) use($data) {
+		// dump($encuesta->history);exit();
+
+		$excel =  \Excel::create("Encuesta {$encuesta->cencuesta} - {$encuesta->nombre}", function($excel) use($data) {
+			/*$excel->sheet('Encuesta', function($sheet) use($data) {
 				$sheet->loadView('excel/encuestas/encuesta',[
 					"encuesta" => $data["encuesta"]
 				]);
-			});
-
+			});*/
 
 			$excel->sheet('Estadisticas', function($sheet) use($data) {
-				//dump($data["encuesta"]->history->estadisticas);exit();
 				$sheet->loadView('excel/encuestas/estadisticas',[
 					"encuesta" => $data["encuesta"]
 				]);
 			});
-		})->download($format);
+		});
+		
+		// $slug = env("SLUG_APP","shared");
+		// $dir_path = base_path()."/public/evidencias/{$slug}/actividades/actividad_{$actividad->cactividad}";
+		// $path = "$dir_path/";
+		// $data = $excel->store('xlsx', $path, true);
+
+		return $excel->download($format);
 
 	}
 }

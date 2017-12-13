@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title> Checklist </title>
-	<link href="{{ URL::asset('css/excel.css') }}" rel="stylesheet">
+	<!-- <link href="{{ URL::asset('css/excel.css') }}" rel="stylesheet"> -->
 </head>
 <body>
 
@@ -11,12 +11,8 @@
 		<tr>
 			<th class="bordered" width="100"> Pregunta </th>
 			<th class="bordered"> Respuesta </th>
-			<th class="bordered"> Anotaciones </th>
-			<th class="bordered"> Evidencia </th>
 		</tr>
-		{{--
 		@foreach( $actividad->checklist->preguntas as $pregunta )
-
 			<tr>
 				<td class="bordered" width="100">
 					{{ $pregunta->enunciado }}
@@ -44,7 +40,6 @@
 				</td>
 			</tr>
 		@endforeach
-		--}}
 	</table>
 
 </body>

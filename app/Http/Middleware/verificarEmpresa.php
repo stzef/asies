@@ -25,7 +25,7 @@ class verificarEmpresa
 	if ($pos) {
 		$subdomain = mb_substr($http_host, 0, $pos);
 	}
-	if ( $_SERVER['HTTP_HOST'] == "127.0.0.1:8000" ){
+	if ( $_SERVER['HTTP_HOST'] == "127.0.0.1:8000" or $_SERVER['HTTP_HOST'] == "localhost:9000" ){
 		$subdomain = "guataqui";
 	}
 

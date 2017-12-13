@@ -23,6 +23,7 @@ class AppController extends Controller
 
 		$user = \Auth::user();
 		$asignaciones = $user->getAsignacion();
+		$encuestas = $user->getEncuestas();
 
 		$now = Carbon::now();
 		$now->hour   = 0;
@@ -49,6 +50,7 @@ class AppController extends Controller
 		return view('dashboard',[
 			'actividades_proximas' => $actividades_proximas,
 			'asignaciones' => $asignaciones,
+			'encuestas' => $encuestas,
 		]);
 	}
 }

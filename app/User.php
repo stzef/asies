@@ -7,6 +7,7 @@ use asies\Models\TareasUsuarios;
 use asies\Models\AsignacionTareas;
 use asies\Models\Tareas;
 use asies\Models\Actividades;
+use asies\Models\HistorialEncuestas;
 
 use Bican\Roles\Traits\HasRoleAndPermission;
 use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
@@ -50,6 +51,10 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
 		return $tareas;
 	}
 
+	public function getEncuestas(){
+		return HistorialEncuestas::where("user",$this->id)->get();
+	}
+
 	public function getAsignacion(){
 		$response = [
 			"asignaciones" => [],
@@ -64,13 +69,16 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
 		];
 
 		$asignacion = AsignacionTareas
-			::where('user', $this->id)
-			->groupBy('cactividad');
+			::where('user', $this->id);
+			// ->groupBy('cactividad');
+		
+		$qOk = clone $asignacion;
+		$qNoOk = clone $asignacion;
 
 		$response["asignaciones"] = $asignacion->get();
 		$response["totales"] = count($asignacion->get());
-		$response["ok"] = $asignacion->where("ifhecha",1)->count();
-		$response["no_ok"] = $asignacion->where("ifhecha",0)->count();
+		$response["ok"] = $qOk->where("ifhecha",1)->count();
+		$response["no_ok"] = $qNoOk->where("ifhecha",0)->count();
 
 		
 		$response["estado"]["completadas"] = 0;

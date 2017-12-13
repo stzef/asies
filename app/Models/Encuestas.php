@@ -17,6 +17,7 @@ use \Auth;
  */
 class Encuestas extends Model
 {
+    protected $table = 'encuestas';
     /**
      * The primary key for the model.
      *
@@ -49,7 +50,21 @@ class Encuestas extends Model
     {
         $history = new \stdClass;
         $history->items = HistorialEncuestas::where("cencuesta",$this->cencuesta)->where("fecha",$fecha)->get();
-
+        
+        /*foreach ($history->items as $item_history) {
+            $cpreguntas = EncuestaPreguntas::select('cpregunta')->where("cencuesta",$this->cencuesta)->orderBy("orden")->get();
+            $total_preguntas = Preguntas::whereIn('cpregunta', $cpreguntas)->count();
+            
+            
+            $item_history->preguntas = Preguntas::whereIn('cpregunta', $cpreguntas)->orderBy("ctipregunta")->get();
+            $item_history->cantidad_preguntas = $total_preguntas;;
+            
+            foreach ($item_history->preguntas as $pregunta) {
+                $copciones = OpcionesPregunta::select("copcion")->where("ctipregunta",$pregunta->ctipregunta)->get();
+                $pregunta->opciones = Opciones::whereIn("copcion",$copciones)->get();
+                $pregunta->respuesta = EncuestaDeta::where("chencuesta",$item_history->chencuesta)->where("cpregunta",$pregunta->cpregunta)->first();
+            }
+        }*/
         # Estadisticas
         $tipreguntas = TiPreguntas::all();
         $estadisticas = [];

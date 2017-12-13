@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title> Estadisticas </title>
-	<link href="{{ URL::asset('css/excel.css') }}" rel="stylesheet">
+	<!-- <link href="{{ URL::asset('css/excel.css') }}" rel="stylesheet"> -->
 </head>
 <body>
 
