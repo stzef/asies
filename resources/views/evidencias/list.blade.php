@@ -176,7 +176,11 @@
 						@endif
 						<td>{{$evidencia->fregistro}}</td>
 						<td>
-							<a class="btn btn-primary" href="{{$evidencia->path}}" download="">Descargar</a>
+							@if ( ! File::exists(public_path() . $evidencia->path) )
+								<span class="label label-danger">No Encontrado</span>
+							@else
+								<a class="btn btn-primary" href="{{$evidencia->path}}" download="">Descargar</a>
+							@endif
 						</td>
 						<td>
 						<!-- Trigger the modal with a button -->
