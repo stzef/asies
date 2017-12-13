@@ -2,6 +2,7 @@
 
 namespace asies\Helpers;
 use Chumper\Zipper\Zipper;
+use Illuminate\Support\Facades\File;
 
 class Helper
 {
@@ -213,12 +214,22 @@ class Helper
     public static function createZip($name, $folders){
         $zipper = new Zipper;
 
-        $base = public_path() . "/";
+        $base = public_path() . "/"; 
         $path = $base.$name;
 
+        if ( File::exists($path) ){
+            File::delete($path);
+        }
+        $zipper->make($name);
+        //$zipper->folder("Evidencias");
         foreach ($folders as $folder) {
+            // $zipper->addString($filename, $content)
+
             $files = glob($folder);
-            $zipper->make($name)->add($files);
+            $lastFolder = basename($folder);
+            $zipper
+                ->folder("Evidencias/$lastFolder") 
+                ->add($files);
         }
         $zipper->close();
         return response()->download($path);

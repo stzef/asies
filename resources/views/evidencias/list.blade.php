@@ -78,6 +78,11 @@
 						de la Actividad {{ $actividad->nactividad }}
 					@endif
 				</h4>
+				@if ( $actividad )
+					<a class="btn btn-primary" href="{{ route('GET_downlaod_evidencias',['cactividad' => $actividad->cactividad]) }}">Decargar Todos los archivos</a>
+				@else
+					<a class="btn btn-primary" href="{{ route('GET_downlaod_evidencias') }}">Decargar Todos los archivos</a>
+				@endif
 			</div>
 		</div>
 		<table class="evidencias table table-bordered tabla-hover table-responsive" cellspacing="0">

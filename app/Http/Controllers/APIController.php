@@ -352,19 +352,35 @@ class APIController extends Controller
 	public function destroy_evidencia(Request $request,$cevidencia){
 
 		$evidencia = Evidencias::where("cevidencia", $cevidencia)->first();
-		$actividad = Actividades::where("cactividad",$evidencia->cactividad)->first();
-
+		
 		$response = array(
 			"ok" => true,
-			"message" => "Se elimino la Evidencia.",
-			"evidencia" => $evidencia->toArray(),
-			"actividad" => $actividad->toArray(),
-		);
+			"message" => "Se elimino la Evidencia."
+		); 
+		if ( !$evidencia ){
+			$response["ok"] = false;
+			$response["message"] = "La Evidencia No existe";
+			// return response()->json($response);
+		}else{
+			$actividad = Actividades::where("cactividad",$evidencia->cactividad)->first();
 
-		// File::delete($evidencia->path);
-		// $evidencia->delete();
+			$response["evidencia"] = $evidencia->toArray();
+			$response["actividad"] = $actividad->toArray();
 
-		$actividad->updateState();
+			if ( !File::exists($evidencia->path) ){
+				$response["ok"] = true;
+				// $response["message"] .= "";
+				// return response()->json($response);
+			}else{
+				File::delete($evidencia->path);
+			}
+
+			$evidencia->delete();
+	
+			$statusUpdate = $actividad->updateState();
+			$response["message"] .= " {$statusUpdate['message']}";
+		}
+
 		
 		return response()->json($response);
 	}

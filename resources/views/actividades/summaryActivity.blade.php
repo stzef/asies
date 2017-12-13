@@ -324,6 +324,9 @@
 										<tr>
 											<td>
 												<div class="p-0 col-lg-5 col-md-5 col-sm-5 col-xs-5 text-center">
+													@if ( ! File::exists(public_path() . $evidencia->path) )
+														<span class="label label-danger">No Encontrado</span>
+													@endif
 													<a href="{{ $evidencia->path }}">
 														<img class="img-thumbnail img-responsive " width="100px" src="{{ $evidencia->previewimg }}" alt="">
 													</a>

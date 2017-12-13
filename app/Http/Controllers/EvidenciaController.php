@@ -112,17 +112,17 @@ class EvidenciaController extends Controller
 		$slug = env("SLUG_APP","shared");
 		
 		$folder = public_path() . "/evidencias/$slug/actividades/";
-		$name = "Evidencias Actividades $slug.zip";
+		$name = "evidencias_actividades_$slug.zip";
 		if ( $cactividad ){
 			$folder = public_path() . "/evidencias/$slug/actividades/actividad_$cactividad/";
-			$name = "Evidencias Actividades $slug Actividad $cactividad.zip";
+			$name = "evidencias_actividades_{$slug}_actividad_{$cactividad}.zip";
 		}
 		$forlders = [$folder];
 		foreach ($forlders as $path) {
 			if ( !File::exists($path) ){
 				dump("El directorio '$path' no existe");exit();
 			}else{
-				dump(glob($path));
+				// dump(glob($path));
 				if (count(glob($path)) == 0 ) { 
 					dump("El directorio '$path' Esta vacio");exit();
 				}
