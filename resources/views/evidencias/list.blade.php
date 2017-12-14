@@ -77,12 +77,16 @@
 					@if ( $actividad )
 						de la Actividad {{ $actividad->nactividad }}
 					@endif
+					@permission('planes.calculate_points')
+						<p class="pull-right">
+							@if ( $actividad )
+								<button class="btn btn-primary" onclick="confirmDownloadFiles('{{ route('GET_downlaod_evidencias',['cactividad' => $actividad->cactividad]) }}')">Decargar Todos los archivos</button>
+							@else
+								<button class="btn btn-primary" onclick="confirmDownloadFiles('{{ route('GET_downlaod_evidencias') }}')" >Decargar Todos los archivos</button>
+							@endif
+						</p>
+					@endpermission
 				</h4>
-				@if ( $actividad )
-					<a class="btn btn-primary" href="{{ route('GET_downlaod_evidencias',['cactividad' => $actividad->cactividad]) }}">Decargar Todos los archivos</a>
-				@else
-					<a class="btn btn-primary" href="{{ route('GET_downlaod_evidencias') }}">Decargar Todos los archivos</a>
-				@endif
 			</div>
 		</div>
 		<table class="evidencias table table-bordered tabla-hover table-responsive" cellspacing="0">
@@ -196,6 +200,13 @@
 @section('scripts')
 	<script src="https://cdn.datatables.net/select/1.2.3/js/dataTables.select.min.js"></script>
 	<script>
+		function confirmDownloadFiles(url){
+			alertify.confirm("Este proceso puede demorar algunos minutos, Desea Continuar?",function(){
+				window.open(url)
+			})
+
+		}
+
 		var table= $(".evidencias").DataTable({
 			columnDefs: [ {
 				orderable: false,

@@ -25,7 +25,7 @@
 			color: red;
 		}
 		.tarea.ok{
-			background-color: green;
+			background-color: #99ff99;
 		}
 		ul{
 			padding-left: 15px;
