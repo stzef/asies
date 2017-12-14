@@ -120,15 +120,19 @@ class EvidenciaController extends Controller
 		$forlders = [$folder];
 		foreach ($forlders as $path) {
 			if ( !File::exists($path) ){
-				dump("El directorio '$path' no existe");exit();
+				return redirect()->back()->withErrors(["El directorio '$path' no existe"]);
 			}else{
-				// dump(glob($path));
 				if (count(glob($path)) == 0 ) { 
-					dump("El directorio '$path' Esta vacio");exit();
-				}
+					return redirect()->back()->withErrors(["El directorio '$path' Esta vacio"]);
+				} 
 			}
 		}
-		$path_file = Helper::createZip($name,$forlders);
-		return $path_file;
+		$path = Helper::createZip($name,$forlders);
+		// dump($path);exit();
+		if ( $path ){
+			return response()->download($path);
+		}else{
+			return response();
+		}
 	}
 }

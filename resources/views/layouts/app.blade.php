@@ -268,6 +268,9 @@
                 @if(Session::has('message'))
                     <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
                 @endif
+                @if($errors->any())
+                    <h4 class="alert alert-danger">{{$errors->first()}}</h4>
+                @endif
                 <div class="container-fluid" id="vue-app">
                     @yield('content')
                 </div>

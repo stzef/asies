@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
 	 */
 	protected $commands = [
 		'asies\Console\Commands\ASIES',
+		'asies\Console\Commands\Scaffolding',
 		// Commands\Inspire::class,
 	];
 

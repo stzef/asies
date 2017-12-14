@@ -214,17 +214,16 @@ class Helper
     public static function createZip($name, $folders){
         $zipper = new Zipper;
 
-        $base = public_path() . "/"; 
+        $base = public_path() . "/temp/"; 
         $path = $base.$name;
 
         if ( File::exists($path) ){
             File::delete($path);
         }
-        $zipper->make($name);
-        //$zipper->folder("Evidencias");
-        foreach ($folders as $folder) {
-            // $zipper->addString($filename, $content)
 
+        // $zipper->make($name);
+        $zipper->make($path);
+        foreach ($folders as $folder) {
             $files = glob($folder);
             $lastFolder = basename($folder);
             $zipper
@@ -232,6 +231,10 @@ class Helper
                 ->add($files);
         }
         $zipper->close();
-        return response()->download($path);
+
+        if ( File::exists($path) ){
+            return $path;
+        }
+        return false;
     }
 }
