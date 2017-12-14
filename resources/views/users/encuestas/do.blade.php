@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('styles')
+<style>
+.respuesta .opcion{
+	display: inline-block;
+	margin: 3px 7px;
+}
+.respuesta .opcion .opcion-text{
+	display: block
+}
+</style>
 @endsection
 
 @section('content')
@@ -20,6 +29,15 @@
 			</div>
 
 			<div>
+				<div>
+					<h3>Tipos de Preguntas</h2>
+					<div>
+						<h4>Abiertas</h4>
+						<p>Preguntas de Respuesta Abierta</p>
+						<h4>Rango Numerico</h4>
+						<p>Preguntas de Selección, siendo el el menor numero, una puntuación baja y el mayor una puntuación alta.</p>
+					</div>
+				</div>
 				@if ( $encuesta->ifhecha )
 					<div class="panel panel-default bg-success">
 						<div class="panel-heading">
@@ -46,7 +64,7 @@
 													<input type="hidden" name="cpregunta" value="{{ $pregunta->cpregunta }}" data-text="{{ $pregunta->enunciado }}">
 													{{$i}} - {{ $pregunta->enunciado }}
 												</td>
-												<td>
+												<td class="respuesta">
 													@if ( $pregunta->isOpenQuestion() )
 														<input type="hidden" name="isOpenQuestion" value="true">
 														<textarea
@@ -59,8 +77,10 @@
 													@else
 														<input type="hidden" name="isOpenQuestion" value="false">
 														@foreach($pregunta->opciones as $opcion)
-															<div>
+															<div class="opcion">
 																<label for="copcion_{{ $opcion->copcion }}_cpregunta_{{ $pregunta->cpregunta }}">
+																	<span class="opcion-text">{{ $opcion->detalle }}</span>
+																
 																	<input
 																		type="radio"
 																		name="copcion_cpregunta_{{ $pregunta->cpregunta }}"
@@ -75,7 +95,6 @@
 																			@endif
 																		@endif
 																	/>
-																	<span>{{ $opcion->detalle }}</span>
 																</label>
 															</div>
 														@endforeach
