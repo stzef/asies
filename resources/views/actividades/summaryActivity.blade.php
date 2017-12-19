@@ -324,9 +324,13 @@
 										<tr>
 											<td>
 												<div class="p-0 col-lg-5 col-md-5 col-sm-5 col-xs-5 text-center">
-													<a href="{{ $evidencia->path }}">
-														<img class="img-thumbnail img-responsive " width="100px" src="{{ $evidencia->previewimg }}" alt="">
-													</a>
+													@if ( ! File::exists(public_path() . $evidencia->path) )
+														<span class="label label-danger">No Encontrado</span>
+													@else
+														<a href="{{ $evidencia->path }}">
+															<img class="img-thumbnail img-responsive " width="100px" src="{{ $evidencia->previewimg }}" alt="">
+														</a>
+													@endif
 												</div>
 												<div class="p-0 col-lg-7 col-md-7 col-sm-7 col-xs-7">
 													<div>
@@ -336,6 +340,9 @@
 													<div>
 														<label class="hidden-xs" for="">Descripción</label>
 														<textarea class="form-control" type="text" name="descripcion" placeholder="Descripción" data-evidencia="{{$evidencia->cevidencia}}" onchange="setdataEvidencia(this.dataset.evidencia,this.name,this.value)">{{ $evidencia->descripcion }}</textarea>
+													</div>
+													<div>
+														<button class="btn btn-danger" data-evidencia="{{$evidencia->cevidencia}}" onclick="destroyEvidencia(this.dataset.evidencia)">Borrar</button> 
 													</div>
 												</div>
 											</td>
@@ -359,6 +366,16 @@
 		Models.Evidencias.set(key,JSON.stringify([[name,value]]),function(response){
 			console.log(response)
 			alertify.success("Evidencia Editada")
+		})
+	}
+	function destroyEvidencia(key){
+		Models.Evidencias.delete(key,function(response){
+			console.log(response)
+			if ( response.ok ){
+				alertify.success(response.message)
+			}else{
+				alertify.error(response.message)
+			}
 		})
 	}
 	@if ( $actividad->checklist )

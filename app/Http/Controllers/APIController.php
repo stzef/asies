@@ -19,6 +19,8 @@ use asies\Models\AsignacionTareas;
 
 use asies\Models\ChecklistDeta;
 
+use Illuminate\Support\Facades\File;
+
 use \View;
 use Auth;
 
@@ -345,6 +347,42 @@ class APIController extends Controller
 			Evidencias::where("cevidencia",$cevidencia)->update([$data["0"]=>$data["1"]]);
 		}
 		return response()->json(array("message"=>"ok"));
+	}
+
+	public function destroy_evidencia(Request $request,$cevidencia){
+
+		$evidencia = Evidencias::where("cevidencia", $cevidencia)->first();
+		
+		$response = array(
+			"ok" => true,
+			"message" => "Se elimino la Evidencia."
+		); 
+		if ( !$evidencia ){
+			$response["ok"] = false;
+			$response["message"] = "La Evidencia No existe";
+			// return response()->json($response);
+		}else{
+			$actividad = Actividades::where("cactividad",$evidencia->cactividad)->first();
+
+			$response["evidencia"] = $evidencia->toArray();
+			$response["actividad"] = $actividad->toArray();
+
+			if ( !File::exists($evidencia->path) ){
+				$response["ok"] = true;
+				// $response["message"] .= "";
+				// return response()->json($response);
+			}else{
+				File::delete($evidencia->path);
+			}
+
+			$evidencia->delete();
+	
+			$statusUpdate = $actividad->updateState();
+			$response["message"] .= " {$statusUpdate['message']}";
+		}
+
+		
+		return response()->json($response);
 	}
 
 	public function usuarios_plan($ctarea){

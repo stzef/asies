@@ -1,6 +1,8 @@
 <?php
 
 namespace asies\Helpers;
+use Chumper\Zipper\Zipper;
+use Illuminate\Support\Facades\File;
 
 class Helper
 {
@@ -207,5 +209,32 @@ class Helper
         $string .= "</ul>";
         return $string;
 
+    }
+
+    public static function createZip($name, $folders){
+        $zipper = new Zipper;
+
+        $base = public_path() . "/temp/"; 
+        $path = $base.$name;
+
+        if ( File::exists($path) ){
+            File::delete($path);
+        }
+
+        // $zipper->make($name);
+        $zipper->make($path);
+        foreach ($folders as $folder) {
+            $files = glob($folder);
+            $lastFolder = basename($folder);
+            $zipper
+                ->folder("Evidencias/$lastFolder") 
+                ->add($files);
+        }
+        $zipper->close();
+
+        if ( File::exists($path) ){
+            return $path;
+        }
+        return false;
     }
 }

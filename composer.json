@@ -16,7 +16,8 @@
         "weblee/mandrill": "dev-master",
         "mandrill/mandrill": "1.0.*",
         "nesbot/carbon": "~1.14",
-        "barryvdh/laravel-elfinder": "^0.3.10"
+        "barryvdh/laravel-elfinder": "^0.3.10",
+        "chumper/zipper": "1.0.x"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

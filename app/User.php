@@ -51,8 +51,10 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
 		return $tareas;
 	}
 
-	public function getEncuestas(){
-		return HistorialEncuestas::where("user",$this->id)->get();
+	public function getEncuestas($ifhecha = null){
+		$query = HistorialEncuestas::where("user",$this->id);
+		if ($ifhecha != null){ $query->where("ifhecha","=",$ifhecha); }
+		return $query->get();
 	}
 
 	public function getAsignacion(){

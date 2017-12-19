@@ -23,7 +23,7 @@ class AppController extends Controller
 
 		$user = \Auth::user();
 		$asignaciones = $user->getAsignacion();
-		$encuestas = $user->getEncuestas();
+		$encuestas = $user->getEncuestas("0");
 
 		$now = Carbon::now();
 		$now->hour   = 0;

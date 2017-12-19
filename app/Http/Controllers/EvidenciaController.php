@@ -9,7 +9,10 @@ use asies\Models\Evidencias;
 use asies\Models\Actividades;
 use asies\Models\Checklists;
 use asies\Models\Actas;
+use asies\Helpers\Helper;
 use View;
+
+use Illuminate\Support\Facades\File;
 
 class EvidenciaController extends Controller
 {
@@ -98,12 +101,38 @@ class EvidenciaController extends Controller
 			$checklists = Checklists::all();
 			$actividad = null;
 		}
-		// dump($actas[0]->actividad);exit();
 		return view('evidencias/list',[
 			"evidencias" => $evidencias,
 			"actas" => $actas,
 			"checklists" => $checklists,
 			"actividad" => $actividad,
 		]);
+	}
+	public function download(Request $request, $cactividad = null){
+		$slug = env("SLUG_APP","shared");
+		
+		$folder = public_path() . "/evidencias/$slug/actividades/";
+		$name = "evidencias_actividades_$slug.zip";
+		if ( $cactividad ){
+			$folder = public_path() . "/evidencias/$slug/actividades/actividad_$cactividad/";
+			$name = "evidencias_actividades_{$slug}_actividad_{$cactividad}.zip";
+		}
+		$forlders = [$folder];
+		foreach ($forlders as $path) {
+			if ( !File::exists($path) ){
+				return redirect()->back()->withErrors(["El directorio '$path' no existe"]);
+			}else{
+				if (count(glob($path)) == 0 ) { 
+					return redirect()->back()->withErrors(["El directorio '$path' Esta vacio"]);
+				} 
+			}
+		}
+		$path = Helper::createZip($name,$forlders);
+		// dump($path);exit();
+		if ( $path ){
+			return response()->download($path);
+		}else{
+			return response();
+		}
 	}
 }
