@@ -260,6 +260,23 @@
                         <li >
                             <a href="{{ URL::route('GET_lista_evidencias') }}"><i class="fa fa-fw fa-tasks"></i> Evidencias</a>
                         </li>
+                        
+                        <li>
+                            <a href="{{ url('/tutoriales') }}"><i class="fa fa-fw fa-film"></i>
+                                Tutoriales
+                                
+                            </a>
+                            <!--<ul id="tutoriales" class="collapse">
+                                
+                                    <li>
+                                        <a href="{{ URL::route('GET_list_actas',['user'=>Auth::user()->name]) }}"><i class="fa fa-list"></i> Tareas</a>
+                                    </li>
+                                
+                                    <li>
+                                        <a href="{{ URL::route('GET_list_actas',['user'=>Auth::user()->name]) }}"><i class="fa fa-list"></i>Actividad</a>
+                                    </li>
+                            </ul>-->
+                        </li>
                     </ul>
                 </div>
             </nav>

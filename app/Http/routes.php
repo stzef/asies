@@ -192,3 +192,9 @@ Route::group(['prefix' => 'users'], function(){
 	
 
 });
+
+Route::get('/tutoriales', "AppController@tutoriales");
+
+/*Route::get('/tutoriales', function(){
+    return view('tutoriales')->name();
+});*/

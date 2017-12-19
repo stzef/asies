@@ -53,4 +53,7 @@ class AppController extends Controller
 			'encuestas' => $encuestas,
 		]);
 	}
+	public function tutoriales(){
+		return view('/tutoriales');
+	}
 }
