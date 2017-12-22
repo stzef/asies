@@ -1,3 +1,6 @@
+//alertify.defaults.notifier.position = "bottom-left"
+ alertify.set('notifier', 'position', 'bottom-left');
+
 Array.prototype.isEmpty = function(){
 	if ( this.length == 0 ){
 		return true

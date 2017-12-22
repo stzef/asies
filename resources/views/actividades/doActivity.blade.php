@@ -581,8 +581,8 @@
 			<tr class="template-download fade">
 				<td width="100px">
 					<span class="preview" >
-						{% if (file.thumbnailUrl) { %}
-							<a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img width="100%" src="{%=file.thumbnailUrl%}"></a>
+						{% if (file.previewimg) { %}
+							<a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img width="100%" src="{%=file.previewimg%}"></a>
 						{% } %}
 					</span>
 				</td>
@@ -597,7 +597,7 @@
 				<td>
 					<p class="name">
 						{% if (file.url) { %}
-							<a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+							<a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.previewimg?'data-gallery':''%}>{%=file.name%}</a>
 						{% } else { %}
 							<span>{%=file.name%}</span>
 						{% } %}

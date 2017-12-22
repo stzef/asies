@@ -353,15 +353,6 @@ class Actividades extends Model
 		if ( $only_count ){
 			return count($evidencias);
 		}else{
-			$ext_img = array("ani","bmp","cal","fax","gif","img","jbg","jpe","jpe","jpg","mac","pbm","pcd","pcx","pct","pgm","png","ppm","psd","ras","tga","tif","wmf");
-			foreach ($evidencias as $evidencia) {
-				$ext = pathinfo($evidencia->path, PATHINFO_EXTENSION);
-				if ( in_array($ext, $ext_img) ){
-					$evidencia->previewimg = $evidencia->path;
-				}else{
-					$evidencia->previewimg = "/evidencias/generic-file.png";
-				}
-			}
 			return $evidencias;
 		}
 	}

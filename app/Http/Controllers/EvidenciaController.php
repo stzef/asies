@@ -101,6 +101,7 @@ class EvidenciaController extends Controller
 			$checklists = Checklists::all();
 			$actividad = null;
 		}
+		// dump($evidencias[0]->previewimg);exit();
 		return view('evidencias/list',[
 			"evidencias" => $evidencias,
 			"actas" => $actas,
