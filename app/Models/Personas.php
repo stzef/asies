@@ -33,14 +33,14 @@ class Personas extends Model
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function cargo(){
-		return $this->belongsTo('App\Cargo', 'ccargo', 'ccargo');
+		return $this->belongsTo('asies\Models\Cargos', 'ccargo', 'ccargo');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function tiempleado(){
-		return $this->belongsTo('App\Tiempleado', 'ctiempleado', 'ctiempleado');
+		return $this->belongsTo('asies\Models\TiEmpleados', 'ctiempleado', 'ctiempleado');
 	}
 
 	/**

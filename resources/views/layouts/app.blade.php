@@ -254,11 +254,43 @@
                             </ul>
                         </li>
                         @endpermission
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#option_users">
+                                <i class="fa fa-fw fa-user"></i>
+                                Usuarios
+                                <i class="fa fa-fw fa-caret-down"></i>
+                            </a>
+                            <ul id="option_users" class="collapse">
+                                    <li>
+                                        <a href="{{ URL::route('list_user') }}"><i class="fa fa-list"></i> Listar</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ URL::route('create_user') }}"><i class="fa fa-plus"></i> Crear</a>
+                                    </li>
+                            </ul>
+                        </li>
                         <li >
                             <a href="{{ URL::route('GET_tareas_create') }}"><i class="fa fa-fw fa-tasks"></i> Tareas</a>
                         </li>
                         <li >
                             <a href="{{ URL::route('GET_lista_evidencias') }}"><i class="fa fa-fw fa-tasks"></i> Evidencias</a>
+                        </li>
+                        
+                        <li>
+                            <a href="{{ url('/tutoriales') }}"><i class="fa fa-fw fa-film"></i>
+                                Tutoriales
+                                
+                            </a>
+                            <!--<ul id="tutoriales" class="collapse">
+                                
+                                    <li>
+                                        <a href="{{ URL::route('GET_list_actas',['user'=>Auth::user()->name]) }}"><i class="fa fa-list"></i> Tareas</a>
+                                    </li>
+                                
+                                    <li>
+                                        <a href="{{ URL::route('GET_list_actas',['user'=>Auth::user()->name]) }}"><i class="fa fa-list"></i>Actividad</a>
+                                    </li>
+                            </ul>-->
                         </li>
                     </ul>
                 </div>
