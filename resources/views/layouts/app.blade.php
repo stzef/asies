@@ -254,6 +254,7 @@
                             </ul>
                         </li>
                         @endpermission
+                        @permission('planes.calculate_points')
                         <li>
                             <a href="javascript:;" data-toggle="collapse" data-target="#option_users">
                                 <i class="fa fa-fw fa-user"></i>
@@ -269,6 +270,7 @@
                                     </li>
                             </ul>
                         </li>
+                        @endpermission
                         <li >
                             <a href="{{ URL::route('GET_tareas_create') }}"><i class="fa fa-fw fa-tasks"></i> Tareas</a>
                         </li>

@@ -179,11 +179,11 @@ Route::group(['prefix' => 'users'], function(){
 		Route::get('actividades', "PerfilController@actividades")->name('mis_actividades');
 	});
 	Route::group(['prefix' => 'manage'], function(){
-		Route::get('/create', "UsersController@viewCreate")->name('show_create');
-		Route::get('/edit/{id}', "UsersController@viewEdit")->name('show_edit');
-		Route::post('/edit/{id}', "UsersController@edit")->name('edit_user');
-		Route::get('/list', "UsersController@viewList")->name('list_user');
-		Route::post('/create', "UsersController@create")->name('create_user');
+		Route::get('/create', "UsersController@viewCreate")->name('show_create')->middleware("permission:planes.calculate_points");;
+		Route::get('/edit/{id}', "UsersController@viewEdit")->name('show_edit')->middleware("permission:planes.calculate_points");;
+		Route::post('/edit/{id}', "UsersController@edit")->name('edit_user')->middleware("permission:planes.calculate_points");;
+		Route::get('/list', "UsersController@viewList")->name('list_user')->middleware("permission:planes.calculate_points");;
+		Route::post('/create', "UsersController@create")->name('create_user')->middleware("permission:planes.calculate_points");;
 	});
 	Route::group(['prefix' => 'encuestas'], function(){
 		Route::get('/', "PerfilController@encuestas")->name('GET_list_encuestas_user');
