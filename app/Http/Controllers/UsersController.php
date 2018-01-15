@@ -57,6 +57,7 @@ class UsersController extends Controller
 			'unique' => ': Ya en el sistema',
 			'min' => ': Su contraseña debe contener minimo 6 caracteres',
 			'email' => ': Escriba un correo verdadero',
+			'confirmed' => ': No coinciden las contraseñas'
 		);
 		$validator = Validator::make($dataBody,
 			[
@@ -69,7 +70,7 @@ class UsersController extends Controller
 				'email' => 'required|email|max:255|unique:users',
 				'ccargo' => 'required|exists:cargos',
 				'ctiempleado' => 'required|exists:tiempleados',
-				'password' => 'required|min:6',
+				'password' => 'required|min:6|confirmed',
 			],$mensajes
 		);
 		$persona->identificacion = $dataBody['identificacion'];
@@ -189,5 +190,26 @@ class UsersController extends Controller
 
 
 		return response()->json(array("obj"=>$dataBody));
+	}
+
+	public function change(Request $request,$id){
+		$dataBody = $request->all();	
+		$status = 0;
+		$response = '';
+		$usuario = User::where('id',$id)->first();
+		//var_dump($usuario->active);exit();
+		if($usuario->active == 1){
+			$usuario->active = 2;
+		}else{
+			$usuario->active = 1;
+		}
+		if($usuario->save()){
+			$response = "¡Cambio realizado con exito!";
+			$status = 200;
+		}else{
+			$response = "Error al realizar el cambio";
+			$status = 404;
+		}
+		return response()->json(array("message"=>$response,"status" => $status));
 	}
 }

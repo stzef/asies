@@ -9,6 +9,9 @@ use asies\Http\Requests;
 use asies\Models\Actividades;
 use asies\Models\ChecklistEvidencias;
 use asies\Models\ChecklistDeta;
+use asies\Models\Checklists;
+use asies\Models\Preguntas;
+use asies\Models\TiPreguntas;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -24,7 +27,12 @@ class ChecklistsController extends Controller
 		View::share('LONG_NAME_APP', env("LONG_NAME_APP"," - "));
 		$this->middleware('auth');
 	}
-
+	public function viewCreate(Request $request){
+		$preguntas= Preguntas::all();
+		$tipreguntas= TiPreguntas::all();	 		
+		$actividades= Actividades::all();	 		
+		return view('checklist/create',array("preguntas" => $preguntas,"tipreguntas" => $tipreguntas,"actividades" => $actividades));
+	}
 	public function excel(Request $request, $cactividad,$format){
 
 		$actividad = Actividades::where("cactividad",$cactividad)->first();
@@ -61,9 +69,7 @@ class ChecklistsController extends Controller
 		$data = $excel->store('xlsx', $path, true);
 
 		return $excel->download($format);
-
 	}
-
 	public function store(Request $request,$cactividad,$cpregunta){
 
 		if ($request->hasFile('files')) {
@@ -144,7 +150,6 @@ class ChecklistsController extends Controller
 			return  $filesa;
 		}
 	}
-
 	public function answer_checklist( Request $request, $cactividad ){
 
 		$actividad = Actividades::where("cactividad",$cactividad)->first();
@@ -205,5 +210,27 @@ class ChecklistsController extends Controller
 
 		return response()->json($response);
 	}
-
+	public function save(Request $request){
+		$dataBody = $request->all();
+		$checklist = new Checklists();
+		$validator = Validator::make($dataBody[0],
+			[
+				'cactividad' => 'required|exists:actividades',
+				'checklist' => 'required|max:200',
+			],
+			[
+				'actividad.required' => 'required',
+				'checklist.required' => 'required',
+			]
+		);
+		if($validator->fails()){
+			$messages = $validator->messages();
+			return response()->json(array("errors_form" => $messages),400);
+		}else{
+			//$checklist->fecha = date("y-m-d");
+			var_dump(date("y-m-d"));		
+		}
+		var_dump($validator->messages());
+	}
+	
 }

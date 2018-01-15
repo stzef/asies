@@ -30,7 +30,10 @@ Route::get('/alcaldias', 'HomeController@alcaldias')->name('GET_alcaldias');
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware('auth');
 
 Route::get('/dashboard', 'AppController@dashboard')->name('app_dashboard')->middleware('auth');
-
+Route::group(['prefix' => 'checklist'], function(){
+	Route::get('/create', "ChecklistsController@viewCreate")->name('show_create');
+	Route::post('/save', "ChecklistsController@save")->name('save');
+});
 Route::group(['prefix' => 'api'], function(){
 
 	Route::group(['prefix' => '{model}'], function(){
@@ -181,8 +184,9 @@ Route::group(['prefix' => 'users'], function(){
 	Route::group(['prefix' => 'manage'], function(){
 		Route::get('/create', "UsersController@viewCreate")->name('show_create');
 		Route::get('/edit/{id}', "UsersController@viewEdit")->name('show_edit');
-		Route::post('/edit/{id}', "UsersController@edit")->name('edit_user');
 		Route::get('/list', "UsersController@viewList")->name('list_user');
+		Route::post('/edit/{id}', "UsersController@edit")->name('edit_user');
+		Route::post('/change/{id}', "UsersController@change")->name('change_state');
 		Route::post('/create', "UsersController@create")->name('create_user');
 	});
 	Route::group(['prefix' => 'encuestas'], function(){

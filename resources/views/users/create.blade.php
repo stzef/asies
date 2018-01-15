@@ -88,12 +88,6 @@
 					</div>
 				</div>
 
-				<div class="form-group col-md-6 text-center">
-					<label for="password" class="col-sm-2 control-label">Contraseña</label>
-					<div class="col-sm-10">
-						<input type="password" class="form-control" required id="password" name="password" placeholder="***********">
-					</div>
-				</div>
 
 				<div class="form-group col-md-6">
 					<label for="role_id" class="col-sm-2 control-label">Tipo de usuario</label>
@@ -105,7 +99,18 @@
 						</select>
 					</div>
 				</div>
-
+				<div class="form-group col-md-6 text-center">
+					<label for="password" class="col-sm-2 control-label">Contraseña</label>
+					<div class="col-sm-10">
+						<input type="password" class="form-control" required id="password" name="password" placeholder="***********">
+					</div>
+				</div>
+				<div class="form-group col-md-6 text-center">
+					<label for="password" class="col-sm-2 control-label">Confirmar Contraseña</label>
+					<div class="col-sm-10">
+						<input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="***********">
+					</div>
+				</div>
 				<div class="form-group col-md-12 text-center">
 					<a type="button" class="btn btn-danger" href="{{ URL::route('list_user') }}" data-dismiss="modal">
 						<i class="glyphicon glyphicon-remove"></i> Cancelar
@@ -114,7 +119,6 @@
 						<i class="glyphicon glyphicon-plus"></i>
 						Crear
 					</button>
-
 				</div>
 
 			</form>
@@ -148,7 +152,9 @@
 			success : function(){
 				sucessHtml = '<div class="alert alert-success"><strong>'+message+'</strong></div>'
 				$( '#form-errors' ).html( sucessHtml );
-				window.location.reload(true); 
+				setTimeout(function(){
+					window.location.reload(1);
+				}, 1000);
 			},
 			error : function(response){
 				var errors = response.responseJSON.errors_form
