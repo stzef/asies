@@ -339,6 +339,7 @@ class ActividadesController extends Controller
 						$filest['size'] = $this->get_file_size($destinationPath.$picture);
 						$filest['url'] = $destinationPath1.$picture;
 						$filest['evidencia'] = $evidencia->cevidencia;
+						$filest['previewimg'] = $evidencia->previewimg;
 						$filest['nombre'] = $evidencia->nombre;
 
 				$filest['thumbnailUrl'] = $thumbnailUrl;

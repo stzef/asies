@@ -66,4 +66,12 @@ class Checklists extends Model
 
         return $response;
     }
+
+    protected $appends = ["previewimg", ];
+	public function getPreviewimgAttribute(){
+        $previewimg = "/img/evidencias/preview/excel.png";
+		return $previewimg;
+
+	}
+
 }

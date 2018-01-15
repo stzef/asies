@@ -29,7 +29,7 @@
 		
 			@if ( count($encuestas) != 0 )
 
-				<h4 class="text-center">Actividades Proximas</h4>
+				<h4 class="text-center">Encuestas</h4>
 				<div class="list-group text-center row">
 					@forelse( $encuestas as $encuesta )
 						<div class="list-group-item col-md-6">

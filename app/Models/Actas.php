@@ -113,4 +113,12 @@ class Actas extends Model
 		$actividad = Actividades::where("cacta",$acta->idacta)->first();
 		return $actividad;
 	}
+
+	protected $appends = ["previewimg", ];
+
+	public function getPreviewimgAttribute(){
+		$previewimg = "/img/evidencias/preview/pdf.png";
+		return $previewimg;
+
+	}
 }
